@@ -1,0 +1,6 @@
+node_modules
+public
+*.html
+webpack.electron.config.js
+webpack.react.config.js
+babel.config.js
