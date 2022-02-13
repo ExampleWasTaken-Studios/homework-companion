@@ -1,0 +1,65 @@
+name: Bug Report
+description: File a bug report
+labels: [Bug]
+body:
+- type: markdown
+  attributes:
+    value: "# Homework Companion Bug Report Form"
+- dropdown:
+  attributes:
+    label: Version
+    description: What version of Homework Companion are you using?
+    options: [Stable, Development]
+  validations:
+    required: true
+- textarea:
+  attributes:
+    label: Build info
+    description: Please paste the contents from ...(currently placeholder - will be changed to location of build info file) into the field
+    placeholder: |
+      {
+        "built": "date-here"
+        "ref": "v1.0.0"
+        "sha": "commit-sha-here"
+        "actor": "actor-of-the-commit"
+        "event_name": "manual-etc"
+      }
+    render: json
+  validations:
+    required: true
+- textarea:
+  attributes:
+    label: Describe the bug
+    description: A clear and concise description of what the bug is and what happened.
+  validations:
+    required: true
+- textarea:
+  attributes:
+    label: Expected behavior
+    description: A clear and concise description of what you expected to happen.
+  validations:
+    required: true
+- textarea:
+  attributes:
+    label: Steps to reproduce
+    description: We need to know how you encountered the bug to properly troubleshoot the issue.
+    placeholder: |
+      1. 
+      2. 
+      3. 
+      ...
+  validations:
+    required: true
+- textarea:
+  attributes:
+    label: References (optional)
+    description: If applicable add screenshots, videos or logs to help explain your problem.
+  validations:
+    required: false
+- input:
+  attributes:
+    label: Discord Username (optional)
+    description: You may optionally provide your Discord username, so that we may contact you directly about the issue.
+    placeholder: ex. username#1234
+  validations:
+    required: false
