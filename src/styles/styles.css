@@ -475,7 +475,7 @@
   background-color: transparent;
   border: 1px solid var(--bg-button);
   border-radius: 4px;
-  transform: background-color var(--hover-trans-duration) ease-out;
+  transition: background-color var(--hover-trans-duration) ease-out;
 }
 
 .button-secondary:hover {
