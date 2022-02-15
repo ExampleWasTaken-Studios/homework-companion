@@ -22,3 +22,5 @@ type Color = "red" | "green" | "blue";
 type TaskState = "open" | "completed" | "overdue";
 
 type TimeframeSelection = "all" | "tomorrow";
+
+type AnnouncementCategory = "announcement" | "update";

@@ -4,6 +4,10 @@
 - a task title is capped at 30 chars to not overlap with the date
 - any input needs a char limit to accomodate for UI design (no overlapping)
 - BUG: modal can be bigger than window
+```css
+transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+transition-duration: .15s
+```
 
 
 ### CSS conventions

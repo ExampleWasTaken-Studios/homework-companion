@@ -18,7 +18,7 @@ export const Homework = ({ openTaskCreationModal, setOpenTaskCreationModal, open
 
   return (
     <div className="home-homework">
-      <h2>Homework</h2>
+      <h2 className="container-title">Homework</h2>
       <ul>
         <TimeframeSelector
           firstSelectorContent="All"
