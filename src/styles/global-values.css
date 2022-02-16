@@ -59,6 +59,10 @@
   --bg-modal-overlay: rgba(0, 0, 0, .1);
   --modal-box-shadow: rgb(0, 0, 0);
 
+  /* Latest announcement field */
+  --bg-latest-field-color: rgba(55, 65, 81, .5);
+  --border-latest-field-color: rgba(46, 56, 72, .8);
+
   /* Lengths */
   --ss-length: .375rem;
   --sm-length: .625rem;

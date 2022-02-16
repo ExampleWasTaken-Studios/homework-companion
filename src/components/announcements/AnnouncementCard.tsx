@@ -2,29 +2,36 @@ import React from "react";
 import cardImage from "../../assets/img/960x540.png";
 
 interface AnnouncementCardProps {
-  isLatest: boolean;
-  authors: string;
+  isLatest?: boolean;
 }
 
-export const AnnouncementCard = ({ isLatest, authors }: AnnouncementCardProps) => {
+export const AnnouncementCard = ({ isLatest }: AnnouncementCardProps) => {
+
+  let css: string;
+  if (isLatest) {
+    css = "announcement-card-latest";
+  } else {
+    css = "announcement-card";
+  }
+
   return (
-    <div className="announcement-card-container">
+    <div className={css}>
       <img
-        draggable={false}
+        className="announcement-card-image"
         src={cardImage}
         alt="placeholder"
-        className="announcement-card-image"
+        draggable={false}
       />
-      <div className="card-stats-container">
-        <p className="announcement-card-category"></p>
-        {isLatest &&
-          <span className="latest-batch">LATEST</span>
-        }
-        <em className="announcement-card-reading-time">8 min read</em>
+      <div className="announcement-card-meta">
+        <div className="announcement-card-stats">
+          <p className="announcement-card-category">UPDATE</p>
+          <span className="announcement-card-latest-field">LATEST</span>
+          <em className="announcement-card-read-time">12 min read</em>
+        </div>
+        <h1 className="announcement-card-title">Homework Companion Announcements</h1>
+        <p className="announcement-card-authors">Homework Companion Development-Team</p>
+        <em className="announcement-card-date">Posted: 02/15/2022</em>
       </div>
-      <h1>Homework Companion Announcements and Updates</h1>
-      <p className="announcement-card-authors">Written by {authors}</p>
-      <em>Posted: 02/15/2022</em>
     </div>
   );
 };
