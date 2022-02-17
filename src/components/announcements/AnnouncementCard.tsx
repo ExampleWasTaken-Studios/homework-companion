@@ -29,7 +29,7 @@ export const AnnouncementCard = ({ isLatest }: AnnouncementCardProps) => {
           <em className="announcement-card-read-time">12 min read</em>
         </div>
         <h1 className="announcement-card-title">Homework Companion Announcements</h1>
-        <p className="announcement-card-authors">Homework Companion Development-Team</p>
+        <p className="announcement-card-authors">Written by Development-Team</p>
         <em className="announcement-card-date">Posted: 02/15/2022</em>
       </div>
     </div>

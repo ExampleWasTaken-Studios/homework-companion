@@ -242,23 +242,21 @@
 
 .announcements-card-container {
   height: 100%;
-  max-height: 100%;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: var(--ml-length);
-  padding: var(--ml-length) 20% 0 20%;
-  overflow-y: scroll;
+
+  padding: var(--ml-length) 10% 0 10%;
+  border: 1px solid yellow;
 }
 /* Announcement card START */
+/* TODO: add .announcement-card */
+
 .announcement-card {
-  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  grid-column: 1;
   background-color: #171E2C;
   border: 1px solid red;
-}
-
-.announcement-card-latest {
-  grid-column: 1 / span 2;
 }
 
 .announcement-card-image {
@@ -272,31 +270,47 @@
 }
 
 .announcement-card-meta {
-  background-color: transparent;
-  padding: var(--ml-length);
+  display: flex;
+  flex-direction: column;
+  padding: var(--ml-length) var(--mm-length) var(--ml-length) var(--mm-length);
 }
 
 .announcement-card-stats {
   display: flex;
   flex-direction: row;
-  background-color: transparent;
-  margin: 0 var(--ms-length) 0 0; 
 }
 
 .announcement-card-category {
+  font-size: var(--mm-length);
   font-weight: 700;
-  background-color: transparent;
-  margin: 0 var(--sm-length) 0 0;
+  line-height: var(--ml-length);
+  margin: 0 var(--sl-length) 0 0;
 }
 
 .announcement-card-latest-field {
-  background-color: transparent;
-  margin: 0 var(--sm-length) 0 0;
+  font-size: 13px;
+  line-height: 17px;
+  height: 24px;
+  background-color: var(--bg-latest-field);
+  margin: 2px var(--sl-length) 0 0;
+  border: 3px solid var(--border-latest-field-color);
+  border-radius: var(--ss-length);
 }
 
 .announcement-card-read-time {
-  background-color: transparent;
-  margin: 0 var(--sm-length) 0 0;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.announcement-card-title {
+  font-size: calc(var(--lm-length) - 1rem);
+  margin: 0 0 var(--sl-length) 0
+}
+
+.announcement-card-authors {
+  font-size: calc(var(--ms-length) + 3px);
+  font-weight: 500;
+  line-height: var(--ml-length);
 }
 /* Announcement card END */
 /* Announcements view END */
