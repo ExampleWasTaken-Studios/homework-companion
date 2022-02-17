@@ -7,8 +7,8 @@ let mainWindow: BrowserWindow;
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: store.get("cache.window.lastWindowX"),
-    height: store.get("cache.window.lastWindowY"),
+    width: 1055,
+    height: 600,
     minWidth: 1055,
     minHeight: 600,
     backgroundColor: "#121212",
@@ -20,9 +20,9 @@ const createWindow = () => {
 
   mainWindow.setMenuBarVisibility(false);
 
-  if (store.get("cache.window.maximized")) {
+  /* if (store.get("cache.window.maximized")) {
     mainWindow.maximize();
-  }
+  } */
 
   process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true"; // TODO: remove before deploy
 
