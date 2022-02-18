@@ -13,18 +13,27 @@ transition-duration: .15s
 ### CSS conventions
 - variables should ONLY be defined in [`./src/styles/global-values.css`](./src/styles/global-values.css)
 - all general styles should be defined in [`./src/styles/styles.css`](./src/styles/styles.css)
-- styles inside [`./src/styles/styles.css`](./src/styles/styles.css) should be grouped into logical section, divided by comments:
-  - ```css
-    /* Sidebar START*/
-    .sidebar {
-      background-color: #000;
-    }
-    /* Sidebar END */
+- styles inside [`./src/styles/styles.css`](./src/styles/styles.css) should be grouped into logical section, divided by comments.
+- media queries are placed at the end of the file
 
-    /* Container START*/
-    .container {
-      background-color: var(--bg-primary);
-    }
-    /* Container END */
-    ```
+Example:
+```css
+/* Sidebar START */
+.sidebar {
+  background-color: #000;
+}
+/* Sidebar END */
+
+/* Container START */
+.container {
+  background-color: var(--bg-primary);
+}
+/* Container END */
+
+/* Media queries START */
+@media screen and (max-width: 768px) {
+  background-color: #FFF;
+}
+/* Media queries END */
+```
 - colors should ALWAYS be defined as a variable
