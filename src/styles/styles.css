@@ -241,49 +241,62 @@
 }
 
 .announcements-card-container {
+  width: 100%;
   height: 100%;
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--ml-length);
 
   padding: var(--ml-length) 10% 0 10%;
-  border: 1px solid yellow;
+  overflow-y: scroll;
+  /* border: 1px solid yellow; */
 }
 /* Announcement card START */
 /* TODO: add .announcement-card */
 
 .announcement-card {
+  cursor: pointer;
+  width: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
-  grid-column: 1;
-  background-color: #171E2C;
-  border: 1px solid red;
+  grid-column: span 2;
+  background-color: var(--bg-button-active);
+  border-radius: 4px;
+  outline: 1px solid var(--bg-button);
+  transition: outline var(--announcement-trans-duration) var(--announcement-trans-timing);
+  overflow: hidden;
+}
+
+.announcement-card:hover {
+  outline: 2px solid var(--announcement-hover-color);
 }
 
 .announcement-card-image {
-  width: 0;
-  height: 0;
-  min-width: 100%;
-  max-width: 100%;
-  min-height: 35%;
-  max-height: 35%;
+  width: 100%;
+  height: 30vh;
+  border-radius: 4px 4px 0 0;
   object-fit: cover;
 }
 
 .announcement-card-meta {
   display: flex;
   flex-direction: column;
-  padding: var(--ml-length) var(--mm-length) var(--ml-length) var(--mm-length);
+  background-color: transparent;
+  padding: var(--mm-length);
 }
 
 .announcement-card-stats {
   display: flex;
   flex-direction: row;
+  background-color: transparent;
 }
 
 .announcement-card-category {
   font-size: var(--mm-length);
   font-weight: 700;
   line-height: var(--ml-length);
+  background-color: transparent;
   margin: 0 var(--sl-length) 0 0;
 }
 
@@ -292,6 +305,7 @@
   line-height: 17px;
   height: 24px;
   background-color: var(--bg-latest-field);
+  padding: 0 2px;
   margin: 2px var(--sl-length) 0 0;
   border: 3px solid var(--border-latest-field-color);
   border-radius: var(--ss-length);
@@ -300,10 +314,12 @@
 .announcement-card-read-time {
   font-size: 14px;
   line-height: 26px;
+  background-color: transparent;
 }
 
 .announcement-card-title {
   font-size: calc(var(--lm-length) - 1rem);
+  background-color: transparent;
   margin: 0 0 var(--sl-length) 0
 }
 
@@ -311,6 +327,11 @@
   font-size: calc(var(--ms-length) + 3px);
   font-weight: 500;
   line-height: var(--ml-length);
+  background-color: transparent;
+}
+
+.announcement-card-date {
+  background-color: transparent;
 }
 /* Announcement card END */
 /* Announcements view END */
@@ -654,3 +675,11 @@
   color: var(--bg-bullet-3);
 }
 /* TaskState colors END */
+
+/* Media queries START */
+/* @media screen and (max-width: 1416px) {
+  .announcement-card {
+    grid-column: 1 / 1;
+  }
+} */
+/* Media queries END */

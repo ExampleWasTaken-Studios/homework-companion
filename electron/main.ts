@@ -32,6 +32,10 @@ const createWindow = () => {
     mainWindow.show();
   });
 
+  mainWindow.on("resize", () => {
+    console.log(mainWindow.getSize());
+  });
+
   mainWindow.on("close", () => {
     persistWindowSettings(mainWindow);
   });

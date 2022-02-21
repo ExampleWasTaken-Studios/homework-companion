@@ -15,9 +15,6 @@
   --bg-secondary-disabled: rgb(24, 24, 24, 30%);
   --bg-active: rgb(87, 87, 87);
   --bg-active-secondary: rgb(51, 51, 51);
-
-  --bg-button-hover: rgb(26, 197, 100);
-  --bg-button-active: rgba(29, 185, 84, 80%);
   
   --bg-textbox: rgb(43, 43, 43);
   --bg-textbox-disabled: rgba(43, 43, 43, .3);
@@ -30,7 +27,7 @@
   /* Button */
   --fg-button: rgb(255, 255, 255);
   --bg-button: rgb(29, 185, 84);
-  --bg-button-active: rgba(29, 185, 84, 80%);
+  --bg-button-active: #1db954cc;
   --bg-button-hover: rgb(26, 197, 100);
   --bg-button-disabled: rgba(29, 185, 84, 30%);
   --fg-button-secondary: rgb(255, 255, 255);
@@ -59,9 +56,15 @@
   --bg-modal-overlay: rgba(0, 0, 0, .1);
   --modal-box-shadow: rgb(0, 0, 0);
 
+  
+  /* Announcement card */
+  --announcement-hover-color: rgb(79, 242, 44);
+  --announcement-trans-timing: cubic-bezier(.4, 0, .2, 1);
+  --announcement-trans-duration: .15s;
+  
   /* Latest announcement field */
-  --bg-latest-field: rgba(55, 65, 81, .5);
-  --border-latest-field-color: rgba(46, 56, 72, .8);
+  --bg-latest-field: rgba(55,65,81,1);
+  --border-latest-field-color: rgba(107,114,128, 1);
 
   /* Lengths */
   --ss-length: .375rem;
