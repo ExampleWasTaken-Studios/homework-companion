@@ -240,17 +240,22 @@
   border-bottom: 1px solid var(--fg-secondary);
 }
 
+.announcements-grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(min-content, max-content);
+  gap: var(--ml-length);
+}
+
 .announcements-card-container {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--ml-length);
+  
 
-  padding: var(--ml-length) 10% 0 10%;
+  padding: var(--ml-length) 10% var(--ml-length) 10%;
   overflow-y: scroll;
   /* border: 1px solid yellow; */
-}
+} 
 /* Announcement card START */
 /* TODO: add .announcement-card */
 
@@ -266,6 +271,20 @@
   outline: 1px solid var(--bg-button);
   transition: outline var(--announcement-trans-duration) var(--announcement-trans-timing);
   overflow: hidden;
+}
+
+.announcement-card-latest {
+  cursor: pointer;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  grid-column: span 2;
+  background-color: var(--bg-button-active);
+  border-radius: 4px;
+  outline: 1px solid var(--bg-button);
+  transition: outline var(--announcement-trans-duration) var(--announcement-trans-timing);
+  overflow: hidden; 
 }
 
 .announcement-card:hover {
@@ -677,9 +696,9 @@
 /* TaskState colors END */
 
 /* Media queries START */
-/* @media screen and (max-width: 1416px) {
+@media screen and (min-width: 1364px) {
   .announcement-card {
-    grid-column: 1 / 1;
+    grid-column: span 1;
   }
-} */
+}
 /* Media queries END */

@@ -3,9 +3,10 @@ import cardImage from "../../assets/img/960x540.png";
 
 interface AnnouncementCardProps {
   isLatest?: boolean;
+  title: string;
 }
 
-export const AnnouncementCard = ({ isLatest }: AnnouncementCardProps) => {
+export const AnnouncementCard = ({ isLatest, title }: AnnouncementCardProps) => {
 
   let css: string;
   if (isLatest) {
@@ -30,7 +31,7 @@ export const AnnouncementCard = ({ isLatest }: AnnouncementCardProps) => {
           {/* <span className="announcement-card-latest-field">LATEST</span> */}
           <em className="announcement-card-read-time">12&nbsp;min&nbsp;read</em>
         </div>
-        <h1 className="announcement-card-title">Announcements</h1>
+        <h1 className="announcement-card-title">{title}</h1>
         <p className="announcement-card-authors">Written by Development-Team</p>
         <em className="announcement-card-date">Posted: 02/15/2022</em>
       </div>
