@@ -31,7 +31,7 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
               <Link to="/">
                 <li className="sidebar-list-item">Home</li>
               </Link>
-              <Link to="/annoucements">
+              <Link to="/announcements">
                 <li className="sidebar-list-item sidebar-item-active">Announcements</li>
               </Link>
               <Link to="/settings">
