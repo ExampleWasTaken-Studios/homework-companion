@@ -9,6 +9,15 @@ transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 transition-duration: .15s
 ```
 
+### Settings
+The settings are structured in categories that each have their respective settings. The categories are in list view on the left. The respective settings are in a list view on the right.
+| Setting | Function | Category |
+| ------- | -------- | -------- |
+| Perfomance mode (not final name) |  replaces performance intensive features and effects with less performance intensive alternatives | Customization |
+| - | version, copyright, disclaimer, 3rd-party licenses | About |
+| Auto start | automatically start application at startup | General |
+| Check for updates | does that really need explaining? :p | General |
+
 
 ### CSS conventions
 - variables should ONLY be defined in [`./src/styles/global-values.css`](./src/styles/global-values.css)
