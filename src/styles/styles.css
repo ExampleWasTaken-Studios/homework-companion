@@ -694,7 +694,7 @@
 /* TaskState colors END */
 
 /* Media queries START */
-@media screen and (min-width: 1364px) {
+@media screen and (min-width: 1266px) {
   .announcement-card {
     grid-column: span 1;
   }
