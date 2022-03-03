@@ -267,7 +267,7 @@
   background-color: var(--bg-button-active);
   border-radius: 4px;
   outline: 1px solid var(--bg-button);
-  transition: outline var(--announcement-trans-duration) var(--announcement-trans-timing);
+  transition: outline var(--hover-trans-duration) var(--hover-trans-timing);
   overflow: hidden;
 }
 
@@ -281,7 +281,7 @@
   background-color: var(--bg-button-active);
   border-radius: 4px;
   outline: 1px solid var(--bg-button);
-  transition: outline var(--announcement-trans-duration) var(--announcement-trans-timing);
+  transition: outline var(--hover-trans-duration) var(--hover-trans-timing);
   overflow: hidden; 
 }
 
@@ -352,6 +352,155 @@
 }
 /* Announcement card END */
 /* Announcements view END */
+
+/* Settings view START */
+.settings {
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--ms-length) + 10px) var(--ms-length) 0 var(--ms-length);
+}
+
+.settings > h2 {
+  margin: 0 0 var(--mm-length) 0;
+}
+
+.settings-header-divider {
+  border-bottom: 1px solid var(--fg-secondary);
+}
+
+.settings-content-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.settings-category-list {
+  width: 300px;
+  margin: var(--ml-length) 0 0 0;
+}
+
+.settings-category-list-item {
+  cursor: pointer;
+  font-weight: 500;
+  padding: 15px 15px 15px 15px;
+  margin: 0 0 1.25rem 0;
+  background-color: var(--bg-textbox);
+  border-radius: 4px;
+  outline: 2px solid transparent;
+  transition: outline 200ms var(--hover-trans-timing);
+}
+
+.settings-category-list-item.active {
+  background-color: var(--bg-button);
+}
+
+.settings-category-list-item:hover {
+  outline: 2px solid var(--bg-button);
+}
+
+.settings-category-list-item.active:hover {
+  outline: 2px solid transparent;
+}
+
+.settings-content {
+  width: 100%;
+  height: 100%;
+  margin: 0 0 0 1.25rem;
+  border-left: 1px solid var(--fg-disabled);
+}
+
+.setting {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 var(--ml-length) 0;
+  margin: var(--ml-length) 0 0 var(--ls-length);
+  border-bottom: 1px solid var(--fg-disabled);
+}
+
+.setting-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.setting-description {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 8px 0 0 0;
+}
+
+.about-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.about {
+  margin: 0 0 0 5%;
+}
+
+
+.header {
+  display:flex;
+  flex-direction: row;
+}
+
+.about-logo {
+  object-fit: contain;
+}
+
+.title-and-version {
+  margin: 6px 0 0 20px;
+}
+
+.about-title {
+  font-weight: normal;
+}
+
+.about-version {
+  display: inline;
+  cursor: pointer;
+  font-weight: normal;
+  letter-spacing: .7px;
+  margin: 0 0 0 3px;
+  transition: color var(--hover-trans-duration) var(--hover-trans-timing);
+}
+
+.about-version:hover {
+  color: var(--fg-secondary);
+}
+
+.license {
+  letter-spacing: .7px;
+  margin: var(--ls-length) 0 0 0;
+}
+
+.third-party-licenses {
+  cursor: pointer;
+  letter-spacing: .7px;
+  display: inline-block;
+  margin: var(--ml-length) 0 0 0;
+  transition: color var(--hover-trans-duration) var(--hover-trans-timing);
+}
+
+.third-party-licenses:hover {
+  color: var(--fg-secondary);
+}
+
+
+
+
+
+
 
 
 
@@ -678,6 +827,44 @@
 .dropdown-icon {
   background-color: var(--bg-modal);
 }
+/* Dropdown END */
+/* Switch START */
+.switch-track-off {
+  cursor: pointer;
+  width: 40px;
+  height: 23px;
+  background-color: var(--fg-disabled);
+  border-radius: 50px;
+  transition: background-color var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.switch-handle-off {
+  width: 22px;
+  height: 21px;
+  background-color: var(--fg-primary);
+  border-radius: 100px;
+  margin: 1px 0 0 0px;
+  transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.switch-track-on {
+  cursor: pointer;
+  width: 40px;
+  height: 23px;
+  background-color: #3BA55D;
+  border-radius: 50px;
+  transition: background-color var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.switch-handle-on {
+  width: 22px;
+  height: 23px;
+  background-color: var(--fg-primary);
+  border-radius: 100px;
+  margin: 0 0 0 19px;
+  transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+/* Switch END */
 
 /* TaskState colors START */
 .red {

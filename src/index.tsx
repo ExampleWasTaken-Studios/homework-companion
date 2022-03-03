@@ -18,9 +18,19 @@ ReactDom.render(
           element={<Announcements />}
         />
         <Route
-          path="/settings"
-          element={<Settings />}
+          path="/settings/general"
+          element={<Settings activeCategory="general" />}
         />
+        <Route
+          path="/settings/customization"
+          element={<Settings activeCategory="customization" />}
+        />
+        <Route
+          path="/settings/about"
+          element={<Settings activeCategory="about" />}
+        />
+
+        
         {/* <Route path="/welcome"
           element={<Welcome />}
         /> */}

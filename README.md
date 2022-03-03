@@ -16,7 +16,7 @@ The settings are structured in categories that each have their respective settin
 | Perfomance mode (not final name) |  replaces performance intensive features and effects with less performance intensive alternatives | Customization |
 | - | version, copyright, disclaimer, 3rd-party licenses | About |
 | Auto start | automatically start application at startup | General |
-| Check for updates | does that really need explaining? :p | General |
+| Hardware Acceleration | Use you GPU for certain tasks. | General |
 
 
 ### CSS conventions

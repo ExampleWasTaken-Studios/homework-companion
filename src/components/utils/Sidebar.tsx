@@ -22,7 +22,7 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
               <Link to="/announcements">
                 <li className="sidebar-list-item">Announcements</li>
               </Link>
-              <Link to="/settings">
+              <Link to="/settings/general">
                 <li className="sidebar-list-item">Settings</li>
               </Link>
             </>
@@ -34,7 +34,7 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
               <Link to="/announcements">
                 <li className="sidebar-list-item sidebar-item-active">Announcements</li>
               </Link>
-              <Link to="/settings">
+              <Link to="/settings/general">
                 <li className="sidebar-list-item">Settings</li>
               </Link>
             </>
@@ -46,7 +46,7 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
               <Link to="/announcements">
                 <li className="sidebar-list-item">Announcements</li>
               </Link>
-              <Link to="/settings">
+              <Link to="/settings/general">
                 <li className="sidebar-list-item sidebar-item-active">Settings</li>
               </Link>
             </>

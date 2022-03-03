@@ -6,10 +6,10 @@
   font-size: 16px;
 
   --fg-primary: rgba(255, 255, 255, 0.871);
-  --fg-secondary: rgba(255, 255, 255, 60%);
+  --fg-secondary: rgba(255, 255, 255, 0.6);
   --fg-disabled: rgba(255, 255, 255, 30%);
 
-  --bg-primary: rgb(18, 18, 18);
+  --bg-primary: #121212;
   --bg-primary-disabled: rgb(18, 18, 18, 30%);
   --bg-secondary: rgb(24, 24, 24);
   --bg-secondary-disabled: rgb(24, 24, 24, 30%);
@@ -35,6 +35,10 @@
   --bg-button-secondary-hover: rgba(97, 207, 136, 18%);
   --bg-button-secondary-disabled: rgba(97, 207, 136, 30%);
 
+  /* Switch */
+  --switch-state-change-duration: .15s;
+  --switch-state-change-timing: cubic-bezier(0, 0, 0.39, 0.64);
+
   /* Sidebar */
   --bg-sidebar: rgb(0, 0, 0);
   --fg-sidebar: rgb(255, 255, 255);
@@ -55,12 +59,9 @@
   --bg-modal-secondary: rgb(24, 24, 24);
   --bg-modal-overlay: rgba(0, 0, 0, .1);
   --modal-box-shadow: rgb(0, 0, 0);
-
   
   /* Announcement card */
   --announcement-hover-color: rgb(79, 242, 44);
-  --announcement-trans-timing: cubic-bezier(.4, 0, .2, 1);
-  --announcement-trans-duration: .15s;
   
   /* Latest announcement field */
   --bg-latest-field: rgba(55,65,81,1);
@@ -79,9 +80,10 @@
   --lm-length: 3.5rem;
   --ll-length: 4.5rem;
 
-  /* Transition durations */
-  --hover-trans-duration: .08s;
+  /* Transition */
   --thumb-hover-trans-duration: 5s;
+  --hover-trans-timing: cubic-bezier(.4, 0, .2, 1);
+  --hover-trans-duration: .15s;
 }
 
 html {

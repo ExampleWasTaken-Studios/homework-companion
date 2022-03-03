@@ -24,3 +24,5 @@ type TaskState = "open" | "completed" | "overdue";
 type TimeframeSelection = "all" | "tomorrow";
 
 type AnnouncementCategory = "announcement" | "update";
+
+type SettingsCategory = "general" | "customization" | "about";
