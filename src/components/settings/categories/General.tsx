@@ -10,7 +10,7 @@ export const General = () => {
       />
       <Setting
         title="Hardware Acceleration"
-        description="Use you GPU for certain tasks."
+        description="Uses your GPU for certain tasks."
       />
     </>
   );
