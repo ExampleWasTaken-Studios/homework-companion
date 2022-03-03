@@ -858,10 +858,10 @@
 
 .switch-handle-on {
   width: 22px;
-  height: 23px;
+  height: 21px;
   background-color: var(--fg-primary);
   border-radius: 100px;
-  margin: 0 0 0 19px;
+  margin: 1px 0 0 19px;
   transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
 }
 /* Switch END */
