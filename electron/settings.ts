@@ -4,10 +4,36 @@ import { Schema } from "electron-store";
 import { cache } from "webpack";
 
 const schema: Schema<unknown> = {
-  mainSettings: {
+  settings: {
     type: "object",
     // Empty defaults are required when using type: "object" (https://github.com/sindresorhus/conf/issues/85#issuecomment-531651424)
-    default: {}
+    default: {},
+    properties: {
+      general: {
+        type: "object",
+        default: {},
+        properties: {
+          autoStart: {
+            type: "boolean",
+            default: false
+          },
+          hwAcc: {
+            type: "boolean",
+            default: true
+          }
+        }
+      },
+      customization: {
+        type: "object",
+        default: {},
+        properties: {
+          perfMode: {
+            type: "boolean",
+            default: false
+          }
+        }
+      }
+    }
   },
   cache: {
     type: "object",

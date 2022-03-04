@@ -1,8 +1,9 @@
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useEffect } from "react";
 
 interface SwitchProps {
   checked: boolean;
   setChecked: React.Dispatch<SetStateAction<boolean>>;
+  onStateChange: () => void;
 }
 
 /**
@@ -10,15 +11,22 @@ interface SwitchProps {
  * The state of the component needs to live in the parent component.
  * @param checked First item of corresponding state.
  * @param setChecked Second item of corresponding state.
+ * @param onStateChanged Called AFTER the state has changed.
  */
-export const Switch = ({ checked, setChecked }: SwitchProps) => {
+export const Switch = ({ checked, setChecked, onStateChange }: SwitchProps) => {
 
-  const clickHandler = () => {
+  const clickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+    console.log("old switch state:", checked);
     setChecked(!checked);
+    console.log("new switch state:", checked);
+    onStateChange();
   };
+
 
   let cssTrack;
   let cssHandle;
+
   if (checked) {
     cssTrack = "switch-track-on";
     cssHandle = "switch-handle-on";
@@ -29,11 +37,11 @@ export const Switch = ({ checked, setChecked }: SwitchProps) => {
 
   return (
     <div 
-      onClick={clickHandler}
-      className={cssTrack}  
+      onClick={event => clickHandler(event)}
+      className={cssTrack}
     >
       <div
-        onClick={clickHandler}
+        onClick={event => clickHandler(event)}
         className={cssHandle}
       >
 

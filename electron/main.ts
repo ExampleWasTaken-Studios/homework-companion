@@ -1,7 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import electronReloader from "electron-reloader";
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
 import store, { persistWindowSettings } from "./settings";
+import channels from "./channels";
+import { javascript } from "webpack";
 
 let mainWindow: BrowserWindow;
 
@@ -14,7 +16,7 @@ const createWindow = () => {
     backgroundColor: "#121212",
     show: false,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
     }
   });
 
@@ -37,8 +39,19 @@ const createWindow = () => {
   });
 
   mainWindow.on("close", () => {
-    persistWindowSettings(mainWindow);
+    persistWindowSettings(mainWindow);  
   });
+
+  // IPC
+  ipcMain.handle(channels.getSettingValue, (event: IpcMainInvokeEvent, key: string) => {
+    console.log(event, key);
+    console.log("value:", store.get(key));
+    return store.get(key);
+  });
+
+  ipcMain.on(channels.setSettingValue, (event: IpcMainEvent, key: string, value: unknown) => {
+    store.set(key, value);
+  });  
 };
 
 app.on("ready", createWindow);
