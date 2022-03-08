@@ -1,5 +1,7 @@
+import { shell } from "electron";
 import React from "react";
 import logo from "../../../assets/img/80x80.png";
+import thirdPartyLicenses from "../../../assets/3rd-party-licenses.md";
 
 export const About = () => {
   return (
@@ -24,7 +26,12 @@ export const About = () => {
           <br/>
         Licensed under the GNU General Public License Version 3
         </div>
-        <div className="third-party-licenses">
+        <div 
+          className="third-party-licenses"
+          onClick={() => {
+            shell.openExternal(thirdPartyLicenses);
+          }}
+        >
           Third-Party Licenses {/* TODO: add logic to show licenses */}
         </div>
       </div>

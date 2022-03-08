@@ -40,6 +40,16 @@ module.exports = [
               outputPath: "./img"
             }
           }
+        },
+        {
+          test: /\.md$/,
+          use: {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "./resources"
+            }
+          }
         }
       ]
     },

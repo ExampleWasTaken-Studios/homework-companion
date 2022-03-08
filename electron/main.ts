@@ -1,13 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import electronReloader from "electron-reloader";
 import path from "path";
-import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
+import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent, shell } from "electron";
 import store, { persistWindowSettings } from "./settings/settings";
 import channels from "./channels";
 
 let mainWindow: BrowserWindow;
 
 const createWindow = () => {
+  shell.beep();
   mainWindow = new BrowserWindow({
     width: 1055,
     height: 600,
