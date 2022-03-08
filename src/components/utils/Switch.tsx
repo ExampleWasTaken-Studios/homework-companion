@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect } from "react";
+import React, { SetStateAction } from "react";
 
 interface SwitchProps {
   checked: boolean;
@@ -17,9 +17,7 @@ export const Switch = ({ checked, setChecked, onStateChange }: SwitchProps) => {
 
   const clickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
-    console.log("old switch state:", checked);
-    setChecked(!checked);
-    console.log("new switch state:", checked);
+    setChecked(prevState => !prevState);
     onStateChange();
   };
 

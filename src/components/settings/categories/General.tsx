@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import store from "../../../../electron/settings/settings";
+import userSettingsPath from "../../../../electron/settings/userSettingsPath";
 import { Setting } from "../Setting";
 
 export const General = () => {
 
-  const [autoStartChecked, setAutoStartChecked] = useState(true);
-  const [hwAccChecked, setHwAccChecked] = useState(false);
+  const [autoStartChecked, setAutoStartChecked] = useState<boolean>(store.get(userSettingsPath.general.autoStart));
+  const [hwAccChecked, setHwAccChecked] = useState<boolean>(store.get(userSettingsPath.general.hwAcc));
 
   return (
     <>
@@ -14,7 +16,8 @@ export const General = () => {
         checked={autoStartChecked}
         setChecked={setAutoStartChecked}
         onStateChange={() => {
-          console.log("autostart has changed to", autoStartChecked);
+          const oldValue: boolean = store.get(userSettingsPath.general.autoStart);
+          store.set(userSettingsPath.general.autoStart, !oldValue);
         }}
       />
       <Setting
@@ -23,7 +26,8 @@ export const General = () => {
         checked={hwAccChecked}
         setChecked={setHwAccChecked}
         onStateChange={() => {
-          console.log("hw acc has changed to", hwAccChecked);
+          const oldValue: boolean = store.get(userSettingsPath.general.hwAcc);
+          store.set(userSettingsPath.general.hwAcc, !oldValue);
         }}
       />
     </>

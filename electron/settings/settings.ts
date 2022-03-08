@@ -1,7 +1,6 @@
 import { BrowserWindow } from "electron";
 import Store from "electron-store";
 import { Schema } from "electron-store";
-import { cache } from "webpack";
 
 const schema: Schema<unknown> = {
   settings: {

@@ -1,9 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import electronReloader from "electron-reloader";
+import path from "path";
 import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
-import store, { persistWindowSettings } from "./settings";
+import store, { persistWindowSettings } from "./settings/settings";
 import channels from "./channels";
-import { javascript } from "webpack";
 
 let mainWindow: BrowserWindow;
 
@@ -17,8 +17,11 @@ const createWindow = () => {
     show: false,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false // THIS IS A BIG SECURITY RISK - IT IS ENABLED DUE TO AN APPARENT WEBPACK BUG (throws reference error otherwise) the dev console should be disabled in production builds as long as this is set to false
     }
   });
+
+  mainWindow.webContents.openDevTools();
 
   mainWindow.setMenuBarVisibility(false);
 
