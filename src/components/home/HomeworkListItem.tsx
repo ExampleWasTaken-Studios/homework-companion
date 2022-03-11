@@ -31,7 +31,11 @@ export const HomeworkListItem = ({ openTaskModal, setOpenTaskModal, data }: Home
         onClick={clickHandler}
       >
         <div className="home-homework-list-item-left-column">
-          <span className={css}>&bull;</span>
+          <span 
+            className={css}
+          >
+            &bull;
+          </span>
         </div>
         <div className="home-homework-list-item-center-column">
           <div className="home-homework-list-item-top-line">

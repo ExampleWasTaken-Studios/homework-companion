@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { getHTMLDateFormat } from "../../utils/DateUtils";
+import { Button } from "./Button";
 import { Dropdown } from "./Dropdown";
 import { DropdownItem } from "./DropdownItem";
 
@@ -97,6 +98,17 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
               rows={20}
               placeholder="Description"
             />
+            <div className="modal-button-container">
+              <Button
+                className="mark-as-complete-button"
+                onClick={() => {
+                  data.state = "completed";
+                  setOpen(false);
+                }}
+              >
+                Mark as Complete
+              </Button>
+            </div>
           </div>
         </div>
       </div>
