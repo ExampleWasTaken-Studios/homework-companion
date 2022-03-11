@@ -29,7 +29,6 @@ ReactDom.render(
           path="/settings/about"
           element={<Settings activeCategory="about" />}
         />
-
         
         {/* <Route path="/welcome"
           element={<Welcome />}

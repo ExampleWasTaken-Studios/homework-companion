@@ -1,9 +1,13 @@
 import { shell } from "electron";
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../../assets/img/80x80.png";
 import thirdPartyLicenses from "../../../assets/3rd-party-licenses.md";
+import { Changelog } from "../../changelog/Changelog";
 
 export const About = () => {
+
+  const [changelogOpen, setChangelogOpen] = useState(false);
+
   return (
     <div className="about-container">
       <div className="about">
@@ -18,7 +22,14 @@ export const About = () => {
           />
           <div className="title-and-version">
             <h1 className="about-title">Homework Companion</h1>
-            <h3 className="about-version">v1.0.0-pre-alpha.1</h3> {/* TODO: add logic to open changelog */}
+            <h3
+              className="about-version"
+              onClick={() => {
+                setChangelogOpen(true);
+              }}
+            >
+              v1.0.0-pre-alpha.1
+            </h3> {/* TODO: add logic to open changelog */}
           </div>
         </div>
         <div className="license">
@@ -35,6 +46,11 @@ export const About = () => {
           Third-Party Licenses {/* TODO: add logic to show licenses */}
         </div>
       </div>
+
+      <Changelog
+        isOpen={changelogOpen}
+        setOpen={setChangelogOpen}
+      />
     </div>
   );
 };
