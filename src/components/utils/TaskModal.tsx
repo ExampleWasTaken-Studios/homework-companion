@@ -4,9 +4,7 @@ import { getHTMLDateFormat } from "../../utils/DateUtils";
 import { Dropdown } from "./Dropdown";
 import { DropdownItem } from "./DropdownItem";
 
-interface TaskModalProps {
-  isOpen?: boolean,
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+interface TaskModalProps extends ModalProps {
   data: {
     id: number;
     color: Color;

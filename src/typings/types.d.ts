@@ -15,6 +15,11 @@ interface Homework {
   content: string;
 }
 
+interface ModalProps {
+  isOpen: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 type Priority = "urgent" | "high" | "normal" | "low";
 
 type Color = "red" | "green" | "blue";

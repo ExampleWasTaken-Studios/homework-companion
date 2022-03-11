@@ -6,11 +6,6 @@ import { Button } from "./Button";
 import { Dropdown } from "./Dropdown";
 import { DropdownItem } from "./DropdownItem";
 
-interface ModalProps {
-  isOpen: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 export const CreateTaskModal = ({ isOpen, setOpen }: ModalProps) => {
   if (!isOpen) {
     return null;
