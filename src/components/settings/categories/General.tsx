@@ -22,7 +22,7 @@ export const General = () => {
       />
       <Setting
         title="Hardware Acceleration"
-        description="Uses your GPU for certain tasks."
+        description="Uses your GPU for certain tasks. Turn this off if you experience frame drops or lag."
         checked={hwAccChecked}
         setChecked={setHwAccChecked}
         onStateChange={() => {
