@@ -1,11 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap');
 
 :root {
-  font-family: Montserrat, sans-serif;
+  font-family: Open Sans, sans-serif;
   font-size: 16px;
 
-  --fg-primary: rgba(255, 255, 255, 0.871);
+  --fg-primary: rgba(255, 255, 255/* , 0.871 */);
   --fg-secondary: rgba(255, 255, 255, 0.6);
   --fg-disabled: rgba(255, 255, 255, 30%);
 
@@ -27,7 +26,7 @@
   /* Button */
   --fg-button: rgb(255, 255, 255);
   --bg-button: rgb(29, 185, 84);
-  --bg-button-active: #1db954cc;
+  --bg-button-active: rgba(29, 185, 84, 0.8);
   --bg-button-hover: rgb(26, 197, 100);
   --bg-button-disabled: rgba(29, 185, 84, 30%);
   --fg-button-secondary: rgb(255, 255, 255);
@@ -66,6 +65,10 @@
   /* Latest announcement field */
   --bg-latest-field: rgba(55,65,81,1);
   --border-latest-field-color: rgba(107,114,128, 1);
+
+  /* Changelog modal */
+  --fg-new-feature: rgb(29, 185, 84);
+  --fg-fix: rgb(255, 166, 0);
 
   /* Lengths */
   --ss-length: .375rem;
