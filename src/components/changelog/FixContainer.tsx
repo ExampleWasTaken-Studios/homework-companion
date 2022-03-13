@@ -5,6 +5,11 @@ interface FixesContainerProps {
 }
 
 export const FixContainer = ({ children }: FixesContainerProps) => {
+
+  if (!children) {
+    return null;
+  }
+
   return (
     <div className="changelog-container">
       <h2 className="changelog-fix-container-title">Fixes</h2>  

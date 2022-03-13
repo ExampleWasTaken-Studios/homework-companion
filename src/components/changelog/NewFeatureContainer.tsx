@@ -6,6 +6,10 @@ interface NewFeatureContainerProps {
 
 export const NewFeatureContainer = ({ children }: NewFeatureContainerProps) => {
 
+  if (!children) {
+    return null;
+  }
+
   return (
     <div className="changelog-container">
       <h2 className="changelog-new-feature-container-title">New Features</h2>
