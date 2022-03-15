@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDom from "react-dom";
 import { HashRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./views/Home";
-import { Announcements } from "./views/Announcements";
-import { Settings } from "./views/Settings";
+import { Home } from "./renderer/views/Home";
+import { Announcements } from "./renderer/views/Announcements";
+import { Settings } from "./renderer/views/Settings";
 
 ReactDom.render(
   <React.StrictMode>

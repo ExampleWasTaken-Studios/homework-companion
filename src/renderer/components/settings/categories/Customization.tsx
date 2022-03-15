@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import store from "../../../../electron/settings/settings";
-import userSettingsPath from "../../../../electron/settings/userSettingsPath";
+import store from "../../../../../electron/settings/settings";
+import userSettingsPath from "../../../../../electron/settings/userSettingsPath";
 import { Setting } from "../Setting";
 
 export const Customization = () => {
