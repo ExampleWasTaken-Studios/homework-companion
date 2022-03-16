@@ -17,6 +17,9 @@ const main = {
       },
     ],
   },
+  externals: {
+    "sqlite3":"commonjs sqlite3", 
+  },
   output: {
     path: path.resolve(__dirname, "./public/electron")
   },
