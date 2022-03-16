@@ -4,16 +4,18 @@ import path from "path";
 import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent, shell } from "electron";
 import store, { persistWindowSettings } from "./settings/settings";
 import channels from "./channels";
+import userSettingsPath from "./settings/userSettingsPath";
 
 let mainWindow: BrowserWindow;
 
 const createWindow = () => {
   shell.beep();
   mainWindow = new BrowserWindow({
-    width: 1055,
-    height: 600,
+    width: store.get("cache.window.lastWindowX"),
+    height: store.get("cache.window.lastWindowY"),
     minWidth: 1055,
     minHeight: 600,
+    center: true,
     backgroundColor: "#121212",
     show: false,
     webPreferences: {
