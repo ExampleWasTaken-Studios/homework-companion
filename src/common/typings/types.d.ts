@@ -20,6 +20,29 @@ interface ModalProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface SettingsSchema {
+  settings: {
+    general: {
+      autoStart: boolean;
+      hwAcc: boolean;
+    },
+    customization: {
+      perfMode: boolean;
+    }
+  },
+  cache: {
+    window: {
+      lastWindowX: number;
+      lastWindowY: number;
+      maximized: boolean;
+    }
+  },
+  metaInfo: {
+    lastVersion: string;
+    lastLaunch: number;
+  }
+}
+
 type Priority = "urgent" | "high" | "normal" | "low";
 
 type Color = "red" | "green" | "blue";

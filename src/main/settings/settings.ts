@@ -2,7 +2,7 @@ import { BrowserWindow } from "electron";
 import Store from "electron-store";
 import { Schema } from "electron-store";
 
-const schema: Schema<unknown> = {
+const schema: Schema<SettingsSchema> = {
   settings: {
     type: "object",
     // Empty defaults are required when using type: "object" (https://github.com/sindresorhus/conf/issues/85#issuecomment-531651424)
