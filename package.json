@@ -2,16 +2,24 @@
   "name": "homework-companion",
   "version": "1.0.0-pre-alpha.1",
   "private": true,
-  "description": "",
+  "description": "Task managing application",
   "main": "./public/electron/main.js",
+  "homepage": "https://github.com/ExampleWasTaken-Studios/homework-companion",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ExampleWasTaken-Studios/homework-companion.git"
+  },
   "scripts": {
     "dev:electron": "webpack --config webpack.electron.config.js && electron .",
     "dev:react": "webpack --config webpack.react.config.js",
-    "dev:serve": "webpack-dev-server --config webpack.react.config.js"
+    "dev:serve": "webpack-dev-server --config webpack.react.config.js",
+    "prod:electron": "webpack --config webpack.electron.prod.config.js",
+    "prod:react": "webpack --config webpack.react.prod.config.js",
+    "build": "prod:electron && prod:react"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "ExampleWasTaken Studios",
+  "license": "GPL-3.0",
   "devDependencies": {
     "@babel/core": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -19,12 +27,14 @@
     "@babel/preset-typescript": "^7.16.7",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
+    "@types/sqlite3": "^3.1.8",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
     "babel-loader": "^8.2.3",
     "cross-env": "^7.0.3",
     "css-loader": "^6.6.0",
     "electron": "^17.1.1",
+    "electron-builder": "^22.14.13",
     "electron-reloader": "^1.2.2",
     "eslint": "^8.8.0",
     "eslint-plugin-react": "^7.28.0",
@@ -33,10 +43,7 @@
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
     "typescript": "^4.5.5",
-    "typescript-eslint": "^0.0.1-alpha.0",
-    "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "typescript-eslint": "^0.0.1-alpha.0"
   },
   "dependencies": {
     "electron-store": "^8.0.1",
@@ -44,6 +51,8 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
     "showdown": "^2.0.3",
-    "sqlite3": "^4.2.0"
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
   }
 }

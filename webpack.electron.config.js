@@ -3,7 +3,7 @@ const path = require("path");
 const main = {
   mode: "development",
   devtool: "source-map",
-  entry: "./electron/main.ts",
+  entry: "./src/main/main.ts",
   target: "electron-main",
   resolve: {
     extensions: [".ts", ".js"]
