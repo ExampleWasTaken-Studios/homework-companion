@@ -8,12 +8,7 @@ module.exports = [
     entry: "./src/index.tsx",
     target: "electron-renderer",
     resolve: {
-      extensions: [".ts", ".tsx", ".js"],
-      alias: {
-        common: path.resolve(__dirname, "./src/common"),
-        main: path.resolve(__dirname, "./src/main"),
-        renderer: path.resolve(__dirname, "./src/renderer")
-      }
+      extensions: [".ts", ".tsx", ".js"]
     },
     module: {
       rules: [
