@@ -24,7 +24,7 @@ const createWindow = () => {
     }
   });
 
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   mainWindow.setMenuBarVisibility(false);
 

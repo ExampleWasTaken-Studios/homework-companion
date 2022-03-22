@@ -4,6 +4,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./renderer/views/Home";
 import { Announcements } from "./renderer/views/Announcements";
 import { Settings } from "./renderer/views/Settings";
+import { Welcome } from "./renderer/views/Welcome";
 
 ReactDom.render(
   <React.StrictMode>
@@ -30,9 +31,10 @@ ReactDom.render(
           element={<Settings activeCategory="about" />}
         />
         
-        {/* <Route path="/welcome"
+        <Route
+          path="/welcome"
           element={<Welcome />}
-        /> */}
+        />
       </Routes>
     </HashRouter>
   </React.StrictMode>,
