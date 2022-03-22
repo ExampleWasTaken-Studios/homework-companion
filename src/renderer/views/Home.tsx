@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Homework } from "../components/home/Homework";
 import { Sidebar } from "../components/utils/Sidebar";
 import "../styles/styles.css";
 
 export const Home = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/welcome");
+  }, []);
 
   let css: string;
   const [openTaskCreationModal, setOpenTaskCreationModal] = useState(false);
