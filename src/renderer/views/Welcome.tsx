@@ -6,11 +6,15 @@ export const Welcome = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    //navigate("/");
+  }, []);
+
   return (
     <div className="welcome">
       <div className="welcome-wrapper">
         <div className="welcome-header">
-          <h1 className="welcome-title">Welcome to Homework Companion!</h1>
+          <h1 className="welcome-title">Welcome&nbsp;to<br />Homework&nbsp;Companion!</h1>
           <h4 className="welcome-subtitle">We need to get some things out of the way before we start.</h4>
         </div>
         <div className="welcome-input">
@@ -21,12 +25,12 @@ export const Welcome = () => {
             className="welcome-subject-textarea"
           >
           </textarea>
-          <h6 className="welcome-textarea-alt">Separate subjects with comma.</h6>
+          <h6 className="welcome-textarea-alt">Separate subjects with a comma</h6>
           <Button 
             onClick={() => navigate("/")}
             className="welcome-btn"
           >
-            Login
+            Get Started
           </Button>  
         </div>
       </div>
