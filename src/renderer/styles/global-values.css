@@ -8,7 +8,7 @@
   --fg-secondary: rgba(255, 255, 255, 0.6);
   --fg-disabled: rgba(255, 255, 255, 30%);
 
-  --bg-primary: #121212;
+  --bg-primary: rgb(18, 18, 18);
   --bg-primary-disabled: rgb(18, 18, 18, 30%);
   --bg-secondary: rgb(24, 24, 24);
   --bg-secondary-disabled: rgb(24, 24, 24, 30%);
