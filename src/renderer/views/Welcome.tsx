@@ -39,5 +39,9 @@ export const Welcome = () => {
 };
 
 export const WelcomeComplete = () => {
-  return <h1 className="welcome-wrapper welcome-title">We&apos;re setting Homework Companion up for you. <br /> Hang tight!</h1>;
+  return (
+    <div className="welcome-wrapper">
+      <h1 className="welcome welcome-title">We&apos;re&nbsp;setting&nbsp;Homework&nbsp;Companion&nbsp;up&nbsp;for&nbsp;you. <br /> Hang&nbsp;tight!</h1>  
+    </div>
+  );
 };
