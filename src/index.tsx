@@ -4,7 +4,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./renderer/views/Home";
 import { Announcements } from "./renderer/views/Announcements";
 import { Settings } from "./renderer/views/Settings";
-import { Welcome } from "./renderer/views/Welcome";
+import { WelcomeComplete, Welcome } from "./renderer/views/Welcome";
 
 ReactDom.render(
   <React.StrictMode>
@@ -34,6 +34,10 @@ ReactDom.render(
         <Route
           path="/welcome"
           element={<Welcome />}
+        />
+        <Route
+          path="/welcome-complete"
+          element={<WelcomeComplete />}
         />
       </Routes>
     </HashRouter>

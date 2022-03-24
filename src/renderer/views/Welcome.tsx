@@ -27,7 +27,7 @@ export const Welcome = () => {
           </textarea>
           <h6 className="welcome-textarea-alt">Separate subjects with a comma</h6>
           <Button 
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/welcome-complete")}
             className="welcome-btn"
           >
             Get Started
@@ -36,4 +36,8 @@ export const Welcome = () => {
       </div>
     </div>
   );
+};
+
+export const WelcomeComplete = () => {
+  return <h1 className="welcome-wrapper welcome-title">We&apos;re setting Homework Companion up for you. <br /> Hang tight!</h1>;
 };
