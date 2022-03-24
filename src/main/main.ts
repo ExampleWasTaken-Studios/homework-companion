@@ -28,9 +28,9 @@ const createWindow = () => {
 
   mainWindow.setMenuBarVisibility(false);
 
-  /* if (store.get("cache.window.maximized")) {
+  if (store.get("cache.window.maximized")) {
     mainWindow.maximize();
-  } */
+  }
 
   process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true"; // TODO: remove before deploy
 
