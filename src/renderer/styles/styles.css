@@ -551,7 +551,7 @@
   padding: var(--ss-length);
   border: none;
   border-radius: 4px;
-  outline: 0px solid var(--bg-button);
+  outline: 1px solid var(--bg-textbox);
   transition: outline var(--hover-trans-duration) var(--hover-trans-timing);
 }
 
