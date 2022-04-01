@@ -3,14 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Homework } from "../components/home/Homework";
 import { Sidebar } from "../components/utils/Sidebar";
 import "../styles/styles.css";
+import { ErrorView } from "./ErrorView";
 
 export const Home = () => {
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate("/welcome");
-  }, []);
 
   let css: string;
   const [openTaskCreationModal, setOpenTaskCreationModal] = useState(false);
@@ -21,6 +18,8 @@ export const Home = () => {
   } else {
     css = "container";
   }
+
+  return <ErrorView error={new Error("test error")} />;
 
   return (
     <div className={css}>

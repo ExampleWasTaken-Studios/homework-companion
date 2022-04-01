@@ -1,15 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import electronReloader from "electron-reloader";
-import path from "path";
 import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent, shell } from "electron";
-import store, { persistWindowSettings } from "./settings/settings";
 import channels from "./channels";
-import userSettingsPath from "./settings/userSettingsPath";
+import store, { persistWindowSettings } from "./settings/settings";
+import { TaskStorage } from "./taskStorage/TaskStorage";
 
 let mainWindow: BrowserWindow;
+const taskStorage: TaskStorage = new TaskStorage();
 
 const createWindow = () => {
-  shell.beep();
   mainWindow = new BrowserWindow({
     width: store.get("cache.window.lastWindowX"),
     height: store.get("cache.window.lastWindowY"),
