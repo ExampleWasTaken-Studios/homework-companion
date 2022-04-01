@@ -1,7 +1,7 @@
 import { app } from "electron";
 import fs from "fs";
 
-class TaskStorage {
+export class TaskStorage {
   private readonly STORAGE_PATH = `${app.getPath("userData")}/taskStorage/taskStorage.json`;
   private storageExists: boolean;
 

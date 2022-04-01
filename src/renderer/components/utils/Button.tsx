@@ -12,9 +12,9 @@ export const Button = ({ className, onClick, children, isSecondary }: ButtonProp
   let classes: string;
 
   if (isSecondary) {
-    classes = `${className} button-secondary`;
+    classes = `button-secondary ${className}`;
   } else {
-    classes = `${className} button`;
+    classes = `button ${className} `;
   }
 
   return (

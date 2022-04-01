@@ -5,6 +5,152 @@
   color: var(--fg-primary);
 }
 
+/* Util components START */
+/* Button component START */
+.button {
+  user-select: none;
+  height: 50%;
+  padding: var(--ss-length) var(--ml-length) var(--ss-length) var(--ml-length);
+  cursor: pointer;
+  color: var(--fg-button);
+  background-color: var(--bg-button);
+  border: 1px solid var(--bg-button);
+  border-radius: 4px;
+  transition: background-color var(--hover-trans-duration) ease-out;
+}
+
+.button:hover {
+  background-color: var(--bg-button-hover);
+  border-color: var(--bg-button-active);
+}
+
+.button:active {
+  transform: scale(.99);
+  background-color: var(--bg-button-active);
+  border-color: var(--bg-button-active);
+}
+
+.button-secondary {
+  user-select: none;
+  font-weight: 300;
+  height: 50%;
+  padding: var(--ss-length) var(--ml-length) var(--ss-length) var(--ml-length);
+  cursor: pointer;
+  color: var(--fg-button-secondary);
+  background-color: transparent;
+  border: 1px solid var(--bg-button);
+  border-radius: 4px;
+  transition: background-color var(--hover-trans-duration) ease-out;
+}
+
+.button-secondary:hover {
+  background-color: var(--bg-button-secondary-hover);
+  border-color: var(--bg-button);
+}
+
+.button-secondary:active {
+  transform: scale(.99);
+  background-color: var(--bg-secondary-active);
+  border-color: var(--bg-button);
+}
+/* Button component END */
+
+/* "Create Task" button START*/
+.home-create-task-button {
+  margin: var(--ms-length) 0 0 auto !important; /* TODO: this !important is currently used to override ".home-homework > ul > a". This behavior should be changed to not need !important in the future */
+}
+/* "Create Task" button END */
+
+/* Dropdown START */
+.dropdown {
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  padding: 0 0 0 5px;
+  color: var(--fg-primary);
+  border-radius: 4px;
+}
+
+.dropdown-selection {
+  margin: 12px 0 0 0;
+  background-color: transparent;
+}
+
+.dropdown > .chevron {
+  margin: 0 0 0 auto;
+  width: 22px;
+  color: var(--fg-primary);
+  background-color: transparent;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-modal-secondary);
+  border-radius: 4px;
+  outline: 1px solid var(--active-border);
+}
+
+.dropdown-item {
+  padding: 10px 0 10px 5px;
+  background-color: var(--bg-modal-secondary);
+  border-radius: 4px;
+}
+
+.dropdown-item:hover {
+  background-color: var(--bg-modal);
+}
+
+.dropdown-icon {
+  background-color: var(--bg-modal);
+}
+/* Dropdown END */
+/* Switch START */
+.switch-track-off {
+  cursor: pointer;
+  width: 40px;
+  height: 23px;
+  background-color: var(--fg-disabled);
+  border-radius: 50px;
+  transition: background-color var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.switch-handle-off {
+  width: 22px;
+  height: 21px;
+  background-color: var(--fg-primary);
+  border-radius: 100px;
+  margin: 1px 0 0 0px;
+  transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.switch-track-on {
+  cursor: pointer;
+  width: 40px;
+  height: 23px;
+  background-color: #3BA55D;
+  border-radius: 50px;
+  transition: background-color var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.switch-handle-on {
+  width: 22px;
+  height: 21px;
+  background-color: var(--fg-primary);
+  border-radius: 100px;
+  margin: 1px 0 0 19px;
+  transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+/* Switch END */
+/* Util components END */
+
 /* Container START */
 .container {
   filter: blur(0);
@@ -572,6 +718,64 @@
 }
 /* Welcome view END */
 
+/* Error view START */
+.error-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2000;
+}
+
+.error-view-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 1% 3%;
+}
+
+.error-view-header {
+  padding: 0 0 var(--ml-length) 0;
+}
+
+.error-view-title {
+  font-weight: normal;
+  margin: 0 0 var(--ss-length) 0;
+}
+
+.error-view-subtitle {
+  font-weight: normal;
+}
+
+.error-view-error-box {
+  font-family: Open Sans;
+  font-size: 16px;
+  resize: none;
+  width: 100%;
+  min-height: 200px;
+  max-height: 500px;
+  background-color: var(--bg-textbox);
+  padding: var(--ss-length);
+  border: none;
+  border-radius: 4px;
+  outline: 1px solid var(--bg-button);
+}
+
+.error-view-relaunch-button {
+  padding: var(--ms-length) var(--ls-length);
+  margin: var(--ms-length) auto 0 auto;
+}
+/* Error view END */
+
 
 /* Modal START */
 .modal-overlay {
@@ -906,150 +1110,6 @@
   background-color: transparent;
 }
 /* Changelog modal END */
-
-/* Button component START */
-.button {
-  user-select: none;
-  height: 50%;
-  padding: var(--ss-length) var(--ml-length) var(--ss-length) var(--ml-length);
-  cursor: pointer;
-  color: var(--fg-button);
-  background-color: var(--bg-button);
-  border: 1px solid var(--bg-button);
-  border-radius: 4px;
-  transition: background-color var(--hover-trans-duration) ease-out;
-}
-
-.button:hover {
-  background-color: var(--bg-button-hover);
-  border-color: var(--bg-button-active);
-}
-
-.button:active {
-  transform: scale(.99);
-  background-color: var(--bg-button-active);
-  border-color: var(--bg-button-active);
-}
-
-.button-secondary {
-  user-select: none;
-  font-weight: 300;
-  height: 50%;
-  padding: var(--ss-length) var(--ml-length) var(--ss-length) var(--ml-length);
-  cursor: pointer;
-  color: var(--fg-button-secondary);
-  background-color: transparent;
-  border: 1px solid var(--bg-button);
-  border-radius: 4px;
-  transition: background-color var(--hover-trans-duration) ease-out;
-}
-
-.button-secondary:hover {
-  background-color: var(--bg-button-secondary-hover);
-  border-color: var(--bg-button);
-}
-
-.button-secondary:active {
-  transform: scale(.99);
-  background-color: var(--bg-secondary-active);
-  border-color: var(--bg-button);
-}
-/* Button component END */
-
-/* "Create Task" button START*/
-.home-create-task-button {
-  margin: var(--ms-length) 0 0 auto !important; /* TODO: this !important is currently used to override ".home-homework > ul > a". This behavior should be changed to not need !important in the future */
-}
-/* "Create Task" button END */
-
-/* Dropdown START */
-.dropdown {
-  user-select: none;
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  text-align: left;
-  padding: 0 0 0 5px;
-  color: var(--fg-primary);
-  border-radius: 4px;
-}
-
-.dropdown-selection {
-  margin: 12px 0 0 0;
-  background-color: transparent;
-}
-
-.dropdown > .chevron {
-  margin: 0 0 0 auto;
-  width: 22px;
-  color: var(--fg-primary);
-  background-color: transparent;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 46px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg-modal-secondary);
-  border-radius: 4px;
-  outline: 1px solid var(--active-border);
-}
-
-.dropdown-item {
-  padding: 10px 0 10px 5px;
-  background-color: var(--bg-modal-secondary);
-  border-radius: 4px;
-}
-
-.dropdown-item:hover {
-  background-color: var(--bg-modal);
-}
-
-.dropdown-icon {
-  background-color: var(--bg-modal);
-}
-/* Dropdown END */
-/* Switch START */
-.switch-track-off {
-  cursor: pointer;
-  width: 40px;
-  height: 23px;
-  background-color: var(--fg-disabled);
-  border-radius: 50px;
-  transition: background-color var(--switch-state-change-duration) var(--switch-state-change-timing);
-}
-
-.switch-handle-off {
-  width: 22px;
-  height: 21px;
-  background-color: var(--fg-primary);
-  border-radius: 100px;
-  margin: 1px 0 0 0px;
-  transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
-}
-
-.switch-track-on {
-  cursor: pointer;
-  width: 40px;
-  height: 23px;
-  background-color: #3BA55D;
-  border-radius: 50px;
-  transition: background-color var(--switch-state-change-duration) var(--switch-state-change-timing);
-}
-
-.switch-handle-on {
-  width: 22px;
-  height: 21px;
-  background-color: var(--fg-primary);
-  border-radius: 100px;
-  margin: 1px 0 0 19px;
-  transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
-}
-/* Switch END */
 
 /* TaskState colors START */
 .red {
