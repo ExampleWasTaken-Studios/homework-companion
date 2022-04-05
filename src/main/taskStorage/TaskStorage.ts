@@ -1,8 +1,8 @@
-import { app } from "electron";
 import fs from "fs";
+import { USER_DATA_PATH } from "../main";
 
 export class TaskStorage {
-  private readonly STORAGE_PATH = `${app.getPath("userData")}/taskStorage/taskStorage.json`;
+  private readonly STORAGE_PATH = `${USER_DATA_PATH}/taskStorage/taskStorage.json`;
   private storageExists: boolean;
 
   private tasks: TaskSchema;

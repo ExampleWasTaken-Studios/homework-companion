@@ -5,6 +5,17 @@ import { Home } from "./renderer/views/Home";
 import { Announcements } from "./renderer/views/Announcements";
 import { Settings } from "./renderer/views/Settings";
 import { WelcomeComplete, Welcome } from "./renderer/views/Welcome";
+import { ErrorView } from "./renderer/views/ErrorView";
+
+window.onerror = (message, source, lineno, colno, error) => {
+  ReactDom.render(
+    <React.StrictMode>
+      <ErrorView
+        error={error as Error}
+      />
+    </React.StrictMode>,
+    document.getElementById("root"));
+};
 
 ReactDom.render(
   <React.StrictMode>

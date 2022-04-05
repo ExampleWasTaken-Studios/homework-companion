@@ -1,8 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent, shell } from "electron";
-import channels from "./channels";
+import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
+import channels from "../common/channels";
 import store, { persistWindowSettings } from "./settings/settings";
 import { TaskStorage } from "./taskStorage/TaskStorage";
+
+export const USER_DATA_PATH = app.getPath("userData");
 
 let mainWindow: BrowserWindow;
 const taskStorage: TaskStorage = new TaskStorage();
@@ -55,7 +57,12 @@ const createWindow = () => {
 
   ipcMain.on(channels.setSettingValue, (event: IpcMainEvent, key: string, value: unknown) => {
     store.set(key, value);
-  });  
+  });
+
+  ipcMain.on(channels.relaunchApp, (event, arg: {force?: boolean}) => {
+    app.relaunch();
+    arg.force ? app.exit() : app.quit();
+  });
 };
 
 app.on("ready", createWindow);
