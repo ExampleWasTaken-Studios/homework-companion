@@ -17,9 +17,7 @@ export const Home = () => {
   } else {
     css = "container";
   }
-
-  throw new Error("POGGERS_ERROR");
-
+  
   return (
     <div className={css}>
       <Sidebar activeItem="home"/>

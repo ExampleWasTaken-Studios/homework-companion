@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = [
   {
     mode: "development",
-    devtool: "hidden-nosources-source-map",
+    devtool: "source-map",
     entry: "./src/index.tsx",
     target: "electron-renderer",
     resolve: {

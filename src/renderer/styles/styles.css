@@ -744,35 +744,22 @@
 }
 
 .error-view-header {
-  padding: 0 0 var(--ml-length) 0;
+  padding: 0 0 var(--ms-length) 0;
 }
 
 .error-view-title {
   font-weight: normal;
-  margin: 0 0 var(--ss-length) 0;
+  margin: 0 0 0 0;
 }
 
 .error-view-subtitle {
   font-weight: normal;
 }
 
-.error-view-error-box {
-  font-family: Open Sans;
-  font-size: 16px;
-  resize: none;
-  width: 100%;
-  min-height: 200px;
-  max-height: 500px;
-  background-color: var(--bg-textbox);
-  padding: var(--ss-length);
-  border: none;
-  border-radius: 4px;
-  outline: 1px solid var(--bg-button);
-}
-
 .error-view-relaunch-button {
-  padding: var(--ms-length) var(--ls-length);
-  margin: var(--ms-length) auto 0 auto;
+  font-size: 14px;
+  padding: var(--sl-length) var(--ml-length);
+  margin: 0 auto 0 auto;
 }
 /* Error view END */
 

@@ -3,6 +3,8 @@ import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "e
 import channels from "../common/channels";
 import store, { persistWindowSettings } from "./settings/settings";
 import { TaskStorage } from "./taskStorage/TaskStorage";
+import electronLocalshortcut from "electron-localshortcut";
+
 
 export const USER_DATA_PATH = app.getPath("userData");
 
@@ -24,7 +26,12 @@ const createWindow = () => {
     }
   });
 
-  // mainWindow.webContents.openDevTools();
+  // TODO: disable before deploy
+  electronLocalshortcut.register("F12", () => {
+    console.log("F12 pressed");
+    mainWindow.webContents.toggleDevTools();
+    console.log(mainWindow.isFocused());
+  });
 
   mainWindow.setMenuBarVisibility(false);
 

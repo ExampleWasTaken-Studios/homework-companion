@@ -11,6 +11,10 @@ window.onerror = (message, source, lineno, colno, error) => {
   ReactDom.render(
     <React.StrictMode>
       <ErrorView
+        message={message as string}
+        source={source as string}
+        lineno={lineno as number}
+        colno={colno as number}
         error={error as Error}
       />
     </React.StrictMode>,
