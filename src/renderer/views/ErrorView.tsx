@@ -1,6 +1,8 @@
-import { app } from "electron";
+import { ipcRenderer } from "electron";
 import React from "react";
+import channels from "../../common/channels";
 import { Button } from "../components/utils/Button";
+import "source-map-support/register";
 
 interface ErrorViewProps {
   error: Error;
@@ -19,13 +21,13 @@ export const ErrorView = ({ error }: ErrorViewProps) => {
           id="error-view-error-box"
           className="error-view-error-box"
           readOnly
-          defaultValue={error.message}
+          defaultValue={`${error.stack}`}
         >
         </textarea>
         <Button 
           className="error-view-relaunch-button"
           onClick={() => {
-            null; //TODO: impl. relaunch feature
+            ipcRenderer.send(channels.relaunchApp, {force: true});
           }}
         >
           Relaunch

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Homework } from "../components/home/Homework";
 import { Sidebar } from "../components/utils/Sidebar";
 import "../styles/styles.css";
-import { ErrorView } from "./ErrorView";
 
 export const Home = () => {
 
@@ -19,7 +18,7 @@ export const Home = () => {
     css = "container";
   }
 
-  return <ErrorView error={new Error("test error")} />;
+  throw new Error("POGGERS_ERROR");
 
   return (
     <div className={css}>
