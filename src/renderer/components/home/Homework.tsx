@@ -1,4 +1,6 @@
+import { ipcRenderer } from "electron/renderer";
 import React, { useState } from "react";
+import channels from "../../../common/channels";
 import { Button } from "../utils/Button";
 import { CreateTaskModal } from "../utils/CreateTaskModal";
 import { TaskModal } from "../utils/TaskModal";
@@ -15,6 +17,11 @@ interface HomeworkProps {
 export const Homework = ({ openTaskCreationModal, setOpenTaskCreationModal, openTaskModal, setOpenTaskModal }: HomeworkProps) => {
 
   const [selectedTimeframe, setSelectedTimeframe] = useState<TimeframeSelection>("all");
+  
+  let tasks: TaskSchema = null;
+
+  ipcRenderer.invoke(channels.getTasks)
+    .then()
 
   return (
     <div className="home-homework">
@@ -41,22 +48,7 @@ export const Homework = ({ openTaskCreationModal, setOpenTaskCreationModal, open
       <div className="home-homework-list">
         {selectedTimeframe === "all" ? (
           <>
-            {/* TODO: add logic to load all tasks from disk */}
-            <HomeworkListItem
-              openTaskModal={openTaskModal}
-              setOpenTaskModal={setOpenTaskModal}
-              data={{ 
-                id: 0,
-                color: "green",
-                title: "Placeholderfgafgsalkfjdgöslkfj",
-                dueDate: new Date(),
-                subject: { id: 0, name: "subject" },
-                priority:"normal",
-                important: false,
-                state: "open",
-                content: "This is a placeholder." 
-              }}
-            />
+            {}
           </>          
         ) : (
           <HomeworkListItem 

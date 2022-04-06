@@ -87,4 +87,13 @@ export class TaskStorage {
     this.tasks = [null];
     return true;
   }
+
+  /**
+   * Get all known tasks. 
+   * @returns An array containing all tasks currently stored to disk. If no tasks are either in memory or on disk, null is returned.
+   */
+  public getTasks(): TaskSchema {
+    this.load();
+    return this.tasks;
+  }
 }

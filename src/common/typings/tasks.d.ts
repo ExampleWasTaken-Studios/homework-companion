@@ -1,1 +1,1 @@
-type TaskSchema = [Homework | null];
+type TaskSchema = [Homework] | null;
