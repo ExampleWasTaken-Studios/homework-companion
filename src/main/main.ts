@@ -70,6 +70,10 @@ const createWindow = () => {
     app.relaunch();
     arg.force ? app.exit() : app.quit();
   });
+
+  ipcMain.on(channels.getTasks, (event) => {
+    event.sender.send(channels.getTasksResponse, taskStorage.getTasks());
+  });
 };
 
 app.on("ready", createWindow);

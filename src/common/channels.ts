@@ -1,7 +1,8 @@
 const channels = {
   getSettingValue: "getSettingValue",
   setSettingValue: "setSettingValue",
-  relaunchApp: "relaunchApp"
+  relaunchApp: "relaunchApp",
+  getTasks: "getTasks"
 };
 
 export default channels;
