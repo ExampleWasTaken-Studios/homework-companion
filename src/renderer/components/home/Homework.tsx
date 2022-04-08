@@ -1,4 +1,4 @@
-import { ipcRenderer } from "electron/renderer";
+import { ipcRenderer } from "electron";
 import React, { useState } from "react";
 import channels from "../../../common/channels";
 import { Button } from "../utils/Button";
@@ -18,10 +18,10 @@ export const Homework = ({ openTaskCreationModal, setOpenTaskCreationModal, open
 
   const [selectedTimeframe, setSelectedTimeframe] = useState<TimeframeSelection>("all");
   
-  let tasks: TaskSchema = null;
+  const tasks: TaskSchema = null;
 
   ipcRenderer.invoke(channels.getTasks)
-    .then()
+    .then();
 
   return (
     <div className="home-homework">
