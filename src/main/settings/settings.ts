@@ -81,6 +81,7 @@ export const persistWindowSettings = (win: BrowserWindow): void => {
 
   console.log("persisting window settings");
   console.log("Dimensions to be stored", win.getSize());
+  console.log("Maximized:", win.isMaximized());
 
   store.set("cache.window.maximized", win.isMaximized());
 

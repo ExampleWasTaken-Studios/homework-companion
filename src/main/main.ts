@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
+import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 import channels from "../common/channels";
 import store, { persistWindowSettings } from "./settings/settings";
 import { TaskStorage } from "./taskStorage/TaskStorage";
@@ -22,7 +23,7 @@ const createWindow = () => {
     show: false,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false // THIS IS A BIG SECURITY RISK - IT IS ENABLED DUE TO AN APPARENT WEBPACK BUG (throws reference error otherwise) the dev console should be disabled in production builds as long as this is set to false
+      contextIsolation: false,
     }
   });
 
@@ -48,11 +49,11 @@ const createWindow = () => {
   });
 
   mainWindow.on("resize", () => {
-    console.log(mainWindow.getSize());
+    persistWindowSettings(mainWindow);
   });
 
   mainWindow.on("close", () => {
-    persistWindowSettings(mainWindow);  
+    persistWindowSettings(mainWindow);
   });
 
   // IPC
@@ -72,11 +73,15 @@ const createWindow = () => {
   });
 
   ipcMain.on(channels.getTasks, (event) => {
-    event.sender.send(channels.getTasksResponse, taskStorage.getTasks());
+    console.log("received request - sending reply");
+    event.reply(channels.getTaskResponse, taskStorage.getTasks());
   });
 };
 
-app.on("ready", createWindow);
+app.on("ready", () => {
+  createWindow();
+  installExtension(REACT_DEVELOPER_TOOLS).then(name => console.log(`Added Extension: ${name}`)).catch(err => console.warn(`Couldn't add extension: ${err}`));
+});
 
 app.on("window-all-closed", () => {
   app.quit();

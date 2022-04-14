@@ -13,7 +13,7 @@ const main = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        use: "babel-loader",
+        use: "ts-loader",
       },
     ],
   },

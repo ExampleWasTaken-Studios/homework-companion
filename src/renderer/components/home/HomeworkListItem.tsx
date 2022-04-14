@@ -4,17 +4,7 @@ import { TaskModal } from "../utils/TaskModal";
 interface HomeworkListItemProps {
   openTaskModal: boolean;
   setOpenTaskModal: React.Dispatch<React.SetStateAction<boolean>>;
-  data: {
-    id: number;
-    color: Color;
-    title: string;
-    dueDate: Date;
-    subject: Subject;
-    priority: Priority;
-    important: boolean;
-    state: TaskState;
-    content: string;
-  }
+  data: Homework
 }
 
 export const HomeworkListItem = ({ openTaskModal, setOpenTaskModal, data }: HomeworkListItemProps) => {
@@ -39,7 +29,7 @@ export const HomeworkListItem = ({ openTaskModal, setOpenTaskModal, data }: Home
         </div>
         <div className="home-homework-list-item-center-column">
           <div className="home-homework-list-item-top-line">
-            <p className="home-homework-list-item-title">{data.title}</p>
+            <p className="home-homework-list-item-title">{data.id}</p>
           </div>
           <div className="home-homework-list-item-bottom-line">
             <p className="home-homework-list-item-subject">{data.subject.name}</p>
@@ -53,17 +43,7 @@ export const HomeworkListItem = ({ openTaskModal, setOpenTaskModal, data }: Home
       <TaskModal
         isOpen={openTaskModal}
         setOpen={setOpenTaskModal}
-        data={{
-          id: data.id,
-          color: data.color,
-          title: data.title,
-          dueDate: data.dueDate,
-          subject: data.subject,
-          priority: data.priority,
-          important: data.important,
-          state: data.state,
-          content: data.content
-        }}
+        data={data}
       />
     </>
   );
