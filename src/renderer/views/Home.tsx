@@ -6,17 +6,9 @@ import "../styles/styles.css";
 
 export const Home = () => {
 
-  const navigate = useNavigate();
-
-  let css: string;
+  const css = "container";
   const [openTaskCreationModal, setOpenTaskCreationModal] = useState(false);
   const [openTaskModal, setOpenTaskModal] = useState(false);
-
-  if (openTaskCreationModal || openTaskModal) {
-    css = "container-blur";
-  } else {
-    css = "container";
-  }
   
   return (
     <div className={css}>

@@ -6,17 +6,7 @@ import { Dropdown } from "./Dropdown";
 import { DropdownItem } from "./DropdownItem";
 
 interface TaskModalProps extends ModalProps {
-  data: {
-    id: number;
-    color: Color;
-    title: string;
-    dueDate: Date;
-    subject: Subject;
-    priority: Priority;
-    important: boolean;
-    state: TaskState;
-    content: string;
-  };
+  data: Homework;
 }
 
 export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
@@ -26,6 +16,8 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
   if (!isOpen) {
     return null;
   }
+
+  console.log("TASK MODAL DATA:", data);
 
   return ReactDOM.createPortal(
     <>
@@ -97,6 +89,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
               className="task-content"
               rows={20}
               placeholder="Description"
+              defaultValue={data.content}
             />
             <div className="modal-button-container">
               <Button

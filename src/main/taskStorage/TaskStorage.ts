@@ -1,18 +1,19 @@
 import fs from "fs";
 import { USER_DATA_PATH } from "../main";
+import { NULL_TASK } from "../../common/constants";
 
 export class TaskStorage {
   private readonly STORAGE_PATH = `${USER_DATA_PATH}/taskStorage/taskStorage.json`;
   private storageExists: boolean;
 
-  private tasks: TaskSchema;
+  private tasks: Homework[];
 
   constructor() {
     this.storageExists = fs.existsSync(this.STORAGE_PATH);
     if (this.storageExists) {
       this.tasks = JSON.parse(fs.readFileSync(this.STORAGE_PATH, {encoding: "utf-8"}));
     } else {
-      this.tasks = [null];
+      this.tasks = [NULL_TASK];
     }
   }
 
@@ -64,7 +65,7 @@ export class TaskStorage {
       console.warn("File does not exist");
       return false;
     }
-    let tempTask: TaskSchema;
+    let tempTask: Homework[];
     try {
       tempTask = JSON.parse(fs.readFileSync(this.STORAGE_PATH, {encoding: "utf-8"}));
     } catch (error) {
@@ -84,7 +85,7 @@ export class TaskStorage {
       console.warn("File does not exist. Nothing to reset.");
       return false;
     }
-    this.tasks = [null];
+    this.tasks = [NULL_TASK];
     return true;
   }
 
@@ -92,8 +93,37 @@ export class TaskStorage {
    * Get all known tasks. 
    * @returns An array containing all tasks currently stored to disk. If no tasks are either in memory or on disk, null is returned.
    */
-  public getTasks(): TaskSchema {
-    this.load();
-    return this.tasks;
+  public getTasks(): Homework[] {
+    //this.load();
+    return [{
+      id: 1,
+      color: "red",
+      title: "Returned Task",
+      dueDate: new Date(),
+      subject: {
+        id: 1,
+        name: "Returned subject"
+      },
+      priority: "low",
+      important: false,
+      state: "open",
+      content: "This is a task that is returned by the TaskStorage#getTasks() method."
+    },
+    {
+      id: 2,
+      color: "blue",
+      title: "Returned 2nd Task",
+      dueDate: new Date(),
+      subject: {
+        id: 1,
+        name: "Returned 2nd subject"
+      },
+      priority: "high",
+      important: false,
+      state: "open",
+      content: "This is the 2nd task that is returned by the TaskStorage#getTasks() method."
+    }
+    ];
+    //return this.tasks;
   }
 }
