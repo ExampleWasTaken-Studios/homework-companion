@@ -50,6 +50,7 @@
         "ArrayExpression": "consistent",
         "ArrayPattern": { "minItems": 3 }
       }
-    ]
+    ],
+    "object-curly-spacing": ["error", "always", {"arraysInObjects": false}]
   }
 }

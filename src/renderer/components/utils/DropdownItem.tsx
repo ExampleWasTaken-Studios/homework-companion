@@ -3,15 +3,17 @@ import "../../styles/styles.css";
 
 interface DropdownItemProps {
   value: string;
-  setSelection: React.Dispatch<React.SetStateAction<string>>;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onClick: () => void;
 }
 
-
-export const DropdownItem = ({ value, setSelection }: DropdownItemProps) => {
+export const DropdownItem = ({ value, onClick }: DropdownItemProps) => {
   return (
     <div
       className="dropdown-item"
-      onClick={() => {console.log("fired"); setSelection(value);}}
+      onClick={() => {
+        onClick();
+      }}
     >
       {value}
     </div>
