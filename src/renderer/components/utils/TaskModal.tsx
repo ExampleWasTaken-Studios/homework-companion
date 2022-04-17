@@ -21,7 +21,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
 
   return ReactDOM.createPortal(
     <>
-      <div
+      {/*<div
         className="modal-overlay"
         onClick={() => setOpen(false)}
       >
@@ -76,7 +76,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
                 selection={subjectSelection}
                 className="task-subject"
               >
-                {/* TODO: add logic to load all subjects from disk */}
+                {/* TODO: add logic to load all subjects from disk
                 <DropdownItem
                   setSelection={setSubjectSelection}
                   value="Placeholder"
@@ -104,7 +104,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
             </div>
           </div>
         </div>
-      </div>
+      </div>*/}
     </>,
     document.getElementById("task-portal") as Element
   );

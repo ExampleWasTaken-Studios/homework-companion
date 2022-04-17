@@ -75,7 +75,7 @@
 }
 
 .dropdown-selection {
-  margin: 12px 0 0 0;
+  margin: 10px 0 0 0;
   background-color: transparent;
 }
 
@@ -149,20 +149,41 @@
   transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
 }
 /* Switch END */
+/* Invert color of calendar icon */
+::-webkit-calendar-picker-indicator {
+  filter: invert();
+  cursor: pointer;
+  margin: 0 0 0 -5px;
+}
+
+/* Modal START */
+.modal-overlay {
+  user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  background: hsl(0, calc(1 * 0%), 0%);
+  background-color: rgba(0, 0, 0, .85);
+}
+
+.modal {
+  width: max-content;
+  display: flex;
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
+}
+/* Modal END */
 /* Util components END */
 
 /* Container START */
 .container {
   filter: blur(0);
-  height: 100%;
-  max-height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-
-.container-blur {
-  filter: blur(3px);
   height: 100%;
   max-height: 100%;
   width: 100%;
@@ -762,229 +783,139 @@
   margin: 0 auto 0 auto;
 }
 /* Error view END */
-
-
-/* Modal START */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: var(--bg-modal-overlay);
-  z-index: 1000;
-}
-
-.modal {
-  user-select: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 60%;
-  transform: translate(-50%, -50%);
-  background-color: var(--bg-modal);
-  box-shadow: 0 0 5px var(--modal-box-shadow);
-  border-radius: 4px;
-  padding: 1% 2% 1% 2%;
-  z-index: 1001;
-}
-
-.task-modal-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg-modal);
-}
-
-.task-header {
-  border-radius: 4px;
-  background-color: var(--bg-modal);
-}
-
-.task-title {
-  font-size: 20px;
-  font-family: Open Sans;
-  font-weight: 500;
+/* Create new Task Modal START */
+.create-task-container {
   width: 100%;
-  height: 40px;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  padding: 0 0 0 5px;
-  margin: 0 0 1.5% 0;
-  background-color: var(--bg-modal);
-  transition: background-color var(--hover-trans-duration) ease-in-out;
-}
-
-.task-title:hover {
-  outline: 1px solid var(--active-border);
-}
-
-.task-title:focus {
-  outline: 1px solid var(--active-border);
-  background-color: var(--bg-modal-secondary);
-}
-
-.task-property-container {
   height: 100%;
-  background-color: var(--bg-modal);
-  display: flex;
-  flex-direction: row;
-  margin: 0 0 2.5% 0; 
-}
-
-.task-due-date {
-  cursor: pointer;
-  font-size: 16px;
-  font-family: Open Sans;
-  width: 100%;
-  padding: 0 0 0 5px;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-}
-
-.task-priority {
-  height: 100%;
-  width: 100%;
-  margin: 0 .5% 0 .5%;
-}
-
-.task-subject {
-  width: 100%;
-}
-
-.task-content-container {
-  height: 100%;
-}
-
-.task-content {
-  font-size: 16px;
-  font-family: Open Sans;
-  width: 100%;
-  padding: 5px;
-  resize: vertical;
-  min-height: 10em;
-  max-height: 40em;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-}
-
-.task-content:focus {
-  outline: 1px solid var(--active-border);
-}
-
-.create-task-modal-container {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg-modal);
-}
-
-.create-task-heading {
-  background-color: var(--bg-modal);
-  font-weight: normal;
-  user-select: none;
-  margin: 0 0 1.5% 0;
-}
-
-.create-task-property-container {
-  height: 100%;
-  background-color: var(--bg-modal);
-  display: flex;
-  flex-direction: row;
-  margin: 0 0 2.5% 0;
+  background-color: var(--bg-secondary);
+  margin: var(--sm-length) var(--ml-length) var(--ml-length) var(--ml-length);
 }
 
 .create-task-title {
-  font-family: Open Sans;
-  font-size: 18px;
-  width: 50%;
-  background-color: var(--bg-modal-secondary);
-  padding: 0 0 0 5px;
-  margin: 0 .5% 0 0;
-  border: none;
-  border-radius: 4px;
-  outline: none;
+  font-size: 22px;
+  font-weight: normal;
+  background-color: var(--bg-secondary);
+  margin: 0 0 var(--sm-length) 0;
 }
 
-.create-task-title:focus {
-  outline: 1px solid var(--active-border);
+.create-task-property-container {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--bg-secondary);
+  margin: 0 0 var(--sm-length) 0;
 }
 
-.create-task-date {
-  cursor: pointer;
+.create-task-datepicker {
   font-family: Open Sans;
   font-size: 16px;
-  width: 25%;
-  color: var(--fg-primary);
-  background-color: var(--bg-modal-secondary);
-  padding: 0 0 0 5px;
-  margin: 0 .5% 0 0;
+  padding: 3px;
+  margin: 0 var(--ss-length) 0 0;
   border: none;
   border-radius: 4px;
 }
 
-/* Invert color of calendar icon */
-::-webkit-calendar-picker-indicator {
-  filter: invert();
-  cursor: pointer;
-  margin: 0 0 0 -5px;
-}
-
-::-webkit-datetime-edit {
-  z-index: 10;
-}
-
-.create-task-date:focus {
-  outline: none;
-}
-
-.create-task-priority {
-  width: 25%;
-  background-color: var(--bg-modal-secondary);
-  margin: 0 .5% 0 0;
-}
-
-.create-task-subject {
-  width: 25%;
-  background-color: var(--bg-modal-secondary);
+.create-task-prio {
+  margin: 0 var(--ss-length) 0 0;
 }
 
 .create-task-content {
   font-family: Open Sans;
-  font-size: 16px;  
-  height: 25em;
-  min-height: 10em;
-  max-height: 40em;
+  font-size: 16px;
+  min-height: 50px;
+  max-height: 250px;
   width: 100%;
-  resize: vertical;
-  background-color: var(--bg-modal-secondary);
   padding: 5px;
-  margin: 0 0 1.6% 0;
+  margin: 0 0 var(--ss-length) 0;
   border: none;
   border-radius: 4px;
-  outline: none;
+  resize: vertical;
 }
 
-.create-task-content:focus {
-  outline: 1px solid var(--active-border);
-}
-
-.modal-button-container {
-  background-color: transparent;
+.create-task-btn-container {
   display: flex;
-  font-weight: row;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--bg-secondary);
 }
 
-.mark-as-complete-button {
-  margin: 1.6% 0 0 auto;
+.create-task-cancel-btn {
+  text-align: center;
+  width: 49%;
 }
 
-.cancel-task-button {
-  margin: 0 1% 0 auto;
+.create-task-create-btn {
+  text-align: center;
+  width: 49%;
 }
-/* Modal END */
+
+
+/* Create new Task Modal END */
+/* Task Modal START */
+.task-container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-secondary);
+  margin: var(--sm-length) var(--ml-length) var(--ml-length) var(--ml-length);
+}
+
+.task-title {
+  font-size: 22px;
+  font-weight: normal;
+  background-color: var(--bg-secondary);
+  margin: 0 0 var(--sm-length) 0;
+}
+
+.task-property-container {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--bg-secondary);
+  margin: 0 0 var(--sm-length) 0;
+}
+
+.task-datepicker {
+  font-family: Open Sans;
+  font-size: 16px;
+  padding: 3px;
+  margin: 0 var(--ss-length) 0 0;
+  border: none;
+  border-radius: 4px;
+}
+
+.task-prio {
+  margin: 0 var(--ss-length) 0 0;
+}
+
+.task-content {
+  font-family: Open Sans;
+  font-size: 16px;
+  min-height: 50px;
+  max-height: 250px;
+  width: 100%;
+  padding: 5px;
+  margin: 0 0 var(--ss-length) 0;
+  border: none;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.task-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--bg-secondary);
+}
+
+.task-cancel-btn {
+  text-align: center;
+  width: 49%;
+}
+
+.task-create-btn {
+  text-align: center;
+  width: 49%;
+}
+/* Task Modal END */
+
 
 /* Changelog modal START */
 .changelog-modal {
@@ -1118,4 +1049,26 @@
     grid-column: span 1;
   }
 }
+
+@media screen and (min-height: 700px) {
+  .create-task-content, .task-content {
+    max-height: 400px;
+    height: 340px;
+  }
+}
+
+@media screen and (min-height: 800px) {
+  .create-task-content, .task-content {
+    max-height: 600px;
+    height: 340px;
+  }
+}
+
+@media screen and (min-height: 900px) {
+  .create-task-content, .task-content {
+    max-height: 700px;
+    height: 340px; 
+  }
+}
+
 /* Media queries END */
