@@ -111,11 +111,11 @@ export const Homework = () => {
               >
                 <DropdownItem
                   value="PLACEHOLDER_1"
-                  onClick={() => console.log("LOGIC FOR SUBJECT LOADING NOT YET IMPLEMENTED")}
+                  onClick={() => console.warn("LOGIC FOR SUBJECT LOADING NOT YET IMPLEMENTED")}
                 />
                 <DropdownItem
                   value="PLACEHOLDER_2"
-                  onClick={() => console.log("LOGIC FOR SUBJECT LOADING NOT YET IMPLEMENTED")}
+                  onClick={() => console.warn("LOGIC FOR SUBJECT LOADING NOT YET IMPLEMENTED")}
                 />
               </Dropdown>
             </div>

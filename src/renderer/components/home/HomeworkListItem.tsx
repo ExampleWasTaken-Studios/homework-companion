@@ -30,7 +30,7 @@ export const HomeworkListItem = ({ onClick, data }: HomeworkListItemProps) => {
           </div>
         </div>
         <div className="home-homework-list-item-right-column">
-          <p className="home-homework-list-item-date">{data.dueDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}</p>
+          {<p className="home-homework-list-item-date">{new Date(data.dueDate).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}</p>}
         </div>
       </div>
     </>

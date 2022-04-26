@@ -1,17 +1,20 @@
 import fs from "fs";
+import { fileExists } from "../../renderer/utils/FileUtils";
 import { USER_DATA_PATH } from "../main";
 import { NULL_TASK } from "../../common/constants";
 
 export class TaskStorage {
-  private readonly STORAGE_PATH = `${USER_DATA_PATH}/taskStorage/taskStorage.json`;
+  private readonly STORAGE_DIR = `${USER_DATA_PATH}/Task Storage`;
+  private readonly STORAGE_FILE_NAME = `taskStorage.json`;
+  private readonly STORAGE_PATH = `${this.STORAGE_DIR}/${this.STORAGE_FILE_NAME}`;
   private storageExists: boolean;
 
   private tasks: Homework[];
 
   constructor() {
-    this.storageExists = fs.existsSync(this.STORAGE_PATH);
+    this.storageExists = fileExists(this.STORAGE_PATH);
     if (this.storageExists) {
-      this.tasks = JSON.parse(fs.readFileSync(this.STORAGE_PATH, {encoding: "utf-8"}));
+      this.tasks = JSON.parse(fs.readFileSync(this.STORAGE_PATH, { encoding: "utf-8" }));
     } else {
       this.tasks = [NULL_TASK];
     }
@@ -27,11 +30,14 @@ export class TaskStorage {
       return false;
     }
 
+    fs.mkdirSync(this.STORAGE_DIR, { recursive: true });
+
     fs.writeFile(this.STORAGE_PATH, JSON.stringify(this.tasks), err => {
       console.error("An error occured while creating the task storage. Deleteing the file.",err);
-      fs.rmSync(this.STORAGE_PATH, {force: true});
+      fs.rmSync(this.STORAGE_PATH, { force: true });
       return false;
     });
+    this.storageExists = true;
     return true;
   }
 
@@ -44,7 +50,7 @@ export class TaskStorage {
       console.warn("File does not exist");
       return false;
     }
-    const tempTasks = fs.readFileSync(this.STORAGE_PATH, {encoding: "utf-8"});
+    const tempTasks = fs.readFileSync(this.STORAGE_PATH, { encoding: "utf-8" });
     fs.writeFile(this.STORAGE_PATH, JSON.stringify(this.tasks), err => {
       console.error("An error occured while trying to update the task storage. Reverting back to previous version.", err);
       fs.writeFile(this.STORAGE_PATH, JSON.stringify(tempTasks), err => {
@@ -67,7 +73,7 @@ export class TaskStorage {
     }
     let tempTask: Homework[];
     try {
-      tempTask = JSON.parse(fs.readFileSync(this.STORAGE_PATH, {encoding: "utf-8"}));
+      tempTask = JSON.parse(fs.readFileSync(this.STORAGE_PATH, { encoding: "utf-8" }));
     } catch (error) {
       console.error("An error occurred while loading tasks.", error);
       return false;
@@ -94,8 +100,8 @@ export class TaskStorage {
    * @returns An array containing all tasks currently stored to disk. If no tasks are either in memory or on disk, null is returned.
    */
   public getTasks(): Homework[] {
-    //this.load();
-    return [{
+    this.load();
+    /* return [{
       id: 1,
       color: "red",
       title: "Returned Task",
@@ -123,7 +129,7 @@ export class TaskStorage {
       state: "open",
       content: "This is the 2nd task that is returned by the TaskStorage#getTasks() method."
     }
-    ];
-    //return this.tasks;
+    ]; */
+    return this.tasks;
   }
 }
