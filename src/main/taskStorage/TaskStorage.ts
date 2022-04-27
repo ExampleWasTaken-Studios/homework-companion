@@ -1,5 +1,5 @@
 import fs from "fs";
-import { fileExists } from "../../renderer/utils/FileUtils";
+import { fileExists } from "../../common/utils/FileUtils";
 import { USER_DATA_PATH } from "../main";
 import { NULL_TASK } from "../../common/constants";
 

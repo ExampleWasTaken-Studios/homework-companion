@@ -3,7 +3,7 @@ import { isEqual } from "lodash";
 import React, { useEffect, useState } from "react";
 import channels from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
-import { getHTMLDateFormat } from "../../utils/DateUtils";
+import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
 import { Button } from "../utils/Button";
 import { Dropdown } from "../utils/Dropdown";
 import { DropdownItem } from "../utils/DropdownItem";
