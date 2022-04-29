@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import fs from "fs";
-import { fileExists } from "../../common/utils/FileUtils";
-import { USER_DATA_PATH } from "../main";
 import { NULL_TASK } from "../../common/constants";
+import { USER_DATA_PATH } from "../main";
 
 export class TaskStorage {
   private readonly STORAGE_DIR = `${USER_DATA_PATH}/Task Storage`;
@@ -12,11 +12,13 @@ export class TaskStorage {
   private tasks: Homework[];
 
   constructor() {
-    this.storageExists = fileExists(this.STORAGE_PATH);
+    this.storageExists = fs.existsSync(this.STORAGE_PATH);
+    console.log("storage", this.storageExists);
     if (this.storageExists) {
       this.tasks = JSON.parse(fs.readFileSync(this.STORAGE_PATH, { encoding: "utf-8" }));
     } else {
       this.tasks = [NULL_TASK];
+      this.create();
     }
   }
 
@@ -31,12 +33,7 @@ export class TaskStorage {
     }
 
     fs.mkdirSync(this.STORAGE_DIR, { recursive: true });
-
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify(this.tasks), err => {
-      console.error("An error occured while creating the task storage. Deleteing the file.",err);
-      fs.rmSync(this.STORAGE_PATH, { force: true });
-      return false;
-    });
+    fs.writeFile(this.STORAGE_PATH, JSON.stringify(this.tasks), _err => false);
     this.storageExists = true;
     return true;
   }
@@ -53,10 +50,7 @@ export class TaskStorage {
     const tempTasks = fs.readFileSync(this.STORAGE_PATH, { encoding: "utf-8" });
     fs.writeFile(this.STORAGE_PATH, JSON.stringify(this.tasks), err => {
       console.error("An error occured while trying to update the task storage. Reverting back to previous version.", err);
-      fs.writeFile(this.STORAGE_PATH, JSON.stringify(tempTasks), err => {
-        console.error("An error occured while reverting back to previous version.", err);
-        return false;
-      });
+      fs.writeFile(this.STORAGE_PATH, JSON.stringify(tempTasks), _err => false);
       return false;
     });
     return true;
@@ -78,6 +72,9 @@ export class TaskStorage {
       console.error("An error occurred while loading tasks.", error);
       return false;
     }
+    tempTask.forEach(current => {
+      current.dueDate = new Date(current.dueDate);
+    });
     this.tasks = tempTask;
     return true;
   }

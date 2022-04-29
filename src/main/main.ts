@@ -1,11 +1,10 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
+import electronLocalshortcut from "electron-localshortcut";
 import channels from "../common/channels";
 import store, { persistWindowSettings } from "./settings/settings";
 import { TaskStorage } from "./taskStorage/TaskStorage";
-import electronLocalshortcut from "electron-localshortcut";
-
 
 export const USER_DATA_PATH = app.getPath("userData");
 
