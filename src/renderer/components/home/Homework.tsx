@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import { isEqual } from "lodash";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import channels from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
 import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
@@ -11,19 +11,26 @@ import { Modal } from "../utils/Modal";
 import { HomeworkListItem } from "./HomeworkListItem";
 import { TimeframeSelector } from "./TimeframeSelector";
 
-
 export const Homework = () => {
 
   const [selectedTimeframe, setSelectedTimeframe] = useState<TimeframeSelection>("all");
 
   const [tasks, setTasks] = useState([NULL_TASK]);
 
+  // Create Task Modal
   const [createTaskModalOpen, setCreateTaskModalOpen] = useState(false);
   const [createTaskModalPrio, setCreateTaskModalPrio] = useState("Priority");
   const [createTaskSubject, setCreateTaskSubject] = useState("Subject");
+  const [createNewTaskData, setCreateNewTaskData] = useState<Homework>(NULL_TASK);
 
+  
+
+
+  // Task Modal
   const [taskModalOpen, setTaskModalOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(NULL_TASK);
+
+ 
 
   const homeworkListItemClickHandler = (newTask: Homework) => {
     setSelectedTask(newTask);
@@ -72,10 +79,18 @@ export const Homework = () => {
           close={() => setCreateTaskModalOpen(false)}
         >
           <div className="create-task-container">
-            <h1 className="create-task-title">
+            <h1 className="create-task-header">
               Create new Task
             </h1>
             <div className="create-task-property-container">
+              <input
+                type="text"
+                id="create-task-title"
+                className="create-task-title"
+                autoComplete="off"
+                placeholder="Title"
+                onChange={event => null}
+              />
               <input
                 type="date"
                 id="create-task-datepicker"
@@ -83,6 +98,7 @@ export const Homework = () => {
                 defaultValue={getHTMLDateFormat()} // TODO: change to ipc
                 min={getHTMLDateFormat()}
                 max={getHTMLDateFormat(new Date(9999, 11, 31))}
+                onChange={event => null}
               />
               <Dropdown
                 selection={createTaskModalPrio}
@@ -130,14 +146,14 @@ export const Homework = () => {
             <div className="create-task-btn-container">
               <Button
                 className="create-task-cancel-btn"
+                onClick={() => console.log(createNewTaskData)}
                 isSecondary
-                onClick={() => setTaskModalOpen(false)}
               >
                 Cancel
               </Button>
               <Button
                 className="create-task-create-btn"
-                onClick={() => setTaskModalOpen(false)}
+                onClick={() => null}
               >
                 Create
               </Button>
@@ -151,9 +167,10 @@ export const Homework = () => {
           close={() => setTaskModalOpen(false)}
         >
           <div className="task-container">
-            <h1 className="task-title">
-              Task Modal
-            </h1>
+            <input 
+              className="task-title"
+              defaultValue={selectedTask.title}
+            />
             <div className="task-property-container">
               <input
                 type="date"

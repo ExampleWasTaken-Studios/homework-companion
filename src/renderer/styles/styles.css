@@ -791,7 +791,7 @@
   margin: var(--sm-length) var(--ml-length) var(--ml-length) var(--ml-length);
 }
 
-.create-task-title {
+.create-task-header {
   font-size: 22px;
   font-weight: normal;
   background-color: var(--bg-secondary);
@@ -803,6 +803,15 @@
   flex-direction: row;
   background-color: var(--bg-secondary);
   margin: 0 0 var(--sm-length) 0;
+}
+
+.create-task-title {
+  font-family: Open Sans;
+  font-size: 16px;
+  padding: 3px;
+  margin: 0 var(--ss-length) 0 0;
+  border: none;
+  border-radius: 4px;
 }
 
 .create-task-datepicker {
@@ -861,8 +870,11 @@
 .task-title {
   font-size: 22px;
   font-weight: normal;
-  background-color: var(--bg-secondary);
-  margin: 0 0 var(--sm-length) 0;
+  width: 100%;
+  padding: 5px 3px;
+  margin: 5px 0 var(--sm-length) 0;
+  border: none;
+  border-radius: 4px;
 }
 
 .task-property-container {
