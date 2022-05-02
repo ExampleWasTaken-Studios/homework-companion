@@ -244,7 +244,7 @@ export const Homework = () => {
       <div className="home-homework-list">
         {selectedTimeframe === "all" ? (
           <>
-            {tasks[0].id > -1 ? tasks.map(current => (
+            {tasks.length > 0 ? tasks.map(current => (
               <HomeworkListItem
                 onClick={homeworkListItemClickHandler}
                 data={current}

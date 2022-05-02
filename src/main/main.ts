@@ -4,7 +4,7 @@ import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-insta
 import electronLocalshortcut from "electron-localshortcut";
 import channels from "../common/channels";
 import store, { persistWindowSettings } from "./settings/settings";
-import { TaskStorage } from "./taskStorage/TaskStorage";
+import TaskStorage from "./db/TaskStorage";
 
 export const USER_DATA_PATH = app.getPath("userData");
 
@@ -73,7 +73,7 @@ const createWindow = () => {
 
   ipcMain.on(channels.getTasks, (event) => {
     console.log("received request - sending reply");
-    event.reply(channels.getTaskResponse, taskStorage.getTasks());
+    event.reply(channels.getTaskResponse, taskStorage.getData());
   });
 };
 
