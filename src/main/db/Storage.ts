@@ -1,6 +1,13 @@
 import fs from "fs";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import TaskStorage from "./TaskStorage"; // This is imported so that it can be referenced in the comment of 'Storage'.
 import { USER_DATA_PATH } from "../main";
 
+/**
+ * This class manages the storage of user generated data.
+ * It also manages the directory that is used to store said data.
+ * Whenever docs of this class refer to "a goal of a subclass" they refer the feature each subclass manages. E.g. The goal of {@link TaskStorage} is the handling of the db that contains all tasks stored by the user.
+ */
 export default abstract class Storage {
   /**
    * The path to the storage location for all user generated data.
@@ -71,10 +78,9 @@ export default abstract class Storage {
   abstract resetFile(): void;
 
   /**
-   * The the contents of the corresponding file.  
-   * This method should be
+   * Get the data of the file corresponding to the goal of the subclass.
    */
-  abstract get(): unknown;
+  abstract getData(): unknown;
 
   /**
    * Get the path to the file corresponding to the goal of the subclass.

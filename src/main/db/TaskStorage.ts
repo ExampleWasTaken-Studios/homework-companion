@@ -8,7 +8,9 @@ export default class TaskStorage extends Storage {
    */
   private readonly STORAGE_PATH: string;
   private readonly FILE_NAME: string;
+  private readonly FILE_NOT_FOUND_MESSAGE = "Task storage file does not exist.";
 
+  // Used to prevent re-instantiation of this class
   private static instantiated = false;
 
   constructor() {
@@ -18,7 +20,6 @@ export default class TaskStorage extends Storage {
     super();
     this.FILE_NAME = `taskDB.json`;
     this.STORAGE_PATH = this.STORAGE_DIR + this.FILE_NAME;
-    console.log(this.STORAGE_PATH);
     this.createFile();
     TaskStorage.instantiated = true;
   }
@@ -27,7 +28,7 @@ export default class TaskStorage extends Storage {
     return fs.existsSync(this.STORAGE_PATH);
   }
 
-  createFile(): void {
+  createFile() {
     if (this.storageExists()) {
       return;
     }
@@ -36,29 +37,27 @@ export default class TaskStorage extends Storage {
     fs.writeFile(this.STORAGE_PATH, JSON.stringify([]), _err => null);
   }
 
-  updateFile(newTasks: Homework[]): void {
+  updateFile(newTasks: Homework[]) {
     if (!this.storageExists()) {
-      console.warn("File does not exist");
-      return;
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     fs.writeFile(this.STORAGE_PATH, JSON.stringify(newTasks), _err => false);
   }
 
-  resetFile(): void {
+  resetFile() {
     if (!this.storageExists()) {
-      console.warn("File does not exist");
-      return;
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     fs.writeFile(this.STORAGE_PATH, JSON.stringify([]), _err => false);
   }
 
-  get(): Homework[] {
+  getData(): Homework[] {
     if (!this.storageExists()) {
-      throw new Error("File does not exists");
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
     let tasks: Homework[];
@@ -73,7 +72,7 @@ export default class TaskStorage extends Storage {
     return tasks;
   }
 
-  getStoragePath(): string {
+  getStoragePath() {
     return this.STORAGE_DIR + this.FILE_NAME;
   }
   
