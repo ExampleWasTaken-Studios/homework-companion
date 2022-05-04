@@ -11,7 +11,6 @@ export const SettingsContainer = ({ activeCategory }: SettingsContainerProps) =>
 
   return (
     <div className="settings">
-      {/* <h2 className="container-title">Settings</h2> */}
       <ViewHeader title="Settings" />
       <div className="settings-content-container">
         <SettingsCategoryList
