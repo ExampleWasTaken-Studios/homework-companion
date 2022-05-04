@@ -31,6 +31,11 @@ export default abstract class Storage {
     }
   }
 
+  /**
+   * Gets the path seperator used by the operating system that the app runs on at runtime.  
+   * Currently only supports Windows and Unix based platforms.
+   * @returns The correct path seperator for the operating system.
+   */
   protected getPathSeparator() {
     if (process.platform === "win32") {
       return "\\";
