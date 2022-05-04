@@ -32,10 +32,23 @@ export default abstract class Storage {
   }
 
   /**
+   * Gets the path seperator used by the operating system that the app runs on at runtime.  
+   * Currently only supports Windows and Unix based platforms.
+   * @returns The correct path seperator for the operating system.
+   */
+  protected getPathSeparator() {
+    if (process.platform === "win32") {
+      return "\\";
+    }
+    return "/";
+  }
+
+  /**
    * Creates the storage dir if it does not exist already.
    */
   protected createDir() {
-    this.STORAGE_DIR = `${USER_DATA_PATH}/db`;
+    const pathSeparator = this.getPathSeparator();
+    this.STORAGE_DIR = `${USER_DATA_PATH}${pathSeparator}db${pathSeparator}`;
     if (!fs.existsSync(this.STORAGE_DIR)) {
       fs.mkdirSync(this.STORAGE_DIR, { recursive:true });
     }
