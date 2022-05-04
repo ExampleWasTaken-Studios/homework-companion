@@ -31,11 +31,19 @@ export default abstract class Storage {
     }
   }
 
+  protected getPathSeparator() {
+    if (process.platform === "win32") {
+      return "\\";
+    }
+    return "/";
+  }
+
   /**
    * Creates the storage dir if it does not exist already.
    */
   protected createDir() {
-    this.STORAGE_DIR = `${USER_DATA_PATH}/db`;
+    const pathSeparator = this.getPathSeparator();
+    this.STORAGE_DIR = `${USER_DATA_PATH}${pathSeparator}db${pathSeparator}`;
     if (!fs.existsSync(this.STORAGE_DIR)) {
       fs.mkdirSync(this.STORAGE_DIR, { recursive:true });
     }
