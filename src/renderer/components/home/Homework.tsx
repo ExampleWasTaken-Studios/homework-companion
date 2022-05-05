@@ -80,7 +80,7 @@ export const Homework = () => {
               className="create-task-title"
               autoComplete="off"
               placeholder="Title"
-              onChange={event => null}
+              onChange={_event => null}
             />
             <input
               type="date"
@@ -89,7 +89,7 @@ export const Homework = () => {
               defaultValue={getHTMLDateFormat()} // TODO: change to ipc
               min={getHTMLDateFormat()}
               max={getHTMLDateFormat(new Date(9999, 11, 31))}
-              onChange={event => null}
+              onChange={_event => null}
             />
             <Dropdown
               selection={createTaskModalPrio}
