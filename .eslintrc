@@ -25,6 +25,7 @@
     "indent": "off",
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
     "react/jsx-closing-bracket-location": ["error", "line-aligned"],
     "react/jsx-max-props-per-line": ["error", { "maximum": 1}],
     "react/jsx-first-prop-new-line": ["error", "multiline-multiprop"],
