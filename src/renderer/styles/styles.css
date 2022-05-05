@@ -895,13 +895,19 @@
 }
 
 .task-cancel-btn {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 49%;
+  height: 35px;
 }
 
 .task-create-btn {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 49%;
+  height: 35px;
 }
 /* Task Modal END */
 
