@@ -14,7 +14,7 @@ interface Homework {
   state: TaskState;
   content: string;
   metaInfo: {
-    DateCreated: Date;
+    dateCreated: Date;
   }
 }
 
