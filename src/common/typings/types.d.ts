@@ -13,6 +13,9 @@ interface Homework {
   important: boolean;
   state: TaskState;
   content: string;
+  metaInfo: {
+    DateCreated: Date;
+  }
 }
 
 interface ModalProps {
