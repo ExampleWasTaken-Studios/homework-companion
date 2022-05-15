@@ -13,5 +13,8 @@ export const NULL_TASK: Homework = {
   priority: "urgent", // set to urgent to appear at the top
   important: false,
   state: "open",
-  content: "NULL_CONTENT"
+  content: "NULL_CONTENT",
+  metaInfo: {
+    dateCreated: new Date(999999999999999)
+  }
 };
