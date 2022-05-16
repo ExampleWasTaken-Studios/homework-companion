@@ -23,6 +23,7 @@
 
   --active-border: rgb(0, 0, 0);
 
+  
   /* Button */
   --fg-button: rgb(255, 255, 255);
   --bg-button: rgb(29, 185, 84);
@@ -33,15 +34,19 @@
   --bg-button-secondary-active: rgba(97, 207, 136, 28%);
   --bg-button-secondary-hover: rgba(97, 207, 136, 18%);
   --bg-button-secondary-disabled: rgba(97, 207, 136, 30%);
-
+  
   /* Switch */
   --switch-state-change-duration: .15s;
   --switch-state-change-timing: cubic-bezier(0, 0, 0.39, 0.64);
+  
+  /* Alert */
+  --alert-error-outline: rgb(245, 34, 38);
+  --alert-error-bg: rgba(245, 34, 38, 60%);
 
   /* Sidebar */
   --bg-sidebar: rgb(0, 0, 0);
   --fg-sidebar: rgb(255, 255, 255);
-
+  
   /* Homework list bullet */
   --bg-bullet-1: #DF1515;
   --bg-bullet-2: var(--bg-button);

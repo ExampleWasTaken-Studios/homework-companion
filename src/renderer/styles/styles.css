@@ -49,6 +49,7 @@
   background-color: var(--bg-secondary-active);
   border-color: var(--bg-button);
 }
+
 /* Button component END */
 
 /* Homework view "Create Task" button START*/
@@ -56,8 +57,9 @@
   display: flex;
   height: 100%;
   align-items: center;
-  padding: 0 var(--sl-length) 0 var(--sl-length);  
+  padding: 0 var(--sl-length) 0 var(--sl-length);
 }
+
 /* Homework view "Create Task" button END */
 
 /* Dropdown START */
@@ -78,7 +80,7 @@
   background-color: transparent;
 }
 
-.dropdown > .chevron {
+.dropdown>.chevron {
   margin: 0 0 0 auto;
   width: 22px;
   color: var(--fg-primary);
@@ -110,6 +112,7 @@
 .dropdown-icon {
   background-color: var(--bg-modal);
 }
+
 /* Dropdown END */
 /* Switch START */
 .switch-track-off {
@@ -147,6 +150,7 @@
   margin: 1px 0 0 19px;
   transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
 }
+
 /* Switch END */
 /* Invert color of calendar icon */
 ::-webkit-calendar-picker-indicator {
@@ -166,7 +170,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   background: hsl(0, calc(1 * 0%), 0%);
   background-color: var(--bg-modal-overlay);
 }
@@ -177,7 +181,35 @@
   background-color: var(--bg-secondary);
   border-radius: 4px;
 }
+
 /* Modal END */
+
+/* Alert START */
+.alert {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--fg-primary);
+  background-color: var(--alert-error-bg);
+  border: 1px solid var(--alert-error-outline);
+  border-radius: 4px;
+  margin: var(--ms-length) 0;
+}
+
+.icon-tabler-alert-circle {
+  width: 6.5%;
+  color: var(--alert-error-outline);
+  background-color: transparent;
+  margin: 0 0 0 var(--sm-length);
+}
+
+.alert-content {
+  color: var(--fg-primary);
+  background-color: transparent;
+  margin: 0 0 0 var(--sm-length);
+}
+
+/* Alert END */
 /* Util components END */
 
 /* Container START */
@@ -189,6 +221,7 @@
   display: flex;
   flex-direction: row;
 }
+
 /* Container END */
 
 /* Sidebar START */
@@ -207,7 +240,7 @@
   background-color: var(--bg-sidebar);
 }
 
-#application-name > sup {
+#application-name>sup {
   font-size: 17px;
   background-color: var(--bg-sidebar);
 }
@@ -236,6 +269,7 @@
   box-shadow: 0 0 5px #000;
   color: var(--fg-primary);
 }
+
 /* Sidebar END */
 
 /* View header START */
@@ -251,11 +285,12 @@
   font-weight: normal;
 }
 
-.view-header-children { 
+.view-header-children {
   display: flex;
   height: 100%;
   max-height: 100%;
 }
+
 /* View header END */
 
 /* Home view */
@@ -274,7 +309,7 @@
   height: 100%;
   max-height: 100%;
   padding: 0 var(--ms-length) 0 0;
-  margin: calc(var(--ms-length) + 5px) 0 0 0; 
+  margin: calc(var(--ms-length) + 5px) 0 0 0;
   overflow-y: scroll;
 }
 
@@ -355,6 +390,7 @@
   width: fit-content;
   margin: 0 var(--ss-length) 0 auto;
 }
+
 /* Homework END */
 /* Home view END */
 
@@ -369,7 +405,7 @@
   padding: calc(var(--ms-length) + 5px) var(--ms-length) 0 var(--ms-length);
 }
 
-.announcements > h2 {
+.announcements>h2 {
   margin: 0 0 var(--mm-length) 0;
 }
 
@@ -388,12 +424,13 @@
 .announcements-card-container {
   width: 100%;
   height: 100%;
-  
+
 
   padding: var(--ml-length) 10% var(--ml-length) 10%;
   overflow-y: scroll;
   /* border: 1px solid yellow; */
-} 
+}
+
 /* Announcement card START */
 .announcement-card {
   cursor: pointer;
@@ -420,10 +457,11 @@
   border-radius: 4px;
   outline: 1px solid var(--bg-button);
   transition: outline var(--hover-trans-duration) var(--hover-trans-timing);
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-.announcement-card:hover, .announcement-card-latest:hover {
+.announcement-card:hover,
+.announcement-card-latest:hover {
   outline: 2px solid var(--announcement-hover-color);
 }
 
@@ -488,6 +526,7 @@
 .announcement-card-date {
   background-color: transparent;
 }
+
 /* Announcement card END */
 /* Announcements view END */
 
@@ -584,7 +623,7 @@
 
 
 .header {
-  display:flex;
+  display: flex;
   flex-direction: row;
 }
 
@@ -629,6 +668,7 @@
 .third-party-licenses:hover {
   color: var(--fg-secondary);
 }
+
 /* Settings view END */
 
 /* Welcome view START */
@@ -645,7 +685,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center; 
+  text-align: center;
   display: flex;
   flex-direction: column;
   padding: 2% 3%;
@@ -670,7 +710,7 @@
   flex-direction: column;
 }
 
-.welcome-input > label {
+.welcome-input>label {
   text-align: left;
   margin: 0 0 3px 0;
 }
@@ -705,6 +745,7 @@
   padding: 5% 0 0 0;
   margin: var(--ms-length) 0 0 0;
 }
+
 /* Welcome view END */
 
 /* Error view START */
@@ -750,6 +791,7 @@
   padding: var(--sl-length) var(--ml-length);
   margin: 0 auto 0 auto;
 }
+
 /* Error view END */
 /* Create new Task Modal START */
 .create-task-container {
@@ -909,6 +951,7 @@
   width: 49%;
   height: 35px;
 }
+
 /* Task Modal END */
 
 
@@ -991,7 +1034,7 @@
 
 .changelog-fix-container-title {
   font-weight: normal;
-  color:var(--fg-fix);
+  color: var(--fg-fix);
   margin: 0 0 var(--ms-length) 0;
   background-color: transparent;
 }
@@ -1022,6 +1065,7 @@
 .changelog-list-item-description {
   background-color: transparent;
 }
+
 /* Changelog modal END */
 
 /* TaskState colors START */
@@ -1036,6 +1080,7 @@
 .blue {
   color: var(--bg-bullet-3);
 }
+
 /* TaskState colors END */
 
 /* Media queries START */
@@ -1046,23 +1091,29 @@
 }
 
 @media screen and (min-height: 700px) {
-  .create-task-content, .task-content {
+
+  .create-task-content,
+  .task-content {
     max-height: 400px;
     height: 340px;
   }
 }
 
 @media screen and (min-height: 800px) {
-  .create-task-content, .task-content {
+
+  .create-task-content,
+  .task-content {
     max-height: 600px;
     height: 340px;
   }
 }
 
 @media screen and (min-height: 900px) {
-  .create-task-content, .task-content {
+
+  .create-task-content,
+  .task-content {
     max-height: 700px;
-    height: 340px; 
+    height: 340px;
   }
 }
 
