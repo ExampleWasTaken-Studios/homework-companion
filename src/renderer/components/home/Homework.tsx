@@ -377,7 +377,7 @@ export const Homework = () => {
               className="task-create-btn"
               onClick={() => setCreateTaskModalOpen(false)}
             >
-                Complete
+                Mark as Complete
             </Button>
           </div>
         </div>
