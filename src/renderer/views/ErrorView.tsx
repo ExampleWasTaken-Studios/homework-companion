@@ -1,23 +1,10 @@
 import { ipcRenderer } from "electron";
-import React, { useEffect } from "react";
+import React from "react";
+import "source-map-support/register";
 import channels from "../../common/channels";
 import { Button } from "../components/utils/Button";
-import "source-map-support/register";
-import { log } from "../../../public/electron/main";
 
-interface ErrorViewProps {
-  message: string;
-  source: string;
-  lineno: number;
-  colno: number;
-  error: Error;
-}
-
-export const ErrorView = ({ message, source, lineno, colno, error }: ErrorViewProps) => {
-
-  useEffect(() => {
-    console.error("ErrorView was triggered due to:", "Message:", message, "\nSource:", source, "\nLine no.:", lineno, "\nColumn no.:", colno, "\n", error);
-  }, []);
+export const ErrorView = () => {
 
   return (
     <div className="error-view">
@@ -29,7 +16,7 @@ export const ErrorView = ({ message, source, lineno, colno, error }: ErrorViewPr
         <Button 
           className="error-view-relaunch-button"
           onClick={() => {
-            ipcRenderer.send(channels.relaunchApp, {force: true});
+            ipcRenderer.send(channels.relaunchApp, { force: true });
           }}
         >
           Relaunch

@@ -18,7 +18,6 @@ export const Homework = () => {
   const [createTaskModalOpen, setCreateTaskModalOpen] = useState(false);
   const [createTaskModalPrio, setCreateTaskModalPrio] = useState("Priority");
   const [createTaskSubject, setCreateTaskSubject] = useState("Subject");
-  const [createNewTaskData, setCreateNewTaskData] = useState<Homework>(NULL_TASK);
 
   
 
@@ -27,7 +26,6 @@ export const Homework = () => {
   const [taskModalOpen, setTaskModalOpen] = useState(false);
   const [selectedTask, setSelectedTask] = useState(NULL_TASK);
 
- 
 
   const homeworkListItemClickHandler = (newTask: Homework) => {
     setSelectedTask(newTask);
@@ -70,85 +68,87 @@ export const Homework = () => {
         close={() => setCreateTaskModalOpen(false)}
       >
         <div className="create-task-container">
-          <h1 className="create-task-header">
+          <form>
+            <h1 className="create-task-header">
               Create new Task
-          </h1>
-          <div className="create-task-property-container">
-            <input
-              type="text"
-              id="create-task-title"
-              className="create-task-title"
+            </h1>
+            <div className="create-task-property-container">
+              <input
+                type="text"
+                id="create-task-title"
+                className="create-task-title"
+                autoComplete="off"
+                placeholder="Title"
+                onChange={_event => null}
+              />
+              <input
+                type="date"
+                id="create-task-datepicker"
+                className="create-task-datepicker"
+                defaultValue={getHTMLDateFormat()} // TODO: change to ipc
+                min={getHTMLDateFormat()}
+                max={getHTMLDateFormat(new Date(9999, 11, 31))}
+                onChange={_event => null}
+              />
+              <Dropdown
+                selection={createTaskModalPrio}
+                className="create-task-prio"
+              >
+                <DropdownItem 
+                  value="Urgent"
+                  onClick={() => setCreateTaskModalPrio("Urgent")}
+                />
+                <DropdownItem
+                  value="High"
+                  onClick={() => setCreateTaskModalPrio("High")}
+                />
+                <DropdownItem
+                  value="Normal"
+                  onClick={() => setCreateTaskModalPrio("Normal")}
+                />
+                <DropdownItem
+                  value="Low"
+                  onClick={() => setCreateTaskModalPrio("Low")}
+                />
+              </Dropdown>
+              <Dropdown
+                selection={createTaskSubject}
+                className="create-task-subject"
+              >
+                <DropdownItem
+                  value="PLACEHOLDER_1"
+                  onClick={() => console.warn("LOGIC FOR SUBJECT LOADING NOT YET IMPLEMENTED")}
+                />
+                <DropdownItem
+                  value="PLACEHOLDER_2"
+                  onClick={() => console.warn("LOGIC FOR SUBJECT LOADING NOT YET IMPLEMENTED")}
+                />
+              </Dropdown>
+            </div>
+            <textarea
+              id="create-task-content"
+              rows={20}
+              className="create-task-content"
+              placeholder="Description"
               autoComplete="off"
-              placeholder="Title"
-              onChange={_event => null}
+              onChange={(event) => setSelectedTask(prevState => ({ ...prevState, content: event.target.value }))}
             />
-            <input
-              type="date"
-              id="create-task-datepicker"
-              className="create-task-datepicker"
-              defaultValue={getHTMLDateFormat()} // TODO: change to ipc
-              min={getHTMLDateFormat()}
-              max={getHTMLDateFormat(new Date(9999, 11, 31))}
-              onChange={_event => null}
-            />
-            <Dropdown
-              selection={createTaskModalPrio}
-              className="create-task-prio"
-            >
-              <DropdownItem 
-                value="Urgent"
-                onClick={() => setCreateTaskModalPrio("Urgent")}
-              />
-              <DropdownItem
-                value="High"
-                onClick={() => setCreateTaskModalPrio("High")}
-              />
-              <DropdownItem
-                value="Normal"
-                onClick={() => setCreateTaskModalPrio("Normal")}
-              />
-              <DropdownItem
-                value="Low"
-                onClick={() => setCreateTaskModalPrio("Low")}
-              />
-            </Dropdown>
-            <Dropdown
-              selection={createTaskSubject}
-              className="create-task-subject"
-            >
-              <DropdownItem
-                value="PLACEHOLDER_1"
-                onClick={() => console.warn("LOGIC FOR SUBJECT LOADING NOT YET IMPLEMENTED")}
-              />
-              <DropdownItem
-                value="PLACEHOLDER_2"
-                onClick={() => console.warn("LOGIC FOR SUBJECT LOADING NOT YET IMPLEMENTED")}
-              />
-            </Dropdown>
-          </div>
-          <textarea
-            id="create-task-content"
-            rows={20}
-            className="create-task-content"
-            placeholder="Description"
-            autoComplete="off"
-            onChange={(event) => setSelectedTask(prevState => ({ ...prevState, content: event.target.value }))}
-          />
-          <div className="create-task-btn-container">
-            <Button
-              className="create-task-cancel-btn"
-              onClick={() => console.log(createNewTaskData)}
-              isSecondary
-            >
+            <div className="create-task-btn-container">
+              <Button
+                className="create-task-cancel-btn"
+                onClick={() => console.log()}
+                isSecondary
+              >
                 Cancel
-            </Button>
-            <Button
-              className="create-task-create-btn"
-              onClick={() => null}
-            >
+              </Button>
+              <Button
+                className="create-task-create-btn"
+                onClick={() => null}
+              >
                 Create
-            </Button>
-          </div>
+              </Button>
+            </div>
+          </form>
         </div>
       </Modal>
 
