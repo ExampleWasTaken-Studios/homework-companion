@@ -85,6 +85,18 @@ export default class TaskStorage extends Storage {
     fs.writeFile(this.STORAGE_PATH, JSON.stringify([...this.getData(), newTask]), _err => false);
   }
 
+  completeTask(taskToComplete: Homework) {
+    if (!this.storageExists()) {
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
+    }
+
+    const targetIndex = this.getData().findIndex(current => isEqual(current, taskToComplete));
+    const updatedTasks = this.getData();
+    updatedTasks[targetIndex] = { ...updatedTasks[targetIndex], color: "green", state: "completed" };
+
+    this.updateFile(updatedTasks);
+  }
+
   removeTask(taskToRemove: Homework) {
     if (!this.storageExists()) {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);

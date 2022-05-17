@@ -99,6 +99,18 @@ const createWindow = () => {
     console.log("deleted task - sending reply");
     event.reply(channels.deleteTaskSuccess);
   });
+
+  ipcMain.on(channels.completeTask, (event, taskToComplete: Homework) => {
+    console.log("received task to be completed - attempting completion");
+    try {
+      taskStorage.completeTask(taskToComplete);
+    } catch (e) {
+      console.error(e);
+      event.reply(channels.completeTaskFail);
+    }
+    console.log("completed task - sending reply");
+    event.reply(channels.completeTaskSuccess);
+  });
 };
 
 app.on("ready", () => {

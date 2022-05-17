@@ -137,6 +137,11 @@ export const Homework = () => {
   // Task that is currently displayed in the task modal
   const [selectedTask, setSelectedTask] = useState(NULL_TASK);
 
+  const completeTaskHandler = () => {
+    ipcRenderer.send(channels.completeTask, selectedTask);
+    setTaskModalOpen(false);
+  };
+
   const [taskToDelete, setTaskToDelete] = useState(NULL_TASK);
   const [deleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState(false);
 
@@ -375,7 +380,7 @@ export const Homework = () => {
             </Button>
             <Button
               className="task-create-btn"
-              onClick={() => setCreateTaskModalOpen(false)}
+              onClick={completeTaskHandler}
             >
                 Mark as Complete
             </Button>
