@@ -1,5 +1,4 @@
 import { ipcRenderer } from "electron";
-import { Action } from "history";
 import React, { useEffect, useReducer, useState } from "react";
 import channels from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
@@ -78,7 +77,7 @@ export const Homework = () => {
 
   const [tasks, setTasks] = useState([NULL_TASK]);
 
-  // Create Task Modal
+  /* Create task modal START */
   const [createTaskModalOpen, setCreateTaskModalOpen] = useState(false);
   const [createTaskModalPrio, setCreateTaskModalPrio] = useState("Priority");
   const [createTaskSubject, setCreateTaskSubject] = useState("Subject");
@@ -120,8 +119,7 @@ export const Homework = () => {
     };
     console.log("newTask", newTask);
     ipcRenderer.send(channels.addTask, newTask);
-
-    console.log("inputData:", inputData);
+    setCreateTaskModalOpen(false);
   };
 
   const cancelHandler = () => {
@@ -129,6 +127,7 @@ export const Homework = () => {
     setCreateTaskInputIncomplete(false);
     createTaskDispatch({ type: INPUT_DATA_ACTION_TYPES.RESET_DATA });
   };
+  /* Create task modal END */
   
 
 
@@ -153,13 +152,14 @@ export const Homework = () => {
 
     return () => {
       ipcRenderer.removeAllListeners(channels.getTaskResponse);
+      ipcRenderer.removeAllListeners(channels.addTaskSuccess);
     };
   }, []);
 
   useEffect(() => {
     ipcRenderer.send(channels.getTasks);
     console.log("send task request");
-  }, []);
+  }, [createTaskModalOpen]);
   
   return (
     <div className="home-homework">
