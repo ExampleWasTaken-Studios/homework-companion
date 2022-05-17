@@ -13,7 +13,7 @@ export const NULL_TASK: Homework = {
   priority: "urgent", // set to urgent to appear at the top
   important: false,
   state: "open",
-  content: "NULL_CONTENT",
+  content: "If you're seeing this, you found a bug that our little mice didn't find when we sent them out to eat them all.\nPlease report the issue to us!",
   metaInfo: {
     dateCreated: new Date(999999999999999)
   }
