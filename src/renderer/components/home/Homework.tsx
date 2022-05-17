@@ -87,6 +87,7 @@ export const Homework = () => {
   const [inputData, createTaskDispatch] = useReducer(inputDataReducer, { title: "", date: new Date(), priority: "Priority", subject: "Subject", content: "" });
 
   const submitHandler = () => {
+    console.log("debug: submitHandler");
     if (inputData.title === "" 
           || inputData.date === null
           || inputData.priority === "Priority"
@@ -100,6 +101,25 @@ export const Homework = () => {
 
     setCreateTaskInputIncomplete(false);
     // store task
+    const newTask: Homework = {
+      id: 999, // The next higher ID than the highest already existing ID should be stored in TaskStorage and be retrievable via IPC.
+      title: inputData.title,
+      color: "green",
+      dueDate: inputData.date,
+      subject: {
+        id: -1,
+        name: "GEN_NULL_SUBJECT"
+      },
+      priority: inputData.priority as Priority,
+      important: false,
+      state: "open",
+      content: inputData.content,
+      metaInfo: {
+        dateCreated: new Date()
+      }
+    };
+    console.log("newTask", newTask);
+    ipcRenderer.send(channels.addTask, newTask);
 
     console.log("inputData:", inputData);
   };

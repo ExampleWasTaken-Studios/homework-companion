@@ -5,6 +5,7 @@ import electronLocalshortcut from "electron-localshortcut";
 import channels from "../common/channels";
 import store, { persistWindowSettings } from "./settings/settings";
 import TaskStorage from "./db/TaskStorage";
+import { Homework } from "../renderer/components/home/Homework";
 
 export const USER_DATA_PATH = app.getPath("userData");
 
@@ -74,6 +75,18 @@ const createWindow = () => {
   ipcMain.on(channels.getTasks, (event) => {
     console.log("received request - sending reply");
     event.reply(channels.getTaskResponse, taskStorage.getData());
+  });
+
+  ipcMain.on(channels.addTask, (event, newTask: Homework) => {
+    console.log("received new task - attempting store");
+    try {
+      taskStorage.updateFile(newTask);
+    } catch (e) {
+      console.error(e);
+      event.reply(channels.addTaskFail);
+    }
+    console.log("stored new task - sending reply");
+    event.reply(channels.addTaskSuccess);
   });
 };
 

@@ -37,13 +37,15 @@ export default class TaskStorage extends Storage {
     fs.writeFile(this.STORAGE_PATH, JSON.stringify([]), _err => null);
   }
 
-  updateFile(newTasks: Homework[]) {
+  updateFile(newTask: Homework) {
     if (!this.storageExists()) {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
+    console.log("spreat array:", [...this.getData(), newTask]);
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify(newTasks), _err => false);
+    fs.writeFile(this.STORAGE_PATH, JSON.stringify([...this.getData(), newTask]), _err => false);
   }
 
   resetFile() {
