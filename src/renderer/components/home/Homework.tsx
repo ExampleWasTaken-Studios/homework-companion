@@ -1,4 +1,5 @@
 import { ipcRenderer } from "electron";
+import { isEqual } from "lodash";
 import React, { useEffect, useReducer, useState } from "react";
 import channels from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
@@ -103,7 +104,7 @@ export const Homework = () => {
     const newTask: Homework = {
       id: 999, // The next higher ID than the highest already existing ID should be stored in TaskStorage and be retrievable via IPC.
       title: inputData.title,
-      color: "green",
+      color: "blue",
       dueDate: inputData.date,
       subject: {
         id: -1,
@@ -131,9 +132,25 @@ export const Homework = () => {
   
 
 
-  // Task Modal
+  /* Task modal START */
   const [taskModalOpen, setTaskModalOpen] = useState(false);
+  // Task that is currently displayed in the task modal
   const [selectedTask, setSelectedTask] = useState(NULL_TASK);
+
+  const [taskToDelete, setTaskToDelete] = useState(NULL_TASK);
+  const [deleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState(false);
+
+  const deleteTaskHandler = () => {
+    if (isEqual(taskToDelete, NULL_TASK)) {
+      setDeleteConfirmationModalOpen(false);
+      return;
+    }
+    console.log("sending request to delete task:", taskToDelete);
+    ipcRenderer.send(channels.deleteTask, taskToDelete);
+    setDeleteConfirmationModalOpen(false);
+    setTaskModalOpen(false);
+  };
+  /* Task modal END */
 
 
   const homeworkListItemClickHandler = (newTask: Homework) => {
@@ -152,14 +169,13 @@ export const Homework = () => {
 
     return () => {
       ipcRenderer.removeAllListeners(channels.getTaskResponse);
-      ipcRenderer.removeAllListeners(channels.addTaskSuccess);
     };
   }, []);
 
   useEffect(() => {
     ipcRenderer.send(channels.getTasks);
     console.log("send task request");
-  }, [createTaskModalOpen]);
+  }, [createTaskModalOpen, taskModalOpen]);
   
   return (
     <div className="home-homework">
@@ -350,7 +366,10 @@ export const Homework = () => {
             <Button
               className="task-cancel-btn"
               isSecondary
-              onClick={() => setCreateTaskModalOpen(false)}
+              onClick={() => {
+                setDeleteConfirmationModalOpen(true);
+                setTaskToDelete(selectedTask);
+              }}
             >
                 Delete
             </Button>
@@ -363,6 +382,38 @@ export const Homework = () => {
           </div>
         </div>
       </Modal>
+
+      {/* Delete confirmation modal */}
+      <Modal
+        isOpen={deleteConfirmationModalOpen}
+        close={() => setDeleteConfirmationModalOpen(false)}
+      >
+        <div className="delete-task-confirmation-modal">
+          <div className="delete-task-content">
+            <h1 className="delete-task-title">Delete Task</h1>
+            <p className="delete-task-description">Are you sure you want to delete that Task?<br/>This action cannot be undone.</p>
+          </div>
+          <div className="delete-task-action-bar">
+            <Button
+              onClick={() => {
+                setTaskToDelete(NULL_TASK);
+                setDeleteConfirmationModalOpen(false);
+              }}
+              isSecondary
+              className="delete-task-cancel-btn"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => deleteTaskHandler()}
+              className="delete-task-delete-btn"
+            >
+              Delete Task
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
       <div className="home-homework-list">
         {tasks.length > 0 ? tasks.map(current => (
           <HomeworkListItem

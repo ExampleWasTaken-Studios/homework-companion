@@ -1,4 +1,5 @@
 import fs from "fs";
+import { isEqual } from "lodash";
 import Storage from "./Storage";
 
 export default class TaskStorage extends Storage {
@@ -37,15 +38,12 @@ export default class TaskStorage extends Storage {
     fs.writeFile(this.STORAGE_PATH, JSON.stringify([]), _err => null);
   }
 
-  updateFile(newTask: Homework) {
+  updateFile(tasks: Homework[]) {
     if (!this.storageExists()) {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
-    console.log("spreat array:", [...this.getData(), newTask]);
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify([...this.getData(), newTask]), _err => false);
+    fs.writeFile(this.STORAGE_PATH, JSON.stringify(tasks), _err => null);
   }
 
   resetFile() {
@@ -77,5 +75,27 @@ export default class TaskStorage extends Storage {
   getStoragePath() {
     return this.STORAGE_DIR + this.FILE_NAME;
   }
-  
+
+  addTask(newTask: Homework) {
+    if (!this.storageExists()) {
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    fs.writeFile(this.STORAGE_PATH, JSON.stringify([...this.getData(), newTask]), _err => false);
+  }
+
+  removeTask(taskToRemove: Homework) {
+    if (!this.storageExists()) {
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
+    }
+
+    const targetIndex = this.getData().findIndex(current => isEqual(current, taskToRemove));
+    const updatedTasks = this.getData();
+    updatedTasks.splice(targetIndex, 1);
+
+    console.log("updatedTasks:", updatedTasks);
+
+    this.updateFile(updatedTasks as Homework[]);
+  }
 }

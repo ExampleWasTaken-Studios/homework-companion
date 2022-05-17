@@ -3,9 +3,8 @@ import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "e
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 import electronLocalshortcut from "electron-localshortcut";
 import channels from "../common/channels";
-import store, { persistWindowSettings } from "./settings/settings";
 import TaskStorage from "./db/TaskStorage";
-import { Homework } from "../renderer/components/home/Homework";
+import store, { persistWindowSettings } from "./settings/settings";
 
 export const USER_DATA_PATH = app.getPath("userData");
 
@@ -80,13 +79,25 @@ const createWindow = () => {
   ipcMain.on(channels.addTask, (event, newTask: Homework) => {
     console.log("received new task - attempting store");
     try {
-      taskStorage.updateFile(newTask);
+      taskStorage.addTask(newTask);
     } catch (e) {
       console.error(e);
       event.reply(channels.addTaskFail);
     }
     console.log("stored new task - sending reply");
     event.reply(channels.addTaskSuccess);
+  });
+
+  ipcMain.on(channels.deleteTask, (event, taskToDelete: Homework) => {
+    console.log("received task to be deleted - attempting deletion");
+    try {
+      taskStorage.removeTask(taskToDelete);
+    } catch (e) {
+      console.error(e);
+      event.reply(channels.deleteTaskFail);
+    }
+    console.log("deleted task - sending reply");
+    event.reply(channels.deleteTaskSuccess);
   });
 };
 

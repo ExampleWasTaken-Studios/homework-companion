@@ -7,7 +7,10 @@ const channels = {
   getTaskResponse: "tasks/get/response",
   addTask: "tasks/add",
   addTaskSuccess: "tasks/add/success",
-  addTaskFail: "tasks/add/fail"
+  addTaskFail: "tasks/add/fail",
+  deleteTask: "tasks/delete",
+  deleteTaskSuccess: "tasks/delete/success",
+  deleteTaskFail: "tasks/delete/fail"
 };
 
 export default channels;

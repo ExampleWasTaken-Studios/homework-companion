@@ -954,6 +954,46 @@
 
 /* Task Modal END */
 
+/* Delete task modal START */
+.delete-task-confirmation-modal {
+  display: flex;
+  flex-direction: column;
+  padding: var(--ms-length);
+  border-radius: 4px;
+}
+
+.delete-task-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.delete-task-title {
+  font-size: 24px;
+  margin: 0 0 var(--ms-length) 0;
+}
+
+.delete-task-description {
+  margin: 0 0 var(--ms-length) 0;
+}
+
+.delete-task-action-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  margin: var(--ms-length) 0 0 0;
+}
+
+.delete-task-cancel-btn {
+  padding: var(--ss-length) var(--ml-length);
+  margin: 0 var(--ss-length) 0 0;
+}
+
+.delete-task-delete-btn {
+  padding: var(--ss-length) var(--ml-length);
+}
+
+/* Delete task modal END */
+
 
 /* Changelog modal START */
 .changelog-modal {
