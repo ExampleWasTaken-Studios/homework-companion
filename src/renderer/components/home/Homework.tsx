@@ -138,10 +138,21 @@ export const Homework = () => {
   const [selectedTask, setSelectedTask] = useState(NULL_TASK);
 
   const completeTaskHandler = () => {
-    ipcRenderer.send(channels.completeTask, selectedTask);
-    setTaskModalOpen(false);
+    if (selectedTask.state === "open") {
+      ipcRenderer.send(channels.completeTask, selectedTask);
+      setTaskModalOpen(false);
+    }
   };
 
+  const incompleteTaskHandler = () => {
+    if (selectedTask.state === "completed") {
+      ipcRenderer.send(channels.incompleteTask, selectedTask);
+      setTaskModalOpen(false);
+    }
+  };
+  /* Task modal END */
+
+  /* Delete modal START */
   const [taskToDelete, setTaskToDelete] = useState(NULL_TASK);
   const [deleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState(false);
 
@@ -155,7 +166,8 @@ export const Homework = () => {
     setDeleteConfirmationModalOpen(false);
     setTaskModalOpen(false);
   };
-  /* Task modal END */
+  /* Delete modal END */
+
 
 
   const homeworkListItemClickHandler = (newTask: Homework) => {
@@ -378,12 +390,21 @@ export const Homework = () => {
             >
                 Delete
             </Button>
-            <Button
-              className="task-create-btn"
-              onClick={completeTaskHandler}
-            >
+            {selectedTask.state === "open" ? (
+              <Button
+                className="task-create-btn"
+                onClick={completeTaskHandler}
+              >
                 Mark as Complete
-            </Button>
+              </Button>
+            ) : (
+              <Button
+                className="task-create-btn"
+                onClick={incompleteTaskHandler}
+              >
+                Completed
+              </Button>
+            )}
           </div>
         </div>
       </Modal>

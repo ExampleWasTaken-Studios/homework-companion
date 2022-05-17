@@ -111,6 +111,18 @@ const createWindow = () => {
     console.log("completed task - sending reply");
     event.reply(channels.completeTaskSuccess);
   });
+
+  ipcMain.on(channels.incompleteTask, (event, taskToIncomplete: Homework) => {
+    console.log("received task to incomplete - attempting to incomplete");
+    try {
+      taskStorage.incompleteTask(taskToIncomplete);
+    } catch (e) {
+      console.error(e);
+      event.reply(channels.incompleteTaskFail);
+    }
+    console.log("incompleted task - sending reply");
+    event.reply(channels.incompleteTaskSuccess);
+  });
 };
 
 app.on("ready", () => {
