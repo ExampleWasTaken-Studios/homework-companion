@@ -17,12 +17,13 @@ enum INPUT_DATA_ACTION_TYPES {
   CHANGE_DATE = "CHANGE_DATE",
   CHANGE_PRIORITY = "CHANGE_PRIORITY",
   CHANGE_SUBJECT = "CHANGE_SUBJECT",
-  CHANGE_CONTENT = "CHANGE_CONTENT"
+  CHANGE_CONTENT = "CHANGE_CONTENT",
+  RESET_DATA = "RESET_DATA"
 }
 
 interface InputDataAction {
   type: INPUT_DATA_ACTION_TYPES,
-  payload: string | Date;
+  payload?: string | Date;
 }
 
 interface InputDataState {
@@ -60,6 +61,14 @@ const inputDataReducer = (state: InputDataState, action: InputDataAction): Input
         ...state,
         content: action.payload as string
       };
+    case INPUT_DATA_ACTION_TYPES.RESET_DATA:
+      return {
+        title: "",
+        date: new Date(0),
+        priority: "Priority",
+        subject: "Subject",
+        content: ""
+      };
     default:
       return state;
   }
@@ -78,7 +87,27 @@ export const Homework = () => {
   const [inputData, createTaskDispatch] = useReducer(inputDataReducer, { title: "", date: new Date(), priority: "Priority", subject: "Subject", content: "" });
 
   const submitHandler = () => {
+    if (inputData.title === "" 
+          || inputData.date === null
+          || inputData.priority === "Priority"
+          /* || inputData.subject === "Subject" */
+          || inputData.content === ""
+    ) {
+      setCreateTaskInputIncomplete(true);
+      createTaskDispatch({ type: INPUT_DATA_ACTION_TYPES.RESET_DATA });
+      return;
+    }
+
+    setCreateTaskInputIncomplete(false);
+    // store task
+
     console.log("inputData:", inputData);
+  };
+
+  const cancelHandler = () => {
+    setCreateTaskModalOpen(false);
+    setCreateTaskInputIncomplete(false);
+    createTaskDispatch({ type: INPUT_DATA_ACTION_TYPES.RESET_DATA });
   };
   
 
@@ -220,14 +249,14 @@ export const Homework = () => {
           <div className="create-task-btn-container">
             <Button
               className="create-task-cancel-btn"
-              onClick={() => null}
+              onClick={() => cancelHandler()}
               isSecondary
             >
                 Cancel
             </Button>
             <Button
               className="create-task-create-btn"
-              onClick={submitHandler}
+              onClick={() => submitHandler()}
             >
                 Create
             </Button>
