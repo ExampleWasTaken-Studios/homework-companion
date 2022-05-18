@@ -139,6 +139,12 @@ export const Homework = () => {
   // Task that is currently displayed in the task modal
   const [selectedTask, setSelectedTask] = useState(NULL_TASK);
 
+  const openDeleteConfirmationHandler = () => {
+    setDeleteConfirmationModalOpen(true);
+    setTaskModalOpen(false);
+    setTaskToDelete(selectedTask);
+  };
+
   const completeTaskHandler = () => {
     if (selectedTask.state === "open") {
       ipcRenderer.send(CHANNELS.COMPLETE_TASK, selectedTask);
@@ -167,6 +173,12 @@ export const Homework = () => {
     ipcRenderer.send(CHANNELS.DELETE_TASK, taskToDelete);
     setDeleteConfirmationModalOpen(false);
     setTaskModalOpen(false);
+  };
+
+  const deleteTaskAbortHandler = () => {
+    setTaskToDelete(NULL_TASK);
+    setTaskModalOpen(true);
+    setDeleteConfirmationModalOpen(false);
   };
   /* Delete modal END */
 
@@ -204,7 +216,7 @@ export const Homework = () => {
 
     ipcRenderer.send(CHANNELS.GET_NEXT_TASK_ID);
     console.log("sent next ID request");
-  }, [createTaskModalOpen, taskModalOpen]);
+  }, [createTaskModalOpen, taskModalOpen, deleteConfirmationModalOpen]);
   
   return (
     <div className="home-homework">
@@ -395,10 +407,7 @@ export const Homework = () => {
             <Button
               className="task-cancel-btn"
               isSecondary
-              onClick={() => {
-                setDeleteConfirmationModalOpen(true);
-                setTaskToDelete(selectedTask);
-              }}
+              onClick={openDeleteConfirmationHandler}
             >
                 Delete
             </Button>
@@ -433,17 +442,14 @@ export const Homework = () => {
           </div>
           <div className="delete-task-action-bar">
             <Button
-              onClick={() => {
-                setTaskToDelete(NULL_TASK);
-                setDeleteConfirmationModalOpen(false);
-              }}
+              onClick={deleteTaskAbortHandler}
               isSecondary
               className="delete-task-cancel-btn"
             >
               Cancel
             </Button>
             <Button
-              onClick={() => deleteTaskHandler()}
+              onClick={deleteTaskHandler}
               className="delete-task-delete-btn"
             >
               Delete Task
