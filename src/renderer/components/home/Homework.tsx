@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import { isEqual } from "lodash";
 import React, { useEffect, useReducer, useState } from "react";
-import CHANNELS from "../../../common/CHANNELS";
+import CHANNELS from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
 import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
 import { Alert } from "../utils/Alert";

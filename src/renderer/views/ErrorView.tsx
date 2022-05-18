@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import React from "react";
 import "source-map-support/register";
-import channels from "../../common/CHANNELS";
+import channels from "../../common/channels";
 import { Button } from "../components/utils/Button";
 
 export const ErrorView = () => {

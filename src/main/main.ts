@@ -2,7 +2,7 @@
 import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 import electronLocalshortcut from "electron-localshortcut";
-import CHANNELS from "../common/CHANNELS";
+import CHANNELS from "../common/channels";
 import TaskStorage from "./db/TaskStorage";
 import store, { persistWindowSettings } from "./settings/settings";
 
