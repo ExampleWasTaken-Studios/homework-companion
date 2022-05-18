@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import { isEqual } from "lodash";
 import React, { useEffect, useReducer, useState } from "react";
-import channels from "../../../common/channels";
+import CHANNELS from "../../../common/CHANNELS";
 import { NULL_TASK } from "../../../common/constants";
 import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
 import { Alert } from "../utils/Alert";
@@ -121,7 +121,7 @@ export const Homework = () => {
       }
     };
     console.log("newTask", newTask);
-    ipcRenderer.send(channels.ADD_TASK, newTask);
+    ipcRenderer.send(CHANNELS.ADD_TASK, newTask);
     setCreateTaskModalOpen(false);
   };
 
@@ -141,14 +141,14 @@ export const Homework = () => {
 
   const completeTaskHandler = () => {
     if (selectedTask.state === "open") {
-      ipcRenderer.send(channels.COMPLETE_TASK, selectedTask);
+      ipcRenderer.send(CHANNELS.COMPLETE_TASK, selectedTask);
       setTaskModalOpen(false);
     }
   };
 
   const incompleteTaskHandler = () => {
     if (selectedTask.state === "completed") {
-      ipcRenderer.send(channels.INCOMPLETE_TASK, selectedTask);
+      ipcRenderer.send(CHANNELS.INCOMPLETE_TASK, selectedTask);
       setTaskModalOpen(false);
     }
   };
@@ -164,7 +164,7 @@ export const Homework = () => {
       return;
     }
     console.log("sending request to delete task:", taskToDelete);
-    ipcRenderer.send(channels.DELETE_TASK, taskToDelete);
+    ipcRenderer.send(CHANNELS.DELETE_TASK, taskToDelete);
     setDeleteConfirmationModalOpen(false);
     setTaskModalOpen(false);
   };
@@ -179,30 +179,30 @@ export const Homework = () => {
   };
 
   useEffect(() => {
-    ipcRenderer.on(channels.GET_TASKS_RESPONSE, (_event, sentTasks) => {
+    ipcRenderer.on(CHANNELS.GET_TASKS_RESPONSE, (_event, sentTasks) => {
       console.log("received reply");  
       console.log("received data:", sentTasks);
       setTasks(sentTasks);
       console.log("set state");
     });
 
-    ipcRenderer.on(channels.GET_NEXT_TASK_ID_RESPONSE, (_event, sentId) => {
+    ipcRenderer.on(CHANNELS.GET_NEXT_TASK_ID_RESPONSE, (_event, sentId) => {
       console.log("recieved reply");
       console.log("received data:", sentId);
       nextTaskId = sentId;
     });
 
     return () => {
-      ipcRenderer.removeAllListeners(channels.GET_TASKS_RESPONSE);
-      ipcRenderer.removeAllListeners(channels.GET_NEXT_TASK_ID_RESPONSE);
+      ipcRenderer.removeAllListeners(CHANNELS.GET_TASKS_RESPONSE);
+      ipcRenderer.removeAllListeners(CHANNELS.GET_NEXT_TASK_ID_RESPONSE);
     };
   }, []);
 
   useEffect(() => {
-    ipcRenderer.send(channels.GET_TASKS);
+    ipcRenderer.send(CHANNELS.GET_TASKS);
     console.log("sent task request");
 
-    ipcRenderer.send(channels.GET_NEXT_TASK_ID);
+    ipcRenderer.send(CHANNELS.GET_NEXT_TASK_ID);
     console.log("sent next ID request");
   }, [createTaskModalOpen, taskModalOpen]);
   
