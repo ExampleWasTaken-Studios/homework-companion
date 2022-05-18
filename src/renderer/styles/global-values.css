@@ -56,7 +56,7 @@
   /* Modals */
   --bg-modal: rgb(40, 40, 40);
   --bg-modal-secondary: rgb(24, 24, 24);
-  --bg-modal-overlay: rgba(0, 0, 0, .1);
+  --bg-modal-overlay: rgba(0, 0, 0, 50%);
   --modal-box-shadow: rgb(0, 0, 0);
   
   /* Announcement card */
