@@ -34,6 +34,8 @@ interface InputDataState {
   content: string;
 }
 
+let nextTaskId = 0;
+
 const inputDataReducer = (state: InputDataState, action: InputDataAction): InputDataState => {
   switch (action.type) {
     case INPUT_DATA_ACTION_TYPES.CHANGE_TITLE:
@@ -102,7 +104,7 @@ export const Homework = () => {
     setCreateTaskInputIncomplete(false);
     // store task
     const newTask: Homework = {
-      id: 999, // The next higher ID than the highest already existing ID should be stored in TaskStorage and be retrievable via IPC.
+      id: nextTaskId, // The next higher ID than the highest already existing ID should be stored in TaskStorage and be retrievable via IPC.
       title: inputData.title,
       color: "blue",
       dueDate: inputData.date,
@@ -119,7 +121,7 @@ export const Homework = () => {
       }
     };
     console.log("newTask", newTask);
-    ipcRenderer.send(channels.addTask, newTask);
+    ipcRenderer.send(channels.ADD_TASK, newTask);
     setCreateTaskModalOpen(false);
   };
 
@@ -139,14 +141,14 @@ export const Homework = () => {
 
   const completeTaskHandler = () => {
     if (selectedTask.state === "open") {
-      ipcRenderer.send(channels.completeTask, selectedTask);
+      ipcRenderer.send(channels.COMPLETE_TASK, selectedTask);
       setTaskModalOpen(false);
     }
   };
 
   const incompleteTaskHandler = () => {
     if (selectedTask.state === "completed") {
-      ipcRenderer.send(channels.incompleteTask, selectedTask);
+      ipcRenderer.send(channels.INCOMPLETE_TASK, selectedTask);
       setTaskModalOpen(false);
     }
   };
@@ -162,7 +164,7 @@ export const Homework = () => {
       return;
     }
     console.log("sending request to delete task:", taskToDelete);
-    ipcRenderer.send(channels.deleteTask, taskToDelete);
+    ipcRenderer.send(channels.DELETE_TASK, taskToDelete);
     setDeleteConfirmationModalOpen(false);
     setTaskModalOpen(false);
   };
@@ -177,21 +179,31 @@ export const Homework = () => {
   };
 
   useEffect(() => {
-    ipcRenderer.on(channels.getTaskResponse, (_event, sentTasks) => {
+    ipcRenderer.on(channels.GET_TASKS_RESPONSE, (_event, sentTasks) => {
       console.log("received reply");  
       console.log("received data:", sentTasks);
       setTasks(sentTasks);
       console.log("set state");
     });
 
+    ipcRenderer.on(channels.GET_NEXT_TASK_ID_RESPONSE, (_event, sentId) => {
+      console.log("recieved reply");
+      console.log("received data:", sentId);
+      nextTaskId = sentId;
+    });
+
     return () => {
-      ipcRenderer.removeAllListeners(channels.getTaskResponse);
+      ipcRenderer.removeAllListeners(channels.GET_TASKS_RESPONSE);
+      ipcRenderer.removeAllListeners(channels.GET_NEXT_TASK_ID_RESPONSE);
     };
   }, []);
 
   useEffect(() => {
-    ipcRenderer.send(channels.getTasks);
-    console.log("send task request");
+    ipcRenderer.send(channels.GET_TASKS);
+    console.log("sent task request");
+
+    ipcRenderer.send(channels.GET_NEXT_TASK_ID);
+    console.log("sent next ID request");
   }, [createTaskModalOpen, taskModalOpen]);
   
   return (

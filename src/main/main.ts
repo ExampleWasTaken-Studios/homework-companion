@@ -56,72 +56,76 @@ const createWindow = () => {
   });
 
   // IPC
-  ipcMain.handle(channels.getSettingValue, (event: IpcMainInvokeEvent, key: string) => {
+  ipcMain.handle(channels.GET_SETTING_VALUE, (event: IpcMainInvokeEvent, key: string) => {
     console.log(event, key);
     console.log("value:", store.get(key));
     return store.get(key);
   });
 
-  ipcMain.on(channels.setSettingValue, (event: IpcMainEvent, key: string, value: unknown) => {
+  ipcMain.on(channels.SET_SETTING_VALUE, (event: IpcMainEvent, key: string, value: unknown) => {
     store.set(key, value);
   });
 
-  ipcMain.on(channels.relaunchApp, (event, arg: {force?: boolean}) => {
+  ipcMain.on(channels.RELAUNCH_APP, (event, arg: {force?: boolean}) => {
     app.relaunch();
     arg.force ? app.exit() : app.quit();
   });
 
-  ipcMain.on(channels.getTasks, (event) => {
-    console.log("received request - sending reply");
-    event.reply(channels.getTaskResponse, taskStorage.getData());
+  ipcMain.on(channels.GET_NEXT_TASK_ID, (event) => {
+    event.reply(channels.GET_NEXT_TASK_ID_RESPONSE, taskStorage.getNextId());
   });
 
-  ipcMain.on(channels.addTask, (event, newTask: Homework) => {
+  ipcMain.on(channels.GET_TASKS, (event) => {
+    console.log("received request - sending reply");
+    event.reply(channels.GET_TASKS_RESPONSE, taskStorage.getData());
+  });
+
+  ipcMain.on(channels.ADD_TASK, (event, newTask: Homework) => {
     console.log("received new task - attempting store");
     try {
       taskStorage.addTask(newTask);
     } catch (e) {
       console.error(e);
-      event.reply(channels.addTaskFail);
+      event.reply(channels.ADD_TASK_FAIL);
     }
     console.log("stored new task - sending reply");
-    event.reply(channels.addTaskSuccess);
+    event.reply(channels.ADD_TASK_SUCCESS);
   });
 
-  ipcMain.on(channels.deleteTask, (event, taskToDelete: Homework) => {
+  ipcMain.on(channels.DELETE_TASK, (event, taskToDelete: Homework) => {
     console.log("received task to be deleted - attempting deletion");
     try {
       taskStorage.removeTask(taskToDelete);
     } catch (e) {
       console.error(e);
-      event.reply(channels.deleteTaskFail);
+      event.reply(channels.DELETE_TASK_FAIL);
     }
     console.log("deleted task - sending reply");
-    event.reply(channels.deleteTaskSuccess);
+    event.reply(channels.DELETE_TASK_SUCCESS);
   });
 
-  ipcMain.on(channels.completeTask, (event, taskToComplete: Homework) => {
+  ipcMain.on(channels.COMPLETE_TASK, (event, taskToComplete: Homework) => {
     console.log("received task to be completed - attempting completion");
     try {
       taskStorage.completeTask(taskToComplete);
     } catch (e) {
       console.error(e);
-      event.reply(channels.completeTaskFail);
+      event.reply(channels.COMPLETE_TASK_FAIL);
     }
     console.log("completed task - sending reply");
-    event.reply(channels.completeTaskSuccess);
+    event.reply(channels.COMPLETE_TASK_SUCCESS);
   });
 
-  ipcMain.on(channels.incompleteTask, (event, taskToIncomplete: Homework) => {
+  ipcMain.on(channels.INCOMPLETE_TASK, (event, taskToIncomplete: Homework) => {
     console.log("received task to incomplete - attempting to incomplete");
     try {
       taskStorage.incompleteTask(taskToIncomplete);
     } catch (e) {
       console.error(e);
-      event.reply(channels.incompleteTaskFail);
+      event.reply(channels.INCOMPLETE_TASK_FAIL);
     }
     console.log("incompleted task - sending reply");
-    event.reply(channels.incompleteTaskSuccess);
+    event.reply(channels.INCOMPLETE_TASK_SUCCESS);
   });
 };
 

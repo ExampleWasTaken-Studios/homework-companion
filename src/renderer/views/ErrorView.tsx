@@ -16,7 +16,7 @@ export const ErrorView = () => {
         <Button 
           className="error-view-relaunch-button"
           onClick={() => {
-            ipcRenderer.send(channels.relaunchApp, { force: true });
+            ipcRenderer.send(channels.RELAUNCH_APP, { force: true });
           }}
         >
           Relaunch

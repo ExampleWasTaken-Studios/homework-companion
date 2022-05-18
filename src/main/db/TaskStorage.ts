@@ -123,4 +123,14 @@ export default class TaskStorage extends Storage {
 
     this.updateFile(updatedTasks as Homework[]);
   }
+
+  getNextId() {
+    let highestId = 0;
+    this.getData().forEach(current => {
+      if (current.id > highestId) {
+        highestId = current.id;
+      }
+    });
+    return highestId +1;
+  }
 }
