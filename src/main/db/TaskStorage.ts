@@ -81,8 +81,23 @@ export default class TaskStorage extends Storage {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
+    const tasks = this.getData();
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify([...this.getData(), newTask]), _err => false);
+    fs.writeFile(this.STORAGE_PATH, JSON.stringify([...tasks, newTask]), _err => false);
+  }
+
+  updateTask(task: Homework) {
+    if (!this.storageExists()) {
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
+    }
+    const tasks = this.getData();
+    console.log("UPDATE TASK - tasks:", tasks);
+    console.log("UPDATE TASK - task:", task);
+    const targetIndex = tasks.findIndex(current => current.id === task.id);
+    tasks[targetIndex] = task;
+    console.log("UPDATE TASK - tasks after update:", tasks);
+    this.updateFile(tasks);
   }
 
   completeTask(taskToComplete: Homework) {
@@ -90,11 +105,12 @@ export default class TaskStorage extends Storage {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
-    const targetIndex = this.getData().findIndex(current => isEqual(current, taskToComplete));
-    const updatedTasks = this.getData();
-    updatedTasks[targetIndex] = { ...updatedTasks[targetIndex], color: "green", state: "completed" };
+    const tasks = this.getData();
 
-    this.updateFile(updatedTasks);
+    const targetIndex = tasks.findIndex(current => isEqual(current, taskToComplete));
+    tasks[targetIndex] = { ...tasks[targetIndex], color: "green", state: "completed" };
+
+    this.updateFile(tasks);
   }
 
   incompleteTask(taskToIncomplete: Homework) {
@@ -103,11 +119,12 @@ export default class TaskStorage extends Storage {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
-    const targetIndex = this.getData().findIndex(current => isEqual(current, taskToIncomplete));
-    const updatedTasks = this.getData();
-    updatedTasks[targetIndex] = { ...updatedTasks[targetIndex], color: "blue", state: "open" };
+    const tasks = this.getData();
 
-    this.updateFile(updatedTasks);
+    const targetIndex = tasks.findIndex(current => isEqual(current, taskToIncomplete));
+    tasks[targetIndex] = { ...tasks[targetIndex], color: "blue", state: "open" };
+
+    this.updateFile(tasks);
   }
 
   removeTask(taskToRemove: Homework) {
@@ -115,13 +132,14 @@ export default class TaskStorage extends Storage {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
-    const targetIndex = this.getData().findIndex(current => isEqual(current, taskToRemove));
-    const updatedTasks = this.getData();
-    updatedTasks.splice(targetIndex, 1);
+    const tasks = this.getData();
 
-    console.log("updatedTasks:", updatedTasks);
+    const targetIndex = tasks.findIndex(current => isEqual(current, taskToRemove));
+    tasks.splice(targetIndex, 1);
 
-    this.updateFile(updatedTasks as Homework[]);
+    console.log("updatedTasks:", tasks);
+
+    this.updateFile(tasks as Homework[]);
   }
 
   getNextId() {

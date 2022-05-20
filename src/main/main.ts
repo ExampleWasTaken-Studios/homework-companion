@@ -92,6 +92,18 @@ const createWindow = () => {
     event.reply(CHANNELS.ADD_TASK_SUCCESS);
   });
 
+  ipcMain.on(CHANNELS.UPDATE_TASK, (event, task: Homework) => {
+    console.log("received task to update - attempting update");
+    try {
+      taskStorage.updateTask(task);
+    } catch (e) {
+      console.error(e);
+      event.reply(CHANNELS.UPDATE_TASK_FAIL);
+    }
+    console.log("updated task - sending reply");
+    event.reply(CHANNELS.UPDATE_TASK_SUCCESS);
+  });
+
   ipcMain.on(CHANNELS.DELETE_TASK, (event, taskToDelete: Homework) => {
     console.log("received task to be deleted - attempting deletion");
     try {
