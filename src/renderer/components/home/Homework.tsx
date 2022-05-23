@@ -34,49 +34,50 @@ interface InputDataState {
   content: string;
 }
 
+const inputDataReducer = (state: InputDataState, action: InputDataAction): InputDataState => {
+
+  switch (action.type) {
+    case INPUT_DATA_ACTION_TYPES.CHANGE_TITLE:
+      return {
+        ...state,
+        title: action.payload as string
+      };
+    case INPUT_DATA_ACTION_TYPES.CHANGE_DATE:
+      return {
+        ...state,
+        date: action.payload as Date
+      };
+    case INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY:
+      return {
+        ...state,
+        priority: action.payload as string
+      };
+    case INPUT_DATA_ACTION_TYPES.CHANGE_SUBJECT:
+      return {
+        ...state,
+        subject: action.payload as string
+      };
+    case INPUT_DATA_ACTION_TYPES.CHANGE_CONTENT:
+      return {
+        ...state,
+        content: action.payload as string
+      };
+    case INPUT_DATA_ACTION_TYPES.RESET_DATA:
+      return {
+        title: "",
+        date: new Date(0),
+        priority: "Priority",
+        subject: "Subject",
+        content: ""
+      };
+    default:
+      return state;
+  }
+};
+
 let nextTaskId = 0;
 
 export const Homework = () => {
-
-  const inputDataReducer = (state: InputDataState, action: InputDataAction): InputDataState => {
-    switch (action.type) {
-      case INPUT_DATA_ACTION_TYPES.CHANGE_TITLE:
-        return {
-          ...state,
-          title: action.payload as string
-        };
-      case INPUT_DATA_ACTION_TYPES.CHANGE_DATE:
-        return {
-          ...state,
-          date: action.payload as Date
-        };
-      case INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY:
-        return {
-          ...state,
-          priority: action.payload as string
-        };
-      case INPUT_DATA_ACTION_TYPES.CHANGE_SUBJECT:
-        return {
-          ...state,
-          subject: action.payload as string
-        };
-      case INPUT_DATA_ACTION_TYPES.CHANGE_CONTENT:
-        return {
-          ...state,
-          content: action.payload as string
-        };
-      case INPUT_DATA_ACTION_TYPES.RESET_DATA:
-        return {
-          title: "",
-          date: new Date(0),
-          priority: "Priority",
-          subject: "Subject",
-          content: ""
-        };
-      default:
-        return state;
-    }
-  };
 
   const [tasks, setTasks] = useState([NULL_TASK]);
 
@@ -138,7 +139,20 @@ export const Homework = () => {
   const [taskModalOpen, setTaskModalOpen] = useState(false);
   // Task that is currently displayed in the task modal
   const [selectedTask, setSelectedTask] = useState(NULL_TASK);
+  const [taskModified, setTaskModified] = useState(false);
   const [taskInputData, taskDispatch] = useReducer(inputDataReducer, { title: selectedTask.title, date: selectedTask.dueDate, priority: selectedTask.priority, subject: selectedTask.subject.name, content: selectedTask.content });
+
+  useEffect(() => {
+    if (taskInputData.title !== selectedTask.title 
+      || taskInputData.date !== selectedTask.dueDate
+      || taskInputData.priority !== selectedTask.priority
+      || taskInputData.subject !== selectedTask.subject.name
+      || taskInputData.content !== selectedTask.content) {
+      setTaskModified(true);
+      return;
+    }
+    setTaskModified(false);
+  }, [taskInputData]);
 
   const openDeleteConfirmationHandler = () => {
     setDeleteConfirmationModalOpen(true);
@@ -217,13 +231,6 @@ export const Homework = () => {
     ipcRenderer.send(CHANNELS.GET_NEXT_TASK_ID);
     console.log("sent next ID request");
   }, [createTaskModalOpen, taskModalOpen, deleteConfirmationModalOpen]);
-
-  useEffect(() => {
-    const newTask: Homework = {
-       id
-    }
-    ipcRenderer.send(CHANNELS.UPDATE_TASK, )
-  })
   
   return (
     <div className="home-homework">
@@ -448,8 +455,15 @@ export const Homework = () => {
                 Completed
               </Button>
             )}
-            
           </div>
+          {taskModified && (
+            <Button
+              className="task-update-btn"
+              onClick={() => console.info("UPDATE TASK BUTTON")}
+            >
+              Save
+            </Button>
+          )}
         </div>
       </Modal>
 
