@@ -2,7 +2,7 @@ import React from "react";
 
 interface HomeworkListItemProps {
   onClick: (newTask: Homework) => void;
-  data: Homework
+  data: Homework;
 }
 
 export const HomeworkListItem = ({ onClick, data }: HomeworkListItemProps) => {
