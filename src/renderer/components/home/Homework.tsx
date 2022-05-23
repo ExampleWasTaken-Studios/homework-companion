@@ -22,7 +22,7 @@ enum INPUT_DATA_ACTION_TYPES {
 }
 
 interface InputDataAction {
-  type: INPUT_DATA_ACTION_TYPES,
+  type: INPUT_DATA_ACTION_TYPES;
   payload?: string | Date;
 }
 
@@ -36,47 +36,47 @@ interface InputDataState {
 
 let nextTaskId = 0;
 
-const inputDataReducer = (state: InputDataState, action: InputDataAction): InputDataState => {
-  switch (action.type) {
-    case INPUT_DATA_ACTION_TYPES.CHANGE_TITLE:
-      return {
-        ...state,
-        title: action.payload as string
-      };
-    case INPUT_DATA_ACTION_TYPES.CHANGE_DATE:
-      return {
-        ...state,
-        date: action.payload as Date
-      };
-    case INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY:
-      return {
-        ...state,
-        priority: action.payload as string
-      };
-    case INPUT_DATA_ACTION_TYPES.CHANGE_SUBJECT:
-      return {
-        ...state,
-        subject: action.payload as string
-      };
-    case INPUT_DATA_ACTION_TYPES.CHANGE_CONTENT:
-      return {
-        ...state,
-        content: action.payload as string
-      };
-    case INPUT_DATA_ACTION_TYPES.RESET_DATA:
-      return {
-        title: "",
-        date: new Date(0),
-        priority: "Priority",
-        subject: "Subject",
-        content: ""
-      };
-    default:
-      return state;
-  }
-};
-
 export const Homework = () => {
+
+  const inputDataReducer = (state: InputDataState, action: InputDataAction): InputDataState => {
+    switch (action.type) {
+      case INPUT_DATA_ACTION_TYPES.CHANGE_TITLE:
+        return {
+          ...state,
+          title: action.payload as string
+        };
+      case INPUT_DATA_ACTION_TYPES.CHANGE_DATE:
+        return {
+          ...state,
+          date: action.payload as Date
+        };
+      case INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY:
+        return {
+          ...state,
+          priority: action.payload as string
+        };
+      case INPUT_DATA_ACTION_TYPES.CHANGE_SUBJECT:
+        return {
+          ...state,
+          subject: action.payload as string
+        };
+      case INPUT_DATA_ACTION_TYPES.CHANGE_CONTENT:
+        return {
+          ...state,
+          content: action.payload as string
+        };
+      case INPUT_DATA_ACTION_TYPES.RESET_DATA:
+        return {
+          title: "",
+          date: new Date(0),
+          priority: "Priority",
+          subject: "Subject",
+          content: ""
+        };
+      default:
+        return state;
+    }
+  };
 
   const [tasks, setTasks] = useState([NULL_TASK]);
 
@@ -138,6 +138,7 @@ export const Homework = () => {
   const [taskModalOpen, setTaskModalOpen] = useState(false);
   // Task that is currently displayed in the task modal
   const [selectedTask, setSelectedTask] = useState(NULL_TASK);
+  const [taskInputData, taskDispatch] = useReducer(inputDataReducer, { title: selectedTask.title, date: selectedTask.dueDate, priority: selectedTask.priority, subject: selectedTask.subject.name, content: selectedTask.content });
 
   const openDeleteConfirmationHandler = () => {
     setDeleteConfirmationModalOpen(true);
@@ -183,7 +184,6 @@ export const Homework = () => {
   /* Delete modal END */
 
 
-
   const homeworkListItemClickHandler = (newTask: Homework) => {
     setSelectedTask(newTask);
     console.log("newTask:", newTask);
@@ -217,6 +217,13 @@ export const Homework = () => {
     ipcRenderer.send(CHANNELS.GET_NEXT_TASK_ID);
     console.log("sent next ID request");
   }, [createTaskModalOpen, taskModalOpen, deleteConfirmationModalOpen]);
+
+  useEffect(() => {
+    const newTask: Homework = {
+       id
+    }
+    ipcRenderer.send(CHANNELS.UPDATE_TASK, )
+  })
   
   return (
     <div className="home-homework">
@@ -350,6 +357,7 @@ export const Homework = () => {
           <input 
             className="task-title"
             defaultValue={selectedTask.title}
+            onChange={event => taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_TITLE, payload: event.target.value })}
           />
           <div className="task-property-container">
             <input
@@ -359,6 +367,7 @@ export const Homework = () => {
               defaultValue={getHTMLDateFormat()} // TODO: change to ipc
               min={getHTMLDateFormat()}
               max={getHTMLDateFormat(new Date(9999, 11, 31))}
+              onChange={event => taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_DATE, payload: event.target.value })}
             />
             <Dropdown
               selection={selectedTask.priority.substring(0, 1).toUpperCase() + selectedTask.priority.substring(1)}
@@ -366,19 +375,31 @@ export const Homework = () => {
             >
               <DropdownItem 
                 value="Urgent"
-                onClick={() => setSelectedTask(prevState => ({ ...prevState, priority: "urgent" }))}
+                onClick={() => {
+                  setSelectedTask(prevState => ({ ...prevState, priority: "urgent" }));
+                  taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "urgent" });
+                }}
               />
               <DropdownItem
                 value="High"
-                onClick={() => setSelectedTask(prevState => ({ ...prevState, priority: "high" }))}
+                onClick={() => {
+                  setSelectedTask(prevState => ({ ...prevState, priority: "high" }));
+                  taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "high" });
+                }}
               />
               <DropdownItem
                 value="Normal"
-                onClick={() => setSelectedTask(prevState => ({ ...prevState, priority: "normal" }))}
+                onClick={() => {
+                  setSelectedTask(prevState => ({ ...prevState, priority: "normal" }));
+                  taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "normal" });
+                }}
               />
               <DropdownItem
                 value="Low"
-                onClick={() => setSelectedTask(prevState => ({ ...prevState, priority: "low" }))}
+                onClick={() => {
+                  setSelectedTask(prevState => ({ ...prevState, priority: "low" }));
+                  taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "low" });
+                }}
               />
             </Dropdown>
             <Dropdown
@@ -402,6 +423,7 @@ export const Homework = () => {
             placeholder="Description"
             autoComplete="off"
             defaultValue={selectedTask.content}
+            onChange={event => taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_CONTENT, payload: event.target.value })}
           />
           <div className="task-btn-container">
             <Button
@@ -426,6 +448,7 @@ export const Homework = () => {
                 Completed
               </Button>
             )}
+            
           </div>
         </div>
       </Modal>
