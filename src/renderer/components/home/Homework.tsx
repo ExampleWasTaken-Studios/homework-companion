@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import { isEqual } from "lodash";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { ChangeEvent, useEffect, useReducer, useState } from "react";
 import CHANNELS from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
 import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
@@ -18,7 +18,8 @@ enum INPUT_DATA_ACTION_TYPES {
   CHANGE_PRIORITY = "CHANGE_PRIORITY",
   CHANGE_SUBJECT = "CHANGE_SUBJECT",
   CHANGE_CONTENT = "CHANGE_CONTENT",
-  RESET_DATA = "RESET_DATA"
+  RESET_DATA = "RESET_DATA",
+  RESET_TASK = "RESET_TASK"
 }
 
 interface InputDataAction {
@@ -70,6 +71,8 @@ const inputDataReducer = (state: InputDataState, action: InputDataAction): Input
         subject: "Subject",
         content: ""
       };
+    case INPUT_DATA_ACTION_TYPES.RESET_TASK:
+      return state;
     default:
       return state;
   }
@@ -139,20 +142,9 @@ export const Homework = () => {
   const [taskModalOpen, setTaskModalOpen] = useState(false);
   // Task that is currently displayed in the task modal
   const [selectedTask, setSelectedTask] = useState(NULL_TASK);
-  const [taskModified, setTaskModified] = useState(false);
   const [taskInputData, taskDispatch] = useReducer(inputDataReducer, { title: selectedTask.title, date: selectedTask.dueDate, priority: selectedTask.priority, subject: selectedTask.subject.name, content: selectedTask.content });
-
-  useEffect(() => {
-    if (taskInputData.title !== selectedTask.title 
-      || taskInputData.date !== selectedTask.dueDate
-      || taskInputData.priority !== selectedTask.priority
-      || taskInputData.subject !== selectedTask.subject.name
-      || taskInputData.content !== selectedTask.content) {
-      setTaskModified(true);
-      return;
-    }
-    setTaskModified(false);
-  }, [taskInputData]);
+  const [taskInputIncomplete, setTaskInputIncomplete] = useState(false);
+  
 
   const openDeleteConfirmationHandler = () => {
     setDeleteConfirmationModalOpen(true);
@@ -172,6 +164,29 @@ export const Homework = () => {
       ipcRenderer.send(CHANNELS.INCOMPLETE_TASK, selectedTask);
       setTaskModalOpen(false);
     }
+  };
+
+  const updateTaskHandler = () => {
+    if (taskInputData.title === "" || taskInputData.date === null || taskInputData.content === "") {
+      setTaskInputIncomplete(true);
+      return;
+    }
+    setTaskInputIncomplete(false);
+
+    const updatedTask: Homework = {
+      id: selectedTask.id,
+      color: selectedTask.color,
+      title: taskInputData.title,
+      dueDate: taskInputData.date,
+      subject: selectedTask.subject,
+      priority: taskInputData.priority as Priority,
+      important: selectedTask.important,
+      state: selectedTask.state,
+      content: taskInputData.content,
+      metaInfo: selectedTask.metaInfo
+    };
+    ipcRenderer.send(CHANNELS.UPDATE_TASK, updatedTask);
+    setTaskModalOpen(false);
   };
   /* Task modal END */
 
@@ -364,7 +379,9 @@ export const Homework = () => {
           <input 
             className="task-title"
             defaultValue={selectedTask.title}
-            onChange={event => taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_TITLE, payload: event.target.value })}
+            onChange={event => {
+              taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_TITLE, payload: event.target.value });
+            }}
           />
           <div className="task-property-container">
             <input
@@ -432,6 +449,12 @@ export const Homework = () => {
             defaultValue={selectedTask.content}
             onChange={event => taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_CONTENT, payload: event.target.value })}
           />
+          {taskInputIncomplete && (
+            <Alert
+              severity="error"
+              content="At least one requred field is missing!"
+            />
+          )}
           <div className="task-btn-container">
             <Button
               className="task-cancel-btn"
@@ -456,14 +479,12 @@ export const Homework = () => {
               </Button>
             )}
           </div>
-          {taskModified && (
-            <Button
-              className="task-update-btn"
-              onClick={() => console.info("UPDATE TASK BUTTON")}
-            >
+          <Button
+            className="task-update-btn"
+            onClick={updateTaskHandler}
+          >
               Save
-            </Button>
-          )}
+          </Button>
         </div>
       </Modal>
 
