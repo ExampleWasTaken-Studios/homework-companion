@@ -187,6 +187,7 @@ export const Homework = () => {
     };
     ipcRenderer.send(CHANNELS.UPDATE_TASK, updatedTask);
     setTaskModalOpen(false);
+    taskDispatch({ type: INPUT_DATA_ACTION_TYPES.RESET_DATA });
   };
   /* Task modal END */
 
