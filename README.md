@@ -41,6 +41,7 @@ styles
 The goal of this approach is to avoid situations where the naming of the CSS is ambiguous or unclear.  
 Example: You have a file named `FixContainer.css`. Without the `changelog` directory it would not be clear what the file belongs to.
 - Each module is imported in [`main.css`](./src/renderer/styles/main.css).
+- [`main.css`](./src/renderer/styles/main.css) only imports other modules. It does not define any styles.
 - Colors are defined as a variable in [`global.css`](./src/renderer/styles/global.css).
 
 
