@@ -20,29 +20,27 @@ The settings are structured in categories that each have their respective settin
 
 
 ### CSS conventions
-- variables should ONLY be defined in [`./src/styles/global-values.css`](./src/styles/global-values.css)
-- all general styles should be defined in [`./src/styles/styles.css`](./src/styles/styles.css)
-- styles inside [`./src/styles/styles.css`](./src/styles/styles.css) should be grouped into logical section, divided by comments.
-- media queries are placed at the end of the file
+In order to keep our CSS codebase clean we set up some conventions outlined below.
 
+- Variables must be defined in [`global.css`](./src/renderer/styles/global.css).
+- Each component has it's own file named `<component_name>.css` inside the [`styles`](./src/renderer/styles/) folder. We refer to this file as "module".  
+The structure of the [`styles`](./src/renderer/styles/) folder should, to an extend, copy the structure of the [renderer](./src/renderer) folder.  
 Example:
-```css
-/* Sidebar START */
-.sidebar {
-  background-color: #000;
-}
-/* Sidebar END */
+```sh
+# Actual structure:
+renderer
+|- components
+   |- changelog
+      |- FixContainer.tsx
 
-/* Container START */
-.container {
-  background-color: var(--bg-primary);
-}
-/* Container END */
-
-/* Media queries START */
-@media screen and (max-width: 768px) {
-  background-color: #FFF;
-}
-/* Media queries END */
+# Styles structure:
+styles
+|- changelog
+   |- FixContainer.css
 ```
-- colors should ALWAYS be defined as a variable
+The goal of this approach is to avoid situations where the naming of the CSS is ambiguous or unclear.  
+Example: You have a file named `FixContainer.css`. Without the `changelog` directory it would not be clear what the file belongs to.
+- Each module is imported in [`main.css`](./src/renderer/styles/main.css).
+- Colors are defined as a variable in [`global.css`](./src/renderer/styles/global.css).
+
+
