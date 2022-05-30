@@ -1,0 +1,21 @@
+.changelog-item {
+  margin: var(--ms-length) 0;
+  background-color: transparent;
+}
+
+.changelog-list-item {
+  background-color: transparent;
+}
+
+.changelog-list-item::marker {
+  color: var(--fg-secondary);
+}
+
+.changelog-list-item-name {
+  font-weight: 500;
+  background-color: transparent;
+}
+
+.changelog-list-item-description {
+  background-color: transparent;
+}

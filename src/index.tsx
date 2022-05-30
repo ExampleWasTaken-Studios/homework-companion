@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDom from "react-dom";
-import { HashRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./renderer/views/Home";
-import { Announcements } from "./renderer/views/Announcements";
-import { Settings } from "./renderer/views/Settings";
-import { WelcomeComplete, Welcome } from "./renderer/views/Welcome";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import GlobalErrorBoundary from "./renderer/components/errors/GlobalErrorBoundary";
+import "./renderer/styles/main.css";
+import { Announcements } from "./renderer/views/Announcements";
+import { Home } from "./renderer/views/Home";
+import { Settings } from "./renderer/views/Settings";
+import { Welcome, WelcomeComplete } from "./renderer/views/Welcome";
 
 ReactDom.render(
   <React.StrictMode>

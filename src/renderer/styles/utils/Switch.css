@@ -1,0 +1,35 @@
+.switch-track-off {
+  cursor: pointer;
+  width: 40px;
+  height: 23px;
+  background-color: var(--fg-disabled);
+  border-radius: 50px;
+  transition: background-color var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.switch-handle-off {
+  width: 22px;
+  height: 21px;
+  background-color: var(--fg-primary);
+  border-radius: 100px;
+  margin: 1px 0 0 0px;
+  transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.switch-track-on {
+  cursor: pointer;
+  width: 40px;
+  height: 23px;
+  background-color: #3BA55D;
+  border-radius: 50px;
+  transition: background-color var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.switch-handle-on {
+  width: 22px;
+  height: 21px;
+  background-color: var(--fg-primary);
+  border-radius: 100px;
+  margin: 1px 0 0 19px;
+  transition: margin var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
