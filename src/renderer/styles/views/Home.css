@@ -1,0 +1,14 @@
+.container {
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.home-create-task-button {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding: 0 var(--sl-length) 0 var(--sl-length);
+}

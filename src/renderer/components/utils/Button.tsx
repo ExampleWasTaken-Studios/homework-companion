@@ -1,5 +1,4 @@
 import React from "react";
-import "../../styles/styles.css";
 
 interface ButtonProps {
   onClick: () => void;

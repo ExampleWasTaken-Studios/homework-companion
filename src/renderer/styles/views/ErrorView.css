@@ -1,0 +1,42 @@
+.error-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2000;
+}
+
+.error-view-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 1% 3%;
+}
+
+.error-view-header {
+  padding: 0 0 var(--ms-length) 0;
+}
+
+.error-view-title {
+  font-weight: normal;
+  margin: 0 0 0 0;
+}
+
+.error-view-subtitle {
+  font-weight: normal;
+}
+
+.error-view-relaunch-button {
+  font-size: 14px;
+  padding: var(--sl-length) var(--ml-length);
+  margin: 0 auto 0 auto;
+}

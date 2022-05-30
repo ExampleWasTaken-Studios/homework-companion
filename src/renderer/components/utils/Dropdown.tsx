@@ -1,6 +1,5 @@
 import React, { ReactNode, useState } from "react";
 import { DownChevronIcon } from "../svg/DownChevronIcon";
-import "../../styles/styles.css";
 
 interface DropdownProps {
   selection: string;

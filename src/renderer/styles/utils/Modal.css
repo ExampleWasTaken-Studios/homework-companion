@@ -1,0 +1,21 @@
+.modal-overlay {
+  user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: hsl(0, calc(1 * 0%), 0%);
+  background-color: var(--bg-modal-overlay);
+}
+
+.modal {
+  width: max-content;
+  display: flex;
+  background-color: var(--bg-secondary);
+  border-radius: 4px;
+}
