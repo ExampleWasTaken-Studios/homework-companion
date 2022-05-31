@@ -35,7 +35,7 @@ export default class TaskStorage extends Storage {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify([]), _err => null);
+    fs.writeFile(this.STORAGE_PATH, JSON.stringify({ tasks: []}), _err => null);
   }
 
   updateFile(tasks: Homework[]) {
@@ -43,7 +43,7 @@ export default class TaskStorage extends Storage {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify(tasks), _err => null);
+    fs.writeFile(this.STORAGE_PATH, JSON.stringify({ tasks: tasks }), _err => null);
   }
 
   resetFile() {
@@ -52,7 +52,7 @@ export default class TaskStorage extends Storage {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify([]), _err => false);
+    fs.writeFile(this.STORAGE_PATH, JSON.stringify({ tasks: []}), _err => false);
   }
 
   getData(): Homework[] {
@@ -61,8 +61,11 @@ export default class TaskStorage extends Storage {
     }
 
     let tasks: Homework[];
+    let tempTasks: { tasks: Homework[]};
     try {
-      tasks = JSON.parse(fs.readFileSync(this.STORAGE_PATH, { encoding: "utf-8" }));
+      tempTasks = JSON.parse(fs.readFileSync(this.STORAGE_PATH, { encoding: "utf-8" }));
+      console.log(tempTasks);
+      tasks = tempTasks.tasks;
     } catch (err) {
       throw new Error(`An error occured while loading tasks:\n${err}`);
     }
@@ -84,7 +87,7 @@ export default class TaskStorage extends Storage {
     const tasks = this.getData();
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify([...tasks, newTask]), _err => false);
+    fs.writeFile(this.STORAGE_PATH, JSON.stringify({ tasks: [...tasks, newTask]}), _err => false);
   }
 
   updateTask(task: Homework) {
