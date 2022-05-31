@@ -189,6 +189,7 @@ export const Homework = () => {
     ipcRenderer.send(CHANNELS.UPDATE_TASK, updatedTask);
     setTaskModalOpen(false);
     taskDispatch({ type: INPUT_DATA_ACTION_TYPES.RESET_DATA });
+    setTaskModified(false);
   };
   /* Task modal END */
 
@@ -217,6 +218,7 @@ export const Homework = () => {
 
   const homeworkListItemClickHandler = (newTask: Homework) => {
     setSelectedTask(newTask);
+    setTaskModified(false);
     console.log("newTask:", newTask);
     setTaskModalOpen(true);
   };
