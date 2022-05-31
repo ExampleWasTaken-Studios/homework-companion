@@ -144,6 +144,7 @@ export const Homework = () => {
   const [selectedTask, setSelectedTask] = useState(NULL_TASK);
   const [taskInputData, taskDispatch] = useReducer(inputDataReducer, { title: selectedTask.title, date: selectedTask.dueDate, priority: selectedTask.priority, subject: selectedTask.subject.name, content: selectedTask.content });
   const [taskInputIncomplete, setTaskInputIncomplete] = useState(false);
+  const [taskModified, setTaskModified] = useState(false);
   
 
   const openDeleteConfirmationHandler = () => {
@@ -382,6 +383,7 @@ export const Homework = () => {
             defaultValue={selectedTask.title}
             onChange={event => {
               taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_TITLE, payload: event.target.value });
+              setTaskModified(true);
             }}
           />
           <div className="task-property-container">
@@ -392,7 +394,10 @@ export const Homework = () => {
               defaultValue={getHTMLDateFormat()} // TODO: change to ipc
               min={getHTMLDateFormat()}
               max={getHTMLDateFormat(new Date(9999, 11, 31))}
-              onChange={event => taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_DATE, payload: event.target.value })}
+              onChange={event => {
+                taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_DATE, payload: event.target.value });
+                setTaskModified(true);
+              }}
             />
             <Dropdown
               selection={selectedTask.priority.substring(0, 1).toUpperCase() + selectedTask.priority.substring(1)}
@@ -403,6 +408,7 @@ export const Homework = () => {
                 onClick={() => {
                   setSelectedTask(prevState => ({ ...prevState, priority: "urgent" }));
                   taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "urgent" });
+                  setTaskModified(true);
                 }}
               />
               <DropdownItem
@@ -410,6 +416,7 @@ export const Homework = () => {
                 onClick={() => {
                   setSelectedTask(prevState => ({ ...prevState, priority: "high" }));
                   taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "high" });
+                  setTaskModified(true);
                 }}
               />
               <DropdownItem
@@ -417,6 +424,7 @@ export const Homework = () => {
                 onClick={() => {
                   setSelectedTask(prevState => ({ ...prevState, priority: "normal" }));
                   taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "normal" });
+                  setTaskModified(true);
                 }}
               />
               <DropdownItem
@@ -424,6 +432,7 @@ export const Homework = () => {
                 onClick={() => {
                   setSelectedTask(prevState => ({ ...prevState, priority: "low" }));
                   taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "low" });
+                  setTaskModified(true);
                 }}
               />
             </Dropdown>
@@ -448,7 +457,10 @@ export const Homework = () => {
             placeholder="Description"
             autoComplete="off"
             defaultValue={selectedTask.content}
-            onChange={event => taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_CONTENT, payload: event.target.value })}
+            onChange={event => {
+              taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_CONTENT, payload: event.target.value });
+              setTaskModified(true);
+            }}
           />
           {taskInputIncomplete && (
             <Alert
@@ -480,12 +492,21 @@ export const Homework = () => {
               </Button>
             )}
           </div>
-          <Button
-            className="task-update-btn"
-            onClick={updateTaskHandler}
-          >
-              Save
-          </Button>
+          {taskModified ? (
+            <Button
+              className="task-update-btn"
+              onClick={updateTaskHandler}
+            >
+              Update
+            </Button>
+          ) : (
+            <Button
+              className="task-update-btn hidden"
+              onClick={updateTaskHandler}
+            >
+              Update
+            </Button>
+          )}
         </div>
       </Modal>
 

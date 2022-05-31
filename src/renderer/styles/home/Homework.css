@@ -181,6 +181,24 @@
   height: 35px;
 }
 
+.task-update-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+  margin: var(--sm-length) 0 0 0;
+  border: 1px solid var(--bg-button);
+  transition: height var(--switch-state-change-duration) var(--switch-state-change-timing), font-size var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.task-update-btn.hidden {
+  height: 0px;
+  font-size: 0;
+  padding: 0;
+  border: 0;
+}
+
 /* Task Modal END */
 
 /* Delete task modal START */
