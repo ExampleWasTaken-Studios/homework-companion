@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import { isEqual } from "lodash";
-import React, { ChangeEvent, useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import CHANNELS from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
 import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
@@ -249,6 +249,67 @@ export const Homework = () => {
 
     ipcRenderer.send(CHANNELS.GET_NEXT_TASK_ID);
     console.log("sent next ID request");
+  }, [createTaskModalOpen, taskModalOpen, deleteConfirmationModalOpen]);
+
+  useEffect(() => {
+    ipcRenderer.send(CHANNELS.SHORTCUT_REGISTER_ESC);
+    ipcRenderer.send(CHANNELS.SHORTCUT_REGISTER_ENTER);
+    ipcRenderer.send(CHANNELS.SHORTCUT_REGISTER_CMD_CTRL_ENTER);
+
+    ipcRenderer.on(CHANNELS.SHORTCUT_FIRED_ESC, () => {
+
+      console.log("[SHORTCUT] ESC");
+      console.log(createTaskModalOpen, taskModalOpen, deleteConfirmationModalOpen);
+
+      if (createTaskModalOpen) {
+        cancelHandler();
+      }
+
+      if (taskModalOpen) {
+        setTaskModalOpen(false);
+      }
+
+      if (deleteConfirmationModalOpen) {
+        deleteTaskAbortHandler();
+      }
+    });
+
+    ipcRenderer.on(CHANNELS.SHORTCUT_FIRED_ENTER, () => {
+      if (deleteConfirmationModalOpen) {
+        deleteTaskHandler();
+      }
+    });
+
+    ipcRenderer.on(CHANNELS.SHORTCUT_FIRED_CMD_CTRL_ENTER, () => {
+      if (createTaskModalOpen) {
+        submitHandler();
+      }
+
+      if (taskModalOpen) {
+        if (taskModified) {
+          console.info("[UPDATING TASK]");
+          updateTaskHandler();
+        } else {
+          if (selectedTask.state === "open") {
+            console.info("[COMPLETING TASK]");
+            completeTaskHandler();
+          } else if (selectedTask.state === "completed") {
+            console.info("[INCOMPLETING TASK]");
+            incompleteTaskHandler();
+          }
+        }
+      }
+    });
+
+    return () => {
+      ipcRenderer.removeAllListeners(CHANNELS.SHORTCUT_FIRED_ESC);
+      ipcRenderer.removeAllListeners(CHANNELS.SHORTCUT_FIRED_ENTER);
+      ipcRenderer.removeAllListeners(CHANNELS.SHORTCUT_UNREGISTER_CMD_CTRL_ENTER);
+
+      ipcRenderer.send(CHANNELS.SHORTCUT_UNREGISTER_ESC);
+      ipcRenderer.send(CHANNELS.SHORTCUT_UNREGISTER_ENTER);
+
+    };
   }, [createTaskModalOpen, taskModalOpen, deleteConfirmationModalOpen]);
   
   return (

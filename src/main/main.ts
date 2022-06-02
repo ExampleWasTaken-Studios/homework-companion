@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
+import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent, ipcRenderer } from "electron";
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 import electronLocalshortcut from "electron-localshortcut";
 import CHANNELS from "../common/channels";
@@ -138,6 +138,39 @@ const createWindow = () => {
     }
     console.log("incompleted task - sending reply");
     event.reply(CHANNELS.INCOMPLETE_TASK_SUCCESS);
+  });
+
+  ipcMain.on(CHANNELS.SHORTCUT_REGISTER_ESC, () => {
+    electronLocalshortcut.register(mainWindow, "Esc", () => {
+      console.log("[SHORTCUT] ESC");
+      mainWindow.webContents.send(CHANNELS.SHORTCUT_FIRED_ESC);
+    });
+  });
+
+  ipcMain.on(CHANNELS.SHORTCUT_UNREGISTER_ESC, () => {
+    electronLocalshortcut.unregister(mainWindow, "Esc");
+  });
+
+  ipcMain.on(CHANNELS.SHORTCUT_REGISTER_ENTER, () => {
+    electronLocalshortcut.register(mainWindow, "Enter", () => {
+      console.log("[SHORTCUT] Enter");
+      mainWindow.webContents.send(CHANNELS.SHORTCUT_FIRED_ENTER);
+    });
+  });
+
+  ipcMain.on(CHANNELS.SHORTCUT_UNREGISTER_ENTER, () => {
+    electronLocalshortcut.unregister(mainWindow, "Enter");
+  });
+
+  ipcMain.on(CHANNELS.SHORTCUT_REGISTER_CMD_CTRL_ENTER, () => {
+    electronLocalshortcut.register(mainWindow, "CommandOrControl+Enter", () => {
+      console.log("[SHORTCUT] CommandOrControl+Enter");
+      mainWindow.webContents.send(CHANNELS.SHORTCUT_FIRED_CMD_CTRL_ENTER);
+    });
+  });
+
+  ipcMain.on(CHANNELS.SHORTCUT_UNREGISTER_CMD_CTRL_ENTER, () => {
+    electronLocalshortcut.unregister(mainWindow, "CommandOrControl+Enter");
   });
 };
 
