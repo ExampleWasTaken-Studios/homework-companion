@@ -93,12 +93,16 @@ export default class TaskStorage extends Storage {
     if (!this.storageExists()) {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
-    const tasks = this.getData();
-    console.log("UPDATE TASK - tasks:", tasks);
-    console.log("UPDATE TASK - task:", task);
-    const targetIndex = tasks.findIndex(current => current.id === task.id);
-    tasks[targetIndex] = task;
-    console.log("UPDATE TASK - tasks after update:", tasks);
+    let tasks = this.getData();
+
+    tasks = tasks.map(current => {
+      if (current.id === task.id) {
+        return task;
+      } else {
+        return current;
+      }
+    });
+
     this.updateFile(tasks);
   }
 
