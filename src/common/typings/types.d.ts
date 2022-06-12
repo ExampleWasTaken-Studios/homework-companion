@@ -46,7 +46,7 @@ interface SettingsSchema {
   }
 }
 
-type Priority = "urgent" | "high" | "normal" | "low";
+type Priority = "Urgent" | "High" | "Normal" | "Low";
 
 type Color = "red" | "green" | "blue";
 

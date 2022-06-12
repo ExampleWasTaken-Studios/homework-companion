@@ -1,0 +1,77 @@
+.overlay {
+  user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: hsl(0, calc(1 * 0%), 0%);
+  background-color: var(--bg-modal-overlay);
+}
+
+.task-modal {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: var(--ms-length);
+  background-color: var(--bg-modal);
+  border-radius: 4px;
+}
+
+.task-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 0 var(--ms-length) 0;
+  background-color: transparent;
+}
+
+.modal-title {
+  background-color: transparent;
+}
+
+.close-icon {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+}
+
+.task-title-label,
+.due-date-label,
+.priority-label,
+.subject-label,
+.content-label {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+.input {
+  font-family: Open Sans;
+  font-size: 19px;
+  font-weight: normal;
+  width: 100%;
+  padding: 5px 3px;
+  margin: 5px 0 var(--sm-length) 0;
+  border: none;
+  border-radius: 4px;
+}
+
+.textarea {
+  resize: vertical;
+  font-family: Open Sans;
+  font-size: 19px;
+  font-weight: normal;
+  width: 100%;
+  height: 60px;
+  max-height: 90px;
+  padding: 5px 3px;
+  margin: 5px 0 var(--sm-length) 0;
+  border: none;
+  border-radius: 4px;
+}

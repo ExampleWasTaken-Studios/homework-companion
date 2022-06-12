@@ -9,6 +9,7 @@ import { Button } from "../utils/Button";
 import { Dropdown } from "../utils/Dropdown";
 import { DropdownItem } from "../utils/DropdownItem";
 import { Modal } from "../utils/Modal";
+import { TaskModal } from "../utils/TaskModal";
 import { ViewHeader } from "../utils/ViewHeader";
 import { HomeworkListItem } from "./HomeworkListItem";
 
@@ -437,7 +438,7 @@ export const Homework = () => {
 
       {/* Task Modal */}
       <Modal
-        isOpen={taskModalOpen}
+        isOpen={false}
         close={() => setTaskModalOpen(false)}
       >
         <div className="task-container">
@@ -469,7 +470,7 @@ export const Homework = () => {
               <DropdownItem 
                 value="Urgent"
                 onClick={() => {
-                  setSelectedTask(prevState => ({ ...prevState, priority: "urgent" }));
+                  setSelectedTask(prevState => ({ ...prevState, priority: "Urgent" }));
                   taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "urgent" });
                   setTaskModified(true);
                 }}
@@ -477,7 +478,7 @@ export const Homework = () => {
               <DropdownItem
                 value="High"
                 onClick={() => {
-                  setSelectedTask(prevState => ({ ...prevState, priority: "high" }));
+                  setSelectedTask(prevState => ({ ...prevState, priority: "High" }));
                   taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "high" });
                   setTaskModified(true);
                 }}
@@ -485,7 +486,7 @@ export const Homework = () => {
               <DropdownItem
                 value="Normal"
                 onClick={() => {
-                  setSelectedTask(prevState => ({ ...prevState, priority: "normal" }));
+                  setSelectedTask(prevState => ({ ...prevState, priority: "Normal" }));
                   taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "normal" });
                   setTaskModified(true);
                 }}
@@ -493,7 +494,7 @@ export const Homework = () => {
               <DropdownItem
                 value="Low"
                 onClick={() => {
-                  setSelectedTask(prevState => ({ ...prevState, priority: "low" }));
+                  setSelectedTask(prevState => ({ ...prevState, priority: "Low" }));
                   taskDispatch({ type: INPUT_DATA_ACTION_TYPES.CHANGE_PRIORITY, payload: "low" });
                   setTaskModified(true);
                 }}
@@ -613,6 +614,14 @@ export const Homework = () => {
           <p>emtpy state goes here</p>
         )}
       </div>
+      
+      <TaskModal
+        isOpen={taskModalOpen}
+        setOpen={setTaskModalOpen}
+        onOpen={() => console.info("onOpen exec")}
+        onClose={() => console.info("onClose exec")}
+        data={selectedTask}
+      />
     </div>
   );
 };
