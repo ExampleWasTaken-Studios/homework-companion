@@ -1,22 +1,22 @@
+import { ipcRenderer } from "electron";
 import React, { SetStateAction, useEffect, useState } from "react";
+import CHANNELS from "../../../common/channels";
 import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
 import { CloseIcon } from "../svg/CloseIcon";
 
 interface TaskModalProps {
   isOpen: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
-  onOpen?: () => void;
-  onClose?: () => void;
   data: Homework;
 }
 
-export const TaskModal = ({ isOpen, setOpen, onOpen, onClose, data }: TaskModalProps) => {
+export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
 
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("Oops! We've messed up! Please read the description!");
   const [dueDate, setDueDate] = useState(new Date());
   const [priority, setPriority] = useState<Priority>("Normal");
   const [subject, setSubject] = useState<Subject>({ id: -1, name: "placeholder" });
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState("Looks like something went wrong on our end while we tried to load your task. :/");
 
   useEffect(() => {
     if (isOpen) {
@@ -25,13 +25,41 @@ export const TaskModal = ({ isOpen, setOpen, onOpen, onClose, data }: TaskModalP
   }, [isOpen]);
 
   const openHandler = () => {
-    onOpen && onOpen();
+    setTitle(data.title);
+    setDueDate(data.dueDate);
+    setPriority(data.priority);
+    setSubject(data.subject);
+    setContent(data.content);
   };
 
-  const closeHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent> | React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+  const closeHandler = (event: React.MouseEvent) => {
+    event.preventDefault();
     event.stopPropagation();
     setOpen(false);
-    onClose && onClose();
+
+    data = { ...data, title, dueDate, priority, subject, content };
+    ipcRenderer.send(CHANNELS.UPDATE_TASK, data);
+  };
+
+  const dataChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, sender: "title" | "dueDate" | "priority" | "subject" | "content") => {
+    switch (sender) {
+      case "title":
+        setTitle(event.target.value);
+        return;
+      case "dueDate":
+        setDueDate(new Date(event.target.value));
+        return;
+      case "priority":
+        setPriority(event.target.value as Priority);
+        return;
+      case "subject":
+        console.log("Subject loading not yet implemented");
+        setSubject({ id: -1, name: event.target.value });
+        return;
+      case "content":
+        setContent(event.target.value);
+        return;
+    }
   };
 
   return (
@@ -41,7 +69,10 @@ export const TaskModal = ({ isOpen, setOpen, onOpen, onClose, data }: TaskModalP
           className="overlay"
           onClick={event => closeHandler(event)}
         >
-          <div className="task-modal">
+          <div
+            className="task-modal"
+            onClick={event => event.stopPropagation()} // needed to prevent the modal from closing when clicked 
+          >
   
             <div className="task-header">
               <h2 className="modal-title">Edit Task</h2>
@@ -55,6 +86,7 @@ export const TaskModal = ({ isOpen, setOpen, onOpen, onClose, data }: TaskModalP
                 className="input"
                 autoComplete="off"
                 defaultValue={data.title}
+                onChange={event => dataChangeHandler(event, "title")}
               />
             </label>
   
@@ -64,10 +96,11 @@ export const TaskModal = ({ isOpen, setOpen, onOpen, onClose, data }: TaskModalP
                 type="date"
                 name="due-date"
                 id="due-date"
-                className="input"
+                className="input due-date"
                 autoComplete="off"
                 autoCorrect="off"
                 defaultValue={getHTMLDateFormat(data.dueDate)}
+                onChange={event => dataChangeHandler(event, "dueDate")}
               />
             </label>
   
@@ -76,10 +109,11 @@ export const TaskModal = ({ isOpen, setOpen, onOpen, onClose, data }: TaskModalP
               <select
                 name="priority"
                 id="priority"
-                className="input"
+                className="input dropdown"
                 autoComplete="off"
                 autoCorrect="off"
                 defaultValue={data.priority}
+                onChange={event => dataChangeHandler(event, "priority")}
               > 
                 <option value="Urgent">Urgent</option>
                 <option value="High">High</option>
@@ -93,7 +127,9 @@ export const TaskModal = ({ isOpen, setOpen, onOpen, onClose, data }: TaskModalP
               <select
                 name="subject"
                 id="subject"
-                className="input"
+                className="input dropdown"
+                defaultValue={data.subject.name}
+                onChange={event => dataChangeHandler(event, "subject")}
               >
                 <option value="English">English</option>
                 <option value="German">German</option>
@@ -110,6 +146,7 @@ export const TaskModal = ({ isOpen, setOpen, onOpen, onClose, data }: TaskModalP
                 autoComplete="off"
                 autoCorrect="off"
                 defaultValue={data.content}
+                onChange={event => dataChangeHandler(event, "content")}
               />
             </label>
   

@@ -1,7 +1,7 @@
 import React from "react";
 
 interface CloseIconProps {
-  onClick: (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => void;
+  onClick: (event: React.MouseEvent) => void;
 }
 
 export const CloseIcon = ({ onClick }: CloseIconProps) => {

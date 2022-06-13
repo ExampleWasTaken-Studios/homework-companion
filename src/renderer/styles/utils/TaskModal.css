@@ -62,6 +62,14 @@
   border-radius: 4px;
 }
 
+.due-date {
+  cursor: pointer;
+}
+
+.dropdown {
+  cursor: pointer;
+}
+
 .textarea {
   resize: vertical;
   font-family: Open Sans;

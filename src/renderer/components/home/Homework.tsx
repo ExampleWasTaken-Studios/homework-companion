@@ -618,8 +618,6 @@ export const Homework = () => {
       <TaskModal
         isOpen={taskModalOpen}
         setOpen={setTaskModalOpen}
-        onOpen={() => console.info("onOpen exec")}
-        onClose={() => console.info("onClose exec")}
         data={selectedTask}
       />
     </div>
