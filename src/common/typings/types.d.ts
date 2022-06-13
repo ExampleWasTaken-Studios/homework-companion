@@ -18,11 +18,6 @@ interface Homework {
   }
 }
 
-interface ModalProps {
-  isOpen: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 interface SettingsSchema {
   settings: {
     general: {
