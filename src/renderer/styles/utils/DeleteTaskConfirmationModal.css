@@ -1,0 +1,53 @@
+.overlay {
+  user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: hsl(0, calc(1 * 0%), 0%);
+  background-color: var(--bg-modal-overlay);
+}
+
+.delete-task-modal {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  padding: var(--ms-length);
+  background-color: var(--bg-modal);
+  border-radius: 4px;
+}
+
+.delete-content {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+.delete-task-title {
+  background-color: transparent;
+}
+
+.delete-task-description {
+  background-color: transparent;
+}
+
+.delete-task-action-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: transparent;
+}
+
+.delete-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 49%;
+  padding: var(--sm-length) var(--ms-length);
+  margin: var(--ss-length) 0;
+}

@@ -27,3 +27,4 @@
 @import url(./settings/categories/About.css);
 @import url(./utils/TaskModal.css);
 @import url(./utils//CreateTaskModal.css);
+@import url(./utils/DeleteTaskConfirmationModal.css);

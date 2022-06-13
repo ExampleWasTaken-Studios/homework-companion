@@ -7,6 +7,7 @@ import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
 import { Alert } from "../utils/Alert";
 import { Button } from "../utils/Button";
 import { CreateTaskModal } from "../utils/CreateTaskModal";
+import { DeleteTaskConfirmationModalProps } from "../utils/DeleteTaskConfirmationModal";
 import { Dropdown } from "../utils/Dropdown";
 import { DropdownItem } from "../utils/DropdownItem";
 import { Modal } from "../utils/Modal";
@@ -624,6 +625,12 @@ export const Homework = () => {
       <TaskModal
         isOpen={taskModalOpen}
         setOpen={setTaskModalOpen}
+        data={selectedTask}
+      />
+
+      <DeleteTaskConfirmationModalProps
+        isOpen={deleteConfirmationModalOpen}
+        setOpen={setDeleteConfirmationModalOpen}
         data={selectedTask}
       />
     </div>
