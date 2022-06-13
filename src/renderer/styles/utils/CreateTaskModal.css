@@ -57,7 +57,7 @@
   font-weight: normal;
   width: 100%;
   padding: 5px 3px;
-  margin: var(--ss-length) 0;
+  margin: 5px 0 var(--sm-length) 0;
   border: none;
   border-radius: 4px;
 }
@@ -82,4 +82,21 @@
   margin: var(--ss-length) 0;
   border: none;
   border-radius: 4px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  background-color: transparent;
+}
+
+.create-task-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 49%;
+  padding: var(--sm-length) var(--ms-length);
+  margin: var(--ss-length) 0;
 }

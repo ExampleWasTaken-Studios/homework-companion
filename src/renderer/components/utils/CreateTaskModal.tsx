@@ -1,71 +1,119 @@
 import { ipcRenderer } from "electron";
+import { identity } from "lodash";
 import React, { SetStateAction, useEffect, useState } from "react";
 import CHANNELS from "../../../common/channels";
-import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
 import { CloseIcon } from "../svg/CloseIcon";
+import { Alert } from "./Alert";
+import { Button } from "./Button";
 
-interface TaskModalProps {
+
+interface CreateTaskModalProps {
   isOpen: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
-  data: Homework;
 }
 
-export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
+let nextTaskId = 0;
+
+export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
 
   const [title, setTitle] = useState("Oops! We've messed up! Please read the description!");
-  const [dueDate, setDueDate] = useState(new Date());
+  const [dueDate, setDueDate] = useState(new Date(0));
   const [priority, setPriority] = useState<Priority>("Normal");
   const [subject, setSubject] = useState<Subject>({ id: -1, name: "placeholder" });
   const [content, setContent] = useState("Looks like something went wrong on our end while we tried to load your task. :/");
 
-  useEffect(() => {
-    if (isOpen) {
-      openHandler();
-    }
-  }, [isOpen]);
+  const [inputIncomplete, setInputIncomplete] = useState(false);
 
-  const openHandler = () => {
-    setTitle(data.title);
-    setDueDate(data.dueDate);
-    setPriority(data.priority);
-    setSubject(data.subject);
-    setContent(data.content);
-  };
+  useEffect(() => {
+    ipcRenderer.send(CHANNELS.GET_NEXT_TASK_ID);
+    ipcRenderer.on(CHANNELS.GET_TASKS_RESPONSE, (_event, sentId) => {
+      nextTaskId = sentId;
+    });
+
+    return () => {
+      ipcRenderer.removeAllListeners(CHANNELS.GET_NEXT_TASK_ID_RESPONSE);
+    };
+  });
 
   const closeHandler = (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
     setOpen(false);
-
-    data = { ...data, title, dueDate, priority, subject, content };
-    ipcRenderer.send(CHANNELS.UPDATE_TASK, data);
   };
 
   const dataChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, sender: "title" | "dueDate" | "priority" | "subject" | "content") => {
     switch (sender) {
       case "title":
         setTitle(event.target.value);
-        return;
+        break;
       case "dueDate":
         setDueDate(new Date(event.target.value));
-        return;
+        break;
       case "priority":
         setPriority(event.target.value as Priority);
-        return;
+        break;
       case "subject":
         console.log("Subject loading not yet implemented");
         setSubject({ id: -1, name: event.target.value });
-        return;
+        break;
       case "content":
         setContent(event.target.value);
-        return;
+        break;
     }
+    if (title.length !== 0
+      && title !== "Oops! We've messed up! Please read the description!"
+      && dueDate 
+      && dueDate !== new Date(0)
+      /* && subject.id !== -1 */ 
+      && content !== ""
+      && content !== "Looks like something went wrong on our end while we tried to load your task. :/") { // this is for UX to remove the incomple alert once all required fields are correctly entered
+      setInputIncomplete(false);
+    }
+  };
+
+  const generateTask = (title: string, dueDate: Date, priority: Priority, subject: Subject, content: string) => {
+
+    const task: Homework = {
+      id: nextTaskId,
+      color: "blue",
+      title: title,
+      dueDate: dueDate,
+      priority: priority,
+      subject: subject,
+      important: false,
+      state: "open",
+      content: content,
+      metaInfo: {
+        dateCreated: new Date()
+      }
+    };
+
+    return task;
+  };
+
+  const submitTaskHandler = () => {
+
+    if (title.length === 0
+          || title === "Oops! We've messed up! Please read the description!"
+          || !dueDate 
+          || dueDate === new Date(0)
+          /* || subject.id === -1 */ 
+          || content === ""
+          || content === "Looks like something went wrong on our end while we tried to load your task. :/") {
+      setInputIncomplete(true);
+      return;
+    } else {
+      setInputIncomplete(false);
+    }
+
+    ipcRenderer.send(CHANNELS.ADD_TASK, generateTask(title, dueDate, priority, subject, content));
+    setOpen(false);
   };
 
   return (
     <>
       {isOpen && (
-        <div 
+        <div
           className="overlay"
           onClick={event => closeHandler(event)}
         >
@@ -73,41 +121,38 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
             className="task-modal"
             onClick={event => event.stopPropagation()} // needed to prevent the modal from closing when clicked 
           >
-  
+
             <div className="task-header">
-              <h2 className="modal-title">Edit Task</h2>
-              <CloseIcon onClick={event => closeHandler(event)}/>
+              <h2 className="modal-title">Create new Task</h2>
+              <CloseIcon onClick={event => closeHandler(event)} />
             </div>
-  
+
             <label className="task-title-label">
-            TITLE
+              TITLE
               <input
                 type="text"
                 className="input"
                 autoComplete="off"
-                defaultValue={data.title}
                 onChange={event => dataChangeHandler(event, "title")}
               />
             </label>
-  
+
             <label className="due-date-label">
-            DUE DATE
+              DUE DATE
               <input
                 type="date"
-                id="due-date"
                 className="input due-date"
                 autoComplete="off"
-                defaultValue={getHTMLDateFormat(data.dueDate)}
                 onChange={event => dataChangeHandler(event, "dueDate")}
               />
             </label>
-  
+
             <label className="priority-label">
             PRIORITY
               <select
                 className="input dropdown"
                 autoComplete="off"
-                defaultValue={data.priority}
+                defaultValue="Normal"
                 onChange={event => dataChangeHandler(event, "priority")}
               > 
                 <option value="Urgent">Urgent</option>
@@ -121,12 +166,11 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
             SUBJECT
               <select
                 className="input dropdown"
-                defaultValue={data.subject.name}
+                defaultValue="Example Subject"
                 onChange={event => dataChangeHandler(event, "subject")}
               >
                 <option value="English">English</option>
                 <option value="German">German</option>
-                <option value={data.subject.name}>{data.subject.name}</option>
               </select>
             </label>
   
@@ -135,11 +179,34 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
               <textarea
                 className="textarea"
                 autoComplete="off"
-                defaultValue={data.content}
                 onChange={event => dataChangeHandler(event, "content")}
               />
             </label>
-  
+
+            {inputIncomplete && (
+              <Alert
+                severity="error"
+                content="At least one required field is missing!"
+              />
+            )}
+
+            <div className="button-container">
+              <Button
+                onClick={() => setOpen(false)}
+                className="create-task-btn"
+                isSecondary
+              >
+                Cancel
+              </Button>
+
+              <Button
+                onClick={() => submitTaskHandler()}
+                className="create-task-btn"
+              >
+                Create Task
+              </Button>
+            </div>
+
           </div>
         </div>
       )}

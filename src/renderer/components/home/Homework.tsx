@@ -6,6 +6,7 @@ import { NULL_TASK } from "../../../common/constants";
 import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
 import { Alert } from "../utils/Alert";
 import { Button } from "../utils/Button";
+import { CreateTaskModal } from "../utils/CreateTaskModal";
 import { Dropdown } from "../utils/Dropdown";
 import { DropdownItem } from "../utils/DropdownItem";
 import { Modal } from "../utils/Modal";
@@ -326,7 +327,7 @@ export const Homework = () => {
 
       {/* Create new Task Modal */}
       <Modal
-        isOpen={createTaskModalOpen}
+        isOpen={false}
         close={() => setCreateTaskModalOpen(false)}
       >
         <div className="create-task-container">
@@ -615,6 +616,11 @@ export const Homework = () => {
         )}
       </div>
       
+      <CreateTaskModal
+        isOpen={createTaskModalOpen}
+        setOpen={setCreateTaskModalOpen}
+      />
+
       <TaskModal
         isOpen={taskModalOpen}
         setOpen={setTaskModalOpen}
