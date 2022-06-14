@@ -79,7 +79,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
               <CloseIcon onClick={event => closeHandler(event)}/>
             </div>
   
-            <label className="task-title-label">
+            <label className="label">
             TITLE
               <input
                 type="text"
@@ -90,7 +90,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
               />
             </label>
   
-            <label className="due-date-label">
+            <label className="label">
             DUE DATE
               <input
                 type="date"
@@ -101,36 +101,38 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
                 onChange={event => dataChangeHandler(event, "dueDate")}
               />
             </label>
+
+            <div className="priority-subject-container">
+              <label className="label inline">
+                PRIORITY
+                <select
+                  className="input dropdown"
+                  autoComplete="off"
+                  defaultValue={data.priority}
+                  onChange={event => dataChangeHandler(event, "priority")}
+                > 
+                  <option value="Urgent">Urgent</option>
+                  <option value="High">High</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Low">Low</option>
+                </select>
+              </label>
   
-            <label className="priority-label">
-            PRIORITY
-              <select
-                className="input dropdown"
-                autoComplete="off"
-                defaultValue={data.priority}
-                onChange={event => dataChangeHandler(event, "priority")}
-              > 
-                <option value="Urgent">Urgent</option>
-                <option value="High">High</option>
-                <option value="Normal">Normal</option>
-                <option value="Low">Low</option>
-              </select>
-            </label>
+              <label className="label inline">
+                SUBJECT
+                <select
+                  className="input dropdown"
+                  defaultValue={data.subject.name}
+                  onChange={event => dataChangeHandler(event, "subject")}
+                >
+                  <option value="English">English</option>
+                  <option value="German">German</option>
+                  <option value={data.subject.name}>{data.subject.name}</option>
+                </select>
+              </label>
+            </div>
   
-            <label className="subject-label">
-            SUBJECT
-              <select
-                className="input dropdown"
-                defaultValue={data.subject.name}
-                onChange={event => dataChangeHandler(event, "subject")}
-              >
-                <option value="English">English</option>
-                <option value="German">German</option>
-                <option value={data.subject.name}>{data.subject.name}</option>
-              </select>
-            </label>
-  
-            <label className="content-label">
+            <label className="label">
             DESCRIPTION
               <textarea
                 className="textarea"

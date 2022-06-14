@@ -3,8 +3,8 @@ import { identity } from "lodash";
 import React, { SetStateAction, useEffect, useState } from "react";
 import CHANNELS from "../../../common/channels";
 import { CloseIcon } from "../svg/CloseIcon";
-import { Alert } from "./Alert";
-import { Button } from "./Button";
+import { Alert } from "../utils/Alert";
+import { Button } from "../utils/Button";
 
 
 interface CreateTaskModalProps {
@@ -127,17 +127,18 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
               <CloseIcon onClick={event => closeHandler(event)} />
             </div>
 
-            <label className="task-title-label">
+            <label className="label">
               TITLE
               <input
                 type="text"
                 className="input"
                 autoComplete="off"
+                autoFocus
                 onChange={event => dataChangeHandler(event, "title")}
               />
             </label>
 
-            <label className="due-date-label">
+            <label className="label">
               DUE DATE
               <input
                 type="date"
@@ -147,34 +148,35 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
               />
             </label>
 
-            <label className="priority-label">
-            PRIORITY
-              <select
-                className="input dropdown"
-                autoComplete="off"
-                defaultValue="Normal"
-                onChange={event => dataChangeHandler(event, "priority")}
-              > 
-                <option value="Urgent">Urgent</option>
-                <option value="High">High</option>
-                <option value="Normal">Normal</option>
-                <option value="Low">Low</option>
-              </select>
-            </label>
+            <div className="priority-subject-container">
+              <label className="label inline">
+                PRIORITY
+                <select
+                  className="input dropdown"
+                  autoComplete="off"
+                  defaultValue="Normal"
+                  onChange={event => dataChangeHandler(event, "priority")}
+                > 
+                  <option value="Urgent">Urgent</option>
+                  <option value="High">High</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Low">Low</option>
+                </select>
+              </label>
   
-            <label className="subject-label">
-            SUBJECT
-              <select
-                className="input dropdown"
-                defaultValue="Example Subject"
-                onChange={event => dataChangeHandler(event, "subject")}
-              >
-                <option value="English">English</option>
-                <option value="German">German</option>
-              </select>
-            </label>
+              <label className="label inline">
+                SUBJECT
+                <select
+                  className="input dropdown"
+                  onChange={event => dataChangeHandler(event, "subject")}
+                >
+                  <option value="English">English</option>
+                  <option value="German">German</option>
+                </select>
+              </label>
+            </div>
   
-            <label className="content-label">
+            <label className="label">
             DESCRIPTION
               <textarea
                 className="textarea"

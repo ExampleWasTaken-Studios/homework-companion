@@ -4,9 +4,9 @@ import React, { useEffect, useReducer, useState } from "react";
 import CHANNELS from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
 import { Button } from "../utils/Button";
-import { CreateTaskModal } from "../utils/CreateTaskModal";
-import { DeleteTaskConfirmationModalProps } from "../utils/DeleteTaskConfirmationModal";
-import { TaskModal } from "../utils/TaskModal";
+import { CreateTaskModal } from "../modals/CreateTaskModal";
+import { DeleteTaskConfirmationModalProps } from "../modals/DeleteTaskConfirmationModal";
+import { TaskModal } from "../modals/TaskModal";
 import { ViewHeader } from "../utils/ViewHeader";
 import { HomeworkListItem } from "./HomeworkListItem";
 

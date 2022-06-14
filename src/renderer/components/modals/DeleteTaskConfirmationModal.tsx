@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import React, { SetStateAction } from "react";
 import CHANNELS from "../../../common/channels";
-import { Button } from "./Button";
+import { Button } from "../utils/Button";
 
 interface DeleteTaskConfirmationModalProps {
   isOpen: boolean;
