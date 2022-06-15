@@ -26,14 +26,14 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
 
   useEffect(() => {
     ipcRenderer.send(CHANNELS.GET_NEXT_TASK_ID);
-    ipcRenderer.on(CHANNELS.GET_TASKS_RESPONSE, (_event, sentId) => {
+    ipcRenderer.on(CHANNELS.GET_NEXT_TASK_ID_RESPONSE, (_event, sentId) => {
       nextTaskId = sentId;
     });
 
     return () => {
       ipcRenderer.removeAllListeners(CHANNELS.GET_NEXT_TASK_ID_RESPONSE);
     };
-  });
+  }, []);
 
   const closeHandler = (event: React.MouseEvent) => {
     event.preventDefault();

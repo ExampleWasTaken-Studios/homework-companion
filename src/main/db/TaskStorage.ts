@@ -63,8 +63,6 @@ export default class TaskStorage extends Storage {
     let tasks: Homework[];
     try {
       tempTasks = JSON.parse(fs.readFileSync(this.STORAGE_PATH, { encoding: "utf-8" }));
-      console.log("TEMP TASKS", tempTasks);
-      console.log("TASKS", tempTasks.tasks);
       tasks = tempTasks.tasks;
     } catch (err) {
       throw new Error(`An error occured while loading tasks:\n${err}`);
@@ -86,7 +84,9 @@ export default class TaskStorage extends Storage {
 
     const tasks = this.getData();
 
-    fs.writeFileSync(this.STORAGE_PATH, JSON.stringify({ tasks: [...tasks, newTask]}));
+    tasks.push(newTask);
+
+    fs.writeFileSync(this.STORAGE_PATH, JSON.stringify({ tasks: tasks }));
   }
 
   updateTask(task: Homework) {
@@ -120,7 +120,6 @@ export default class TaskStorage extends Storage {
   }
 
   incompleteTask(taskToIncomplete: Homework) {
-    console.log("fired");
     if (!this.storageExists()) {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
@@ -143,18 +142,20 @@ export default class TaskStorage extends Storage {
     const targetIndex = tasks.findIndex(current => isEqual(current, taskToRemove));
     tasks.splice(targetIndex, 1);
 
-    console.log("updatedTasks:", tasks);
-
     this.updateFile(tasks as Homework[]);
   }
 
   getNextId() {
     let highestId = 0;
-    this.getData().forEach(current => {
+
+    const tasks = this.getData();
+
+    tasks.forEach(current => {
       if (current.id > highestId) {
-        highestId = current.id;
+        highestId += 2;
       }
     });
-    return highestId +1;
+
+    return highestId;
   }
 }
