@@ -41,7 +41,7 @@
     "babel-loader": "^8.2.3",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
-    "electron": "^17.1.2",
+    "electron": "^17.2.0",
     "electron-reloader": "^1.2.3",
     "eslint": "^8.11.0",
     "eslint-plugin-react": "^7.29.4",
