@@ -16,7 +16,7 @@
 .task-modal {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 520px;
   padding: var(--ms-length);
   background-color: var(--bg-modal);
   border-radius: 4px;
