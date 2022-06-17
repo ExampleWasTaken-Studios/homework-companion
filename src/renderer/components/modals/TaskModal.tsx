@@ -1,8 +1,9 @@
 import { ipcRenderer } from "electron";
 import React, { SetStateAction, useEffect, useState } from "react";
 import CHANNELS from "../../../common/channels";
-import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
+import { getHTMLDateFormat, isValidDate } from "../../../common/utils/DateUtils";
 import { CloseIcon } from "../svg/CloseIcon";
+import { Alert } from "../utils/Alert";
 import { Button } from "../utils/Button";
 
 interface TaskModalProps {
@@ -19,6 +20,8 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
   const [subject, setSubject] = useState<Subject>({ id: -1, name: "placeholder" });
   const [content, setContent] = useState("Looks like something went wrong on our end while we tried to load your task. :/");
   const [state, setState] = useState<TaskState>("open");
+
+  const [inputIncomplete, setInputIncomplete] = useState(false);
 
   const [buttonContent, setButtonContent] = useState<"Mark as Complete" | "Complete">("Mark as Complete");
 
@@ -40,33 +43,54 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
   const closeHandler = (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
-    setOpen(false);
 
+    if (title === "" || content === "") {
+      setInputIncomplete(true);
+      return;
+    }
+    
     data = { ...data, title, dueDate, priority, subject, content, state };
     ipcRenderer.send(CHANNELS.UPDATE_TASK, data);
+
+    setOpen(false);
+
+    setTitle("Oops! We've messed up! Please read the description!");
+    setDueDate(new Date());
+    setPriority("Normal");
+    setSubject({ id: -1, name: "placeholder" });
+    setState("open");
   };
 
   const dataChangeHandler = (value: string, sender: "title" | "dueDate" | "priority" | "subject" | "content" | "state") => {
     switch (sender) {
       case "title":
         setTitle(value);
-        return;
+        break;
       case "dueDate":
         setDueDate(new Date(value));
-        return;
+        break;
       case "priority":
         setPriority(value as Priority);
-        return;
+        break;
       case "subject":
         console.log("Subject loading not yet implemented");
         setSubject({ id: -1, name: value });
-        return;
+        break;
       case "content":
         setContent(value);
-        return;
+        break;
       case "state":
         setState(value as TaskState);
-        return;
+        break;
+    }
+    if (title.length !== 0
+      && title !== "Oops! We've messed up! Please read the description!"
+      && dueDate 
+      && dueDate !== new Date(0)
+      /* && subject.id !== -1 */ 
+      && content !== ""
+      && content !== "Looks like something went wrong on our end while we tried to load your task. :/") { // this is for UX to remove the incomple alert once all required fields are correctly entered
+      setInputIncomplete(false);
     }
   };
 
@@ -150,10 +174,17 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
               />
             </label>
 
+            {inputIncomplete && (
+              <Alert
+                severity="error"
+                content="At least one required field missing!"
+              />
+            )}
+
             <Button
               onClick={() => {
                 if (state === "open" || state === "overdue") {
-                  dataChangeHandler("complete", "state");
+                  dataChangeHandler("completed", "state");
                   setButtonContent("Complete");
                 } else if (state === "completed") {
                   dataChangeHandler("open", "state");

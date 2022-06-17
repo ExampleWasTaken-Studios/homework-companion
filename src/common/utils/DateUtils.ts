@@ -20,3 +20,33 @@ export const getHTMLDateFormat = (date: Date = new Date()): string => {
 
   return `${date.getFullYear()}-${month}-${day}`;
 };
+
+/**
+ * Check if a date is valid.
+ * @param date The date instance that should be validated.
+ * @returns True if the date passed is valid, false otherwise
+ */
+export const isValidDate = (date: Date): boolean => {
+
+  if (isNaN(date as unknown as number)) {
+    return false;
+  }
+
+  const daysInMonth = (month: number, year: number) => {
+    return new Date(year, month, 0).getDate();
+  };
+
+  if (date.getDate() > daysInMonth(date.getMonth(), date.getFullYear())) {
+    return false;
+  }
+
+  if (date.getMonth() > 12) {
+    return false;
+  }
+
+  if (date.getFullYear() > 260000) {
+    return false;
+  }
+
+  return true;
+};

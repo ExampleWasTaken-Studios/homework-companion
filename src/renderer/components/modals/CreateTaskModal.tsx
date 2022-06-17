@@ -39,6 +39,11 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
     event.preventDefault();
     event.stopPropagation();
     setOpen(false);
+
+    setTitle("Oops! We've messed up! Please read the description!");
+    setDueDate(new Date());
+    setPriority("Normal");
+    setSubject({ id: -1, name: "placeholder" });
   };
 
   const dataChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, sender: "title" | "dueDate" | "priority" | "subject" | "content") => {
