@@ -1,38 +1,13 @@
 import { ipcRenderer } from "electron";
-import { isEqual } from "lodash";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CHANNELS from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
-import { Button } from "../utils/Button";
 import { CreateTaskModal } from "../modals/CreateTaskModal";
 import { DeleteTaskConfirmationModalProps } from "../modals/DeleteTaskConfirmationModal";
 import { TaskModal } from "../modals/TaskModal";
+import { Button } from "../utils/Button";
 import { ViewHeader } from "../utils/ViewHeader";
 import { HomeworkListItem } from "./HomeworkListItem";
-
-enum INPUT_DATA_ACTION_TYPES {
-  CHANGE_TITLE = "CHANGE_TITLE",
-  CHANGE_DATE = "CHANGE_DATE",
-  CHANGE_PRIORITY = "CHANGE_PRIORITY",
-  CHANGE_SUBJECT = "CHANGE_SUBJECT",
-  CHANGE_CONTENT = "CHANGE_CONTENT",
-  RESET_DATA = "RESET_DATA",
-  RESET_TASK = "RESET_TASK"
-}
-
-interface InputDataAction {
-  type: INPUT_DATA_ACTION_TYPES;
-  payload?: string | Date;
-}
-
-interface InputDataState {
-  title: string;
-  date: Date;
-  priority: string;
-  subject: string;
-  content: string;
-}
-
 
 
 export const Homework = () => {
