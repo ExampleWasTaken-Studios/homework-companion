@@ -15,25 +15,7 @@ enum CHANNELS {
   UPDATE_TASK_FAIL = "tasks/update/fail",
   DELETE_TASK = "tasks/delete",
   DELETE_TASK_SUCCESS = "tasks/delete/success",
-  DELETE_TASK_FAIL = "tasks/delete/fail",
-  COMPLETE_TASK = "tasks/complete",
-  COMPLETE_TASK_SUCCESS = "tasks/complete/success",
-  COMPLETE_TASK_FAIL = "tasks/complete/fail",
-  INCOMPLETE_TASK = "tasks/incomplete",
-  INCOMPLETE_TASK_SUCCESS = "tasks/incomplete/success",
-  INCOMPLETE_TASK_FAIL = "tasks/incomplete/fail",
-
-  SHORTCUT_REGISTER_ESC = "shortcut/register/esc",
-  SHORTCUT_UNREGISTER_ESC = "shortcut/unregister/esc",
-  SHORTCUT_FIRED_ESC = "shortcut/fired/esc",
-
-  SHORTCUT_REGISTER_ENTER = "shortcut/register/enter",
-  SHORTCUT_UNREGISTER_ENTER = "shortcut/unregister/enter",
-  SHORTCUT_FIRED_ENTER = "shortcut/fired/enter",
-
-  SHORTCUT_REGISTER_CMD_CTRL_ENTER = "shortcut/register/cmd-ctrl-enter",
-  SHORTCUT_UNREGISTER_CMD_CTRL_ENTER = "shortcut/unregister/cmd-ctrl-enter",
-  SHORTCUT_FIRED_CMD_CTRL_ENTER = "shortcut/fired/cmd-ctrl-enter"
+  DELETE_TASK_FAIL = "tasks/delete/fail"
 }
 
 export default CHANNELS;

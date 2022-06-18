@@ -62,11 +62,11 @@ const createWindow = () => {
     return store.get(key);
   });
 
-  ipcMain.on(CHANNELS.SET_SETTING_VALUE, (event: IpcMainEvent, key: string, value: unknown) => {
+  ipcMain.on(CHANNELS.SET_SETTING_VALUE, (_event: IpcMainEvent, key: string, value: unknown) => {
     store.set(key, value);
   });
 
-  ipcMain.on(CHANNELS.RELAUNCH_APP, (event, arg: {force?: boolean}) => {
+  ipcMain.on(CHANNELS.RELAUNCH_APP, (_event, arg: {force?: boolean}) => {
     app.relaunch();
     arg.force ? app.exit() : app.quit();
   });
@@ -114,63 +114,6 @@ const createWindow = () => {
     }
     console.log("deleted task - sending reply");
     event.reply(CHANNELS.DELETE_TASK_SUCCESS);
-  });
-
-  ipcMain.on(CHANNELS.COMPLETE_TASK, (event, taskToComplete: Homework) => {
-    console.log("received task to be completed - attempting completion");
-    try {
-      taskStorage.completeTask(taskToComplete);
-    } catch (e) {
-      console.error(e);
-      event.reply(CHANNELS.COMPLETE_TASK_FAIL);
-    }
-    console.log("completed task - sending reply");
-    event.reply(CHANNELS.COMPLETE_TASK_SUCCESS);
-  });
-
-  ipcMain.on(CHANNELS.INCOMPLETE_TASK, (event, taskToIncomplete: Homework) => {
-    console.log("received task to incomplete - attempting to incomplete");
-    try {
-      taskStorage.incompleteTask(taskToIncomplete);
-    } catch (e) {
-      console.error(e);
-      event.reply(CHANNELS.INCOMPLETE_TASK_FAIL);
-    }
-    console.log("incompleted task - sending reply");
-    event.reply(CHANNELS.INCOMPLETE_TASK_SUCCESS);
-  });
-
-  ipcMain.on(CHANNELS.SHORTCUT_REGISTER_ESC, () => {
-    electronLocalshortcut.register(mainWindow, "Esc", () => {
-      console.log("[SHORTCUT] ESC");
-      mainWindow.webContents.send(CHANNELS.SHORTCUT_FIRED_ESC);
-    });
-  });
-
-  ipcMain.on(CHANNELS.SHORTCUT_UNREGISTER_ESC, () => {
-    electronLocalshortcut.unregister(mainWindow, "Esc");
-  });
-
-  ipcMain.on(CHANNELS.SHORTCUT_REGISTER_ENTER, () => {
-    electronLocalshortcut.register(mainWindow, "Enter", () => {
-      console.log("[SHORTCUT] Enter");
-      mainWindow.webContents.send(CHANNELS.SHORTCUT_FIRED_ENTER);
-    });
-  });
-
-  ipcMain.on(CHANNELS.SHORTCUT_UNREGISTER_ENTER, () => {
-    electronLocalshortcut.unregister(mainWindow, "Enter");
-  });
-
-  ipcMain.on(CHANNELS.SHORTCUT_REGISTER_CMD_CTRL_ENTER, () => {
-    electronLocalshortcut.register(mainWindow, "CommandOrControl+Enter", () => {
-      console.log("[SHORTCUT] CommandOrControl+Enter");
-      mainWindow.webContents.send(CHANNELS.SHORTCUT_FIRED_CMD_CTRL_ENTER);
-    });
-  });
-
-  ipcMain.on(CHANNELS.SHORTCUT_UNREGISTER_CMD_CTRL_ENTER, () => {
-    electronLocalshortcut.unregister(mainWindow, "CommandOrControl+Enter");
   });
 };
 
