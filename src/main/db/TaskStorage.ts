@@ -113,8 +113,15 @@ export default class TaskStorage extends Storage {
 
     const tasks = this.getData();
 
-    const targetIndex = tasks.findIndex(current => isEqual(current, taskToComplete));
-    tasks[targetIndex] = { ...tasks[targetIndex], color: "green", state: "completed" };
+    tasks.forEach(current => {
+      if (current.id === taskToComplete.id) {
+        current.state = "completed";
+        current.color = "green";
+      }
+    });
+
+    /* const targetIndex = tasks.findIndex(current => isEqual(current, taskToComplete));
+    tasks[targetIndex] = { ...tasks[targetIndex], color: "green", state: "completed" }; */
 
     this.updateFile(tasks);
   }
@@ -159,7 +166,6 @@ export default class TaskStorage extends Storage {
       }
     });
 
-    console.log("RETURNING ID:", highestId);
     return highestId;
   }
 }
