@@ -76,7 +76,7 @@ const createWindow = () => {
   });
 
   ipcMain.on(CHANNELS.GET_TASKS, (event) => {
-    console.log("received request - sending reply");
+    console.log("received request for tasks - sending reply");
     event.reply(CHANNELS.GET_TASKS_RESPONSE, taskStorage.getData());
   });
 
