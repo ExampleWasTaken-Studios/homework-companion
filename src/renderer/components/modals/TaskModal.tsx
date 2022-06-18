@@ -58,6 +58,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     setDueDate(new Date());
     setPriority("Normal");
     setSubject({ id: -1, name: "placeholder" });
+    setContent("Looks like something went wrong on our end while we tried to load your task. :/");
     setState("open");
   };
 
