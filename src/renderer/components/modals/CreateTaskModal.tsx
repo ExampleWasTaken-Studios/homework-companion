@@ -1,5 +1,4 @@
 import { ipcRenderer } from "electron";
-import { identity } from "lodash";
 import React, { SetStateAction, useEffect, useState } from "react";
 import CHANNELS from "../../../common/channels";
 import { CloseIcon } from "../svg/CloseIcon";
@@ -24,10 +23,19 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
 
   const [inputIncomplete, setInputIncomplete] = useState(false);
 
+  const resetData = () => {
+    setTitle("Oops! We've messed up! Please read the description!");
+    setDueDate(new Date());
+    setPriority("Normal");
+    setSubject({ id: -1, name: "placeholder" });
+    setContent("Looks like something went wrong on our end while we tried to load your task. :/");
+  };
+
   useEffect(() => {
     ipcRenderer.send(CHANNELS.GET_NEXT_TASK_ID);
     ipcRenderer.on(CHANNELS.GET_NEXT_TASK_ID_RESPONSE, (_event, sentId) => {
       nextTaskId = sentId;
+      console.log("NEXT TASK ID", nextTaskId);
     });
 
     return () => {
@@ -40,10 +48,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
     event.stopPropagation();
     setOpen(false);
 
-    setTitle("Oops! We've messed up! Please read the description!");
-    setDueDate(new Date());
-    setPriority("Normal");
-    setSubject({ id: -1, name: "placeholder" });
+    resetData();
   };
 
   const dataChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, sender: "title" | "dueDate" | "priority" | "subject" | "content") => {
@@ -113,6 +118,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
 
     ipcRenderer.send(CHANNELS.ADD_TASK, generateTask(title, dueDate, priority, subject, content));
     setOpen(false);
+    resetData();
   };
 
   return (
