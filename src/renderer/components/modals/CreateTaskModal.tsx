@@ -35,7 +35,6 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
     ipcRenderer.send(CHANNELS.GET_NEXT_TASK_ID);
     ipcRenderer.on(CHANNELS.GET_NEXT_TASK_ID_RESPONSE, (_event, sentId) => {
       nextTaskId = sentId;
-      console.log("NEXT TASK ID", nextTaskId);
     });
 
     return () => {
