@@ -1,7 +1,7 @@
-import { app, shell } from "electron";
+import { shell } from "electron";
 import React, { useState } from "react";
-import logo from "../../../assets/img/80x80.png";
 import thirdPartyLicenses from "../../../assets/3rd-party-licenses.md";
+import logo from "../../../assets/img/80x80.png";
 import { Changelog } from "../../changelog/Changelog";
 
 export const About = () => {

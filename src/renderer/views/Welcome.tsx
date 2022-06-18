@@ -4,12 +4,6 @@ import { Button } from "../components/utils/Button";
 
 export const Welcome = () => {
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    //navigate("/");
-  }, []);
-
   return (
     <div className="welcome">
       <div className="welcome-wrapper">

@@ -1,8 +1,3 @@
-interface Subject {
-  id: number;
-  name: string;
-}
-
 interface Homework {
   id: number;
   color: Color;
@@ -46,6 +41,11 @@ type Priority = "Urgent" | "High" | "Normal" | "Low";
 type Color = "red" | "green" | "blue";
 
 type TaskState = "open" | "completed" | "overdue";
+
+interface Subject {
+  id: number;
+  name: string;
+}
 
 type AnnouncementCategory = "announcement" | "update";
 

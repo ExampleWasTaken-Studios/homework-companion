@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import React, { SetStateAction, useEffect, useState } from "react";
 import CHANNELS from "../../../common/channels";
-import { getHTMLDateFormat, isValidDate } from "../../../common/utils/DateUtils";
+import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
 import { CloseIcon } from "../svg/CloseIcon";
 import { Alert } from "../utils/Alert";
 import { Button } from "../utils/Button";
