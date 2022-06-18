@@ -38,6 +38,11 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     setSubject(data.subject);
     setContent(data.content);
     setState(data.state);
+    if (data.state === "open" || data.state === "overdue") {
+      setButtonContent("Mark as Complete");
+    } else {
+      setButtonContent("Complete");
+    }
   };
 
   const closeHandler = (event: React.MouseEvent) => {
