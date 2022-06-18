@@ -151,11 +151,18 @@ export default class TaskStorage extends Storage {
     const tasks = this.getData();
 
     tasks.forEach(current => {
+
+      console.log("CURRENT ID:", current.id);
+      console.log("HIGHEST ID:", highestId);
+
       if (current.id > highestId) {
         highestId += 2;
+      } else if (current.id === highestId) {
+        highestId++;
       }
     });
 
+    console.log("RETURNING ID:", highestId);
     return highestId;
   }
 }
