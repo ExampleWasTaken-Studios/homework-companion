@@ -35,13 +35,17 @@ export const ContextMenu = ({ parentRef, items }: ContextMenuProps) => {
     setPosY(0);
   }, [show]);
 
+  useEffect(() => {
+    document.addEventListener("click", onClick);
+
+    return () => document.removeEventListener("click", onClick);
+  });
+
   useLayoutEffect(() => {
     parentRef.current && parentRef.current.addEventListener("contextmenu", onContextMenu);
-    document.addEventListener("click", onClick);
 
     return () => {
       parentRef.current && parentRef.current.removeEventListener("contextmenu", onContextMenu);
-      document.removeEventListener("click", onClick);
     };
   });
 
