@@ -54,6 +54,11 @@ export const Homework = () => {
         {tasks.length > 0 ? tasks.map(current => (
           <HomeworkListItem
             onClick={homeworkListItemClickHandler}
+            contextMenuDeleteHandler={() => {
+              console.log("BEFORE SEND");
+              ipcRenderer.send(CHANNELS.DELETE_TASK, current);
+              setTasks(tasks.filter(data => data.id !== current.id));
+            }}
             data={current}
             key={current.id}
           />

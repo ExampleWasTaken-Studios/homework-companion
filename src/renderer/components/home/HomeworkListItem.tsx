@@ -5,10 +5,11 @@ import { ContextMenu } from "../contextmenu/ContextMenu";
 
 interface HomeworkListItemProps {
   onClick: (newTask: Homework) => void;
+  contextMenuDeleteHandler: () => void;
   data: Homework;
 }
 
-export const HomeworkListItem = ({ onClick, data }: HomeworkListItemProps) => {
+export const HomeworkListItem = ({ onClick, contextMenuDeleteHandler, data }: HomeworkListItemProps) => {
   const css = `home-homework-list-item-bull ${data.color}`;
 
   const parentRef = useRef<HTMLDivElement>(null);
@@ -29,7 +30,7 @@ export const HomeworkListItem = ({ onClick, data }: HomeworkListItemProps) => {
         </div>
         <div className="home-homework-list-item-center-column">
           <div className="home-homework-list-item-top-line">
-            <p className="home-homework-list-item-title">{data.title}</p>
+            <p className="home-homework-list-item-title">#{data.id} {data.title}</p>
           </div>
           <div className="home-homework-list-item-bottom-line">
             <p className="home-homework-list-item-subject">{data.subject.name}</p>
@@ -46,9 +47,7 @@ export const HomeworkListItem = ({ onClick, data }: HomeworkListItemProps) => {
           {
             id: 0,
             type: "Delete",
-            clickHandler: () => {
-              ipcRenderer.send(CHANNELS.DELETE_TASK, data);
-            }
+            clickHandler: contextMenuDeleteHandler
           }
         ]}
       />
