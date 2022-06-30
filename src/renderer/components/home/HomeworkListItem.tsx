@@ -1,4 +1,7 @@
-import React from "react";
+import { ipcRenderer } from "electron";
+import React, { useRef } from "react";
+import CHANNELS from "../../../common/channels";
+import { ContextMenu } from "../contextmenu/ContextMenu";
 
 interface HomeworkListItemProps {
   onClick: (newTask: Homework) => void;
@@ -8,10 +11,13 @@ interface HomeworkListItemProps {
 export const HomeworkListItem = ({ onClick, data }: HomeworkListItemProps) => {
   const css = `home-homework-list-item-bull ${data.color}`;
 
+  const parentRef = useRef<HTMLDivElement>(null);
+
   return (
     <>
       <div
         className="home-homework-list-item"
+        ref={parentRef}
         onClick={() => onClick(data)}
       >
         <div className="home-homework-list-item-left-column">
@@ -33,6 +39,19 @@ export const HomeworkListItem = ({ onClick, data }: HomeworkListItemProps) => {
           {<p className="home-homework-list-item-date">{new Date(data.dueDate).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}</p>}
         </div>
       </div>
+
+      <ContextMenu
+        parentRef={parentRef}
+        items={[
+          {
+            id: 0,
+            type: "Delete",
+            clickHandler: () => {
+              ipcRenderer.send(CHANNELS.DELETE_TASK, data);
+            }
+          }
+        ]}
+      />
     </>
   );
 };
