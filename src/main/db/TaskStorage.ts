@@ -158,11 +158,8 @@ export default class TaskStorage extends Storage {
     const tasks = this.getData();
 
     tasks.forEach(current => {
-
-      if (current.id > highestId) {
-        highestId += 2;
-      } else if (current.id === highestId) {
-        highestId++;
+      if (current.id >= highestId) {
+        highestId = current.id + 1;
       }
     });
 
