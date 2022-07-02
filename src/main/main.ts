@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent, ipcRenderer } from "electron";
+import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 import electronLocalshortcut from "electron-localshortcut";
 import CHANNELS from "../common/channels";

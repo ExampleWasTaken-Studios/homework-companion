@@ -9,7 +9,7 @@ interface DeleteTaskConfirmationModalProps {
   data: Homework;
 }
 
-export const DeleteTaskConfirmationModalProps = ({ isOpen, setOpen, data }: DeleteTaskConfirmationModalProps) => {
+export const DeleteTaskConfirmationModal = ({ isOpen, setOpen, data }: DeleteTaskConfirmationModalProps) => {
 
   const deleteHandler = () => {
     ipcRenderer.send(CHANNELS.DELETE_TASK, data);

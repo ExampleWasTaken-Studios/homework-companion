@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CHANNELS from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
 import { CreateTaskModal } from "../modals/CreateTaskModal";
-import { DeleteTaskConfirmationModalProps } from "../modals/DeleteTaskConfirmationModal";
+import { DeleteTaskConfirmationModal } from "../modals/DeleteTaskConfirmationModal";
 import { TaskModal } from "../modals/TaskModal";
 import { Button } from "../utils/Button";
 import { ViewHeader } from "../utils/ViewHeader";
@@ -101,7 +101,7 @@ export const Homework = () => {
         data={selectedTask}
       />
 
-      <DeleteTaskConfirmationModalProps
+      <DeleteTaskConfirmationModal
         isOpen={deleteConfirmationModalOpen}
         setOpen={setDeleteConfirmationModalOpen}
         data={selectedTask}
