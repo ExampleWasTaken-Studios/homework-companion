@@ -1,4 +1,5 @@
 .context-menu-child {
+  cursor: pointer;
   color: var(--fg-primary);
   background-color: transparent;
   padding: 5px 10px;
