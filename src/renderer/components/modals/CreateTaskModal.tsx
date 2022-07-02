@@ -40,7 +40,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
     return () => {
       ipcRenderer.removeAllListeners(CHANNELS.GET_NEXT_TASK_ID_RESPONSE);
     };
-  }, []);
+  }, [isOpen]);
 
   const closeHandler = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -119,6 +119,8 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
     setOpen(false);
     resetData();
   };
+
+  console.log("task id", nextTaskId);
 
   return (
     <>
