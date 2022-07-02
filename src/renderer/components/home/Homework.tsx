@@ -58,6 +58,29 @@ export const Homework = () => {
               ipcRenderer.send(CHANNELS.DELETE_TASK, current);
               setTasks(tasks.filter(data => data.id !== current.id));
             }}
+            contextMenuCompleteHandler={() => {
+              
+              const tempTasks = tasks.map((i): Homework => {
+                if (i.id === current.id) {
+                  return { ...current, state: "completed" };
+                } else {
+                  return i;
+                }
+              });
+              ipcRenderer.send(CHANNELS.UPDATE_TASK, tempTasks);
+              setTasks(tempTasks);
+            }}
+            contextMenuIncompleteHandler={() => {
+              const tempTasks = tasks.map((i): Homework => {
+                if (i.id === current.id) {
+                  return { ...current, state: "open" };
+                } else {
+                  return i;
+                }
+              });
+              ipcRenderer.send(CHANNELS.UPDATE_TASK, tempTasks);
+              setTasks(tempTasks);
+            }}
             data={current}
             key={current.id}
           />

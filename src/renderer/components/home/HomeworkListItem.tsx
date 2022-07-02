@@ -1,15 +1,15 @@
-import { ipcRenderer } from "electron";
 import React, { useRef } from "react";
-import CHANNELS from "../../../common/channels";
 import { ContextMenu } from "../contextmenu/ContextMenu";
 
 interface HomeworkListItemProps {
   onClick: (newTask: Homework) => void;
   contextMenuDeleteHandler: () => void;
+  contextMenuCompleteHandler: () => void;
+  contextMenuIncompleteHandler: () => void;
   data: Homework;
 }
 
-export const HomeworkListItem = ({ onClick, contextMenuDeleteHandler, data }: HomeworkListItemProps) => {
+export const HomeworkListItem = ({ onClick, contextMenuDeleteHandler, contextMenuCompleteHandler, contextMenuIncompleteHandler, data }: HomeworkListItemProps) => {
   const css = `home-homework-list-item-bull ${data.color}`;
 
   const parentRef = useRef<HTMLDivElement>(null);
@@ -30,7 +30,7 @@ export const HomeworkListItem = ({ onClick, contextMenuDeleteHandler, data }: Ho
         </div>
         <div className="home-homework-list-item-center-column">
           <div className="home-homework-list-item-top-line">
-            <p className="home-homework-list-item-title">#{data.id} {data.title}</p>
+            <p className="home-homework-list-item-title">{data.title}</p>
           </div>
           <div className="home-homework-list-item-bottom-line">
             <p className="home-homework-list-item-subject">{data.subject.name}</p>
@@ -41,16 +41,39 @@ export const HomeworkListItem = ({ onClick, contextMenuDeleteHandler, data }: Ho
         </div>
       </div>
 
-      <ContextMenu
-        parentRef={parentRef}
-        items={[
-          {
-            id: 0,
-            type: "Delete",
-            clickHandler: contextMenuDeleteHandler
-          }
-        ]}
-      />
+      {data.state === "completed" ? (
+        <ContextMenu
+          parentRef={parentRef}
+          items={[
+            {
+              id: 0,
+              type: "Delete",
+              clickHandler: contextMenuDeleteHandler
+            },
+            {
+              id: 1,
+              type: "Mark as Incomplete",
+              clickHandler: contextMenuIncompleteHandler
+            }
+          ]}
+        />
+      ) : (
+        <ContextMenu
+          parentRef={parentRef}
+          items={[
+            {
+              id: 0,
+              type: "Delete",
+              clickHandler: contextMenuDeleteHandler
+            },
+            {
+              id: 1,
+              type: "Mark as Complete",
+              clickHandler: contextMenuCompleteHandler
+            }
+          ]}
+        />
+      )}
     </>
   );
 };

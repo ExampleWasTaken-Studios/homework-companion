@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { ContextMenuChild } from "./fields/ContextMenuChild";
-export type ItemType = "Copy" | "Cut" | "Paste" | "Delete" | "divider";
+export type ItemType = "Copy" | "Cut" | "Paste" | "Delete" | "Mark as Complete" | "Mark as Incomplete" | "divider";
 
 interface Items {
   id: number;
@@ -102,6 +102,22 @@ export const ContextMenu = ({ parentRef, items }: ContextMenuProps) => {
                   />
                 );
               case "Delete":
+                return (
+                  <ContextMenuChild
+                    key={current.id}
+                    type={current.type}
+                    onClick={current.clickHandler}
+                  />
+                );
+              case "Mark as Complete":
+                return (
+                  <ContextMenuChild
+                    key={current.id}
+                    type={current.type}
+                    onClick={current.clickHandler}
+                  />
+                );
+              case "Mark as Incomplete":
                 return (
                   <ContextMenuChild
                     key={current.id}
