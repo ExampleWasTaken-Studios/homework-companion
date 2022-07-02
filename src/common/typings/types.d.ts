@@ -1,8 +1,3 @@
-interface Subject {
-  id: number;
-  name: string;
-}
-
 interface Homework {
   id: number;
   color: Color;
@@ -13,11 +8,9 @@ interface Homework {
   important: boolean;
   state: TaskState;
   content: string;
-}
-
-interface ModalProps {
-  isOpen: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  metaInfo: {
+    dateCreated: Date;
+  }
 }
 
 interface SettingsSchema {
@@ -43,11 +36,16 @@ interface SettingsSchema {
   }
 }
 
-type Priority = "urgent" | "high" | "normal" | "low";
+type Priority = "Urgent" | "High" | "Normal" | "Low";
 
 type Color = "red" | "green" | "blue";
 
 type TaskState = "open" | "completed" | "overdue";
+
+interface Subject {
+  id: number;
+  name: string;
+}
 
 type AnnouncementCategory = "announcement" | "update";
 

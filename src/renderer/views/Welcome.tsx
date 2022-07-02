@@ -1,14 +1,7 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { Button } from "../components/utils/Button";
 
 export const Welcome = () => {
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    //navigate("/");
-  }, []);
 
   return (
     <div className="welcome">

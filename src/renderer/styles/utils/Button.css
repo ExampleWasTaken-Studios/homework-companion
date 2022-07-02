@@ -1,0 +1,42 @@
+.button {
+  user-select: none;
+  cursor: pointer;
+  color: var(--fg-button);
+  background-color: var(--bg-button);
+  border: 1px solid var(--bg-button);
+  border-radius: 4px;
+  transition: background-color var(--hover-trans-duration) ease-out;
+}
+
+.button:hover {
+  background-color: var(--bg-button-hover);
+  border-color: var(--bg-button-active);
+}
+
+.button:active {
+  transform: scale(.99);
+  background-color: var(--bg-button-active);
+  border-color: var(--bg-button-active);
+}
+
+.button-secondary {
+  user-select: none;
+  font-weight: 300;
+  cursor: pointer;
+  color: var(--fg-button-secondary);
+  background-color: transparent;
+  border: 1px solid var(--bg-button);
+  border-radius: 4px;
+  transition: background-color var(--hover-trans-duration) ease-out;
+}
+
+.button-secondary:hover {
+  background-color: var(--bg-button-secondary-hover);
+  border-color: var(--bg-button);
+}
+
+.button-secondary:active {
+  transform: scale(.99);
+  background-color: var(--bg-secondary-active);
+  border-color: var(--bg-button);
+}

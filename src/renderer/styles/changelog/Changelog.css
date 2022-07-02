@@ -1,0 +1,84 @@
+.modal-overlay {
+  user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: hsl(0, calc(1 * 0%), 0%);
+  background-color: var(--bg-modal-overlay);
+}
+
+.changelog-modal {
+  user-select: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 70%;
+  background-color: var(--bg-modal);
+  box-shadow: 0 0 5px var(--modal-box-shadow);
+  border-radius: 4px;
+  padding: var(--ms-length) var(--ml-length) var(--ms-length) var(--ml-length);
+  z-index: 1001;
+}
+
+.changelog-modal-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+.changelog-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: transparent;
+  padding: 0 0 var(--ms-length) 0;
+  margin: 0 0 var(--ms-length) 0;
+  border-bottom: 2px solid var(--fg-primary);
+}
+
+.changelog-heading {
+  background-color: transparent;
+}
+
+.changelog-title {
+  font-size: 24px;
+  font-weight: normal;
+  background-color: transparent;
+}
+
+.changelog-date {
+  font-size: 13px;
+  color: var(--fg-secondary);
+  background-color: transparent;
+}
+
+.changelog-close-btn-container {
+  background-color: transparent;
+}
+
+.changelog-close-btn {
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--bg-bullet-1);
+  background-color: transparent;
+}
+
+.changelog-container {
+  background-color: transparent;
+}
+
+
+.changelog-items {
+  height: 100%;
+  overflow-y: scroll;
+  background-color: transparent;
+}

@@ -1,10 +1,15 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import ReactDOM from "react-dom";
 import { FixContainer } from "./FixContainer";
 import { NewFeatureContainer } from "./NewFeatureContainer";
 import { NewItem } from "./NewItem";
 
-export const Changelog = ({ isOpen, setOpen }: ModalProps) => {
+interface ChangelogProps {
+  isOpen: boolean;
+  setOpen: React.Dispatch<SetStateAction<boolean>>;
+}
+
+export const Changelog = ({ isOpen, setOpen }: ChangelogProps) => {
 
   if (!isOpen) {
     return null;

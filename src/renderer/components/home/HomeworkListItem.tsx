@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useRef } from "react";
+import { ContextMenu } from "../contextmenu/ContextMenu";
 
 interface HomeworkListItemProps {
   onClick: (newTask: Homework) => void;
-  data: Homework
+  contextMenuDeleteHandler: () => void;
+  contextMenuCompleteHandler: () => void;
+  contextMenuIncompleteHandler: () => void;
+  data: Homework;
 }
 
-export const HomeworkListItem = ({ onClick, data }: HomeworkListItemProps) => {
+export const HomeworkListItem = ({ onClick, contextMenuDeleteHandler, contextMenuCompleteHandler, contextMenuIncompleteHandler, data }: HomeworkListItemProps) => {
   const css = `home-homework-list-item-bull ${data.color}`;
+
+  const parentRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
       <div
         className="home-homework-list-item"
+        ref={parentRef}
         onClick={() => onClick(data)}
       >
         <div className="home-homework-list-item-left-column">
@@ -33,6 +40,40 @@ export const HomeworkListItem = ({ onClick, data }: HomeworkListItemProps) => {
           {<p className="home-homework-list-item-date">{new Date(data.dueDate).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}</p>}
         </div>
       </div>
+
+      {data.state === "completed" ? (
+        <ContextMenu
+          parentRef={parentRef}
+          items={[
+            {
+              id: 0,
+              type: "Delete",
+              clickHandler: contextMenuDeleteHandler
+            },
+            {
+              id: 1,
+              type: "Mark as Incomplete",
+              clickHandler: contextMenuIncompleteHandler
+            }
+          ]}
+        />
+      ) : (
+        <ContextMenu
+          parentRef={parentRef}
+          items={[
+            {
+              id: 0,
+              type: "Delete",
+              clickHandler: contextMenuDeleteHandler
+            },
+            {
+              id: 1,
+              type: "Mark as Complete",
+              clickHandler: contextMenuCompleteHandler
+            }
+          ]}
+        />
+      )}
     </>
   );
 };

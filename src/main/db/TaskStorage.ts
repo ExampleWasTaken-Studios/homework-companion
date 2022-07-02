@@ -1,4 +1,5 @@
 import fs from "fs";
+import { isEqual } from "lodash";
 import Storage from "./Storage";
 
 export default class TaskStorage extends Storage {
@@ -33,17 +34,15 @@ export default class TaskStorage extends Storage {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify([]), _err => null);
+    fs.writeFileSync(this.STORAGE_PATH, JSON.stringify({ tasks: []}));
   }
 
-  updateFile(newTasks: Homework[]) {
+  updateFile(tasks: Homework[]) {
     if (!this.storageExists()) {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify(newTasks), _err => false);
+    fs.writeFileSync(this.STORAGE_PATH, JSON.stringify({ tasks: tasks }));
   }
 
   resetFile() {
@@ -52,7 +51,7 @@ export default class TaskStorage extends Storage {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    fs.writeFile(this.STORAGE_PATH, JSON.stringify([]), _err => false);
+    fs.writeFileSync(this.STORAGE_PATH, JSON.stringify({ tasks: []}));
   }
 
   getData(): Homework[] {
@@ -60,9 +59,11 @@ export default class TaskStorage extends Storage {
       throw new Error(this.FILE_NOT_FOUND_MESSAGE);
     }
 
+    let tempTasks: { tasks: Homework[]};
     let tasks: Homework[];
     try {
-      tasks = JSON.parse(fs.readFileSync(this.STORAGE_PATH, { encoding: "utf-8" }));
+      tempTasks = JSON.parse(fs.readFileSync(this.STORAGE_PATH, { encoding: "utf-8" }));
+      tasks = tempTasks.tasks;
     } catch (err) {
       throw new Error(`An error occured while loading tasks:\n${err}`);
     }
@@ -75,5 +76,93 @@ export default class TaskStorage extends Storage {
   getStoragePath() {
     return this.STORAGE_DIR + this.FILE_NAME;
   }
-  
+
+  addTask(newTask: Homework) {
+    if (!this.storageExists()) {
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
+    }
+
+    const tasks = this.getData();
+
+    tasks.push(newTask);
+
+    fs.writeFileSync(this.STORAGE_PATH, JSON.stringify({ tasks: tasks }));
+  }
+
+  updateTask(task: Homework) {
+    if (!this.storageExists()) {
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
+    }
+    let tasks = this.getData();
+
+    tasks = tasks.map(current => {
+      if (current.id === task.id) {
+        return task;
+      } else {
+        return current;
+      }
+    });
+
+    this.updateFile(tasks);
+  }
+
+  completeTask(taskToComplete: Homework) {
+    if (!this.storageExists()) {
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
+    }
+
+    const tasks = this.getData();
+
+    tasks.forEach(current => {
+      if (current.id === taskToComplete.id) {
+        current.state = "completed";
+        current.color = "green";
+      }
+    });
+
+    /* const targetIndex = tasks.findIndex(current => isEqual(current, taskToComplete));
+    tasks[targetIndex] = { ...tasks[targetIndex], color: "green", state: "completed" }; */
+
+    this.updateFile(tasks);
+  }
+
+  incompleteTask(taskToIncomplete: Homework) {
+    if (!this.storageExists()) {
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
+    }
+
+    const tasks = this.getData();
+
+    const targetIndex = tasks.findIndex(current => isEqual(current, taskToIncomplete));
+    tasks[targetIndex] = { ...tasks[targetIndex], color: "blue", state: "open" };
+
+    this.updateFile(tasks);
+  }
+
+  removeTask(taskToRemove: Homework) {
+    if (!this.storageExists()) {
+      throw new Error(this.FILE_NOT_FOUND_MESSAGE);
+    }
+
+    const tasks = this.getData();
+
+    const targetIndex = tasks.findIndex(current => isEqual(current, taskToRemove));
+    tasks.splice(targetIndex, 1);
+
+    this.updateFile(tasks as Homework[]);
+  }
+
+  getNextId() {
+    let highestId = 0;
+
+    const tasks = this.getData();
+
+    tasks.forEach(current => {
+      if (current.id >= highestId) {
+        highestId = current.id + 1;
+      }
+    });
+
+    return highestId;
+  }
 }

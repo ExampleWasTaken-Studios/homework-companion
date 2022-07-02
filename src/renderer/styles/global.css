@@ -4,7 +4,7 @@
   font-family: Open Sans, sans-serif;
   font-size: 16px;
 
-  --fg-primary: rgba(255, 255, 255/* , 0.871 */);
+  --fg-primary: rgba(255, 255, 255);
   --fg-secondary: rgba(255, 255, 255, 0.6);
   --fg-disabled: rgba(255, 255, 255, 30%);
 
@@ -14,7 +14,7 @@
   --bg-secondary-disabled: rgb(24, 24, 24, 30%);
   --bg-active: rgb(87, 87, 87);
   --bg-active-secondary: rgb(51, 51, 51);
-  
+
   --bg-textbox: rgb(43, 43, 43);
   --bg-textbox-disabled: rgba(43, 43, 43, .3);
   --bg-sidebar: rgb(0, 0, 0);
@@ -22,6 +22,7 @@
   --bg-hover: rgba(255, 255, 255, .1);
 
   --active-border: rgb(0, 0, 0);
+
 
   /* Button */
   --fg-button: rgb(255, 255, 255);
@@ -37,6 +38,10 @@
   /* Switch */
   --switch-state-change-duration: .15s;
   --switch-state-change-timing: cubic-bezier(0, 0, 0.39, 0.64);
+
+  /* Alert */
+  --alert-error-outline: rgb(245, 34, 38);
+  --alert-error-bg: rgba(245, 34, 38, 60%);
 
   /* Sidebar */
   --bg-sidebar: rgb(0, 0, 0);
@@ -58,13 +63,13 @@
   --bg-modal-secondary: rgb(24, 24, 24);
   --bg-modal-overlay: rgba(0, 0, 0, 50%);
   --modal-box-shadow: rgb(0, 0, 0);
-  
+
   /* Announcement card */
   --announcement-hover-color: rgb(79, 242, 44);
-  
+
   /* Latest announcement field */
-  --bg-latest-field: rgba(55,65,81,1);
-  --border-latest-field-color: rgba(107,114,128, 1);
+  --bg-latest-field: rgba(55, 65, 81, 1);
+  --border-latest-field-color: rgba(107, 114, 128, 1);
 
   /* Changelog modal */
   --fg-new-feature: rgb(29, 185, 84);
@@ -100,6 +105,8 @@ body {
 }
 
 * {
+  color: var(--fg-primary);
+  background-color: var(--bg-primary);
   padding: 0;
   margin: 0;
   box-sizing: border-box;
