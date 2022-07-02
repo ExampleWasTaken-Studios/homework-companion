@@ -2,8 +2,8 @@
   cursor: pointer;
   color: var(--fg-primary);
   background-color: transparent;
-  padding: 5px 10px;
-  margin: 3px;
+  padding: 10px 15px;
+  margin: 5px;
   border-radius: 4px;
 }
 

@@ -1,6 +1,6 @@
 .context-menu {
   position: absolute;
-  width: 150px;
+  min-width: 180px;
   color: var(--fg-primary);
   background-color: var(--bg-modal);
   border: 1px solid var(--bg-hover);
