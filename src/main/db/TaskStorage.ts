@@ -16,7 +16,7 @@ export default class TaskStorage extends Storage {
 
   constructor() {
     if (TaskStorage.instantiated) {
-      throw Error ("Instances of 'Storage' may only exist once");
+      throw Error("Instances of 'Storage' may only exist once");
     }
     super();
     this.FILE_NAME = `taskDB.json`;
@@ -149,7 +149,7 @@ export default class TaskStorage extends Storage {
     const targetIndex = tasks.findIndex(current => isEqual(current, taskToRemove));
     tasks.splice(targetIndex, 1);
 
-    this.updateFile(tasks as Homework[]);
+    this.updateFile(tasks);
   }
 
   getNextId() {
