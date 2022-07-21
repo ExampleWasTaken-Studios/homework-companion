@@ -15,7 +15,7 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
         <ul className="sidebar-list">
           {activeItem === "home" ? (
             <>
-              <Link to="/">
+              <Link to="/home">
                 <li className="sidebar-list-item sidebar-item-active no">Home</li>
               </Link>
               {/* <Link to="/announcements">
@@ -27,7 +27,7 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
             </>
           ) : activeItem === "announcements" ? (
             <>
-              <Link to="/">
+              <Link to="/home">
                 <li className="sidebar-list-item">Home</li>
               </Link>
               {/* <Link to="/announcements">
@@ -39,7 +39,7 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
             </>
           ) : activeItem === "settings" ? (
             <>
-              <Link to="/">
+              <Link to="/home">
                 <li className="sidebar-list-item">Home</li>
               </Link>
               {/* <Link to="/announcements">
