@@ -1,5 +1,6 @@
 @import url(./global.css);
 
+@import url(./App.css);
 @import url(./utils/Button.css);
 @import url(./utils/Alert.css);
 @import url(./utils/Dropdown.css);

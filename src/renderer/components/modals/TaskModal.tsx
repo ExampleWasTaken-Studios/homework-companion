@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 import React, { SetStateAction, useEffect, useState } from "react";
-import CHANNELS from "../../../common/channels";
+import Channels from "../../../common/channels";
+import { NULL_SUBJECT } from "../../../common/constants";
 import { getHTMLDateFormat } from "../../../common/utils/DateUtils";
 import { CloseIcon } from "../svg/CloseIcon";
 import { Alert } from "../utils/Alert";
@@ -13,6 +14,8 @@ interface TaskModalProps {
 }
 
 export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
+
+  const [subjects, setSubjects] = useState([NULL_SUBJECT]);
 
   const [title, setTitle] = useState("Oops! We've messed up! Please read the description!");
   const [dueDate, setDueDate] = useState(new Date());
@@ -29,6 +32,15 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     if (isOpen) {
       openHandler();
     }
+
+    ipcRenderer.send(Channels.GET_SUBJECTS);
+    ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubject: Subject[]) => {
+      setSubjects(sentSubject);
+    });
+
+    return () => {
+      ipcRenderer.removeAllListeners(Channels.GET_SUBJECTS_RESPONSE);
+    };
   }, [isOpen]);
 
   const openHandler = () => {
@@ -55,7 +67,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     }
     
     data = { ...data, title, dueDate, priority, subject, content, state };
-    ipcRenderer.send(CHANNELS.UPDATE_TASK, data);
+    ipcRenderer.send(Channels.UPDATE_TASK, data);
 
     setOpen(false);
 
@@ -79,8 +91,13 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
         setPriority(value as Priority);
         break;
       case "subject":
-        console.log("Subject loading not yet implemented");
-        setSubject({ id: -1, name: value });
+        subjects.forEach(current => {
+          if (current.name === value) {
+            setSubject({ id: current.id, name: value });
+          } else {
+            throw Error(`Cannot find subject with name '${value}'`);
+          }
+        });
         break;
       case "content":
         setContent(value);
@@ -93,7 +110,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
       && title !== "Oops! We've messed up! Please read the description!"
       && dueDate 
       && dueDate !== new Date(0)
-      /* && subject.id !== -1 */ 
+      && subject.id !== -1
       && content !== ""
       && content !== "Looks like something went wrong on our end while we tried to load your task. :/") { // this is for UX to remove the incomple alert once all required fields are correctly entered
       setInputIncomplete(false);
@@ -163,9 +180,9 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
                   defaultValue={data.subject.name}
                   onChange={event => dataChangeHandler(event.target.value, "subject")}
                 >
-                  <option value="English">English</option>
-                  <option value="German">German</option>
-                  <option value={data.subject.name}>{data.subject.name}</option>
+                  {subjects.map(current => (
+                    <option key={current.id}>{current.name}</option>
+                  ))}
                 </select>
               </label>
             </div>

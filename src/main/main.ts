@@ -2,7 +2,7 @@
 import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron";
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 import electronLocalshortcut from "electron-localshortcut";
-import CHANNELS from "../common/channels";
+import Channels from "../common/channels";
 import SubjectStorage from "./db/SubjectStorage";
 import TaskStorage from "./db/TaskStorage";
 import store, { persistWindowSettings } from "./settings/settings";
@@ -73,102 +73,112 @@ app.on("window-all-closed", () => {
 
 const registerIPC = () => {
   // IPC
-  ipcMain.handle(CHANNELS.GET_SETTING_VALUE, (event: IpcMainInvokeEvent, key: string) => {
+  ipcMain.handle(Channels.GET_SETTING_VALUE, (event: IpcMainInvokeEvent, key: string) => {
     console.log(event, key);
     console.log("value:", store.get(key));
     return store.get(key);
   });
 
-  ipcMain.on(CHANNELS.SET_SETTING_VALUE, (_event: IpcMainEvent, key: string, value: unknown) => {
+  ipcMain.on(Channels.SET_SETTING_VALUE, (_event: IpcMainEvent, key: string, value: unknown) => {
     store.set(key, value);
   });
 
-  ipcMain.on(CHANNELS.RELAUNCH_APP, (_event, arg: {force?: boolean}) => {
+  ipcMain.on(Channels.RELAUNCH_APP, (_event, arg: {force?: boolean}) => {
     app.relaunch();
     arg.force ? app.exit() : app.quit();
   });
 
-  ipcMain.on(CHANNELS.GET_NEXT_TASK_ID, (event) => {
-    event.reply(CHANNELS.GET_NEXT_TASK_ID_RESPONSE, taskStorage.getNextId());
+  ipcMain.on(Channels.GET_NEXT_TASK_ID, (event) => {
+    event.reply(Channels.GET_NEXT_TASK_ID_RESPONSE, taskStorage.getNextId());
   });
 
-  ipcMain.on(CHANNELS.GET_TASKS, (event) => {
+  ipcMain.on(Channels.GET_TASKS, (event) => {
     console.log("received request for tasks - sending reply");
-    event.reply(CHANNELS.GET_TASKS_RESPONSE, taskStorage.getData());
+    event.reply(Channels.GET_TASKS_RESPONSE, taskStorage.getData());
   });
 
-  ipcMain.on(CHANNELS.ADD_TASK, (event, newTask: Homework) => {
+  ipcMain.on(Channels.ADD_TASK, (event, newTask: Homework) => {
     console.log("received new task - attempting store");
     try {
       taskStorage.addTask(newTask);
     } catch (e) {
       console.error(e);
-      event.reply(CHANNELS.ADD_TASK_FAIL);
+      event.reply(Channels.ADD_TASK_FAIL);
     }
     console.log("stored new task - sending reply");
-    event.reply(CHANNELS.ADD_TASK_SUCCESS);
+    event.reply(Channels.ADD_TASK_SUCCESS);
   });
 
-  ipcMain.on(CHANNELS.UPDATE_TASK, (event, task: Homework) => {
+  ipcMain.on(Channels.UPDATE_TASK, (event, task: Homework) => {
     console.log("received task to update - attempting update");
     try {
       taskStorage.updateTask(task);
     } catch (e) {
       console.error(e);
-      event.reply(CHANNELS.UPDATE_TASK_FAIL);
+      event.reply(Channels.UPDATE_TASK_FAIL);
     }
     console.log("updated task - sending reply");
-    event.reply(CHANNELS.UPDATE_TASK_SUCCESS);
+    event.reply(Channels.UPDATE_TASK_SUCCESS);
   });
 
-  ipcMain.on(CHANNELS.DELETE_TASK, (event, taskToDelete: Homework) => {
+  ipcMain.on(Channels.DELETE_TASK, (event, taskToDelete: Homework) => {
     console.log("received task to be deleted - attempting deletion");
     try {
       taskStorage.removeTask(taskToDelete);
     } catch (e) {
       console.error(e);
-      event.reply(CHANNELS.DELETE_TASK_FAIL);
+      event.reply(Channels.DELETE_TASK_FAIL);
     }
     console.log("deleted task - sending reply");
-    event.reply(CHANNELS.DELETE_TASK_SUCCESS);
+    event.reply(Channels.DELETE_TASK_SUCCESS);
   });
 
-  ipcMain.on(CHANNELS.GET_NEXT_SUBJECT_ID, event => {
-    event.reply(CHANNELS.GET_NEXT_SUBJECT_ID_RESPONSE, subjectStorage.getNextId());
+  ipcMain.on(Channels.GET_NEXT_SUBJECT_ID, event => {
+    event.reply(Channels.GET_NEXT_SUBJECT_ID_RESPONSE, subjectStorage.getNextId());
   });
 
-  ipcMain.on(CHANNELS.GET_SUBJECTS, event => {
-    event.reply(CHANNELS.GET_SUBJECTS_RESPONSE, subjectStorage.getData());
+  ipcMain.on(Channels.GET_SUBJECTS, event => {
+    event.reply(Channels.GET_SUBJECTS_RESPONSE, subjectStorage.getData());
   });
 
-  ipcMain.on(CHANNELS.ADD_SUBJECT, (event, newSubject: Subject) => {
+  ipcMain.on(Channels.SET_SUBJECTS, (event, subjects: Subject[]) => {
+    try {
+      subjectStorage.updateFile(subjects);
+    } catch (e) {
+      console.error(e);
+      event.reply(Channels.SET_SUBJECTS_FAIL);
+    }
+    event.reply(Channels.SET_SUBJECTS_SUCCESS);
+  });
+
+  ipcMain.on(Channels.ADD_SUBJECT, (event, newSubject: Subject) => {
     try {
       subjectStorage.addSubject(newSubject);
     } catch (e) {
       console.error(e);
-      event.reply(CHANNELS.ADD_SUBJECT_FAIL);
+      event.reply(Channels.ADD_SUBJECT_FAIL);
     }
-    event.reply(CHANNELS.ADD_SUBJECT_SUCCESS);
+    event.reply(Channels.ADD_SUBJECT_SUCCESS);
   });
 
-  ipcMain.on(CHANNELS.UPDATE_SUBJECT, (event, subject: Subject) => {
+  ipcMain.on(Channels.UPDATE_SUBJECT, (event, subject: Subject) => {
     try {
       subjectStorage.updateSubject(subject);
     } catch (e) {
       console.error(e);
-      event.reply(CHANNELS.UPDATE_SUBJECT_FAIL);
+      event.reply(Channels.UPDATE_SUBJECT_FAIL);
     }
-    event.reply(CHANNELS.UPDATE_SUBJECT_SUCCESS);
+    event.reply(Channels.UPDATE_SUBJECT_SUCCESS);
   });
 
-  ipcMain.on(CHANNELS.DELETE_SUBJECT, (event, subjectToDelete: Subject) => {
+  ipcMain.on(Channels.DELETE_SUBJECT, (event, subjectToDelete: Subject) => {
     try {
       subjectStorage.removeSubject(subjectToDelete);
     } catch (e) {
       console.error(e);
-      event.reply(CHANNELS.DELETE_SUBJECT_FAIL);
+      event.reply(Channels.DELETE_SUBJECT_FAIL);
     }
 
-    event.reply(CHANNELS.DELETE_SUBJECT_SUCCESS);
+    event.reply(Channels.DELETE_SUBJECT_SUCCESS);
   });
 };

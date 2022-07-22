@@ -8,6 +8,7 @@ import { Home } from "./renderer/views/Home";
 import { Settings } from "./renderer/views/Settings";
 import { Welcome } from "./renderer/views/Welcome";
 
+
 ReactDom.render(
   <React.StrictMode>
     <GlobalErrorBoundary>

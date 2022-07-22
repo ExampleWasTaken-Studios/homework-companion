@@ -1,24 +1,35 @@
+import { ipcRenderer } from "electron";
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Channels from "./common/channels";
 
 export const App = () => {
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-    // code to check for subjects goes in here
-    // if no subjects exist the welcome component will be returned. otherwise the home component
+    ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubjects: Subject[]) => {
+      if (sentSubjects.length === 0) {
+        navigate("/welcome");
+      } else {
+        navigate("/home");
+      }
+    });
 
-    setTimeout(() => {
-      navigate("/home");
-    }, 3000);
+    ipcRenderer.send(Channels.GET_SUBJECTS);
+
+    return () => {
+      ipcRenderer.removeAllListeners(Channels.GET_SUBJECTS_RESPONSE);
+    };
   }, []);
   
 
   return (
     <>
-      <p>placeholder...</p>
+      <div className="spinner-container">
+        <div className="spinner"></div>
+        <h1 className="loading-header">Loading...</h1>
+      </div>
     </>
   );
 };

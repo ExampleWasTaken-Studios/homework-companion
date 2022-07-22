@@ -1,7 +1,33 @@
-import React from "react";
+import { ipcRenderer } from "electron";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Channels from "../../common/channels";
+import { Alert } from "../components/utils/Alert";
 import { Button } from "../components/utils/Button";
 
 export const Welcome = () => {
+
+  const [subjectsTextArea, setSubjectsTextArea] = useState("");
+  const [inputIncomplete, setInputIncomplete] = useState(false);
+
+  const navigate = useNavigate();
+
+  const submitHandler = () => {
+    if (subjectsTextArea.length === 0) {
+      setInputIncomplete(true);
+      return;
+    }
+
+    const subjectNames = subjectsTextArea.split(",");
+    const subjects: Subject[] = [];
+
+    for (let i = 0; i < subjectNames.length; i++) {
+      subjects.push({ id: i, name: subjectNames[i].trim() });
+    }
+
+    ipcRenderer.send(Channels.SET_SUBJECTS, subjects);
+    navigate("/home"); // TODO: this needs to be removed as such operations should be carried out with <Link />
+  };
 
   return (
     <div className="welcome">
@@ -16,15 +42,26 @@ export const Welcome = () => {
             name="welcome-subject-textarea"
             id="welcome-subject-textarea"
             className="welcome-subject-textarea"
+            value={subjectsTextArea}
+            onChange={event => {
+              setInputIncomplete(false);
+              setSubjectsTextArea(event.target.value);
+            }}
           >
           </textarea>
           <h6 className="welcome-textarea-alt">Separate subjects with a comma</h6>
+          {inputIncomplete && (
+            <Alert 
+              severity="error"
+              content="You need to enter at least one subject!"
+            />
+          )}
           <Button 
             className="welcome-btn"
-            onClick={() => null}
+            onClick={submitHandler}
           >
-            Get Started
-          </Button>  
+              Get Started
+          </Button>
         </div>
       </div>
     </div>

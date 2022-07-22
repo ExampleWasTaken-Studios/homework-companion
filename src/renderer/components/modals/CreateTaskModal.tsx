@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 import React, { SetStateAction, useEffect, useState } from "react";
-import CHANNELS from "../../../common/channels";
+import Channels from "../../../common/channels";
+import { NULL_SUBJECT } from "../../../common/constants";
 import { CloseIcon } from "../svg/CloseIcon";
 import { Alert } from "../utils/Alert";
 import { Button } from "../utils/Button";
@@ -12,8 +13,11 @@ interface CreateTaskModalProps {
 }
 
 let nextTaskId = 0;
+const nextSubjectId = 0;
 
 export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
+
+  const [subjects, setSubjects] = useState([NULL_SUBJECT]);
 
   const [title, setTitle] = useState("Oops! We've messed up! Please read the description!");
   const [dueDate, setDueDate] = useState(new Date(0));
@@ -32,13 +36,25 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
   };
 
   useEffect(() => {
-    ipcRenderer.send(CHANNELS.GET_NEXT_TASK_ID);
-    ipcRenderer.on(CHANNELS.GET_NEXT_TASK_ID_RESPONSE, (_event, sentId) => {
+    ipcRenderer.send(Channels.GET_NEXT_TASK_ID);
+    ipcRenderer.on(Channels.GET_NEXT_TASK_ID_RESPONSE, (_event, sentId: number) => {
       nextTaskId = sentId;
     });
 
+    ipcRenderer.send(Channels.GET_NEXT_SUBJECT_ID);
+    ipcRenderer.on(Channels.GET_NEXT_SUBJECT_ID_RESPONSE, (_event, sentId: number) => {
+      nextTaskId = sentId;
+    });
+
+    ipcRenderer.send(Channels.GET_SUBJECTS);
+    ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubjects: Subject[]) => {
+      setSubjects(sentSubjects);
+    });
+
     return () => {
-      ipcRenderer.removeAllListeners(CHANNELS.GET_NEXT_TASK_ID_RESPONSE);
+      ipcRenderer.removeAllListeners(Channels.GET_NEXT_TASK_ID_RESPONSE);
+      ipcRenderer.removeAllListeners(Channels.GET_NEXT_SUBJECT_ID_RESPONSE);
+      ipcRenderer.removeAllListeners(Channels.GET_SUBJECTS_RESPONSE);
     };
   }, [isOpen]);
 
@@ -62,7 +78,6 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
         setPriority(event.target.value as Priority);
         break;
       case "subject":
-        console.log("Subject loading not yet implemented");
         setSubject({ id: -1, name: event.target.value });
         break;
       case "content":
@@ -73,7 +88,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
       && title !== "Oops! We've messed up! Please read the description!"
       && dueDate 
       && dueDate !== new Date(0)
-      /* && subject.id !== -1 */ 
+      && subject.id !== -1
       && content !== ""
       && content !== "Looks like something went wrong on our end while we tried to load your task. :/") { // this is for UX to remove the incomple alert once all required fields are correctly entered
       setInputIncomplete(false);
@@ -106,7 +121,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
           || title === "Oops! We've messed up! Please read the description!"
           || !dueDate 
           || dueDate === new Date(0)
-          /* || subject.id === -1 */ 
+          || subject.id === -1
           || content === ""
           || content === "Looks like something went wrong on our end while we tried to load your task. :/") {
       setInputIncomplete(true);
@@ -115,12 +130,10 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
       setInputIncomplete(false);
     }
 
-    ipcRenderer.send(CHANNELS.ADD_TASK, generateTask(title, dueDate, priority, subject, content));
+    ipcRenderer.send(Channels.ADD_TASK, generateTask(title, dueDate, priority, subject, content));
     setOpen(false);
     resetData();
   };
-
-  console.log("task id", nextTaskId);
 
   return (
     <>
@@ -182,8 +195,9 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
                   className="input dropdown"
                   onChange={event => dataChangeHandler(event, "subject")}
                 >
-                  <option value="English">English</option>
-                  <option value="German">German</option>
+                  {subjects.map(current => (
+                    <option key={current.id}>{current.name}</option>
+                  ))}
                 </select>
               </label>
             </div>
@@ -220,7 +234,6 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
                 Create Task
               </Button>
             </div>
-
           </div>
         </div>
       )}

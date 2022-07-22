@@ -1,4 +1,4 @@
-enum CHANNELS {
+enum Channels {
   GET_SETTING_VALUE = "settings/value/get",
   SET_SETTING_VALUE = "settings/value/set",
 
@@ -24,6 +24,9 @@ enum CHANNELS {
   GET_NEXT_SUBJECT_ID_RESPONSE = "subjects/get/next-id/response",
   GET_SUBJECTS = "subjects/get",
   GET_SUBJECTS_RESPONSE = "subjects/get/response",
+  SET_SUBJECTS = "subjects/set",
+  SET_SUBJECTS_SUCCESS = "subjects/set/success",
+  SET_SUBJECTS_FAIL = "subjects/set/fail",
   ADD_SUBJECT = "subjects/add",
   ADD_SUBJECT_SUCCESS = "subjects/add/success",
   ADD_SUBJECT_FAIL = "subjects/add/fail",
@@ -35,4 +38,4 @@ enum CHANNELS {
   DELETE_SUBJECT_FAIL = "subjects/delete/fail"
 }
 
-export default CHANNELS;
+export default Channels;

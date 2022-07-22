@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import React, { SetStateAction } from "react";
-import CHANNELS from "../../../common/channels";
+import Channels from "../../../common/channels";
 import { Button } from "../utils/Button";
 
 interface DeleteTaskConfirmationModalProps {
@@ -12,7 +12,7 @@ interface DeleteTaskConfirmationModalProps {
 export const DeleteTaskConfirmationModal = ({ isOpen, setOpen, data }: DeleteTaskConfirmationModalProps) => {
 
   const deleteHandler = () => {
-    ipcRenderer.send(CHANNELS.DELETE_TASK, data);
+    ipcRenderer.send(Channels.DELETE_TASK, data);
     setOpen(false);
   };
 

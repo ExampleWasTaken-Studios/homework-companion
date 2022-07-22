@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import React, { useEffect, useState } from "react";
-import CHANNELS from "../../../common/channels";
+import Channels from "../../../common/channels";
 import { NULL_TASK } from "../../../common/constants";
 import { CreateTaskModal } from "../modals/CreateTaskModal";
 import { DeleteTaskConfirmationModal } from "../modals/DeleteTaskConfirmationModal";
@@ -26,8 +26,8 @@ export const Homework = () => {
   };
 
   useEffect(() => {
-    ipcRenderer.send(CHANNELS.GET_TASKS);
-    ipcRenderer.on(CHANNELS.GET_TASKS_RESPONSE, (_event, sentTasks) => {
+    ipcRenderer.send(Channels.GET_TASKS);
+    ipcRenderer.on(Channels.GET_TASKS_RESPONSE, (_event, sentTasks) => {
       console.log("received reply");  
       console.log("received data:", sentTasks);
       setTasks(sentTasks);
@@ -35,7 +35,7 @@ export const Homework = () => {
     });
 
     return () => {
-      ipcRenderer.removeAllListeners(CHANNELS.GET_TASKS_RESPONSE);
+      ipcRenderer.removeAllListeners(Channels.GET_TASKS_RESPONSE);
     };
   }, [createTaskModalOpen, taskModalOpen, deleteConfirmationModalOpen]);
   
@@ -55,7 +55,7 @@ export const Homework = () => {
           <HomeworkListItem
             onClick={homeworkListItemClickHandler}
             contextMenuDeleteHandler={() => {
-              ipcRenderer.send(CHANNELS.DELETE_TASK, current);
+              ipcRenderer.send(Channels.DELETE_TASK, current);
               setTasks(tasks.filter(data => data.id !== current.id));
             }}
             contextMenuCompleteHandler={() => {
@@ -67,7 +67,7 @@ export const Homework = () => {
                   return i;
                 }
               });
-              ipcRenderer.send(CHANNELS.UPDATE_TASK, tempTasks);
+              ipcRenderer.send(Channels.UPDATE_TASK, tempTasks);
               setTasks(tempTasks);
             }}
             contextMenuIncompleteHandler={() => {
@@ -78,7 +78,7 @@ export const Homework = () => {
                   return i;
                 }
               });
-              ipcRenderer.send(CHANNELS.UPDATE_TASK, tempTasks);
+              ipcRenderer.send(Channels.UPDATE_TASK, tempTasks);
               setTasks(tempTasks);
             }}
             data={current}

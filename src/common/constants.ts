@@ -18,3 +18,11 @@ export const NULL_TASK: Homework = {
     dateCreated: new Date(999999999999999)
   }
 };
+
+/**
+ * Dummy object to prevent settings {@link Subject} to null.
+ */
+export const NULL_SUBJECT: Subject = {
+  id: -1,
+  name: "NULL_SUBJECT"
+};
