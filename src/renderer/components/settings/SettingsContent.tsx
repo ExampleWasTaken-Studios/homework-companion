@@ -2,6 +2,7 @@ import React from "react";
 import { About } from "./categories/About";
 import { Customization } from "./categories/Customization";
 import { General } from "./categories/General";
+import { Subjects } from "./categories/subjects/Subjects";
 
 interface SettingsContentProps {
   activeCategory: SettingsCategory;
@@ -14,6 +15,8 @@ export const SettingsContent = ({ activeCategory }: SettingsContentProps) => {
         <General />
       ) : activeCategory === "customization" ? (
         <Customization />
+      ) : activeCategory === "subjects" ? (
+        <Subjects />
       ) : activeCategory === "about" ? (
         <About />
       ) : <></>}
