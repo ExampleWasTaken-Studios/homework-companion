@@ -1,0 +1,26 @@
+.subject-list {
+  user-select: none;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 var(--ml-length) 0;
+  margin: var(--ml-length) 0 0 var(--ls-length);
+}
+
+.subject-list-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: var(--ml-length) 0 0 calc(var(--ls-length) + var(--sm-length));
+}
+
+.subject-list-header-line {
+  font-size: var(--ml-length);
+}
+
+.add-subject-btn {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding: var(--ss-length) var(--sl-length);
+}

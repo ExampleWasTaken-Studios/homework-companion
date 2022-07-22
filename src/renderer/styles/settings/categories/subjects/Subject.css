@@ -1,0 +1,8 @@
+.subject-list-item {
+  cursor: pointer;
+  padding: var(--ms-length) var(--sm-length);
+}
+
+.subject-list-item:hover {
+  background-color: var(--bg-hover);
+}

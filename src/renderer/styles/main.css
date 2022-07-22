@@ -26,6 +26,8 @@
 @import url(./settings/SettingsContainer.css);
 @import url(./settings/Setting.css);
 @import url(./settings/categories/About.css);
+@import url(./settings/categories/subjects/Subjects.css);
+@import url(./settings/categories/subjects/Subject.css);
 @import url(./modals/TaskModal.css);
 @import url(./modals//CreateTaskModal.css);
 @import url(./modals/DeleteTaskConfirmationModal.css);
