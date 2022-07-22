@@ -1,18 +1,37 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ipcRenderer } from "electron";
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useState } from "react";
 import Channels from "../../../common/channels";
+import { Subject } from "../settings/categories/subjects/Subject";
 import { Button } from "../utils/Button";
 
-interface DeleteTaskConfirmationModalProps {
+interface DeleteConfirmationModalProps {
   isOpen: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
-  data: Homework;
+  actionType: "task" | "subject";
+  data: Homework | Subject;
 }
 
-export const DeleteTaskConfirmationModal = ({ isOpen, setOpen, data }: DeleteTaskConfirmationModalProps) => {
+export const DeleteConfirmationModal = ({ isOpen, setOpen, actionType, data }: DeleteConfirmationModalProps) => {
+
+  const placeholder = false;
+  if (
+    // TODO: check that correct type is supplied to 'data' this should be based on 'actionType'
+    placeholder
+  ) {
+    throw new Error("Action type does not match type of received data");
+  }
+
+  const [target, _setTarget] = useState(actionType);
 
   const deleteHandler = () => {
-    ipcRenderer.send(Channels.DELETE_TASK, data);
+    switch (actionType) {
+      case "task":
+        ipcRenderer.send(Channels.DELETE_TASK, data);
+        break;
+      case "subject":
+        ipcRenderer.send(Channels.DELETE_SUBJECT, data);
+    }
     setOpen(false);
   };
 
@@ -32,10 +51,10 @@ export const DeleteTaskConfirmationModal = ({ isOpen, setOpen, data }: DeleteTas
             className="delete-task-modal"
             onClick={event => event.stopPropagation()}
           >
-
+            
             <div className="delete-content">
-              <h1 className="delete-task-title">Delete Task</h1>
-              <p className="delete-task-description">Are you sure you want to this Task?<br/>This action cannot be undone.</p>
+              <h1 className="delete-task-title">Delete {target}?</h1>
+              <p className="delete-task-description">Are you sure you want to delete this {target}?<br/>This action cannot be undone!</p>
             </div>
 
             <div className="delete-task-action-bar">
