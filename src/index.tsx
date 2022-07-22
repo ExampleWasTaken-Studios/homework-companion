@@ -43,6 +43,10 @@ ReactDom.render(
               element={<Settings activeCategory="about" />}
             />
             <Route
+              path="subjects"
+              element={<Settings activeCategory="subjects" />}
+            />
+            <Route
               index
               element={<Settings activeCategory="general" />}
             />
