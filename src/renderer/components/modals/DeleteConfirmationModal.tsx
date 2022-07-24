@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { ipcRenderer } from "electron";
+import { isEqual } from "lodash";
 import React, { SetStateAction, useState } from "react";
 import Channels from "../../../common/channels";
+import { NULL_SUBJECT, NULL_TASK } from "../../../common/constants";
 import { Subject } from "../settings/categories/subjects/Subject";
 import { Button } from "../utils/Button";
 
@@ -27,9 +29,15 @@ export const DeleteConfirmationModal = ({ isOpen, setOpen, actionType, data }: D
   const deleteHandler = () => {
     switch (actionType) {
       case "task":
+        if (isEqual(data, NULL_TASK)) {
+          return;
+        }
         ipcRenderer.send(Channels.DELETE_TASK, data);
         break;
       case "subject":
+        if (isEqual(data, NULL_SUBJECT)) {
+          return;
+        }
         ipcRenderer.send(Channels.DELETE_SUBJECT, data);
     }
     setOpen(false);

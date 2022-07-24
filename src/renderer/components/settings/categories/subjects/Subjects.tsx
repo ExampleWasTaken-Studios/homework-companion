@@ -2,12 +2,15 @@ import { ipcRenderer } from "electron";
 import React, { useEffect, useState } from "react";
 import Channels from "../../../../../common/channels";
 import { NULL_SUBJECT } from "../../../../../common/constants";
+import { DeleteConfirmationModal } from "../../../modals/DeleteConfirmationModal";
 import { Button } from "../../../utils/Button";
 import { Subject } from "./Subject";
 
 export const Subjects = () => {
 
   const [subjects, setSubjects] = useState([NULL_SUBJECT]);
+  const [selectedSubject, setSelectedSubject] = useState(NULL_SUBJECT);
+  const [deleteConfimModalOpen, setDeleteConfimModalOpen] = useState(false);
 
   useEffect(() => {
     ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubjects: Subject[]) => {
@@ -18,7 +21,7 @@ export const Subjects = () => {
     return () => {
       ipcRenderer.removeAllListeners(Channels.GET_SUBJECTS_RESPONSE);
     };
-  }, []);
+  }, [subjects, deleteConfimModalOpen]);
 
   return (
     <>
@@ -36,11 +39,22 @@ export const Subjects = () => {
           return (
             <Subject
               key={current.id}
-              name={current.name}
+              data={current}
+              onClick={() => {
+                setSelectedSubject(current);
+                setDeleteConfimModalOpen(true);
+              }}
             />
           );
         })}
       </ul>
+
+      <DeleteConfirmationModal
+        isOpen={deleteConfimModalOpen}
+        setOpen={setDeleteConfimModalOpen}
+        actionType="subject"
+        data={selectedSubject}
+      />
     </>
   );
 };

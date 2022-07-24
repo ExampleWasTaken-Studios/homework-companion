@@ -1,11 +1,21 @@
 import React from "react";
 
+/**
+ * @param data The subject data
+ */
 interface SubjectProps {
-  name: string;
+  data: Subject;
+  onClick: () => void;
 }
 
-export const Subject = ({ name }: SubjectProps) => {
+export const Subject = ({ data, onClick }: SubjectProps) => {
+
   return (
-    <li className="subject-list-item">{name}</li>
+    <li 
+      className="subject-list-item"
+      onClick={onClick}
+    >
+      {data.name}
+    </li>
   );
 };
