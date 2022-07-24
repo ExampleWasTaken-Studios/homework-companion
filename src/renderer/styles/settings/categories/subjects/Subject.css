@@ -1,6 +1,7 @@
 .subject-list-item {
   cursor: pointer;
   padding: var(--ms-length) var(--sm-length);
+  border-radius: 4px;
 }
 
 .subject-list-item:hover {
