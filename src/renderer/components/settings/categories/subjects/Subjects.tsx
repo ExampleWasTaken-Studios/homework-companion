@@ -25,36 +25,38 @@ export const Subjects = () => {
 
   return (
     <>
-      <div className="subject-list-header">
-        <p className="subject-list-header-line">Click the subject you would like to delete</p>
-        <Button
-          onClick={() => console.log("Create subject button clicked")}
-          className="add-subject-btn"
-        >
+      <div className="subjects-container">
+        <div className="subject-list-header">
+          <p className="subject-list-header-line">Click the subject you would like to delete</p>
+          <Button
+            onClick={() => console.log("Create subject button clicked")}
+            className="add-subject-btn"
+          >
             Add Subject
-        </Button>
-      </div>
-      <ul className="subject-list">
-        {subjects.map(current => {
-          return (
-            <Subject
-              key={current.id}
-              data={current}
-              onClick={() => {
-                setSelectedSubject(current);
-                setDeleteConfimModalOpen(true);
-              }}
-            />
-          );
-        })}
-      </ul>
+          </Button>
+        </div>
+        <ul className="subject-list">
+          {subjects.map(current => {
+            return (
+              <Subject
+                key={current.id}
+                data={current}
+                onClick={() => {
+                  setSelectedSubject(current);
+                  setDeleteConfimModalOpen(true);
+                }}
+              />
+            );
+          })}
+        </ul>
 
-      <DeleteConfirmationModal
-        isOpen={deleteConfimModalOpen}
-        setOpen={setDeleteConfimModalOpen}
-        actionType="subject"
-        data={selectedSubject}
-      />
+        <DeleteConfirmationModal
+          isOpen={deleteConfimModalOpen}
+          setOpen={setDeleteConfimModalOpen}
+          actionType="subject"
+          data={selectedSubject}
+        />
+      </div>
     </>
   );
 };
