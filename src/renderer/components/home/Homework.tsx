@@ -21,7 +21,6 @@ export const Homework = () => {
 
   const homeworkListItemClickHandler = (newTask: Homework) => {
     setSelectedTask(newTask);
-    console.log("newTask:", newTask);
     setTaskModalOpen(true);
   };
 
