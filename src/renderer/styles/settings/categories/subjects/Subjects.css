@@ -3,8 +3,9 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  padding: 0 0 var(--ml-length) 0;
+  padding: var(--ml-length) 0 var(--ml-length) 0;
   margin: var(--ml-length) 0 0 var(--ls-length);
+  border-top: 1px solid var(--fg-disabled);
 }
 
 .subject-list-header {
