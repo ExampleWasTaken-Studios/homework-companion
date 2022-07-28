@@ -4,6 +4,7 @@ import Channels from "../../../../../common/channels";
 import { NULL_SUBJECT } from "../../../../../common/constants";
 import { AddSubjectModal } from "../../../modals/AddSubjectModal";
 import { DeleteConfirmationModal } from "../../../modals/DeleteConfirmationModal";
+import { MsgModal } from "../../../modals/MsgModal";
 import { Button } from "../../../utils/Button";
 import { Subject } from "./Subject";
 
@@ -12,6 +13,7 @@ export const Subjects = () => {
   const [subjects, setSubjects] = useState([NULL_SUBJECT]);
   const [selectedSubject, setSelectedSubject] = useState(NULL_SUBJECT);
   const [addSubjectModalOpen, setAddSubjectModalOpen] = useState(false);
+  const [msgModalOpen, setMsgModalOpen] = useState(false);
   const [deleteConfimModalOpen, setDeleteConfimModalOpen] = useState(false);
 
   useEffect(() => {
@@ -44,6 +46,10 @@ export const Subjects = () => {
                 key={current.id}
                 data={current}
                 onClick={() => {
+                  if(subjects.length < 2) {
+                    setMsgModalOpen(true);
+                    return;
+                  }
                   setSelectedSubject(current);
                   setDeleteConfimModalOpen(true);
                 }}
@@ -62,6 +68,13 @@ export const Subjects = () => {
           setOpen={setDeleteConfimModalOpen}
           actionType="subject"
           data={selectedSubject}
+        />
+
+        <MsgModal
+          isOpen={msgModalOpen}
+          setOpen={setMsgModalOpen}
+          title="Hold on!"
+          message={<p>You need at least one subject!<br/>Add a new one before deleting this one.</p>}
         />
       </div>
     </>
