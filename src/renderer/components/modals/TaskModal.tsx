@@ -34,8 +34,8 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     }
 
     ipcRenderer.send(Channels.GET_SUBJECTS);
-    ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubject: Subject[]) => {
-      setSubjects(sentSubject);
+    ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubjects: Subject[]) => {
+      setSubjects(sentSubjects);
     });
 
     return () => {
