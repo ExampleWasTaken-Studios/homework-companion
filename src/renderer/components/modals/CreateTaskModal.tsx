@@ -13,7 +13,7 @@ interface CreateTaskModalProps {
 }
 
 let nextTaskId = 0;
-const nextSubjectId = 0;
+
 
 export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
 
@@ -22,7 +22,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
   const [title, setTitle] = useState("Oops! We've messed up! Please read the description!");
   const [dueDate, setDueDate] = useState(new Date(0));
   const [priority, setPriority] = useState<Priority>("Normal");
-  const [subject, setSubject] = useState<Subject>({ id: -1, name: "placeholder" });
+  const [subject, setSubject] = useState<Subject>(NULL_SUBJECT);
   const [content, setContent] = useState("Looks like something went wrong on our end while we tried to load your task. :/");
 
   const [inputIncomplete, setInputIncomplete] = useState(false);
@@ -31,18 +31,14 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
     setTitle("Oops! We've messed up! Please read the description!");
     setDueDate(new Date());
     setPriority("Normal");
-    setSubject({ id: -1, name: "placeholder" });
+    setSubject(NULL_SUBJECT);
     setContent("Looks like something went wrong on our end while we tried to load your task. :/");
+    setInputIncomplete(false);
   };
 
   useEffect(() => {
     ipcRenderer.send(Channels.GET_NEXT_TASK_ID);
     ipcRenderer.on(Channels.GET_NEXT_TASK_ID_RESPONSE, (_event, sentId: number) => {
-      nextTaskId = sentId;
-    });
-
-    ipcRenderer.send(Channels.GET_NEXT_SUBJECT_ID);
-    ipcRenderer.on(Channels.GET_NEXT_SUBJECT_ID_RESPONSE, (_event, sentId: number) => {
       nextTaskId = sentId;
     });
 
@@ -53,7 +49,6 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
 
     return () => {
       ipcRenderer.removeAllListeners(Channels.GET_NEXT_TASK_ID_RESPONSE);
-      ipcRenderer.removeAllListeners(Channels.GET_NEXT_SUBJECT_ID_RESPONSE);
       ipcRenderer.removeAllListeners(Channels.GET_SUBJECTS_RESPONSE);
     };
   }, [isOpen]);
@@ -67,6 +62,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
   };
 
   const dataChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, sender: "title" | "dueDate" | "priority" | "subject" | "content") => {
+    setInputIncomplete(false);
     switch (sender) {
       case "title":
         setTitle(event.target.value);
@@ -78,20 +74,15 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
         setPriority(event.target.value as Priority);
         break;
       case "subject":
-        setSubject({ id: -1, name: event.target.value });
+        subjects.forEach(current => {
+          if (current.name === event.target.value) {
+            setSubject({ id: current.id, name: current.name });
+          }
+        });
         break;
       case "content":
         setContent(event.target.value);
         break;
-    }
-    if (title.length !== 0
-      && title !== "Oops! We've messed up! Please read the description!"
-      && dueDate 
-      && dueDate !== new Date(0)
-      && subject.id !== -1
-      && content !== ""
-      && content !== "Looks like something went wrong on our end while we tried to load your task. :/") { // this is for UX to remove the incomple alert once all required fields are correctly entered
-      setInputIncomplete(false);
     }
   };
 
@@ -112,18 +103,21 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
       }
     };
 
+    console.warn(task);
+
     return task;
   };
 
   const submitTaskHandler = () => {
-
     if (title.length === 0
           || title === "Oops! We've messed up! Please read the description!"
           || !dueDate 
           || dueDate === new Date(0)
           || subject.id === -1
+          || subject.name === "Select Subject"
           || content === ""
-          || content === "Looks like something went wrong on our end while we tried to load your task. :/") {
+          || content === "Looks like something went wrong on our end while we tried to load your task. :/"
+    ) {
       setInputIncomplete(true);
       return;
     } else {
@@ -193,11 +187,13 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
                 SUBJECT
                 <select
                   className="input dropdown"
+                  defaultValue="Select Subject"
                   onChange={event => dataChangeHandler(event, "subject")}
                 >
-                  {subjects.map(current => (
-                    <option key={current.id}>{current.name}</option>
-                  ))}
+                  <option disabled>Select Subject</option>
+                  {subjects.map(current => {
+                    return <option key={current.id}>{current.name}</option>;
+                  })} 
                 </select>
               </label>
             </div>
