@@ -31,6 +31,7 @@
 @import url(./modals/TaskModal.css);
 @import url(./modals//CreateTaskModal.css);
 @import url(./modals/DeleteTaskConfirmationModal.css);
+@import url(./modals/AddSubjectModal.css);
 @import url(./contextmenu/ContextMenu.css);
 @import url(./contextmenu/ContextMenuFields.css);
 @import url(./contextmenu/ContextMenuDivider.css);

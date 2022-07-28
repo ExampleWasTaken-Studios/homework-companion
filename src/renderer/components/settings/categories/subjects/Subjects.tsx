@@ -2,6 +2,7 @@ import { ipcRenderer } from "electron";
 import React, { useEffect, useState } from "react";
 import Channels from "../../../../../common/channels";
 import { NULL_SUBJECT } from "../../../../../common/constants";
+import { AddSubjectModal } from "../../../modals/AddSubjectModal";
 import { DeleteConfirmationModal } from "../../../modals/DeleteConfirmationModal";
 import { Button } from "../../../utils/Button";
 import { Subject } from "./Subject";
@@ -10,6 +11,7 @@ export const Subjects = () => {
 
   const [subjects, setSubjects] = useState([NULL_SUBJECT]);
   const [selectedSubject, setSelectedSubject] = useState(NULL_SUBJECT);
+  const [addSubjectModalOpen, setAddSubjectModalOpen] = useState(false);
   const [deleteConfimModalOpen, setDeleteConfimModalOpen] = useState(false);
 
   useEffect(() => {
@@ -27,9 +29,9 @@ export const Subjects = () => {
     <>
       <div className="subjects-container">
         <div className="subject-list-header">
-          <p className="subject-list-header-line">Click the subject you would like to delete</p>
+          <p className="subject-list-header-line">Click to delete</p>
           <Button
-            onClick={() => console.log("Create subject button clicked")}
+            onClick={() => setAddSubjectModalOpen(true)}
             className="add-subject-btn"
           >
             Add Subject
@@ -49,6 +51,11 @@ export const Subjects = () => {
             );
           })}
         </ul>
+
+        <AddSubjectModal
+          isOpen={addSubjectModalOpen}
+          setOpen={setAddSubjectModalOpen}
+        />
 
         <DeleteConfirmationModal
           isOpen={deleteConfimModalOpen}
