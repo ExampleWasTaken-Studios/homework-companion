@@ -93,9 +93,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
       case "subject":
         subjects.forEach(current => {
           if (current.name === value) {
-            setSubject({ id: current.id, name: value });
-          } else {
-            throw Error(`Cannot find subject with name '${value}'`);
+            setSubject({ id: current.id, name: current.name });
           }
         });
         break;
