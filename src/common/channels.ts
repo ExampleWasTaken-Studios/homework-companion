@@ -22,6 +22,10 @@ enum Channels {
 
   GET_NEXT_SUBJECT_ID = "subjects/get/next-id",
   GET_NEXT_SUBJECT_ID_RESPONSE = "subjects/get/next-id/response",
+  GET_SUBJECT_ID = "subjects/get/id",
+  GET_SUBJECT_ID_RESPONSE = "subjects/get/id/response",
+  GET_SUBJECT_BY_ID = "subjects/get/by-id",
+  GET_SUBJECT_BY_ID_RESPONSE = "subject/get/by-id/response",
   GET_SUBJECTS = "subjects/get",
   GET_SUBJECTS_RESPONSE = "subjects/get/response",
   SET_SUBJECTS = "subjects/set",

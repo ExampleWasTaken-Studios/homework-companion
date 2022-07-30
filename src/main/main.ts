@@ -137,6 +137,14 @@ const registerIPC = () => {
     event.reply(Channels.GET_NEXT_SUBJECT_ID_RESPONSE, subjectStorage.getNextId());
   });
 
+  ipcMain.on(Channels.GET_SUBJECT_ID, (event, subject: Subject) => {
+    event.reply(Channels.GET_SUBJECT_ID_RESPONSE, subjectStorage.getSubjectId(subject));
+  });
+
+  ipcMain.on(Channels.GET_SUBJECT_BY_ID, (event, id: number) => {
+    event.reply(Channels.GET_SUBJECT_BY_ID_RESPONSE, subjectStorage.getSubjectById(id));
+  });
+
   ipcMain.on(Channels.GET_SUBJECTS, event => {
     event.reply(Channels.GET_SUBJECTS_RESPONSE, subjectStorage.getData());
   });
