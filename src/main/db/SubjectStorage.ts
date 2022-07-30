@@ -135,4 +135,28 @@ export default class SubjectStorage extends Storage {
     return highestId;
   }
 
+  getSubjectId(subject: Subject): number {
+    const subjects = this.getData();
+
+    subjects.forEach(current => {
+      if (isEqual(subject, current)) {
+        return current.id;
+      }
+    });
+
+    return -2;
+  }
+
+  getSubjectById(id: number): Subject {
+    const subjects = this.getData();
+
+    subjects.forEach(current => {
+      if (isEqual(id, current.id)) {
+        return current;
+      }
+    });
+
+    return { id: -2, name: "Deleted Subject" };
+  }
+
 }
