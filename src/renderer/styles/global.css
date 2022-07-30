@@ -1,4 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap');
+@font-face {
+  font-family: "Open Sans";
+  src: url(../assets/fonts/OpenSans-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(../assets/fonts/OpenSans-Medium.ttf);
+  font-weight: 500;
+  font-style: normal;
+}
 
 :root {
   font-family: Open Sans, sans-serif;
