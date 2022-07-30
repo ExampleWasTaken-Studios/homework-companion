@@ -58,7 +58,6 @@ export const Homework = () => {
               setTasks(tasks.filter(data => data.id !== current.id));
             }}
             contextMenuCompleteHandler={() => {
-              
               const tempTasks = tasks.map((i): Homework => {
                 if (i.id === current.id) {
                   return { ...current, state: "completed" };
