@@ -1,0 +1,43 @@
+{
+  "appId": "app.examplewastaken-studios.app-name",
+  "productName": "App",
+  "mac": {
+    "category": "public.app-category.<category>",
+    "target": "dmg",
+    "icon": "assets/build/stable/mac/logo.png"
+  },
+  "dmg": {
+    "window": {
+      "width": 509,
+      "height": 343
+    },
+    "title": "${productName} v${version}",
+    "background": "assets/build/stable/mac/installer_background.png",
+    "icon": "assets/build/stable/mac/logo.png",
+    "iconSize": 90,
+    "iconTextSize": 12,
+    "contents": [
+      {
+        "x": 169.6,
+        "y": 150
+      },
+      {
+        "x": 339.2,
+        "y": 150,
+        "type": "link",
+        "path": "/Applications"
+      }
+    ]
+  },
+  "extends": null,
+  "files": [
+    "build/**/*"
+  ],
+  "directories": {
+    "buildResources": "assets/build/stable"
+  },
+  "extraResources": {
+    "from": "./assets/runtime",
+    "to": "assets"
+  }
+}

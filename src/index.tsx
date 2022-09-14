@@ -1,15 +1,17 @@
 import React from "react";
-import ReactDom from "react-dom";
+import ReactDOM from "react-dom/client";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { App } from "./App";
-import GlobalErrorBoundary from "./renderer/components/errors/GlobalErrorBoundary";
-import "./renderer/styles/main.css";
-import { Home } from "./renderer/views/Home";
-import { Settings } from "./renderer/views/Settings";
-import { Welcome } from "./renderer/views/Welcome";
+import GlobalErrorBoundary from "./components/errors/GlobalErrorBoundary";
+import "./styles/main.css";
+import { Home } from "./views/Home";
+import { Settings } from "./views/Settings";
+import { Welcome } from "./views/Welcome";
 
-
-ReactDom.render(
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
   <React.StrictMode>
     <GlobalErrorBoundary>
       <HashRouter>
@@ -54,5 +56,5 @@ ReactDom.render(
         </Routes>
       </HashRouter>
     </GlobalErrorBoundary>
-  </React.StrictMode>,
-  document.getElementById("root"));
+  </React.StrictMode>
+);

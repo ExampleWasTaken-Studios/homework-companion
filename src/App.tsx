@@ -1,13 +1,13 @@
-import { ipcRenderer } from "electron";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Channels from "./common/channels";
 
 export const App = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
+  window.api.subjects.get();
+
+  /* useEffect(() => {
     ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubjects: Subject[]) => {
       if (sentSubjects.length === 0) {
         navigate("/welcome");
@@ -21,7 +21,7 @@ export const App = () => {
     return () => {
       ipcRenderer.removeAllListeners(Channels.GET_SUBJECTS_RESPONSE);
     };
-  }, []);
+  }, []); */
   
 
   return (
