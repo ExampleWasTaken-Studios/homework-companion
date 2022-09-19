@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-// import { isEqual } from "lodash"; TODO: handle with preload 
 import React, { SetStateAction, useState } from "react";
-import { NULL_TASK } from "../../constants";
-import { Subject } from "../settings/categories/subjects/Subject";
+import { NULL_SUBJECT, NULL_TASK } from "../../constants";
 import { Button } from "../utils/Button";
 
 interface DeleteConfirmationModalProps {
@@ -25,22 +22,21 @@ export const DeleteConfirmationModal = ({ isOpen, setOpen, actionType, data }: D
   const [target, _setTarget] = useState(actionType);
 
   const deleteHandler = () => {
-
-    // FIXME: preload
-    /* switch (actionType) {
+    switch (actionType) {
       case "task":
-        if (isEqual(data, NULL_TASK)) {
+        if (window.api.util.isEqual(data, NULL_TASK)) {
           return;
         }
-        ipcRenderer.send(Channels.DELETE_TASK, data);
+        window.api.tasks.deleteTask(data as Homework);
         break;
       case "subject":
-        if (isEqual(data, NULL_SUBJECT)) {
+        if (window.api.util.isEqual(data, NULL_SUBJECT)) {
           return;
         }
-        ipcRenderer.send(Channels.DELETE_SUBJECT, data);
+        window.api.subjects.deleteSubject(data as Subject);
+        break;
     }
-    setOpen(false); */
+    setOpen(false);
   };
 
   const abortHandler = () => {

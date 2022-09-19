@@ -17,10 +17,7 @@ export const AddSubjectModal = ({ isOpen, setOpen }: AddSubjectModalProps) => {
   const [inputIncomplete, setInputIncomplete] = useState(false);
 
   const createSubject = () => {
-    /* ipcRenderer.send(Channels.ADD_SUBJECT, { // FIXME: preload
-      id: nextSubjectId,
-      name: subjectName
-    } as Subject); */
+    window.api.subjects.addSubject({ id: nextSubjectId, name: subjectName });
   };
 
   const resetData = () => {
@@ -43,17 +40,11 @@ export const AddSubjectModal = ({ isOpen, setOpen }: AddSubjectModalProps) => {
     resetData();
   };
 
-  // FIXME: preload
-  /* useEffect(() => {
-    ipcRenderer.on(Channels.GET_NEXT_SUBJECT_ID_RESPONSE, (_event, sentId: number) => {
+  useEffect(() => {
+    window.api.subjects.getNextId().then(sentId => {
       nextSubjectId = sentId;
     });
-    ipcRenderer.send(Channels.GET_NEXT_SUBJECT_ID);
-
-    return () => {
-      ipcRenderer.removeAllListeners(Channels.GET_NEXT_SUBJECT_ID_RESPONSE);
-    };
-  }, [isOpen]); */
+  }, [isOpen]);
 
   return (
     <>

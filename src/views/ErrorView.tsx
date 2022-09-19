@@ -13,9 +13,7 @@ export const ErrorView = () => {
         <Button 
           className="error-view-relaunch-button"
           onClick={() => {
-
-            // FIXME: preload
-            /* ipcRenderer.send(channels.RELAUNCH_APP, { force: true }); */
+            window.api.app.relaunch(true);
           }}
         >
           Relaunch

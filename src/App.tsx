@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const App = () => {
@@ -7,21 +7,15 @@ export const App = () => {
 
   window.api.subjects.get();
 
-  /* useEffect(() => {
-    ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubjects: Subject[]) => {
-      if (sentSubjects.length === 0) {
+  useEffect(() => {
+    window.api.subjects.get().then(subjects => {
+      if (subjects.length === 0) {
         navigate("/welcome");
       } else {
         navigate("/home");
       }
     });
-
-    ipcRenderer.send(Channels.GET_SUBJECTS);
-
-    return () => {
-      ipcRenderer.removeAllListeners(Channels.GET_SUBJECTS_RESPONSE);
-    };
-  }, []); */
+  }, [navigate]);
   
 
   return (

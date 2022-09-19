@@ -14,17 +14,9 @@ export const Subjects = () => {
   const [msgModalOpen, setMsgModalOpen] = useState(false);
   const [deleteConfimModalOpen, setDeleteConfimModalOpen] = useState(false);
 
-  // FIXME: preload
-  /* useEffect(() => {
-    ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubjects: Subject[]) => {
-      setSubjects(sentSubjects);
-    });
-    ipcRenderer.send(Channels.GET_SUBJECTS);
-
-    return () => {
-      ipcRenderer.removeAllListeners(Channels.GET_SUBJECTS_RESPONSE);
-    };
-  }, [subjects, deleteConfimModalOpen]); */
+  useEffect(() => {
+    window.api.subjects.get().then(subjects => setSubjects(subjects));
+  }, [subjects, deleteConfimModalOpen]);
 
   return (
     <>

@@ -1,16 +1,24 @@
-import { contextBridge, ipcRenderer } from "electron";
-import userSettingsPath from "../settings/userSettingsPath";
+import { contextBridge, ipcRenderer, shell } from "electron";
+import { isEqual } from "lodash";
+import userSettingsKeys from "../settings/userSettingsPath";
 import { Channels } from "./Channels";
+import { getHTMLDateFormat } from "./DateUtils";
 
 const app = {
   getAssetsPath: async (): Promise<string> => await ipcRenderer.invoke(Channels.GET_ASSETS_PATH),
-  relaunch: (force = false): void => ipcRenderer.send(Channels.RELAUNCH_APP, force)
+  relaunch: (force = false): void => ipcRenderer.send(Channels.RELAUNCH_APP, force),
+  openExternal: (url: string, options?: Electron.OpenExternalOptions | undefined) => shell.openExternal(url, options)
+};
+
+const util = {
+  isEqual: (value: unknown, other: unknown) => isEqual(value, other),
+  getHTMLDateFormat: (date?: Date) => getHTMLDateFormat(date)
 };
 
 const settings = {
   getSettingValue: async (key: string): Promise<unknown> => await ipcRenderer.invoke(Channels.GET_SETTING_VALUE, key),
   setSettingValue: (key: string, value: unknown): void => ipcRenderer.send(Channels.SET_SETTING_VALUE, key, value),
-  getUserSettingsPath: () => userSettingsPath,
+  userSettingsKeys: userSettingsKeys,
 };
 
 const tasks = {
@@ -34,6 +42,7 @@ const subjects = {
 
 export const API = {
   app: app,
+  util: util,
   settings: settings,
   tasks: tasks,
   subjects: subjects

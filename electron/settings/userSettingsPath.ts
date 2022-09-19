@@ -1,4 +1,4 @@
-const userSettingsPath = {
+const userSettingsKeys = {
   general: {
     autoStart: "settings.general.autoStart",
     hwAcc: "settings.general.hwAcc" 
@@ -8,4 +8,4 @@ const userSettingsPath = {
   }
 };
 
-export default userSettingsPath;
+export default userSettingsKeys;

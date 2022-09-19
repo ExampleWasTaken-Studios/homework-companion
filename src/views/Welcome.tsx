@@ -12,9 +12,9 @@ export const Welcome = () => {
 
   const submitHandler = () => {
 
-    // FIXME: preload
-    /* if (subjectsTextArea.length === 0) {
-      setInputIncomplete(true);
+    
+    if (subjectsTextArea.length === 0) {
+      setInputIncomplete(true); 
       return;
     }
 
@@ -24,9 +24,8 @@ export const Welcome = () => {
     for (let i = 0; i < subjectNames.length; i++) {
       subjects.push({ id: i, name: subjectNames[i].trim() });
     }
-
-    ipcRenderer.send(Channels.SET_SUBJECTS, subjects);
-    navigate("/home"); // TODO: this needs to be removed as such operations should be carried out with <Link /> */
+    window.api.subjects.set(subjects);
+    navigate("/home"); // TODO: this needs to be removed as such operations should be carried out with <Link />
   };
 
   return (

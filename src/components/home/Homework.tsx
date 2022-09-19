@@ -22,20 +22,11 @@ export const Homework = () => {
     setTaskModalOpen(true);
   };
 
-  // FIXME: preload
-  /* useEffect(() => {
-    ipcRenderer.send(Channels.GET_TASKS);
-    ipcRenderer.on(Channels.GET_TASKS_RESPONSE, (_event, sentTasks) => {
-      console.log("received reply");  
-      console.log("received data:", sentTasks);
-      setTasks(sentTasks);
-      console.log("set state");
+  useEffect(() => {
+    window.api.tasks.get().then(tasks => {
+      setTasks(tasks);
     });
-
-    return () => {
-      ipcRenderer.removeAllListeners(Channels.GET_TASKS_RESPONSE);
-    };
-  }, [createTaskModalOpen, taskModalOpen, deleteConfirmationModalOpen]); */
+  }, [createTaskModalOpen, taskModalOpen, deleteConfirmationModalOpen]);
   
   return (
     <div className="home-homework">
@@ -53,30 +44,31 @@ export const Homework = () => {
           <HomeworkListItem
             onClick={homeworkListItemClickHandler}
             contextMenuDeleteHandler={() => {
-              /* ipcRenderer.send(Channels.DELETE_TASK, current); // FIXME: preload
-              setTasks(tasks.filter(data => data.id !== current.id)); */
+              window.api.tasks.deleteTask(current);
+              setTasks(tasks.filter(data => data.id !== current.id));
             }}
             contextMenuCompleteHandler={() => {
               const tempTasks = tasks.map((i): Homework => {
                 if (i.id === current.id) {
-                  return { ...current, state: "completed" };
+                  const tempTask = { ...current, state: "completed" as TaskState };
+                  window.api.tasks.updateTask(tempTask);
+                  return tempTask;
                 } else {
                   return i;
                 }
               });
-              /* ipcRenderer.send(Channels.UPDATE_TASK, tempTasks); // FIXME: preload
-              setTasks(tempTasks); */
+              setTasks(tempTasks);
             }}
             contextMenuIncompleteHandler={() => {
               const tempTasks = tasks.map((i): Homework => {
                 if (i.id === current.id) {
-                  return { ...current, state: "open" };
+                  const tempTask = { ...current, state: "open" as TaskState };
+                  window.api.tasks.updateTask(tempTask);
+                  return tempTask;
                 } else {
                   return i;
                 }
               });
-              /* ipcRenderer.send(Channels.UPDATE_TASK, tempTasks); // FIXME: preload
-              setTasks(tempTasks); */
             }}
             data={current}
             key={current.id}

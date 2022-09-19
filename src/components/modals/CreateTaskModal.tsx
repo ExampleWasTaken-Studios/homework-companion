@@ -10,7 +10,7 @@ interface CreateTaskModalProps {
   setOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const nextTaskId = 0;
+let nextTaskId = 0;
 
 
 export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
@@ -34,23 +34,14 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
     setInputIncomplete(false);
   };
 
-  // FIXME: preload
-  /* useEffect(() => {
-    ipcRenderer.send(Channels.GET_NEXT_TASK_ID);
-    ipcRenderer.on(Channels.GET_NEXT_TASK_ID_RESPONSE, (_event, sentId: number) => {
+  useEffect(() => {
+    window.api.tasks.getNextId().then(sentId => {
       nextTaskId = sentId;
     });
-
-    ipcRenderer.send(Channels.GET_SUBJECTS);
-    ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubjects: Subject[]) => {
-      setSubjects(sentSubjects);
+    window.api.subjects.get().then(subjects => {
+      setSubjects(subjects);
     });
-
-    return () => {
-      ipcRenderer.removeAllListeners(Channels.GET_NEXT_TASK_ID_RESPONSE);
-      ipcRenderer.removeAllListeners(Channels.GET_SUBJECTS_RESPONSE);
-    };
-  }, [isOpen]); */
+  }, [isOpen]);
 
   const closeHandler = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -108,15 +99,14 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
   };
 
   const submitTaskHandler = () => {
-    // FIXME: preload
-    /* if (title.length === 0
-          || title === "Oops! We've messed up! Please read the description!"
-          || !dueDate 
-          || dueDate === new Date(0)
-          || subject.id === -1
-          || subject.name === "Select Subject"
-          || content === ""
-          || content === "Looks like something went wrong on our end while we tried to load your task. :/"
+    if (title.length === 0
+      || title === "Oops! We've messed up! Please read the description!"
+      || !dueDate 
+      || dueDate === new Date(0)
+      || subject.id === -1
+      || subject.name === "Select Subject"
+      || content === ""
+      || content === "Looks like something went wrong on our end while we tried to load your task. :/"
     ) {
       setInputIncomplete(true);
       return;
@@ -124,9 +114,9 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
       setInputIncomplete(false);
     }
 
-    ipcRenderer.send(Channels.ADD_TASK, generateTask(title, dueDate, priority, subject, content));
+    window.api.tasks.addTask(generateTask(title, dueDate, priority, subject, content));
     setOpen(false);
-    resetData(); */
+    resetData();
   };
 
   return (

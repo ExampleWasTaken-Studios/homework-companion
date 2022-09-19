@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useState } from "react";
+import React, { SetStateAction, useCallback, useEffect, useState } from "react";
 import { NULL_SUBJECT } from "../../constants";
 import { CloseIcon } from "../svg/CloseIcon";
 import { Alert } from "../utils/Alert";
@@ -25,23 +25,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
 
   const [buttonContent, setButtonContent] = useState<"Mark as Complete" | "Complete">("Mark as Complete");
 
-  // FIXME: preload
-  /* useEffect(() => {
-    if (isOpen) {
-      openHandler();
-    }
-
-    ipcRenderer.send(Channels.GET_SUBJECTS);
-    ipcRenderer.on(Channels.GET_SUBJECTS_RESPONSE, (_event, sentSubjects: Subject[]) => {
-      setSubjects(sentSubjects);
-    });
-
-    return () => {
-      ipcRenderer.removeAllListeners(Channels.GET_SUBJECTS_RESPONSE);
-    };
-  }, [isOpen]); */
-
-  const openHandler = () => {
+  const openHandler = useCallback(() => {
     setTitle(data.title);
     setDueDate(data.dueDate);
     setPriority(data.priority);
@@ -53,11 +37,19 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     } else {
       setButtonContent("Complete");
     }
-  };
+  }, [data]);
+
+  useEffect(() => {
+    if (isOpen) {
+      openHandler();
+    }
+
+    window.api.subjects.get().then(subjects => setSubjects(subjects));
+
+  }, [isOpen, openHandler]);
 
   const closeHandler = (event: React.MouseEvent) => {
-    // FIXME: preload
-    /* event.preventDefault();
+    event.preventDefault();
     event.stopPropagation();
 
     if (title === "" || content === "") {
@@ -66,7 +58,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     }
     
     data = { ...data, title, dueDate, priority, subject, content, state };
-    ipcRenderer.send(Channels.UPDATE_TASK, data);
+    window.api.tasks.updateTask(data);
 
     setOpen(false);
 
@@ -75,7 +67,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     setPriority("Normal");
     setSubject({ id: -1, name: "placeholder" });
     setContent("Looks like something went wrong on our end while we tried to load your task. :/");
-    setState("open"); */
+    setState("open");
   };
 
   const dataChangeHandler = (value: string, sender: "title" | "dueDate" | "priority" | "subject" | "content" | "state") => {
@@ -149,7 +141,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
                 id="due-date"
                 className="input due-date"
                 autoComplete="off"
-                /* defaultValue={getHTMLDateFormat(data.dueDate)} */ // FIXME: preloadw
+                defaultValue={window.api.util.getHTMLDateFormat(data.dueDate)}
                 onChange={event => dataChangeHandler(event.target.value, "dueDate")}
               />
             </label>

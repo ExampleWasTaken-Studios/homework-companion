@@ -39,7 +39,7 @@ export const About = () => {
         <div 
           className="third-party-licenses"
           onClick={() => {
-            // shell.openExternal(thirdPartyLicenses); TODO: add preload implementation
+            window.api.app.openExternal(thirdPartyLicenses);
           }}
         >
           Third-Party Licenses {/* TODO: add logic to show licenses */}
