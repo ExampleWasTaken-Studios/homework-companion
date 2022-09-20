@@ -61,7 +61,7 @@ export const Homework = () => {
               setTasks(tempTasks);
             }}
             contextMenuIncompleteHandler={() => {
-              const tempTasks = tasks.map((i): Homework => {
+              tasks.forEach((i): Homework => {
                 if (i.id === current.id) {
                   const tempTask = { ...current, state: "open" as TaskState };
                   window.api.tasks.updateTask(tempTask);

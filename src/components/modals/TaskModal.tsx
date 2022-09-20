@@ -47,7 +47,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     } else {
       setButtonContent("Complete");
     }
-  }, [data]);
+  }, [data, subjects]);
 
   useEffect(() => {
     isOpen && openHandler();
