@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { ContextMenu } from "../contextmenu/ContextMenu";
 
@@ -13,6 +14,14 @@ export const HomeworkListItem = ({ onClick, contextMenuDeleteHandler, contextMen
   const css = `home-homework-list-item-bull ${data.color}`;
 
   const parentRef = useRef<HTMLDivElement>(null);
+
+  const [subject, setSubject] = useState<Subject>({ id: -3, name: "Loading subject..." });
+
+  useEffect(() => {
+    window.api.subjects.getById(data.subject).then(subject => {
+      setSubject(subject);
+    });
+  }, [data.subject]);
 
   return (
     <>
@@ -33,7 +42,7 @@ export const HomeworkListItem = ({ onClick, contextMenuDeleteHandler, contextMen
             <p className="home-homework-list-item-title">{data.title}</p>
           </div>
           <div className="home-homework-list-item-bottom-line">
-            <p className="home-homework-list-item-subject">{data.subject.name}</p>
+            <p className="home-homework-list-item-subject">{subject.name}</p>
           </div>
         </div>
         <div className="home-homework-list-item-right-column">

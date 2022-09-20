@@ -17,7 +17,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
   const [title, setTitle] = useState("Oops! We've messed up! Please read the description!");
   const [dueDate, setDueDate] = useState(new Date());
   const [priority, setPriority] = useState<Priority>("Normal");
-  const [subject, setSubject] = useState<Subject>({ id: -1, name: "placeholder" });
+  const [subject, setSubject] = useState<Subject>({ id: -3, name: "Loading subject..." });
   const [content, setContent] = useState("Looks like something went wrong on our end while we tried to load your task. :/");
   const [state, setState] = useState<TaskState>("open");
 
@@ -25,11 +25,21 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
 
   const [buttonContent, setButtonContent] = useState<"Mark as Complete" | "Complete">("Mark as Complete");
 
-  const openHandler = useCallback(() => {
+  const openHandler = useCallback(async () => {
+
+    setSubjects(await window.api.subjects.get());
+
     setTitle(data.title);
     setDueDate(data.dueDate);
     setPriority(data.priority);
-    setSubject(data.subject);
+  
+    const subjectById = await window.api.subjects.getById(data.subject); // get the subject by the id, stored on the task object
+    if (subjectById.id < 0) { // check if the id is smaller than zero which would indicate that the subject is not valid (loading, null_subject, deleted subject)
+      setSubject(subjects[0]); // if true set the subject to the first one subject in the array of all subjects
+    } else {
+      setSubject(subjectById); // if false set the subject to the one that is stored on the task object
+    }
+
     setContent(data.content);
     setState(data.state);
     if (data.state === "open" || data.state === "overdue") {
@@ -40,15 +50,10 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
   }, [data]);
 
   useEffect(() => {
-    if (isOpen) {
-      openHandler();
-    }
-
-    window.api.subjects.get().then(subjects => setSubjects(subjects));
-
+    isOpen && openHandler();
   }, [isOpen, openHandler]);
 
-  const closeHandler = (event: React.MouseEvent) => {
+  const closeHandler = async (event: React.MouseEvent) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -57,7 +62,8 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
       return;
     }
     
-    data = { ...data, title, dueDate, priority, subject, content, state };
+    console.log("subject id", await window.api.subjects.getId(subject));
+    data = { ...data, title: title, dueDate: dueDate, priority: priority, subject: await window.api.subjects.getId(subject), content, state };
     window.api.tasks.updateTask(data);
 
     setOpen(false);
@@ -166,8 +172,10 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
                 SUBJECT
                 <select
                   className="input dropdown"
-                  defaultValue={data.subject.name}
-                  onChange={event => dataChangeHandler(event.target.value, "subject")}
+                  defaultValue={subject.name}
+                  onChange={event => {
+                    dataChangeHandler(event.target.value, "subject");
+                  }}
                 >
                   {subjects.map(current => (
                     <option key={current.id}>{current.name}</option>

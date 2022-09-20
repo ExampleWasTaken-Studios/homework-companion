@@ -76,15 +76,14 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
     }
   };
 
-  const generateTask = (title: string, dueDate: Date, priority: Priority, subject: Subject, content: string) => {
-
+  const generateTask = async (title: string, dueDate: Date, priority: Priority, subject: Subject, content: string) => {
     const task: Homework = {
       id: nextTaskId,
       color: "blue",
       title: title,
       dueDate: dueDate,
       priority: priority,
-      subject: subject,
+      subject: await window.api.subjects.getId(subject),
       important: false,
       state: "open",
       content: content,
@@ -92,13 +91,10 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
         dateCreated: new Date()
       }
     };
-
-    console.warn(task);
-
     return task;
   };
 
-  const submitTaskHandler = () => {
+  const submitTaskHandler = async () => {
     if (title.length === 0
       || title === "Oops! We've messed up! Please read the description!"
       || !dueDate 
@@ -114,7 +110,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
       setInputIncomplete(false);
     }
 
-    window.api.tasks.addTask(generateTask(title, dueDate, priority, subject, content));
+    window.api.tasks.addTask(await generateTask(title, dueDate, priority, subject, content));
     setOpen(false);
     resetData();
   };

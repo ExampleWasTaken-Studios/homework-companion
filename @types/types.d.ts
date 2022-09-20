@@ -3,7 +3,7 @@ interface Homework {
   color: Color;
   title: string;
   dueDate: Date;
-  subject: Subject;
+  subject: number;
   priority: Priority;
   important: boolean;
   state: TaskState;

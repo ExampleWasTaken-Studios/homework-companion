@@ -6,10 +6,7 @@ export const NULL_TASK: Homework = {
   color: "red",
   title: "NULL_TASK",
   dueDate: new Date(999999999999999),
-  subject: {
-    id: -1,
-    name: "NULL_SUBJECT"
-  },
+  subject: -1,
   priority: "Urgent", // set to urgent to appear at the top
   important: false,
   state: "open",
