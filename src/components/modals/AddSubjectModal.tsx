@@ -15,7 +15,6 @@ export const AddSubjectModal = ({ isOpen, setOpen }: AddSubjectModalProps) => {
   const [subjectName, setSubjectName] = useState("");
 
   const [inputIncomplete, setInputIncomplete] = useState(false);
-  const [inputLimited, setInputLimited] = useState(false);
 
   const checkLimit = useCharLimiter();
 
@@ -79,10 +78,7 @@ export const AddSubjectModal = ({ isOpen, setOpen }: AddSubjectModalProps) => {
                   const [isLimited] = checkLimit(value, 11);
                   if (isLimited) {
                     event.target.value = subjectName; // set the value to the one before the event fired, thus preventing further input
-                    setInputLimited(true);
                     return;
-                  } else {
-                    setInputLimited(false);
                   }
                   setSubjectName(value);
                 }}
