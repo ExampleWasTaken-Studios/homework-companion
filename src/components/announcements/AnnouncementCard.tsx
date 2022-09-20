@@ -1,4 +1,3 @@
-import React from "react";
 import cardImage from "../../assets/img/960x540.png";
 
 interface AnnouncementCardProps {

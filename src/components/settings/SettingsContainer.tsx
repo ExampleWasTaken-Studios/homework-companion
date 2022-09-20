@@ -1,4 +1,3 @@
-import React from "react";
 import { ViewHeader } from "../utils/ViewHeader";
 import { SettingsCategoryList } from "./SettingsCategoryList";
 import { SettingsContent } from "./SettingsContent";

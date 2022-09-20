@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "../components/utils/Alert";
 import { Button } from "../components/utils/Button";
@@ -14,7 +14,7 @@ export const Welcome = () => {
 
     
     if (subjectsTextArea.length === 0) {
-      setInputIncomplete(true); 
+      setInputIncomplete(true);
       return;
     }
 

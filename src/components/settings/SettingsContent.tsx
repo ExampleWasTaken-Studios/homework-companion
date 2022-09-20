@@ -1,4 +1,3 @@
-import React from "react";
 import { About } from "./categories/About";
 import { Customization } from "./categories/Customization";
 import { General } from "./categories/General";

@@ -1,5 +1,3 @@
-import React from "react";
-
 interface FixProps {
   name: string;
   description: string;

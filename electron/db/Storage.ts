@@ -1,7 +1,7 @@
 import fs from "fs";
+import { USER_DATA_PATH } from "../main";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import TaskStorage from "./TaskStorage"; // This is imported so that it can be referenced in the comment of 'Storage'.
-import { USER_DATA_PATH } from "../main";
 
 /**
  * This class manages the storage of user generated data.

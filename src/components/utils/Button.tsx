@@ -1,5 +1,3 @@
-import React from "react";
-
 interface ButtonProps {
   onClick: () => void;
   className?: string;
@@ -17,6 +15,7 @@ export const Button = ({ className, onClick, children, isSecondary }: ButtonProp
   }
 
   return (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <a
       onClick={onClick}
       className={classes}

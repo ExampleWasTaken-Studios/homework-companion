@@ -1,4 +1,3 @@
-import React from "react";
 import { ErrorIcon } from "../svg/ErrorIcon";
 
 interface AlertProps {

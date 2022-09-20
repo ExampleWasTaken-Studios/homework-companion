@@ -19,6 +19,7 @@ export const DeleteConfirmationModal = ({ isOpen, setOpen, actionType, data }: D
     throw new Error("Action type does not match type of received data");
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [target, _setTarget] = useState(actionType);
 
   const deleteHandler = () => {

@@ -53,7 +53,7 @@ export const AddSubjectModal = ({ isOpen, setOpen }: AddSubjectModalProps) => {
           className="overlay"
           onClick={closeHandler}
         >
-          <div 
+          <div
             className="add-subject-modal"
             onClick={event => event.stopPropagation()}
           >

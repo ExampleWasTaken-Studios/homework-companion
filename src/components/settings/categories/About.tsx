@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import thirdPartyLicenses from "../../../rendererAssets/3rd-party-licenses.md";
 import logo from "../../../rendererAssets/img/80x80.png";
 import { Changelog } from "../../changelog/Changelog";

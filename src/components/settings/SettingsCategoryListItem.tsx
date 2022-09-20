@@ -1,5 +1,3 @@
-import React from "react";
-
 interface SettingsCategoryListItemProps {
   name: string;
   isActive?: boolean;

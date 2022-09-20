@@ -1,5 +1,3 @@
-import React from "react";
-
 interface DropdownItemProps {
   value: string;
   // eslint-disable-next-line @typescript-eslint/ban-types

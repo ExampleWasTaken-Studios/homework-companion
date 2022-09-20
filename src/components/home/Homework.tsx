@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NULL_TASK } from "../../constants";
 import { CreateTaskModal } from "../modals/CreateTaskModal";
 import { DeleteConfirmationModal } from "../modals/DeleteConfirmationModal";

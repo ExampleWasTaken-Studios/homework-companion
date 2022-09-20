@@ -1,4 +1,3 @@
-import React from "react";
 import { AnnouncementCard } from "./AnnouncementCard";
 
 export const AnnouncementsContainer = () => {
