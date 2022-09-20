@@ -1,4 +1,5 @@
 import React, { SetStateAction, useEffect, useState } from "react";
+import { useCharLimiter } from "../../hooks/useCharLimiter";
 import { CloseIcon } from "../svg/CloseIcon";
 import { Alert } from "../utils/Alert";
 import { Button } from "../utils/Button";
@@ -8,13 +9,15 @@ interface AddSubjectModalProps {
   setOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const
 let nextSubjectId = 0;
 
 export const AddSubjectModal = ({ isOpen, setOpen }: AddSubjectModalProps) => {
   const [subjectName, setSubjectName] = useState("");
 
   const [inputIncomplete, setInputIncomplete] = useState(false);
+  const [inputLimited, setInputLimited] = useState(false);
+
+  const checkLimit = useCharLimiter();
 
   const createSubject = () => {
     window.api.subjects.addSubject({ id: nextSubjectId, name: subjectName });
@@ -68,9 +71,21 @@ export const AddSubjectModal = ({ isOpen, setOpen }: AddSubjectModalProps) => {
               <input 
                 type="text"
                 className="input"
+                value={subjectName}
                 autoComplete="off"
                 autoFocus
-                onChange={event => setSubjectName(event.target.value)}
+                onChange={event => {
+                  const value = event.target.value;
+                  const [isLimited] = checkLimit(value, 11);
+                  if (isLimited) {
+                    event.target.value = subjectName; // set the value to the one before the event fired, thus preventing further input
+                    setInputLimited(true);
+                    return;
+                  } else {
+                    setInputLimited(false);
+                  }
+                  setSubjectName(value);
+                }}
               />
             </label>
 
