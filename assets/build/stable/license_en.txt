@@ -1,0 +1,3 @@
+English license goes here. 
+
+Remove this file if you do not want a license to be displayed upon installation.
