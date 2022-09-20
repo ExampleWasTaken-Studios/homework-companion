@@ -1,9 +1,9 @@
 {
-  "appId": "app.examplewastaken-studios.app-name",
-  "productName": "App Canary",
+  "appId": "app.examplewastaken-studios.homework-companion",
+  "productName": "Homework Companion Canary",
   "asar": false,
   "mac": {
-    "category": "public.app-category.<category>",
+    "category": "public.app-category.education",
     "target": "dmg",
     "icon": "assets/build/canary/mac/logo.png"
   },

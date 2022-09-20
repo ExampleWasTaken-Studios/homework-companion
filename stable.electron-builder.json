@@ -1,8 +1,8 @@
 {
-  "appId": "app.examplewastaken-studios.app-name",
-  "productName": "App",
+  "appId": "app.examplewastaken-studios.homework-companion",
+  "productName": "Homework Companion",
   "mac": {
-    "category": "public.app-category.<category>",
+    "category": "public.app-category.education",
     "target": "dmg",
     "icon": "assets/build/stable/mac/logo.png"
   },

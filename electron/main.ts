@@ -53,7 +53,7 @@ const createWindow = () => {
   });
 
   if (app.isPackaged) {
-    win.loadURL(`file://${path.join(__dirname, "../index.html")}`);
+    win.loadURL(`file://${path.join(__dirname, "../", "index.html")}`);
   } else {
     win.loadURL("http://localhost:3000/index.html");
   }

@@ -4,7 +4,7 @@
   "private": true,
   "description": "Task managing application",
   "main": "build/electron/main.js",
-  "homepage": "https://github.com/ExampleWasTaken-Studios/homework-companion",
+  "homepage": ".",
   "repository": {
     "type": "git",
     "url": "https://github.com/ExampleWasTaken-Studios/homework-companion.git"
@@ -33,7 +33,6 @@
     "@types/node": "^16.11.56",
     "electron-devtools-installer": "^3.2.0",
     "electron-localshortcut": "^3.2.1",
-    "electron-rebuild": "^3.2.9",
     "electron-reload": "^2.0.0-alpha.1",
     "electron-store": "^8.1.0",
     "lodash": "^4.17.21",
@@ -55,6 +54,7 @@
     "cross-env": "^7.0.3",
     "electron": "^20.1.4",
     "electron-builder": "^23.3.3",
+    "electron-rebuild": "^3.2.9",
     "electron-reloader": "^1.2.3",
     "eslint": "^8.23.1",
     "eslint-plugin-react": "^7.31.8",
