@@ -1,4 +1,5 @@
 .settings-category-list {
   width: 300px;
+  padding: 0 2px;
   margin: var(--ml-length) 0 0 0;
 }
