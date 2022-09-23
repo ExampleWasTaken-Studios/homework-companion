@@ -90,6 +90,10 @@ app.on("activate", () => {
   }
 });
 
+ipcMain.handle(Channels.GET_APP_VERSION, () => {
+  return app.getVersion();
+});
+
 ipcMain.handle(Channels.GET_ASSETS_PATH, () => {
   return ASSETS_PATH;
 });

@@ -5,6 +5,7 @@ import { Channels } from "./Channels";
 import { getHTMLDateFormat } from "./DateUtils";
 
 const app = {
+  getVersion: async (): Promise<string> =>  await ipcRenderer.invoke(Channels.GET_APP_VERSION),
   getAssetsPath: async (): Promise<string> => await ipcRenderer.invoke(Channels.GET_ASSETS_PATH),
   relaunch: (force = false): void => ipcRenderer.send(Channels.RELAUNCH_APP, force),
   openExternal: (url: string, options?: Electron.OpenExternalOptions | undefined) => shell.openExternal(url, options)
