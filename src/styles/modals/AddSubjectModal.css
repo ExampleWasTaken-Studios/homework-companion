@@ -1,0 +1,50 @@
+.overlay {
+  user-select: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: hsl(0, calc(1 + 0%), 0%);
+  background-color: var(--bg-modal-overlay);
+}
+
+.add-subject-modal {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  padding: var(--ms-length);
+  background-color: var(--bg-modal);
+  border-radius: 4px;
+}
+
+.add-subject-modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 0 var(--ms-length) 0;
+  background-color: transparent;
+}
+
+.add-subject-modal-title {
+  background-color: transparent;
+}
+
+.add-subject-modal-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: transparent;  
+}
+
+.add-subject-modal-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 49%;
+  padding: var(--sm-length) var(--ms-length);
+  margin: var(--ss-length) 0;
+}

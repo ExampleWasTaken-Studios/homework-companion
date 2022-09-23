@@ -1,24 +1,29 @@
-import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const App = () => {
 
   const navigate = useNavigate();
-  const location = useLocation();
+
+  window.api.subjects.get();
 
   useEffect(() => {
-    // code to check for subjects goes in here
-    // if no subjects exist the welcome component will be returned. otherwise the home component
-
-    setTimeout(() => {
-      navigate("/home");
-    }, 3000);
-  }, []);
+    window.api.subjects.get().then(subjects => {
+      if (subjects.length === 0) {
+        navigate("/welcome");
+      } else {
+        navigate("/home");
+      }
+    });
+  }, [navigate]);
   
 
   return (
     <>
-      <p>placeholder...</p>
+      <div className="spinner-container">
+        <div className="spinner"></div>
+        <h1 className="loading-header">Loading...</h1>
+      </div>
     </>
   );
 };
