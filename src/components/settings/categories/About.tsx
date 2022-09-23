@@ -36,7 +36,7 @@ export const About = () => {
           <br/>
         Licensed under the GNU General Public License Version 3
         </div>
-        <div 
+        <div
           className="third-party-licenses"
           onClick={() => {
             window.api.app.openExternal(thirdPartyLicenses);

@@ -3,7 +3,7 @@ import { isEqual } from "lodash";
 import Storage from "./Storage";
 
 export default class TaskStorage extends Storage {
-  
+
   /**
    * The complete path to the task storage file.
    */

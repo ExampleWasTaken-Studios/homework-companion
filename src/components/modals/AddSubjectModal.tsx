@@ -67,7 +67,7 @@ export const AddSubjectModal = ({ isOpen, setOpen }: AddSubjectModalProps) => {
 
             <label className="label">
               SUBJECT
-              <input 
+              <input
                 type="text"
                 className="input"
                 value={subjectName}

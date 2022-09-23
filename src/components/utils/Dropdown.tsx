@@ -13,7 +13,7 @@ interface DropdownProps {
  * @returns Dropdown component
  */
 export const Dropdown = ({ selection, children, className }: DropdownProps) => {
-  
+
   const [open, setOpen] = useState(false);
 
   const classes = `${className} dropdown`;

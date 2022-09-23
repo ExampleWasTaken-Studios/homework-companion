@@ -28,7 +28,7 @@ export const Homework = () => {
       setTasks(tasks);
     });
   }, [createTaskModalOpen, taskModalOpen, deleteConfirmationModalOpen]);
-  
+
   return (
     <div className="home-homework">
       <ViewHeader title="Homework">
@@ -79,7 +79,7 @@ export const Homework = () => {
           <p>emtpy state goes here</p>
         )}
       </div>
-      
+
       <CreateTaskModal
         isOpen={createTaskModalOpen}
         setOpen={setCreateTaskModalOpen}

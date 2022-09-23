@@ -12,7 +12,7 @@ export const ContextMenuChild = ({ type, onClick }: ContextMenuChildProps) => {
       {type === "divider" ? (
         <div className="context-menu-divider"></div>
       ) : (
-        <div 
+        <div
           className="context-menu-child"
           onClick={onClick}
         >

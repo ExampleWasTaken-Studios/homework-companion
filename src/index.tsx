@@ -21,7 +21,7 @@ root.render(
             path="/"
             element={<App />}
           />
-          <Route 
+          <Route
             path="home"
             element={<Home />}
           />

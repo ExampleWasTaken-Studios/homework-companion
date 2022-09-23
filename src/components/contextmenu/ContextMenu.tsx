@@ -25,7 +25,7 @@ export const ContextMenu = ({ parentRef, items }: ContextMenuProps) => {
     setPosX(event.pageX);
     setPosY(event.pageY);
     setShow(true);
-  }, [posX, posY, show]);
+  }, []);
 
   const onClick = useCallback((event: MouseEvent) => {
     event.preventDefault();
@@ -42,23 +42,26 @@ export const ContextMenu = ({ parentRef, items }: ContextMenuProps) => {
   });
 
   useLayoutEffect(() => {
-    parentRef.current && parentRef.current.addEventListener("contextmenu", onContextMenu);
+
+    const parentRefCurrent = parentRef.current;
+
+    parentRefCurrent && parentRefCurrent.addEventListener("contextmenu", onContextMenu);
 
     return () => {
-      parentRef.current && parentRef.current.removeEventListener("contextmenu", onContextMenu);
+      parentRefCurrent && parentRefCurrent.removeEventListener("contextmenu", onContextMenu);
     };
   });
 
   return (
     <>
       {show && (
-        <div 
+        <div
           className="context-menu"
           style={{ top: posY, left: posX }}
         >
-  
+
           {items.map(current => {
-  
+
             if (current.type === "divider") {
               if (current.clickHandler !== undefined) {
                 throw new Error("'ContextMenuChild' components of type 'divider' should not have a 'clickHandler' method defined");
@@ -68,11 +71,11 @@ export const ContextMenu = ({ parentRef, items }: ContextMenuProps) => {
                 throw new Error(`'ContextMenuChild' ${current.type} should have a 'clickHandler' method defined`);
               }
             }
-  
+
             switch (current.type) {
               case "divider":
                 return (
-                  <ContextMenuChild 
+                  <ContextMenuChild
                     key={current.id}
                     type={current.type}
                   />

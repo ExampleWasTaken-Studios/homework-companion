@@ -97,7 +97,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
   const submitTaskHandler = async () => {
     if (title.length === 0
       || title === "Oops! We've messed up! Please read the description!"
-      || !dueDate 
+      || !dueDate
       || dueDate === new Date(0)
       || subject.id === -1
       || subject.name === "Select Subject"
@@ -124,7 +124,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
         >
           <div
             className="task-modal"
-            onClick={event => event.stopPropagation()} // needed to prevent the modal from closing when clicked 
+            onClick={event => event.stopPropagation()} // needed to prevent the modal from closing when clicked
           >
 
             <div className="task-header">
@@ -161,14 +161,14 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
                   autoComplete="off"
                   defaultValue="Normal"
                   onChange={event => dataChangeHandler(event, "priority")}
-                > 
+                >
                   <option value="Urgent">Urgent</option>
                   <option value="High">High</option>
                   <option value="Normal">Normal</option>
                   <option value="Low">Low</option>
                 </select>
               </label>
-  
+
               <label className="label inline">
                 SUBJECT
                 <select
@@ -179,11 +179,11 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
                   <option disabled>Select Subject</option>
                   {subjects.map(current => {
                     return <option key={current.id}>{current.name}</option>;
-                  })} 
+                  })}
                 </select>
               </label>
             </div>
-  
+
             <label className="label">
             DESCRIPTION
               <textarea

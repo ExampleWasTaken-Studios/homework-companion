@@ -25,7 +25,7 @@ export const Changelog = ({ isOpen, setOpen }: ChangelogProps) => {
 
   return ReactDOM.createPortal(
     <>
-      <div 
+      <div
         className="modal-overlay"
         onClick={modalCloseHandler}
       />
@@ -37,12 +37,12 @@ export const Changelog = ({ isOpen, setOpen }: ChangelogProps) => {
               <p className="changelog-date">{/* new Date(day of release).toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"}) */"ENTER DATE HERE"}</p>
             </div>
             <div className="changelog-close-btn-container">
-              <div 
+              <div
                 className="changelog-close-btn"
                 onClick={modalCloseHandler}
               >
                   X
-              </div>  
+              </div>
             </div> {/* TODO: Maybe change to svg? */}
           </div>
 
@@ -63,7 +63,7 @@ export const Changelog = ({ isOpen, setOpen }: ChangelogProps) => {
           </div>
         </div>
       </div>
-      
+
     </>,
     document.getElementById("changelog-portal") as Element);
 };

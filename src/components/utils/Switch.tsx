@@ -7,7 +7,7 @@ interface SwitchProps {
 }
 
 /**
- * Switch component.  
+ * Switch component.
  * The state of the component needs to live in the parent component.
  * @param checked First item of corresponding state.
  * @param setChecked Second item of corresponding state.
@@ -34,7 +34,7 @@ export const Switch = ({ checked, setChecked, onStateChange }: SwitchProps) => {
   }
 
   return (
-    <div 
+    <div
       onClick={event => clickHandler(event)}
       className={cssTrack}
     >

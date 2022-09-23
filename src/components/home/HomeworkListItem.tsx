@@ -31,7 +31,7 @@ export const HomeworkListItem = ({ onClick, contextMenuDeleteHandler, contextMen
         onClick={() => onClick(data)}
       >
         <div className="home-homework-list-item-left-column">
-          <span 
+          <span
             className={css}
           >
             &bull;

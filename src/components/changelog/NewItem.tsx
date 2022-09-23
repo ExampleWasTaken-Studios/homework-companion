@@ -9,7 +9,7 @@ export const NewItem = ({ name, description }: FixProps) => {
       <li className="changelog-list-item">
         <p className="changelog-list-item-name">{name}</p>
         <p className="changelog-list-item-description">{description}</p>
-      </li>  
+      </li>
     </div>
   );
 };

@@ -36,7 +36,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     setTitle(data.title);
     setDueDate(data.dueDate);
     setPriority(data.priority);
-  
+
     const subjectById = await window.api.subjects.getById(data.subject); // get the subject by the id, stored on the task object
     console.log("subjectById", subjectById);
     if (subjectById.id < 0) { // check if the id is smaller than zero which would indicate that the subject is not valid (loading, null_subject, deleted subject)
@@ -119,7 +119,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     }
     if (title.length !== 0
       && title !== NULL_TASK.title
-      && dueDate 
+      && dueDate
       && dueDate !== new Date(0)
       && subject.id !== NULL_TASK.id
       && content !== ""
@@ -131,20 +131,20 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
   return (
     <>
       {isOpen && (
-        <div 
+        <div
           className="overlay"
           onClick={event => closeHandler(event)}
         >
           <div
             className="task-modal"
-            onClick={event => event.stopPropagation()} // needed to prevent the modal from closing when clicked 
+            onClick={event => event.stopPropagation()} // needed to prevent the modal from closing when clicked
           >
-  
+
             <div className="task-header">
               <h2 className="modal-title">Edit Task</h2>
               <CloseIcon onClick={event => closeHandler(event)}/>
             </div>
-  
+
             <label className="label">
             TITLE
               <input
@@ -155,7 +155,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
                 onChange={event => dataChangeHandler(event.target.value, "title")}
               />
             </label>
-  
+
             <label className="label">
             DUE DATE
               <input
@@ -176,7 +176,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
                   autoComplete="off"
                   defaultValue={data.priority}
                   onChange={event => dataChangeHandler(event.target.value, "priority")}
-                > 
+                >
                   <option value="Urgent">Urgent</option>
                   <option value="High">High</option>
                   <option value="Normal">Normal</option>
@@ -199,7 +199,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
                 </select>
               </label>
             </div>
-  
+
             <label className="label">
             DESCRIPTION
               <textarea
@@ -231,7 +231,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
             >
               {buttonContent}
             </Button>
-  
+
           </div>
         </div>
       )}

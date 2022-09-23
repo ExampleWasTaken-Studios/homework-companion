@@ -14,7 +14,7 @@ export const NewFeatureContainer = ({ children }: NewFeatureContainerProps) => {
     <div className="changelog-container">
       <h2 className="changelog-new-feature-container-title">New Features</h2>
       <ul className="changelog-list">
-        {children}  
+        {children}
       </ul>
     </div>
   );

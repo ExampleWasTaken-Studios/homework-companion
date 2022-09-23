@@ -11,7 +11,7 @@ interface SubjectProps {
 export const Subject = ({ data, onClick }: SubjectProps) => {
 
   return (
-    <li 
+    <li
       className="subject-list-item"
       onClick={onClick}
     >

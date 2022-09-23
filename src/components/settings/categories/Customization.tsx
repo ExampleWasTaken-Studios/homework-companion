@@ -3,7 +3,7 @@ import { Setting } from "../Setting";
 
 export const Customization = () => {
   const [perfModeChecked, setPerfModeChecked] = useState(false);
-  
+
   useEffect(() => {
     window.api.settings.getSettingValue(window.api.settings.userSettingsKeys.customization.perfMode).then(value => typeof value === "boolean" && setPerfModeChecked(value));
   }, []);

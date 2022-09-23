@@ -72,7 +72,7 @@ const createWindow = () => {
       .then(name => console.log(`Added Extension: ${name}`))
       .catch(err => console.log("An error occurred:", err));
 
-    win.webContents.openDevTools(); 
+    win.webContents.openDevTools();
   }
 
   win.once("ready-to-show", win.show);

@@ -12,7 +12,7 @@ export const Welcome = () => {
 
   const submitHandler = () => {
 
-    
+
     if (subjectsTextArea.length === 0) {
       setInputIncomplete(true);
       return;
@@ -50,12 +50,12 @@ export const Welcome = () => {
           </textarea>
           <h6 className="welcome-textarea-alt">Separate subjects with a comma</h6>
           {inputIncomplete && (
-            <Alert 
+            <Alert
               severity="error"
               content="You need to enter at least one subject!"
             />
           )}
-          <Button 
+          <Button
             className="welcome-btn"
             onClick={submitHandler}
           >
@@ -70,7 +70,7 @@ export const Welcome = () => {
 export const WelcomeComplete = () => {
   return (
     <div className="welcome-wrapper">
-      <h1 className="welcome welcome-title">We&apos;re&nbsp;setting&nbsp;Homework&nbsp;Companion&nbsp;up&nbsp;for&nbsp;you. <br /> Hang&nbsp;tight!</h1>  
+      <h1 className="welcome welcome-title">We&apos;re&nbsp;setting&nbsp;Homework&nbsp;Companion&nbsp;up&nbsp;for&nbsp;you. <br /> Hang&nbsp;tight!</h1>
     </div>
   );
 };

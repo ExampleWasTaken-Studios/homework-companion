@@ -45,6 +45,8 @@
         "prop": "parens-new-line"
       }
     ],
+    "eol-last": ["error", "always"],
+    "no-trailing-spaces": "error",
     "semi": ["error", "always"],
     "quotes": ["error", "double", { "allowTemplateLiterals": true }],
     "no-debugger": "off",

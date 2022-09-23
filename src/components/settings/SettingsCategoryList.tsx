@@ -34,6 +34,6 @@ export const SettingsCategoryList = ({ activeCategory }: SettingsCategoryListPro
           isActive={activeCategory === "about"}
         />
       </Link>
-    </div>  
+    </div>
   );
 };

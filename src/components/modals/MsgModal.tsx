@@ -10,7 +10,7 @@ interface MsgModalProps {
 }
 
 export const MsgModal = ({ isOpen, setOpen, title, message }: MsgModalProps) => {
-  
+
   return (
     <>
       {isOpen && (

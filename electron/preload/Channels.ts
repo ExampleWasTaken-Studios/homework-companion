@@ -1,9 +1,9 @@
 export enum Channels {
 
-  
+
   GET_SETTING_VALUE = "settings/value/get",
   SET_SETTING_VALUE = "settings/value/set",
-  
+
   GET_APP_VERSION = "app/version/get",
   RELAUNCH_APP = "app/relaunch",
   GET_ASSETS_PATH = "assets-path/get",

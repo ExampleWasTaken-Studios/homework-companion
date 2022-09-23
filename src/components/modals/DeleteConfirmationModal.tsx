@@ -56,7 +56,7 @@ export const DeleteConfirmationModal = ({ isOpen, setOpen, actionType, data }: D
             className="delete-task-modal"
             onClick={event => event.stopPropagation()}
           >
-            
+
             <div className="delete-content">
               <h1 className="delete-task-title">Delete {target}?</h1>
               <p className="delete-task-description">Are you sure you want to delete this {target}?<br/>This action cannot be undone!</p>
