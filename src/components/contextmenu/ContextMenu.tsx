@@ -60,6 +60,7 @@ export const ContextMenu = ({ parentRef, items }: ContextMenuProps) => {
           style={{ top: posY, left: posX }}
         >
 
+          { /* eslint-disable-next-line array-callback-return */ }
           {items.map(current => {
 
             if (current.type === "divider") {
