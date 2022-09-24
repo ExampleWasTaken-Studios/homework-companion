@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "sourceMap": true,
+    "strict": true,
+    "outDir": "../build/electron",
+    "rootDir": ".",
+    "noEmitOnError": true,
+    "target": "es5",                          
+    "module": "commonjs",                    
+    "lib": ["es6"],                     
+    "allowJs": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "../@types",
+    "./"
+  ]
+}

@@ -1,0 +1,259 @@
+.home-homework {
+  user-select: none;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--ms-length) + 5px) var(--ms-length) 0 var(--ms-length);
+}
+
+.home-homework-list {
+  height: 100%;
+  max-height: 100%;
+  padding: 0 var(--ms-length) 0 0;
+  margin: calc(var(--ms-length) + 5px) 0 0 0;
+  overflow-y: scroll;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert();
+  cursor: pointer;
+  margin: 0 0 0 -5px;
+}
+
+/* Create new Task Modal START */
+.create-task-container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-secondary);
+  margin: var(--sm-length) var(--ml-length) var(--ml-length) var(--ml-length);
+}
+
+.create-task-header {
+  font-size: 22px;
+  font-weight: normal;
+  background-color: var(--bg-secondary);
+  margin: 0 0 var(--sm-length) 0;
+}
+
+.create-task-property-container {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--bg-secondary);
+  margin: 0 0 var(--sm-length) 0;
+}
+
+.create-task-title {
+  font-family: Open Sans;
+  font-size: 16px;
+  padding: 3px;
+  margin: 0 var(--ss-length) 0 0;
+  border: none;
+  border-radius: 4px;
+}
+
+.create-task-datepicker {
+  font-family: Open Sans;
+  font-size: 16px;
+  padding: 3px;
+  margin: 0 var(--ss-length) 0 0;
+  border: none;
+  border-radius: 4px;
+}
+
+.create-task-prio {
+  margin: 0 var(--ss-length) 0 0;
+}
+
+.create-task-content {
+  font-family: Open Sans;
+  font-size: 16px;
+  min-height: 50px;
+  max-height: 250px;
+  width: 100%;
+  padding: 5px;
+  margin: 0 0 var(--ss-length) 0;
+  border: none;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.create-task-btn-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--bg-secondary);
+}
+
+.create-task-cancel-btn {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  width: 49%;
+  height: 35px;
+}
+
+.create-task-create-btn {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  width: 49%;
+  height: 35px;
+}
+
+/* Create new Task Modal END */
+
+/* Task Modal START */
+.task-container {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-secondary);
+  margin: var(--sm-length) var(--ml-length) var(--ml-length) var(--ml-length);
+}
+
+.task-property-container {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--bg-secondary);
+  margin: 0 0 var(--sm-length) 0;
+}
+
+.task-datepicker {
+  font-family: Open Sans;
+  font-size: 16px;
+  padding: 3px;
+  margin: 0 var(--ss-length) 0 0;
+  border: none;
+  border-radius: 4px;
+}
+
+.task-prio {
+  margin: 0 var(--ss-length) 0 0;
+}
+
+.task-content {
+  font-family: Open Sans;
+  font-size: 16px;
+  min-height: 50px;
+  max-height: 250px;
+  width: 100%;
+  padding: 5px;
+  margin: 0 0 var(--ss-length) 0;
+  border: none;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.task-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--bg-secondary);
+}
+
+.task-cancel-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 49%;
+  height: 35px;
+}
+
+.task-create-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 49%;
+  height: 35px;
+}
+
+.task-update-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+  margin: var(--sm-length) 0 0 0;
+  border: 1px solid var(--bg-button);
+  transition: height var(--switch-state-change-duration) var(--switch-state-change-timing), font-size var(--switch-state-change-duration) var(--switch-state-change-timing);
+}
+
+.task-update-btn.hidden {
+  height: 0px;
+  font-size: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Task Modal END */
+
+/* Delete task modal START */
+.delete-task-confirmation-modal {
+  display: flex;
+  flex-direction: column;
+  padding: var(--ms-length);
+  border-radius: 4px;
+}
+
+.delete-task-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.delete-task-title {
+  font-size: 24px;
+  margin: 0 0 var(--ms-length) 0;
+}
+
+.delete-task-description {
+  margin: 0 0 var(--ms-length) 0;
+}
+
+.delete-task-action-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  margin: var(--ms-length) 0 0 0;
+}
+
+.delete-task-cancel-btn {
+  padding: var(--ss-length) var(--ml-length);
+  margin: 0 var(--ss-length) 0 0;
+}
+
+.delete-task-delete-btn {
+  padding: var(--ss-length) var(--ml-length);
+}
+
+/* Delete task modal END */
+
+@media screen and (min-height: 700px) {
+
+  .create-task-content,
+  .task-content {
+    max-height: 400px;
+    height: 340px;
+  }
+}
+
+@media screen and (min-height: 800px) {
+
+  .create-task-content,
+  .task-content {
+    max-height: 600px;
+    height: 340px;
+  }
+}
+
+@media screen and (min-height: 900px) {
+
+  .create-task-content,
+  .task-content {
+    max-height: 700px;
+    height: 340px;
+  }
+}

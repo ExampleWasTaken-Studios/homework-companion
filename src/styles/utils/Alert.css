@@ -1,0 +1,23 @@
+.alert {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: var(--fg-primary);
+  background-color: var(--alert-error-bg);
+  border: 1px solid var(--alert-error-outline);
+  border-radius: 4px;
+  margin: var(--ms-length) 0;
+}
+
+.icon-tabler-alert-circle {
+  width: 6.5%;
+  color: var(--alert-error-outline);
+  background-color: transparent;
+  margin: 0 0 0 var(--sm-length);
+}
+
+.alert-content {
+  color: var(--fg-primary);
+  background-color: transparent;
+  margin: 0 0 0 var(--sm-length);
+}

@@ -1,0 +1,12 @@
+.context-menu-child {
+  cursor: pointer;
+  color: var(--fg-primary);
+  background-color: transparent;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 4px;
+}
+
+.context-menu-child:hover {
+  background-color: var(--bg-primary);
+}
