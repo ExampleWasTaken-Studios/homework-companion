@@ -1,1 +1,8 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Get Support on Discord
+    url: https://discord.gg/CBMqmTaUQ4
+    about: Ask your questions directly to us on Discord
+  - name: Get Homework Companion
+    url: https://github.com/examplewastaken-studios/homework-companion/releases/latest
+    about: Get Homework Companion for your PC or mac
