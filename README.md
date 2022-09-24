@@ -1,47 +1,26 @@
-# Homework Companion
+# [Homework Companion](https://github.com/examplewastaken-studios/homework-companion)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/examplewastaken-studios/homework-companion)
+![GitHub all releases](https://img.shields.io/github/downloads/examplewastaken-studios/homework-companion/total)
+![GitHub contributors](https://img.shields.io/github/contributors/examplewastaken-studios/homework-companion)
 
-### Notes
-- a task title is capped at 30 chars to not overlap with the date
-- any input needs a char limit to accomodate for UI design (no overlapping)
-- BUG: modal can be bigger than window
-```css
-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-transition-duration: .15s
-```
+[![Discord](https://img.shields.io/discord/747518483327090849.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/CBMqmTaUQ4)
+[![Twitter](https://img.shields.io/badge/-@ExampleWasTaken%20Studios-2283FE?label=&logo=twitter&logoColor=ffffff&color=262C73&labelColor=2283FE)](https://twitter.com/FlybywireSim)
 
-### Settings
-The settings are structured in categories that each have their respective settings. The categories are in list view on the left. The respective settings are in a list view on the right.
-| Setting | Function | Category |
-| ------- | -------- | -------- |
-| Perfomance mode (not final name) |  replaces performance intensive features and effects with less performance intensive alternatives | Customization |
-| - | version, copyright, disclaimer, 3rd-party licenses | About |
-| Auto start | automatically start application at startup | General |
-| Hardware Acceleration | Use you GPU for certain tasks. | General |
+Homework Companion is an open-source task management app that specializes in homework management.
 
+## Prerequisites
+- Windows 10
+- macOS 11
 
-### CSS conventions
-In order to keep our CSS codebase clean we set up some conventions outlined below.
+> Due to the nature of open source, we are currently unable to test the builds on other platforms than those listed above. But it is probable that Homework Companion runs on Windows 11 as well as newer macOS versions.
 
-- Variables must be defined in [`global.css`](./src/renderer/styles/global.css).
-- Each component has it's own file named `<component_name>.css` inside the [`styles`](./src/renderer/styles/) folder. We refer to this file as "module".  
-The structure of the [`styles`](./src/renderer/styles/) folder should, to an extend, copy the structure of the [renderer](./src/renderer) folder.  
-Example:
-```sh
-# Actual structure:
-renderer
-|- components
-   |- changelog
-      |- FixContainer.tsx
+## Installation
+To download and install the latest version of Homework Companion, head to the [release section](https://github.com/examplewastaken-studios/homework-companion/releases/latest) and download the installation file for your operating system.
 
-# Styles structure:
-styles
-|- changelog
-   |- FixContainer.css
-```
-The goal of this approach is to avoid situations where the naming of the CSS is ambiguous or unclear.  
-Example: You have a file named `FixContainer.css`. Without the `changelog` directory it would not be clear what the file belongs to.
-- Each module is imported in [`main.css`](./src/renderer/styles/main.css).
-- [`main.css`](./src/renderer/styles/main.css) only imports other modules. It does not define any styles.
-- Colors are defined as a variable in [`global.css`](./src/renderer/styles/global.css).
+> We are working on a solution to simplify that process.
 
+## Contributing and bug reporting
+Head to our [docs](./docs/Contributing.md) for information on how to contribute to the project.
 
+## License
+Homework Companion is licensed under the [GPL-3.0](./LICENSE) license.
