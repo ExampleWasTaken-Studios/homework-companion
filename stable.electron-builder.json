@@ -4,7 +4,7 @@
   "mac": {
     "category": "public.app-category.education",
     "target": "dmg",
-    "icon": "assets/build/stable/mac/logo.png"
+    "icon": "assets/build/stable/icons/icon.icns"
   },
   "dmg": {
     "window": {
@@ -13,7 +13,7 @@
     },
     "title": "${productName} v${version}",
     "background": "assets/build/stable/mac/installer_background.png",
-    "icon": "assets/build/stable/mac/logo.png",
+    "icon": "assets/build/stable/icons/icon.icns",
     "iconSize": 90,
     "iconTextSize": 12,
     "contents": [
