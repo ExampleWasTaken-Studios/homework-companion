@@ -2,7 +2,6 @@ import { contextBridge, ipcRenderer, shell } from "electron";
 import { isEqual } from "lodash";
 import userSettingsKeys from "../settings/userSettingsPath";
 import { Channels } from "./Channels";
-import { getHTMLDateFormat } from "./DateUtils";
 
 const app = {
   getVersion: async (): Promise<string> =>  await ipcRenderer.invoke(Channels.GET_APP_VERSION),
@@ -12,8 +11,7 @@ const app = {
 };
 
 const util = {
-  isEqual: (value: unknown, other: unknown) => isEqual(value, other),
-  getHTMLDateFormat: (date?: Date) => getHTMLDateFormat(date)
+  isEqual: (value: unknown, other: unknown) => isEqual(value, other)
 };
 
 const settings = {
