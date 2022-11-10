@@ -6,6 +6,7 @@ import { Channels } from "./preload/Channels";
 import SubjectStorage from "./db/SubjectStorage";
 import TaskStorage from "./db/TaskStorage";
 import store, { persistWindowSettings } from "./settings/settings";
+import { Updater } from "@ewt-studios/updater";
 
 const ASSETS_PATH = app.isPackaged ? path.join(process.resourcesPath, "assets") : path.join(app.getAppPath(), "assets", "runtime");
 export const USER_DATA_PATH = app.getPath("userData");
@@ -78,7 +79,12 @@ const createWindow = () => {
   win.once("ready-to-show", win.show);
 };
 
-app.on("ready", createWindow);
+app.on("ready", () => {
+  createWindow();
+  const updater = new Updater(app, "ExampleWasTaken-Studios", "homework-companion");
+
+  updater.checkForUpdatesAndDownload();
+});
 
 app.on("window-all-closed", () => {
   app.quit(); // TODO: maybe change to default mac behavior
