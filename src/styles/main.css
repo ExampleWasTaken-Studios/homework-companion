@@ -14,8 +14,6 @@
 @import url(./views/Welcome.css);
 @import url(./home/HomeworkListItem.css);
 @import url(./home/Homework.css);
-@import url(./announcements/AnnouncementCard.css);
-@import url(./announcements/AnnouncementContainer.css);
 @import url(./changelog/NewItem.css);
 @import url(./changelog/FixContainer.css);
 @import url(./changelog/NewFeatureContainer.css);
