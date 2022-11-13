@@ -20,16 +20,6 @@ const schema: Schema<SettingsSchema> = {
             default: true
           }
         }
-      },
-      customization: {
-        type: "object",
-        default: {},
-        properties: {
-          perfMode: {
-            type: "boolean",
-            default: false
-          }
-        }
       }
     }
   },

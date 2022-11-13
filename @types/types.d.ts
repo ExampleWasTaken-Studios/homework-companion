@@ -18,9 +18,6 @@ interface SettingsSchema {
     general: {
       autoStart: boolean;
       hwAcc: boolean;
-    },
-    customization: {
-      perfMode: boolean;
     }
   },
   cache: {
