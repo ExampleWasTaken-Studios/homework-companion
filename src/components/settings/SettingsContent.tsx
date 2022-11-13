@@ -1,5 +1,4 @@
 import { About } from "./categories/About";
-import { Customization } from "./categories/Customization";
 import { General } from "./categories/General";
 import { Subjects } from "./categories/subjects/Subjects";
 
@@ -12,8 +11,6 @@ export const SettingsContent = ({ activeCategory }: SettingsContentProps) => {
     <div className="settings-content">
       {activeCategory === "general" ? (
         <General />
-      ) : activeCategory === "customization" ? (
-        <Customization />
       ) : activeCategory === "subjects" ? (
         <Subjects />
       ) : activeCategory === "about" ? (

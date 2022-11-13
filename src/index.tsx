@@ -37,10 +37,6 @@ root.render(
               element={<Settings activeCategory="general" />}
             />
             <Route
-              path="customization"
-              element={<Settings activeCategory="customization" />}
-            />
-            <Route
               path="about"
               element={<Settings activeCategory="about" />}
             />

@@ -49,4 +49,4 @@ interface Subject {
 
 type AnnouncementCategory = "announcement" | "update";
 
-type SettingsCategory = "general" | "customization" | "subjects" | "about";
+type SettingsCategory = "general" | "subjects" | "about";

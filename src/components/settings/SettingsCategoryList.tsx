@@ -16,12 +16,6 @@ export const SettingsCategoryList = ({ activeCategory }: SettingsCategoryListPro
           isActive={activeCategory === "general"}
         />
       </Link>
-      <Link to="/settings/customization">
-        <SettingsCategoryListItem
-          name="Customization"
-          isActive={activeCategory === "customization"}
-        />
-      </Link>
       <Link to="/settings/subjects">
         <SettingsCategoryListItem
           name="Subjects"
