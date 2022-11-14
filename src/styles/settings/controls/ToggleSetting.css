@@ -1,0 +1,21 @@
+.toggle-setting {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 var(--ml-length) 0;
+  margin: var(--ml-length) 0 0 0;
+  border-bottom: 1px solid var(--fg-disabled);
+}
+
+.toggle-setting-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.toggle-setting-description {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--fg-secondary);
+  width: 90%;
+  margin: 8px 0 0 0;
+}
