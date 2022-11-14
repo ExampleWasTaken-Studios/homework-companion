@@ -1,0 +1,9 @@
+.settings-content {
+  user-select: none;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: calc(var(--ms-length) + 5px) var(--ms-length) 0 var(--ms-length);
+}

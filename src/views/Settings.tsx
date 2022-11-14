@@ -1,12 +1,11 @@
-import { SettingsWrapper } from "../components/settings/SettingsContainer";
+import { SettingsContent } from "../components/settings/SettingsContent";
 import { Sidebar } from "../components/utils/Sidebar";
-import { ViewHeader } from "../components/utils/ViewHeader";
 
 export const Settings = () => {
   return (
     <div className="container">
       <Sidebar activeItem="settings" />
-      <SettingsWrapper />
+      <SettingsContent />
     </div>
   );
 };
