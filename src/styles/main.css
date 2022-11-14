@@ -18,12 +18,7 @@
 @import url(./changelog/FixContainer.css);
 @import url(./changelog/NewFeatureContainer.css);
 @import url(./changelog/Changelog.css);
-@import url(./settings/SettingsCategoryListItem.css);
-@import url(./settings/SettingsCategoryList.css);
-@import url(./settings/SettingsContent.css);
-@import url(./settings/SettingsContainer.css);
-@import url(./settings/Setting.css);
-@import url(./settings/categories/About.css);
+@import url(./settings/Settings.css);
 @import url(./settings/categories/subjects/Subjects.css);
 @import url(./settings/categories/subjects/Subject.css);
 @import url(./modals/TaskModal.css);

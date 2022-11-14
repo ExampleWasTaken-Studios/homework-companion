@@ -33,20 +33,8 @@ root.render(
             path="settings"
           >
             <Route
-              path="general"
-              element={<Settings activeCategory="general" />}
-            />
-            <Route
-              path="about"
-              element={<Settings activeCategory="about" />}
-            />
-            <Route
-              path="subjects"
-              element={<Settings activeCategory="subjects" />}
-            />
-            <Route
               index
-              element={<Settings activeCategory="general" />}
+              element={<Settings />}
             />
           </Route>
         </Routes>

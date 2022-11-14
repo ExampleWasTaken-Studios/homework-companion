@@ -1,21 +1,9 @@
-import { About } from "./categories/About";
-import { General } from "./categories/General";
-import { Subjects } from "./categories/subjects/Subjects";
+import React from "react";
 
-interface SettingsContentProps {
-  activeCategory: SettingsCategory;
-}
-
-export const SettingsContent = ({ activeCategory }: SettingsContentProps) => {
+export const SettingsContent = () => {
   return (
     <div className="settings-content">
-      {activeCategory === "general" ? (
-        <General />
-      ) : activeCategory === "subjects" ? (
-        <Subjects />
-      ) : activeCategory === "about" ? (
-        <About />
-      ) : <></>}
+      Test
     </div>
   );
 };
