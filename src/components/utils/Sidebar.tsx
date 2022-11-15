@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-type ActiveItem = "home" | "announcements" | "settings";
+type ActiveItem = "home" | "subjects" | "settings";
 
 interface SidebarProps {
   activeItem: ActiveItem;
@@ -17,21 +17,21 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
               <Link to="/home">
                 <li className="sidebar-list-item sidebar-item-active no">Home</li>
               </Link>
-              {/* <Link to="/announcements">
-                <li className="sidebar-list-item">Announcements</li>
-              </Link> */}
+              <Link to="/subjects">
+                <li className="sidebar-list-item">Subjects</li>
+              </Link>
               <Link to="/settings">
                 <li className="sidebar-list-item">Settings</li>
               </Link>
             </>
-          ) : activeItem === "announcements" ? (
+          ) : activeItem === "subjects" ? (
             <>
               <Link to="/home">
                 <li className="sidebar-list-item">Home</li>
               </Link>
-              {/* <Link to="/announcements">
-                <li className="sidebar-list-item sidebar-item-active">Announcements</li>
-              </Link> */}
+              <Link to="/subjects">
+                <li className="sidebar-list-item sidebar-item-active">Subjects</li>
+              </Link>
               <Link to="/settings">
                 <li className="sidebar-list-item">Settings</li>
               </Link>
@@ -41,9 +41,9 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
               <Link to="/home">
                 <li className="sidebar-list-item">Home</li>
               </Link>
-              {/* <Link to="/announcements">
-                <li className="sidebar-list-item">Announcements</li>
-              </Link> */}
+              <Link to="/subjects">
+                <li className="sidebar-list-item">Subjects</li>
+              </Link>
               <Link to="/settings">
                 <li className="sidebar-list-item sidebar-item-active">Settings</li>
               </Link>

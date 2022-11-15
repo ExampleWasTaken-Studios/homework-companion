@@ -5,9 +5,10 @@ import { AddSubjectModal } from "../../../modals/AddSubjectModal";
 import { DeleteConfirmationModal } from "../../../modals/DeleteConfirmationModal";
 import { MsgModal } from "../../../modals/MsgModal";
 import { Button } from "../../../utils/Button";
+import { ViewHeader } from "../../../utils/ViewHeader";
 import { Subject } from "./Subject";
 
-export const Subjects = () => {
+export const SubjectsContainer = () => {
 
   const [subjects, setSubjects] = useState([NULL_SUBJECT]);
   const [selectedSubject, setSelectedSubject] = useState(NULL_SUBJECT);
@@ -22,15 +23,14 @@ export const Subjects = () => {
   return (
     <>
       <div className="subjects-container">
-        <div className="subject-list-header">
-          <p className="subject-list-header-line">Click to delete</p>
+        <ViewHeader title="Subjects">
           <Button
             onClick={() => setAddSubjectModalOpen(true)}
             className="add-subject-btn"
           >
             Add Subject
           </Button>
-        </div>
+        </ViewHeader>
         <ul className="subject-list">
           {subjects.map(current => {
             return (

@@ -4,7 +4,7 @@
   height: 100%; 
   display: flex;
   flex-direction: column;
-  padding: calc(var(--ms-length) + 5px) 0 0 var(--ms-length);
+  padding: calc(var(--ms-length) + 5px) var(--ms-length) 0 var(--ms-length);
 }
 
 .subject-list {
@@ -16,18 +16,6 @@
   flex-direction: column;
   margin: calc(var(--ms-length)) 0 0 0;
   overflow-y: scroll;
-}
-
-.subject-list-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 0 var(--ms-length) 0;
-  border-bottom: 1px solid var(--fg-disabled);
-}
-
-.subject-list-header-line {
-  font-size: var(--mm-length);
 }
 
 .add-subject-btn {
