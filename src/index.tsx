@@ -6,6 +6,7 @@ import GlobalErrorBoundary from "./components/errors/GlobalErrorBoundary";
 import "./styles/main.css";
 import { Home } from "./views/Home";
 import { Settings } from "./views/Settings";
+import { Subjects } from "./views/Subjects";
 import { Welcome } from "./views/Welcome";
 
 const root = ReactDOM.createRoot(
@@ -24,6 +25,10 @@ root.render(
           <Route
             path="home"
             element={<Home />}
+          />
+          <Route
+            path="subjects"
+            element={<Subjects />}
           />
           <Route
             path="welcome"
