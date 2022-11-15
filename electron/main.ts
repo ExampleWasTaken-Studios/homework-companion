@@ -81,9 +81,10 @@ const createWindow = () => {
 
 app.on("ready", () => {
   createWindow();
-  const updater = new Updater(app, "ExampleWasTaken-Studios", "homework-companion");
+  // TODO: uncomment before release
+  // const updater = new Updater(app, "ExampleWasTaken-Studios", "homework-companion");
 
-  updater.checkForUpdatesAndDownload();
+  // updater.checkForUpdatesAndDownload();
 });
 
 app.on("window-all-closed", () => {
