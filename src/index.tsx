@@ -5,6 +5,7 @@ import { App } from "./App";
 import GlobalErrorBoundary from "./components/errors/GlobalErrorBoundary";
 import "./styles/main.css";
 import { Home } from "./views/Home";
+import { Settings } from "./views/Settings";
 import { Welcome } from "./views/Welcome";
 
 const root = ReactDOM.createRoot(
@@ -30,6 +31,7 @@ root.render(
           />
           <Route
             path="settings"
+            element={<Settings />}
           />
         </Routes>
       </HashRouter>
