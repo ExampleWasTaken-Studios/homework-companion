@@ -40,3 +40,17 @@
   background-color: var(--bg-secondary-active);
   border-color: var(--bg-button);
 }
+
+.disabled {
+  cursor: not-allowed;
+  color: var(--fg-disabled);
+  background-color: var(--bg-button-disabled);
+  border: 1px solid var(--bg-button-disabled);
+}
+
+.disabled:hover {
+  cursor: not-allowed;
+  color: var(--fg-disabled);
+  background-color: var(--bg-button-disabled);
+  border: 1px solid var(--bg-button-disabled);
+}

@@ -33,12 +33,12 @@
   font-weight: 500;
 }
 
-.sidebar-list-item:hover {
+.sidebar-list-item.active {
+  background-color: var(--bg-active);
+  box-shadow: 0 0 5px #000;
   color: var(--fg-primary);
 }
 
-.sidebar-item-active {
-  background-color: var(--bg-active);
-  box-shadow: 0 0 5px #000;
+.sidebar-list-item:hover {
   color: var(--fg-primary);
 }
