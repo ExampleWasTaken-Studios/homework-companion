@@ -30,7 +30,7 @@ export const SettingsContent = () => {
       />
       <ToggleSetting
         title="Disable Hardware Acceleration"
-        description="Turns on Hardware Acceleration, which uses your GPU to make Discord smoother. Turn this off if you are experiencing frame drops. (Requires restart)"
+        description="Turns on Hardware Acceleration, which uses your GPU to make Homework Companion smoother. Turn this off if you are experiencing frame drops. (Requires restart)"
         settingKey={window.api.settings.userSettingsKeys.general.hwAcc}
       />
 

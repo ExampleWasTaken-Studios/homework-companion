@@ -3,7 +3,6 @@ import { CloseIcon } from "../../svg/CloseIcon";
 import { DiscordIcon } from "../../svg/DiscordIcon";
 import { TwitterIcon } from "../../svg/TwitterIcon";
 import { GroupContainer } from "./GroupContainer";
-import { NewItem } from "./NewItem";
 
 interface ChangelogProps {
   isOpen: boolean;
@@ -38,12 +37,11 @@ export const Changelog = ({ isOpen, setOpen, showSocials }: ChangelogProps) => {
 
               <div
                 onClick={() => {
-                  if (window.api.app.getPlatform === "darwin") {
+                  const platform = window.api.app.getPlatform;
+                  if (platform === "darwin") {
                     window.api.app.openExternal("https://bit.ly/3Gt3RS3");
-                  } else if (window.api.app.getPlatform === "win32") {
+                  } else if (platform === "win32") {
                     window.api.app.openExternal("https://bit.ly/3XdW5l9");
-                  } else {
-                    return;
                   }
                 }}
                 className="changelog-hero"

@@ -1,6 +1,6 @@
 interface TwitterIconProps {
   className: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const TwitterIcon = ({ className, onClick }: TwitterIconProps) => {

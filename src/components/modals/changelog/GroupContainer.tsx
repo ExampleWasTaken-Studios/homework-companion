@@ -15,9 +15,9 @@ export const GroupContainer = ({ type, children }: GroupContainerProps) => {
     <div className="group-container">
       {type === "new-features" ? (
         <h2 className="group-type-new-feature-container-title">New&nbsp;Features</h2>
-      ) : (
+      ) : type === "bug-fixes" ? (
         <h2 className="group-type-bug-fixes-container-title">Bug Fixes</h2>
-      )}
+      ) : null}
       <ul className="group-list">
         {children}
       </ul>
