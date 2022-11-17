@@ -9,6 +9,7 @@ export enum Channels {
   GET_ASSETS_PATH = "assets-path/get",
   GET_USER_DATA_PATH = "app/userDataPath",
   CHECK_FOR_UPDATES = "app/check-updates",
+  SHOULD_SHOW_CHANGELOG = "app/should-show-changelog",
 
   GET_NEXT_TASK_ID = "tasks/get/next-id",
   GET_NEXT_TASK_ID_RESPONSE = "tasks/get/next-id/response",

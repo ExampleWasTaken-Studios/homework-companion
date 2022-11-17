@@ -1,12 +1,13 @@
-import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron/main";
+import { Updater } from "@ewt-studios/updater";
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
-import * as path from "path";
 import * as electronLocalshortcut from "electron-localshortcut";
-import { Channels } from "./preload/Channels";
+import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron/main";
+import * as path from "path";
+import semver from "semver";
 import SubjectStorage from "./db/SubjectStorage";
 import TaskStorage from "./db/TaskStorage";
+import { Channels } from "./preload/Channels";
 import store, { persistWindowSettings } from "./settings/settings";
-import { Updater } from "@ewt-studios/updater";
 
 const ASSETS_PATH = app.isPackaged ? path.join(process.resourcesPath, "assets") : path.join(app.getAppPath(), "assets", "runtime");
 export const USER_DATA_PATH = app.getPath("userData");
@@ -103,6 +104,10 @@ ipcMain.handle(Channels.GET_APP_VERSION, () => {
 
 ipcMain.handle(Channels.CHECK_FOR_UPDATES, () => {
   return updater.checkForUpdatesAndDownload();
+});
+
+ipcMain.handle(Channels.SHOULD_SHOW_CHANGELOG, () => {
+  return semver.satisfies(app.getVersion(), `>${store.get("metaInfo.lastChangelogViewed")}`, { includePrerelease: true });
 });
 
 ipcMain.handle(Channels.GET_ASSETS_PATH, () => {

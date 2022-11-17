@@ -42,6 +42,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.0",
+    "semver": "^7.3.8",
     "source-map-support": "^0.5.21",
     "systeminformation": "^5.12.14",
     "web-vitals": "^2.1.4"

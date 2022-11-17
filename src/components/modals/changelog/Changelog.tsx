@@ -12,8 +12,8 @@ interface ChangelogProps {
 
 export const Changelog = ({ isOpen, setOpen, showSocials }: ChangelogProps) => {
 
-  const closeHandler = () => {
-    // TODO: store to disk that changelog for this version has been viewed
+  const closeHandler = async () => {
+    window.api.settings.setSettingValue("metaInfo.lastChangelogViewed", await window.api.app.getVersion());
     setOpen(false);
   };
 
