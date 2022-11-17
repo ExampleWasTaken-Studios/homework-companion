@@ -7,3 +7,38 @@
   justify-content: flex-start;
   padding: calc(var(--ms-length) + 5px) var(--ms-length) 0 var(--ms-length);
 }
+
+.changelog-container {
+  padding: 0 0 var(--ml-length) 0;
+  margin: var(--ml-length) 0 0 0;
+}
+
+.about-section {
+  font-size: 12px;
+  font-weight: lighter;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 var(--ss-length) 0;
+}
+
+.version-section {
+  color: var(--fg-secondary);
+  margin: 0 var(--ss-length) 0 0;
+}
+
+.license-section {
+  cursor: pointer;
+  color: var(--fg-secondary);
+  transition: color var(--hover-trans-timing) var(--hover-trans-duration);
+}
+
+.license-section:hover {
+  color: var(--fg-primary);
+}
+
+.about-section-btn {
+  padding: var(--ss-length);
+  margin: 0 var(--sm-length) 0 0;
+}
