@@ -68,7 +68,7 @@
 }
 
 .inline {
-  width: 49%;
+  width: 100%; /* TODO: When re adding priority set this to 49% */
 }
 
 .textarea {
