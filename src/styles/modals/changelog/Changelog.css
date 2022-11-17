@@ -1,0 +1,89 @@
+.changelog-modal {
+  max-height: 85%;
+  width: 33%;
+  padding: 0 var(--ms-length);
+  border-radius: 4px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.changelog-modal-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding: var(--ms-length) 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.changelog-hero {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0 var(--ml-length);
+  margin: 0 0 var(--sl-length) 0;
+  background: rgb(131, 58, 180);
+  background: linear-gradient(45deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+  border-radius: 4px;
+}
+
+.changelog-hero>h2 {
+  font-weight: 400;
+  letter-spacing: calc(var(--ss-length));
+  text-align: center;
+  background-color: transparent;
+}
+
+.changelog-footer {
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: var(--ms-length);
+  margin: 0 calc(0px - var(--ms-length));
+  border-top: 1px solid var(--fg-disabled);
+}
+
+.changelog-footer>p {
+  font-size: 12px;
+  margin: 0 0 0 var(--ms-length);
+}
+
+.changelog-footer-twitter-icon {
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+}
+
+.changelog-footer-twitter-icon path {
+  color: var(--fg-primary);
+  transition: color var(--hover-trans-timing) var(--hover-trans-duration);
+}
+
+.changelog-footer-twitter-icon:hover path {
+  /* Twitter Blue */
+  color: #1DA1F2;
+}
+
+.changelog-footer-discord-icon {
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  margin: 0 0 0 var(--ms-length);
+}
+
+.changelog-footer-discord-icon path {
+  color: var(--fg-primary);
+  transition: color var(--hover-trans-timing) var(--hover-trans-duration);
+}
+
+.changelog-footer-discord-icon:hover path {
+  /* Discord Blurple */
+  color: #5865F2;
+}

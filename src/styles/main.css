@@ -14,10 +14,6 @@
 @import url(./views/Welcome.css);
 @import url(./home/HomeworkListItem.css);
 @import url(./home/Homework.css);
-@import url(./changelog/NewItem.css);
-@import url(./changelog/FixContainer.css);
-@import url(./changelog/NewFeatureContainer.css);
-@import url(./changelog/Changelog.css);
 @import url(./settings/SettingsContent.css);
 @import url(./settings/controls/ToggleSetting.css);
 @import url(./settings/categories/subjects/SubjectsContainer.css);
@@ -27,6 +23,9 @@
 @import url(./modals/DeleteTaskConfirmationModal.css);
 @import url(./modals/AddSubjectModal.css);
 @import url(./modals/MsgModal.css);
+@import url(./modals/changelog/Changelog.css);
+@import url(./modals/changelog/GroupContainer.css);
+@import url(./modals/changelog/NewItem.css);
 @import url(./contextmenu/ContextMenu.css);
 @import url(./contextmenu/ContextMenuFields.css);
 @import url(./contextmenu/ContextMenuDivider.css);

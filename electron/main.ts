@@ -14,6 +14,7 @@ export const USER_DATA_PATH = app.getPath("userData");
 let win: BrowserWindow | null = null;
 const taskStorage: TaskStorage = new TaskStorage();
 const subjectStorage: SubjectStorage = new SubjectStorage();
+export const updater = new Updater(app, "ExampleWasTaken-Studios", "homework-companion");
 
 const createWindow = () => {
   win = new BrowserWindow({
@@ -81,9 +82,8 @@ const createWindow = () => {
 
 app.on("ready", () => {
   createWindow();
-  // TODO: uncomment before release
-  // const updater = new Updater(app, "ExampleWasTaken-Studios", "homework-companion");
 
+  // TODO: uncomment before release
   // updater.checkForUpdatesAndDownload();
 });
 
@@ -99,6 +99,10 @@ app.on("activate", () => {
 
 ipcMain.handle(Channels.GET_APP_VERSION, () => {
   return app.getVersion();
+});
+
+ipcMain.handle(Channels.CHECK_FOR_UPDATES, () => {
+  return updater.checkForUpdatesAndDownload();
 });
 
 ipcMain.handle(Channels.GET_ASSETS_PATH, () => {
