@@ -43,6 +43,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.0",
     "source-map-support": "^0.5.21",
+    "systeminformation": "^5.12.14",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
@@ -54,7 +55,7 @@
     "@typescript-eslint/parser": "^5.37.0",
     "concurrently": "^7.3.0",
     "cross-env": "^7.0.3",
-    "electron": "^21.2.3",
+    "electron": "^21.3.0",
     "electron-builder": "^23.6.0",
     "electron-icon-builder": "^2.0.1",
     "electron-reloader": "^1.2.3",
