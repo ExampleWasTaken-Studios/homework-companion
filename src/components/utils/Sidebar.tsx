@@ -15,7 +15,7 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
           {activeItem === "home" ? (
             <>
               <Link to="/home">
-                <li className="sidebar-list-item sidebar-item-active no">Home</li>
+                <li className="sidebar-list-item active">Home</li>
               </Link>
               <Link to="/subjects">
                 <li className="sidebar-list-item">Subjects</li>
@@ -30,7 +30,7 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
                 <li className="sidebar-list-item">Home</li>
               </Link>
               <Link to="/subjects">
-                <li className="sidebar-list-item sidebar-item-active">Subjects</li>
+                <li className="sidebar-list-item active">Subjects</li>
               </Link>
               <Link to="/settings">
                 <li className="sidebar-list-item">Settings</li>
@@ -45,7 +45,7 @@ export const Sidebar = ({ activeItem }: SidebarProps) => {
                 <li className="sidebar-list-item">Subjects</li>
               </Link>
               <Link to="/settings">
-                <li className="sidebar-list-item sidebar-item-active">Settings</li>
+                <li className="sidebar-list-item active">Settings</li>
               </Link>
             </>
           ) : null /* TODO: add error view */}
