@@ -172,7 +172,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
             </label>
 
             <div className="priority-subject-container">
-              <label className="label inline">
+              {/* <label className="label inline">
                 PRIORITY
                 <select
                   className="input dropdown"
@@ -185,7 +185,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
                   <option value="Normal">Normal</option>
                   <option value="Low">Low</option>
                 </select>
-              </label>
+              </label> */}
 
               <label className="label inline">
                 SUBJECT
