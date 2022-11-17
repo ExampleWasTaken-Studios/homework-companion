@@ -49,9 +49,9 @@ const schema: Schema<SettingsSchema> = {
     type: "object",
     default: {},
     properties: {
-      lastVersion: {
+      lastChangelogViewed: {
         type: "string",
-        default: ""
+        default: "0.0.0"
       },
       lastLaunch: {
         type: "integer",

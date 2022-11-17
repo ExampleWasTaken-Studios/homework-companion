@@ -1,6 +1,6 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { NULL_TASK } from "../../constants";
+import { Changelog } from "../modals/changelog/Changelog";
 import { CreateTaskModal } from "../modals/CreateTaskModal";
 import { DeleteConfirmationModal } from "../modals/DeleteConfirmationModal";
 import { TaskModal } from "../modals/TaskModal";
@@ -17,6 +17,7 @@ export const Homework = () => {
   const [createTaskModalOpen, setCreateTaskModalOpen] = useState(false);
   const [taskModalOpen, setTaskModalOpen] = useState(false);
   const [deleteConfirmationModalOpen, setDeleteConfirmationModalOpen] = useState(false);
+  const [changelogOpen, setChangelogOpen] = useState(false);
 
   const homeworkListItemClickHandler = (newTask: Homework) => {
     setSelectedTask(newTask);
@@ -24,6 +25,11 @@ export const Homework = () => {
   };
 
   useEffect(() => {
+
+    (async () => {
+      setChangelogOpen(await window.api.app.shouldShowChangelog());
+    })();
+
     window.api.tasks.get().then(tasks => {
       setTasks(tasks);
     });
@@ -96,6 +102,11 @@ export const Homework = () => {
         setOpen={setDeleteConfirmationModalOpen}
         actionType="task"
         data={selectedTask}
+      />
+
+      <Changelog
+        isOpen={changelogOpen}
+        setOpen={setChangelogOpen}
       />
     </div>
   );
