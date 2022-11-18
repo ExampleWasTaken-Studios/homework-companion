@@ -9,6 +9,7 @@ const app = {
   getAssetsPath: async (): Promise<string> => await ipcRenderer.invoke(Channels.GET_ASSETS_PATH),
   relaunch: (force = false): void => ipcRenderer.send(Channels.RELAUNCH_APP, force),
   openExternal: (url: string, options?: Electron.OpenExternalOptions | undefined) => shell.openExternal(url, options),
+  openPath: (path: string) => shell.openPath(path),
   checkForUpdates: async () => await ipcRenderer.invoke(Channels.CHECK_FOR_UPDATES),
   shouldShowChangelog: async () => await ipcRenderer.invoke(Channels.SHOULD_SHOW_CHANGELOG)
 };
