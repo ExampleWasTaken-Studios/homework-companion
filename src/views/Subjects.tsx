@@ -1,4 +1,4 @@
-import { SubjectsContainer } from "../components/settings/categories/subjects/SubjectsContainer";
+import { SubjectsContainer } from "../components/subjects/SubjectsContainer";
 import { Sidebar } from "../components/utils/Sidebar";
 
 export const Subjects = () => {

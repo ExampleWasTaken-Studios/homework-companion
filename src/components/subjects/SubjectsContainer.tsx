@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { NULL_SUBJECT } from "../../../../constants";
-import { AddSubjectModal } from "../../../modals/AddSubjectModal";
-import { DeleteConfirmationModal } from "../../../modals/DeleteConfirmationModal";
-import { MsgModal } from "../../../modals/MsgModal";
-import { Button } from "../../../utils/Button";
-import { ViewHeader } from "../../../utils/ViewHeader";
+import { NULL_SUBJECT } from "../../constants";
+import { AddSubjectModal } from "../modals/AddSubjectModal";
+import { DeleteConfirmationModal } from "../modals/DeleteConfirmationModal";
+import { MsgModal } from "../modals/MsgModal";
+import { Button } from "../utils/Button";
+import { ViewHeader } from "../utils/ViewHeader";
 import { Subject } from "./Subject";
 
 export const SubjectsContainer = () => {
