@@ -16,8 +16,8 @@ export const SettingsContent = () => {
     })();
   });
 
-  const licenseClickHandler = () => {
-    window.api.app.openExternal(""); // TODO: add path to license file
+  const licenseClickHandler = async () => {
+    window.api.app.openPath(`${await window.api.app.getAssetsPath()}/3rd-party-licenses.md`);
   };
 
   return (
