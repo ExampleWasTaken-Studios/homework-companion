@@ -28,12 +28,6 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@ewt-studios/updater": "^2.0.3",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/electron-devtools-installer": "^2.2.2",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.11.56",
     "electron-devtools-installer": "^3.2.0",
     "electron-localshortcut": "^3.2.1",
     "electron-reload": "^2.0.0-alpha.1",
@@ -44,12 +38,13 @@
     "react-router-dom": "^6.4.0",
     "semver": "^7.3.8",
     "source-map-support": "^0.5.21",
-    "systeminformation": "^5.12.14",
-    "web-vitals": "^2.1.4"
+    "systeminformation": "^5.12.14"
   },
   "devDependencies": {
+    "@types/electron-devtools-installer": "^2.2.2",
     "@types/electron-localshortcut": "^3.1.0",
     "@types/lodash": "^4.14.185",
+    "@types/node": "^18.11.9",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
