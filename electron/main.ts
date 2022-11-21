@@ -1,4 +1,5 @@
 import { Updater } from "@ewt-studios/updater";
+import { dialog } from "electron";
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 import * as electronLocalshortcut from "electron-localshortcut";
 import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from "electron/main";
@@ -86,6 +87,17 @@ app.on("ready", () => {
 
   // TODO: uncomment before release
   // updater.checkForUpdatesAndDownload();
+
+  if (semver.prerelease(app.getVersion())) {
+    if (win && app.isPackaged) {
+      dialog.showMessageBox(win, {
+        title: "Warning - Prerelease!",
+        message: `You are using prerelease version ${app.getVersion()} of Homework Companion.`,
+        detail: "Things may break, change or be removed at any time.",
+        buttons: ["Got it"]
+      });
+    }
+  }
 });
 
 app.on("window-all-closed", () => {
