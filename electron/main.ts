@@ -91,10 +91,12 @@ app.on("ready", () => {
   if (semver.prerelease(app.getVersion())) {
     if (win && app.isPackaged) {
       dialog.showMessageBox(win, {
+        type: "warning",
         title: "Warning - Prerelease!",
-        message: `You are using prerelease version ${app.getVersion()} of Homework Companion.`,
+        message: `You are using a prerelease version ${app.getVersion()} of Homework Companion.`,
         detail: "Things may break, change or be removed at any time.",
-        buttons: ["Got it"]
+        buttons: ["Got it"],
+        noLink: true
       });
     }
   }
