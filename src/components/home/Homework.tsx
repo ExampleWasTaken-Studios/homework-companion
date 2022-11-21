@@ -51,8 +51,8 @@ export const Homework = () => {
           <HomeworkListItem
             onClick={homeworkListItemClickHandler}
             contextMenuDeleteHandler={() => {
-              window.api.tasks.deleteTask(current);
-              setTasks(tasks.filter(data => data.id !== current.id));
+              setSelectedTask(current);
+              setDeleteConfirmationModalOpen(true);
             }}
             contextMenuCompleteHandler={() => {
               const tempTasks = tasks.map((i): Homework => {
