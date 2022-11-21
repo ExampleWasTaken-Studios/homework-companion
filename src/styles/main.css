@@ -16,8 +16,8 @@
 @import url(./home/Homework.css);
 @import url(./settings/SettingsContent.css);
 @import url(./settings/controls/ToggleSetting.css);
-@import url(./settings/categories/subjects/SubjectsContainer.css);
-@import url(./settings/categories/subjects/Subject.css);
+@import url(./subjects/SubjectsContainer.css);
+@import url(./subjects/Subject.css);
 @import url(./modals/TaskModal.css);
 @import url(./modals//CreateTaskModal.css);
 @import url(./modals/DeleteTaskConfirmationModal.css);
