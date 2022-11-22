@@ -9,6 +9,7 @@
 # production
 /build
 /dist
+/assets/runtime/3rd-party-licenses.md
 
 # misc
 .DS_Store

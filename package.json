@@ -10,10 +10,11 @@
     "url": "https://github.com/ExampleWasTaken-Studios/homework-companion.git"
   },
   "scripts": {
+    "start": "npm run licenses && concurrently \"cross-env BROWSER=none npm run react:start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
     "lint": "eslint ./ --fix",
-    "start": "concurrently \"cross-env BROWSER=none npm run react:start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
-    "build": "npm run react:build && tsc -p electron && electron-builder -c stable.electron-builder.json",
-    "build:crossplatform": "npm run react:build && tsc -p electron && electron-builder -c stable.electron-builder.json -w -o",
+    "licenses": "node scripts/licenses",
+    "build": "npm run licenses && npm run react:build && tsc -p electron && electron-builder -c stable.electron-builder.json",
+    "build:crossplatform": "npm run licenses && npm run react:build && tsc -p electron && electron-builder -c stable.electron-builder.json -w -o",
     "build:canary": "npm run react:build && tsc -p electron && electron-builder -c canary.electron-builder.json",
     "build:icon": "./node_modules/.bin/electron-icon-builder -i=\"./assets/build/stable/logo.png\" -o=\"./assets/build/stable\" -f",
     "build:icon:canary": "./node_modules/.bin/electron-icon-builder -i=\"./assets/build/canary/logo.png\" -o=\"./assets/build/canary\" -f",
@@ -59,6 +60,7 @@
     "electron-reloader": "^1.2.3",
     "eslint": "^8.23.1",
     "eslint-plugin-react": "^7.31.8",
+    "license-checker": "^25.0.1",
     "react-scripts": "^5.0.1",
     "typescript": "^4.8.3",
     "typescript-eslint": "^0.0.1-alpha.0",
