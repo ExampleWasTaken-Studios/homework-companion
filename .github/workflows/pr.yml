@@ -39,10 +39,7 @@ jobs:
       - name: Upload PR artifact (Windows)
         uses: actions/upload-artifact@v3
         with:
-          name: Homework Companion (Windows)
-          path: ./dist/*.exe
-      - name: Upload PR artifact (macOS)
-        uses: actions/upload-artifact@v3
-        with:
-          name: Homework Companion (macOS)
-          path: ./dist/*.dmg          
+          name: Homework Companion
+          path: |
+            ./dist/*.exe
+            ./dist/*.dmg
