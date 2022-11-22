@@ -10,6 +10,7 @@
     "url": "https://github.com/ExampleWasTaken-Studios/homework-companion.git"
   },
   "scripts": {
+    "lint": "eslint ./ --fix",
     "start": "concurrently \"cross-env BROWSER=none npm run react:start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
     "build": "npm run react:build && tsc -p electron && electron-builder -c stable.electron-builder.json",
     "build:crossplatform": "npm run react:build && tsc -p electron && electron-builder -c stable.electron-builder.json -w -o",
