@@ -12,6 +12,7 @@
   "scripts": {
     "start": "concurrently \"cross-env BROWSER=none npm run react:start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
     "build": "npm run react:build && tsc -p electron && electron-builder -c stable.electron-builder.json",
+    "build:crossplatform": "npm run react:build && tsc -p electron && electron-builder -c stable.electron-builder.json -w -o",
     "build:canary": "npm run react:build && tsc -p electron && electron-builder -c canary.electron-builder.json",
     "build:icon": "./node_modules/.bin/electron-icon-builder -i=\"./assets/build/stable/logo.png\" -o=\"./assets/build/stable\" -f",
     "build:icon:canary": "./node_modules/.bin/electron-icon-builder -i=\"./assets/build/canary/logo.png\" -o=\"./assets/build/canary\" -f",
