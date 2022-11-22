@@ -15,7 +15,7 @@ Please report any violations to a moderator on our [Discord](https://discord.gg/
 
 ## Contributing
 ### Reporting Bugs
-> **If you want to report a security vulnerability, do not open an issue! Contact a member of our development team via [Discord](https://discord.gg/CBMqmTaUQ4)!**
+> **If you want to report a security vulnerability, do not open an issue! Contact a member of our development team on [Discord](https://discord.gg/CBMqmTaUQ4)!**
 
 
 Bugs are unintended behavior of Homework Companion that diminish a user's experience.
