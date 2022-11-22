@@ -1,0 +1,46 @@
+name: PR
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+      
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+  build:
+    runs-on: macos-11
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Build Homework Companion
+        run: npm run build
+      - name: Upload PR artifact (Windows)
+        uses: actions/upload-artifact@v3
+        with:
+          name: Homework Companion (Windows)
+          path: ./dist/*.exe
+      - name: Upload PR artifact (macOS)
+        uses: actions/upload-artifact@v3
+        with:
+          name: Homework Companion (macOS)
+          path: ./dist/*.dmg          
