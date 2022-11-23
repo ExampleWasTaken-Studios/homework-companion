@@ -5,13 +5,6 @@ body:
 - type: markdown
   attributes:
     value: "# Homework Companion Feature Request Form"
-- type: dropdown
-  attributes:
-    label: Version
-    description: What version of Homework Companion are you using?
-    options: [Stable, Development]
-  validations:
-    required: true
 - type: textarea
   attributes:
     label: Description
@@ -37,3 +30,12 @@ body:
     placeholder: ex. username#1234
   validations:
     required: false
+- type: checkboxes
+  attributes:
+    label: Before we wrap things up
+    description: "We'd like to make sure you did these two things:"
+    options:
+      - label: I have searched the issue tracker for my issue.
+        required: true
+      - label: I have read and accepted the code of conduct of this repository.
+        required: true
