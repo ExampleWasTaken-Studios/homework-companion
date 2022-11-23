@@ -20,7 +20,7 @@ jobs:
       - name: Build Homework Companion
         run: npm run build:crossplatform
       - name: Publish
-        uses: actions/action-gh-release@v1
+        uses: softprops/action-gh-release@v1
         with:
           files: |
             ./dist/*.exe
