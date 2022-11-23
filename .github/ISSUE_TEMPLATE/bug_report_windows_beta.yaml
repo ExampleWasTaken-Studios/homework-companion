@@ -1,85 +1,94 @@
 name: Bug Report (Windows)
-description: File a bug report for Homework Companion running on Windows machines
-labels: [Bug, Windows]
+description: File a bug report for Homework Companion running on Windows machines.
+labels: ["Bug", "Windows"]
 body:
-- type: markdown
-  attributes:
-    value: |
-    # Homework Companion for Windows Bug Report Form
-    Please note that only the latest version of Homework Companion is supported.  
-    Head over to the [download section](https://github.com/examplewastaken-studios/homework-companion/releases/latest) to download the latest version.
-- type: dropdown
-  attributes:
-    label: Homework Companion Version
-    description: What version of Homework Companion are you using?
-    options: [Stable, Canary]
-  validations:
-    required: true
-- type: textarea
-  attributes:
-    label: Describe the bug
-    description: A clear and concise description of what the bug is and what happened.
-    placeholder: |
-      Example:
-      Clicking the "+" button does not open the window to create a new task.
-  validations:
-    required: true
-- type: textarea
-  attributes:
-    label: Expected behavior
-    description: A clear and concise description of what you expect to happen.
-    placeholder: |
-      Example:
-      Upon clicking the "+" button a window should open that allows for new task creation.
-  validations:
-    required: true
-- type: textarea
-  attributes:
-    label: Exact steps to reproduce
-    description: Describe the exact steps to reproduce the issue in as much detail as possible. Don't just list what you did, but how you did it.
-    placeholder: |
-      1. 
-      2. 
-      3. 
-      ...
-  validations:
-    required: true
-- type: textarea
-  attributes:
-    label: References
-    description: If applicable, add screenshots, videos, logs, etc. to help explain your problem.
-- type: textarea
-  attributes:
-    label: Additional information
-    description: Add any other context about the problem here.
-- type: markdown
-  attributes:
-    value: "To help us understand your issue even better, please answer these questions:"
-- type: dropdown
-  attributes:
-    label: When did this start happening?
-    description: Did the issue start happening recently (after an update?) or was this always a problem?
-    options: ["Yes", "No", "None of the above"]
-  validations:
-    required: true
-- type: textarea
-  label: Can you reliably reproduce the issue?
-  description: If not, provide details about how often and under what conditions the issue appears.
-validations:
-  required: true
-- type: input
-  attributes:
-    label: Discord Username
-    description: You may optionally provide your Discord username, so that we may contact you directly about the issue.
-    placeholder: ex. username#1234
-- type: checkboxes
-  attributes:
-    label: "Before we wrap things up"
-    description: "We'd like to make sure you did these three things:"
-    options:
-      - label: I have searched the issue tracker for my issue.
-        required: true
-      - label: I have read and accepted the code of conduct of the repository.
-        required: true
-      - label: "Checked that I'm really on Windows ;p"
-        required: true
+  - type: markdown
+    attributes:
+      value: |
+          \# Homework Companion for Windows Bug Report Form 
+          Please note that only the latest version of Homework Companion is supported. 
+          Head over to the [download section](https://github.com/examplewastaken-studios/homework-companion/releases/latest) to download the latest version. 
+  - type: dropdown
+    attributes:
+      label: Homework Companion Version
+      description: What version of Homework Companion are you using?
+      options: ["Stable", "Beta"]
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is and what happened.
+      placeholder: |
+        Example:
+        Clicking the "+" button does not open the window to create a new task.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Exact steps to reproduce
+      description: Describe the exact steps to reproduce the issue in as much detail as possible. Don't just list what you did but how you did it.
+      placeholder: |
+        1. 
+        2. 
+        3. 
+        ...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: References
+      description: If applicable, add screenshots, videos, logs, etc. to help explain your problem.
+  - type: textarea
+    attributes:
+      label: Additional information
+      description: Add any other context about the problem here.
+  - type: markdown
+    attributes:
+      value: "To help us understand your issue even better, please answer these questions:"
+  - type: dropdown
+    attributes:
+      label: When did this start happening?
+      description: Did the issue start happening recently (after an update?) or was this always a problem?
+      options: ["Yes", "No", "None of the above"]
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Can you reliably reproduce the issue?
+      description: If not, provide details about how often and under what conditions the issue appears.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Discord Username
+      description: You may optionally provide your Discord username so that we may contact you directly about the issue.
+      placeholder: username#1234
+  - type: checkboxes
+    attributes:
+      label: Before we wrap things up
+      description: "We'd like to make sure you did these three things:"
+      options:
+        - label: I have searched the issue tracker for my issue.
+          required: true
+        - label: I have read and accepted the code of conduct of this repository.
+          required: true
+        - label: Checked that I'm really on Windows ;p
+          required: true
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
