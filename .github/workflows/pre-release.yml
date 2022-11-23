@@ -1,0 +1,30 @@
+name: Pre Release
+on:
+  push:
+    tags:
+      - "v*.*.*-*.*"
+
+jobs:
+  build:
+    runs-on: macos-11
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Homework Companion
+        run: npm run build:crossplatform
+      - name: Publish
+        uses: actions/action-gh-release@v1
+        with:
+          files: |
+            ./dist/*.exe
+            ./dist/*.dmg
+          body_path: ./.github/RELEASE_DESCRIPTION.md
+          draft: false
+          prerelease: true
+          generate_release_notes: true
