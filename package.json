@@ -1,6 +1,6 @@
 {
   "name": "homework-companion",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-beta.1",
   "private": true,
   "description": "Task managing application",
   "main": "build/electron/main.js",
