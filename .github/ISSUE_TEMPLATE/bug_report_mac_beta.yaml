@@ -58,7 +58,7 @@ body:
       label: Can you reliably reproduce the issue?
       description: If not, provide details about how often and under what conditions the issue appears.
     validations:
-      required: true,
+      required: true
   - type: input
     attributes:
       label: Discord Username
