@@ -85,8 +85,7 @@ const createWindow = () => {
 app.on("ready", () => {
   createWindow();
 
-  // TODO: uncomment before release
-  // updater.checkForUpdatesAndDownload();
+  updater.checkForUpdatesAndDownload();
 
   if (semver.prerelease(app.getVersion())) {
     if (win && app.isPackaged) {
