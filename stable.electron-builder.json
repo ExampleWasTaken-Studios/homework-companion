@@ -1,6 +1,7 @@
 {
   "appId": "app.examplewastaken-studios.homework-companion",
   "productName": "Homework Companion",
+  "publish": null,
   "mac": {
     "category": "public.app-category.education",
     "target": "dmg",
