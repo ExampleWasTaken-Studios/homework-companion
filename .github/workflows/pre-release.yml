@@ -18,8 +18,11 @@ jobs:
         run: npm ci
       - name: Build Homework Companion
         run: npm run build:crossplatform
+<<<<<<< HEAD
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+=======
+>>>>>>> master
       - name: Print ./dist contents
         run: ls dist
       - name: Publish
