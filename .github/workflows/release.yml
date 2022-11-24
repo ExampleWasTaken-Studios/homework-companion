@@ -19,6 +19,8 @@ jobs:
         run: npm ci
       - name: Build Homework Companion
         run: npm run build:crossplatform
+      - name: Print ./dist contents
+        run: ls dist
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
