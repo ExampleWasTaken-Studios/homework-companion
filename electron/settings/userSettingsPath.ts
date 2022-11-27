@@ -1,7 +1,7 @@
 const userSettingsKeys = {
   general: {
-    autoStart: "settings.general.autoStart",
-    hwAcc: "settings.general.hwAcc"
+    autoStartEnabled: "settings.general.autoStart",
+    hwAccEnabled: "settings.general.hwAcc"
   }
 };
 

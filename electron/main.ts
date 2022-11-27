@@ -1,4 +1,5 @@
 import { Updater } from "@ewt-studios/updater";
+import AutoLaunch from "auto-launch";
 import { dialog } from "electron";
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 import * as electronLocalshortcut from "electron-localshortcut";
@@ -9,6 +10,7 @@ import SubjectStorage from "./db/SubjectStorage";
 import TaskStorage from "./db/TaskStorage";
 import { Channels } from "./preload/Channels";
 import store, { persistWindowSettings } from "./settings/settings";
+import userSettingsKeys from "./settings/userSettingsPath";
 
 const ASSETS_PATH = app.isPackaged ? path.join(process.resourcesPath, "assets") : path.join(app.getAppPath(), "assets", "runtime");
 export const USER_DATA_PATH = app.getPath("userData");
@@ -17,6 +19,19 @@ let win: BrowserWindow | null = null;
 const taskStorage: TaskStorage = new TaskStorage();
 const subjectStorage: SubjectStorage = new SubjectStorage();
 export const updater = new Updater(app, "ExampleWasTaken-Studios", "homework-companion");
+const autoLaunch = new AutoLaunch({
+  name: "Homework Companion",
+  isHidden: true,
+});
+
+if (app.isPackaged) {
+  autoLaunch.disable();
+}
+
+if (!store.get(userSettingsKeys.general.hwAccEnabled)) {
+  console.log("Disabling HWACC");
+  app.disableHardwareAcceleration();
+}
 
 const createWindow = () => {
   win = new BrowserWindow({
@@ -83,9 +98,16 @@ const createWindow = () => {
 };
 
 app.on("ready", () => {
+  console.log("READY");
   createWindow();
 
   updater.checkForUpdatesAndDownload();
+
+  if (store.get(userSettingsKeys.general.autoStart)) {
+    autoLaunch.enable();
+  } else {
+    autoLaunch.disable();
+  }
 
   if (semver.prerelease(app.getVersion())) {
     if (win && app.isPackaged) {
@@ -121,6 +143,17 @@ ipcMain.handle(Channels.CHECK_FOR_UPDATES, () => {
 
 ipcMain.handle(Channels.SHOULD_SHOW_CHANGELOG, () => {
   return semver.satisfies(app.getVersion(), `>${store.get("metaInfo.lastChangelogViewed")}`, { includePrerelease: true });
+});
+
+ipcMain.on(Channels.ENABLE_AUTOSTART, () => {
+  if (app.isPackaged) {
+    return;
+  }
+  autoLaunch.enable();
+});
+
+ipcMain.on(Channels.DISABLE_AUTOSTART, () => {
+  autoLaunch.disable();
 });
 
 ipcMain.handle(Channels.GET_ASSETS_PATH, () => {

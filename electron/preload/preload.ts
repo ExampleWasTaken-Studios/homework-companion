@@ -11,7 +11,9 @@ const app = {
   openExternal: (url: string, options?: Electron.OpenExternalOptions | undefined) => shell.openExternal(url, options),
   openPath: (path: string) => shell.openPath(path),
   checkForUpdates: async () => await ipcRenderer.invoke(Channels.CHECK_FOR_UPDATES),
-  shouldShowChangelog: async () => await ipcRenderer.invoke(Channels.SHOULD_SHOW_CHANGELOG)
+  shouldShowChangelog: async () => await ipcRenderer.invoke(Channels.SHOULD_SHOW_CHANGELOG),
+  enableAutostart: () => ipcRenderer.send(Channels.ENABLE_AUTOSTART),
+  disableAutostart: () => ipcRenderer.send(Channels.DISABLE_AUTOSTART)
 };
 
 const util = {

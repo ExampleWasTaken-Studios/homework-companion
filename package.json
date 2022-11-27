@@ -31,6 +31,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "@ewt-studios/updater": "^2.0.3",
+    "auto-launch": "^5.0.5",
     "electron-devtools-installer": "^3.2.0",
     "electron-localshortcut": "^3.2.1",
     "electron-reload": "^2.0.0-alpha.1",
@@ -44,6 +45,7 @@
     "systeminformation": "^5.12.14"
   },
   "devDependencies": {
+    "@types/auto-launch": "^5.0.2",
     "@types/electron-devtools-installer": "^2.2.2",
     "@types/electron-localshortcut": "^3.1.0",
     "@types/lodash": "^4.14.185",
