@@ -11,11 +11,11 @@ const schema: Schema<SettingsSchema> = {
         type: "object",
         default: {},
         properties: {
-          autoStart: {
+          autoStartEnabled: {
             type: "boolean",
             default: false
           },
-          hwAcc: {
+          hwAccEnabled: {
             type: "boolean",
             default: true
           }

@@ -10,6 +10,8 @@ export enum Channels {
   GET_USER_DATA_PATH = "app/userDataPath",
   CHECK_FOR_UPDATES = "app/check-updates",
   SHOULD_SHOW_CHANGELOG = "app/should-show-changelog",
+  ENABLE_AUTOSTART = "app/autostart/enable",
+  DISABLE_AUTOSTART = "app/autostart/disable",
 
   GET_NEXT_TASK_ID = "tasks/get/next-id",
   GET_NEXT_TASK_ID_RESPONSE = "tasks/get/next-id/response",
