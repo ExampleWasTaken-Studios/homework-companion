@@ -103,7 +103,7 @@ app.on("ready", () => {
 
   updater.checkForUpdatesAndDownload();
 
-  if (store.get(userSettingsKeys.general.autoStart)) {
+  if (store.get(userSettingsKeys.general.autoStartEnabled)) {
     autoLaunch.enable();
   } else {
     autoLaunch.disable();

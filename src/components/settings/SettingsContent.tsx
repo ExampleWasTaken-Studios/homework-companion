@@ -26,14 +26,14 @@ export const SettingsContent = () => {
       <ToggleSetting
         title="Autolaunch Homework Companion"
         description="Save yourself a few clicks and let Homework Companion greet you at computer startup."
-        settingKey={window.api.settings.userSettingsKeys.general.autoStart}
+        settingKey={window.api.settings.userSettingsKeys.general.autoStartEnabled}
         onSetChecked={window.api.app.enableAutostart}
         onSetUnchecked={window.api.app.disableAutostart}
       />
       <ToggleSetting
         title="Enable Hardware Acceleration"
         description="Turns on Hardware Acceleration, which uses your GPU to make Homework Companion smoother. Turn this off if you are experiencing frame drops. (Requires restart)"
-        settingKey={window.api.settings.userSettingsKeys.general.hwAcc}
+        settingKey={window.api.settings.userSettingsKeys.general.hwAccEnabled}
       />
 
       <div className="changelog-container">
