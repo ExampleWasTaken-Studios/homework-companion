@@ -49,6 +49,10 @@
   width: fit-content;
 }
 
+.home-homework-list-item-title > s {
+  background: transparent;
+}
+
 .home-homework-list-item-bottom-line {
   background: transparent;
   width: 100%;
