@@ -3,6 +3,7 @@ import { CloseIcon } from "../../svg/CloseIcon";
 import { DiscordIcon } from "../../svg/DiscordIcon";
 import { TwitterIcon } from "../../svg/TwitterIcon";
 import { GroupContainer } from "./GroupContainer";
+import { NewItem } from "./NewItem";
 
 interface ChangelogProps {
   isOpen: boolean;
@@ -50,11 +51,14 @@ export const Changelog = ({ isOpen, setOpen, showSocials }: ChangelogProps) => {
               </div>
 
               <GroupContainer type="new-features">
-                {/* TODO: enter changelog  */}
+
               </GroupContainer>
 
               <GroupContainer type="bug-fixes">
-
+                <NewItem
+                  name="BETA VERSION:"
+                  description="This release is not a release candidate. We only release this version for internal testing purposes."
+                />
               </GroupContainer>
 
               {showSocials && (
