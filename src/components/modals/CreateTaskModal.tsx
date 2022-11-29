@@ -21,7 +21,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
   const [dueDate, setDueDate] = useState(new Date(0));
   const [priority, setPriority] = useState<Priority>("Normal");
   const [subject, setSubject] = useState<Subject>(NULL_SUBJECT);
-  const [content, setContent] = useState("Looks like something went wrong on our end while we tried to load your task. :/");
+  const [content, setContent] = useState("");
 
   const [inputIncomplete, setInputIncomplete] = useState(false);
 
@@ -30,7 +30,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
     setDueDate(new Date());
     setPriority("Normal");
     setSubject(NULL_SUBJECT);
-    setContent("Looks like something went wrong on our end while we tried to load your task. :/");
+    setContent("");
     setInputIncomplete(false);
   };
 
@@ -101,8 +101,6 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
       || dueDate === new Date(0)
       || subject.id === -1
       || subject.name === "Select Subject"
-      || content === ""
-      || content === "Looks like something went wrong on our end while we tried to load your task. :/"
     ) {
       setInputIncomplete(true);
       return;

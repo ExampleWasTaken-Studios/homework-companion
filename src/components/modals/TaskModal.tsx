@@ -21,7 +21,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
   const [dueDate, setDueDate] = useState(new Date());
   const [priority, setPriority] = useState<Priority>("Normal");
   const [subject, setSubject] = useState<Subject>({ id: -3, name: "Loading subject..." });
-  const [content, setContent] = useState("Looks like something went wrong on our end while we tried to load your task. :/");
+  const [content, setContent] = useState("");
   const [state, setState] = useState<TaskState>("open");
 
   const [inputIncomplete, setInputIncomplete] = useState(false);
@@ -73,7 +73,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
 
     console.log("closeHandler");
 
-    if (title === "" || content === "") {
+    if (title === "") {
       setInputIncomplete(true);
       return;
     }
@@ -88,7 +88,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
     setDueDate(new Date());
     setPriority("Normal");
     setSubject({ id: -1, name: "placeholder" });
-    setContent("Looks like something went wrong on our end while we tried to load your task. :/");
+    setContent("");
     setState("open");
 
     openHandlerExecuted = false;
@@ -124,9 +124,7 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
       && title !== NULL_TASK.title
       && dueDate
       && dueDate !== new Date(0)
-      && subject.id !== NULL_TASK.id
-      && content !== ""
-      && content !== NULL_TASK.content) {
+      && subject.id !== NULL_TASK.id) {
       setInputIncomplete(false);
     }
   };
