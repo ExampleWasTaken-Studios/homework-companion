@@ -1,7 +1,7 @@
 ![logo-png](https://user-images.githubusercontent.com/58574351/192744872-d980a851-7b8e-4619-ac1b-ff80d64dfa39.png)
 <div align="center">
 
-  ![GitHub release (latest by date)](https://img.shields.io/github/v/release/examplewastaken-studios/homework-companion)
+  ![GitHub release (latest by date)](https://img.shields.io/github/v/release/examplewastaken-studios/homework-companion?display_name=tag&include_prereleases&sort=semver)
   ![GitHub all releases](https://img.shields.io/github/downloads/examplewastaken-studios/homework-companion/total)
   ![GitHub contributors](https://img.shields.io/github/contributors/examplewastaken-studios/homework-companion)
 
