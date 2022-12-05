@@ -18,7 +18,7 @@ export const USER_DATA_PATH = app.getPath("userData");
 let win: BrowserWindow | null = null;
 const taskStorage: TaskStorage = new TaskStorage();
 const subjectStorage: SubjectStorage = new SubjectStorage();
-export const updater = new Updater(app, "ExampleWasTaken-Studios", "homework-companion");
+export let updater: Updater;
 const autoLaunch = new AutoLaunch({
   name: "Homework Companion",
   isHidden: true,
@@ -101,6 +101,7 @@ app.on("ready", () => {
   console.log("READY");
   createWindow();
 
+  updater = new Updater(app, "ExampleWasTaken-Studios", "homework-companion");
   updater.checkForUpdatesAndDownload();
 
   if (store.get(userSettingsKeys.general.autoStartEnabled)) {
