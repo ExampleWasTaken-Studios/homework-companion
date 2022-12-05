@@ -10,15 +10,21 @@ interface CreateTaskModalProps {
   setOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
-let nextTaskId = 0;
+const getDateTomorrow = () => {
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return tomorrow;
+};
 
+let nextTaskId = 0;
 
 export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
 
   const [subjects, setSubjects] = useState([NULL_SUBJECT]);
 
   const [title, setTitle] = useState("Oops! We've messed up! Please read the description!");
-  const [dueDate, setDueDate] = useState(new Date(0));
+  const [dueDate, setDueDate] = useState(getDateTomorrow());
   const [priority, setPriority] = useState<Priority>("Normal");
   const [subject, setSubject] = useState<Subject>(NULL_SUBJECT);
   const [content, setContent] = useState("");
@@ -27,7 +33,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
 
   const resetData = () => {
     setTitle("Oops! We've messed up! Please read the description!");
-    setDueDate(new Date());
+    setDueDate(getDateTomorrow());
     setPriority("Normal");
     setSubject(NULL_SUBJECT);
     setContent("");
@@ -148,6 +154,7 @@ export const CreateTaskModal = ({ isOpen, setOpen }: CreateTaskModalProps) => {
                 className="input due-date"
                 autoComplete="off"
                 onChange={event => dataChangeHandler(event, "dueDate")}
+                value={dueDate.toISOString().substring(0, 10)}
               />
             </label>
 
