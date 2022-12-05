@@ -24,7 +24,9 @@ To download and install the latest version of Homework Companion, head to the [r
 ### Important
 Because we cannot afford a developer certificate for macOS or Windows you will see a warning, informing you that the developer cannot be verified.
 
-For instructions on how to install Homework Companion anyway see below:
+> For more information on why this is happening see the [FAQ](#faq).
+
+For instructions on how to install Homework Companion anyway see below.  
 
 #### Windows
 If you see a dialog informing you that this app is from an "unverified publisher", hit `More infomation` and then `Run anyway`.
