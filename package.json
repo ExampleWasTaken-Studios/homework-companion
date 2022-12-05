@@ -15,7 +15,7 @@
     "licenses": "node scripts/licenses",
     "build": "npm run licenses && npm run react:build && tsc -p electron && electron-builder -c stable.electron-builder.json",
     "build:crossplatform": "npm run licenses && npm run react:build && tsc -p electron && electron-builder -c stable.electron-builder.json -w -o",
-    "build:icon": "./node_modules/.bin/electron-icon-builder -i=\"./assets/build/stable/logo.png\" -o=\"./assets/build/stable\" -f",
+    "build:icon": "./node_modules/.bin/electron-icon-builder -i=\"./assets/build/logo.png\" -o=\"./assets/build\" -f",
     "clean:mac": "rm -r dist build",
     "clean:win": "rmdir dist build /q /s",
     "react:start": "react-scripts start",
