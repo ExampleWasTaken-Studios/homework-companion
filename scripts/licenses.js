@@ -9,7 +9,7 @@ const OUT_FILE = "./assets/runtime/3rd-party-licenses.md";
 
 if (fs.existsSync(OUT_FILE)) {
   console.warn("Skipping licenses generation as the existing file is sufficient for development needs.");
-  console.warn("If you see this message in the CI you have probably commit the '3rd-party-license.md' file.");
+  console.warn("If you see this message in the CI you have probably commited the '3rd-party-license.md' file.");
   process.exit(0);
 }
 
