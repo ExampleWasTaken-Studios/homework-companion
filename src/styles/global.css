@@ -125,7 +125,7 @@
   /* Homework list bullet */
   --bg-bullet-1: #DF1515;
   --bg-bullet-2: var(--bg-button);
-  --bg-bullet-3: #3599FC;
+  --bg-bullet-3: #0092fc;
 
   /* Webkit scroller */
   --thumb: rgba(255, 255, 255, .1);
