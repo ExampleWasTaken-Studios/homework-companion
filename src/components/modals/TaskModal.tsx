@@ -164,8 +164,8 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
                 id="due-date"
                 className="input due-date"
                 autoComplete="off"
-                defaultValue={getHtmlDate(data.dueDate)}
                 onChange={event => dataChangeHandler(event.target.value, "dueDate")}
+                value={dueDate.toISOString().substring(0, 10)}
               />
             </label>
 
