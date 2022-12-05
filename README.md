@@ -12,19 +12,18 @@ Homework Companion is an open-source task management app that specializes in hom
 
 </div>
 
-## Platforms
+## Supported Platforms
 - Windows 10
 - macOS 11
 
 > Due to the nature of open source, we are currently unable to test the builds on other platforms than those listed above. But it is probable that Homework Companion runs on Windows 11 as well as newer macOS versions.
 
 ## Installation
-To download and install the latest version of Homework Companion, head to the [release section](https://github.com/examplewastaken-studios/homework-companion/releases/latest) and download the installation file for your operating system. Of if you already have it installed go to `Settings > Check for Updates`.
-
-### Important
-Because we cannot afford a developer certificate for macOS or Windows you will see a warning, informing you that the developer cannot be verified.
-
+> ### Important
+>Because we cannot afford a developer certificate for macOS or Windows you will see a warning, informing you that the developer cannot be verified.  
 > For more information on why this is happening see the [FAQ](#faq).
+
+To download and install the latest version of Homework Companion, head to the [release section](https://github.com/examplewastaken-studios/homework-companion/releases/latest) and download the installation file for your operating system. Of if you already have it installed go to `Settings > Check for Updates`.
 
 For instructions on how to install Homework Companion anyway see below.  
 
