@@ -12,19 +12,35 @@ Homework Companion is an open-source task management app that specializes in hom
 
 </div>
 
-## Platforms
+## Supported Platforms
 - Windows 10
 - macOS 11
 
 > Due to the nature of open source, we are currently unable to test the builds on other platforms than those listed above. But it is probable that Homework Companion runs on Windows 11 as well as newer macOS versions.
 
 ## Installation
+> ### Important
+>Because we cannot afford a developer certificate for macOS or Windows you will see a warning, informing you that the developer cannot be verified.  
+> For more information on why this is happening see the [FAQ](#faq).
+
 To download and install the latest version of Homework Companion, head to the [release section](https://github.com/examplewastaken-studios/homework-companion/releases/latest) and download the installation file for your operating system. Of if you already have it installed go to `Settings > Check for Updates`.
 
-> We are working on a solution to simplify that process.
+For instructions on how to install Homework Companion anyway see below.  
+
+#### Windows
+If you see a dialog informing you that this app is from an "unverified publisher", hit `More infomation` and then `Run anyway`.
+
+#### macOS
+[See the official support article from Apple](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac).
 
 ## Contributing and bug reporting
 Head to our [docs](./docs/Contributing.md) for information on how you can contribute to the project.
+
+## FAQ
+### Why does my OS indicate that this app cannot be verified?
+For security reasons Apple and Microsoft introduced a verification step for app developers that ensures the contents of an app are verified by them. The price of around $500 for such a certificate per year makes it impossible for open source developers to aquire it. Therefore our app is not verified.  
+The contents of Homework Companion are 100% accessible through this repository.  
+Auto updates are directly downloaded from the releases section.
 
 ## License
 Homework Companion is licensed under the [GPL-3.0](./LICENSE) license.
