@@ -1,6 +1,5 @@
 import React, { SetStateAction, useCallback, useEffect, useState } from "react";
 import { NULL_SUBJECT, NULL_TASK } from "../../constants";
-import { useHtmlDate } from "../../hooks/useHtmlDate";
 import { CloseIcon } from "../svg/CloseIcon";
 import { Alert } from "../utils/Alert";
 import { Button } from "../utils/Button";
@@ -27,8 +26,6 @@ export const TaskModal = ({ isOpen, setOpen, data }: TaskModalProps) => {
   const [inputIncomplete, setInputIncomplete] = useState(false);
 
   const [buttonContent, setButtonContent] = useState<"Mark as Complete" | "Complete">("Mark as Complete");
-
-  const getHtmlDate = useHtmlDate();
 
   const openHandler = useCallback(async () => {
 
