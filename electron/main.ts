@@ -1,3 +1,4 @@
+import Chatty, { Console, LogLevelPresets } from "@ewt-studios/chatty";
 import { Updater } from "@ewt-studios/updater";
 import AutoLaunch from "auto-launch";
 import { dialog } from "electron";
@@ -11,6 +12,9 @@ import TaskStorage from "./db/TaskStorage";
 import { Channels } from "./preload/Channels";
 import store, { persistWindowSettings } from "./settings/settings";
 import userSettingsKeys from "./settings/userSettingsPath";
+
+const consoleEndpoint = new Console(...LogLevelPresets.all);
+export const logger = new Chatty(consoleEndpoint);
 
 const ASSETS_PATH = app.isPackaged ? path.join(process.resourcesPath, "assets") : path.join(app.getAppPath(), "assets", "runtime");
 export const USER_DATA_PATH = app.getPath("userData");

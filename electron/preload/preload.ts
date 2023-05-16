@@ -1,5 +1,7 @@
+import { LogLevel } from "@ewt-studios/chatty";
 import { contextBridge, ipcRenderer, shell } from "electron";
 import { isEqual } from "lodash";
+import { logger } from "../main";
 import userSettingsKeys from "../settings/userSettingsPath";
 import { Channels } from "./Channels";
 
@@ -17,7 +19,8 @@ const app = {
 };
 
 const util = {
-  isEqual: (value: unknown, other: unknown) => isEqual(value, other)
+  isEqual: (value: unknown, other: unknown) => isEqual(value, other),
+  log: (level: LogLevel, payload: string[]) => logger.log(level, ...payload)
 };
 
 const settings = {
