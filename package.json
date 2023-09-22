@@ -41,7 +41,7 @@
     "react-router-dom": "^6.4.0",
     "semver": "^7.3.8",
     "source-map-support": "^0.5.21",
-    "systeminformation": "^5.12.14"
+    "systeminformation": "^5.21.7"
   },
   "devDependencies": {
     "@types/auto-launch": "^5.0.2",
